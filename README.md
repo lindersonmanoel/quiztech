@@ -125,7 +125,9 @@ quiz-tech/
 
 - Senhas com hash **bcrypt**; nunca guardadas em texto puro
 - JWT assinado; `SECRET_KEY` obrigatória em produção
-- Limite de tentativas de login (5 falhas em 15 min por IP + e-mail), persistido no banco
+- Limite de tentativas de login persistido no banco: 5 falhas em 15 min por IP + e-mail **e** 20 por e-mail (contra ataque distribuído). O cabeçalho de IP do Vercel só é confiado quando a app roda no Vercel
+- **Certificado protegido:** quem reprova vê quais respostas errou, mas o gabarito só aparece depois da aprovação, e há um intervalo de 10 min (`RETAKE_COOLDOWN_SECONDS`) para refazer um quiz reprovado. Isso é um freio, não uma garantia: o reforço definitivo é ter mais perguntas por área e sortear um subconjunto a cada tentativa
+- `/docs` e `/openapi.json` ficam **desligados em produção** (defina `ENABLE_DOCS=1` para ligar)
 - Gabarito só é enviado depois da correção; a nota é calculada no servidor
 - Rotas `/api/admin/*` exigem administrador
 - Consulta pública de certificado por código **não expõe e-mail**

@@ -31,3 +31,14 @@ def require_admin(user: User = Depends(get_current_user)) -> User:
     if not user.is_admin:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Acesso restrito a administradores")
     return user
+
+
+def get_optional_user(
+    credentials: HTTPAuthorizationCredentials | None = Depends(_bearer),
+    db: Session = Depends(get_db),
+) -> User | None:
+    """Rotas públicas que se comportam melhor quando há um usuário logado (token inválido = anônimo)."""
+    if credentials is None:
+        return None
+    user_id = decode_access_token(credentials.credentials)
+    return db.get(User, user_id) if user_id else None

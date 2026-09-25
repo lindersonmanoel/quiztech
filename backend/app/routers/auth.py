@@ -14,10 +14,11 @@ router = APIRouter(prefix="/api", tags=["auth"])
 
 
 def _client_ip(request: Request) -> str:
-    # No Vercel a plataforma preenche este cabeçalho; localmente/Railway usa o IP da conexão.
-    forwarded = request.headers.get("x-vercel-forwarded-for")
-    if forwarded:
-        return forwarded.split(",")[0].strip()
+    # Só o Vercel sobrescreve este cabeçalho; em qualquer outro host o cliente poderia forjá-lo.
+    if config.IS_SERVERLESS:
+        forwarded = request.headers.get("x-vercel-forwarded-for")
+        if forwarded:
+            return forwarded.split(",")[0].strip()
     return request.client.host if request.client else "?"
 
 
@@ -48,16 +49,17 @@ def register(data: RegisterIn, db: Session = Depends(get_db)):
 @router.post("/auth/login", response_model=TokenOut)
 def login(data: LoginIn, request: Request, db: Session = Depends(get_db)):
     email = data.email.lower()
-    key = ratelimit.make_key(_client_ip(request), email)
-    if ratelimit.is_blocked(db, key):
+    ip = ratelimit.ip_key(_client_ip(request), email)
+    by_email = ratelimit.email_key(email)
+    if ratelimit.is_blocked(db, ip, by_email):
         raise HTTPException(status.HTTP_429_TOO_MANY_REQUESTS, "Muitas tentativas. Tente novamente em alguns minutos.")
 
     user = db.scalar(select(User).where(User.email == email))
     ok = verify_password(data.password, user.password_hash if user else _DUMMY_HASH)
     if not user or not ok:
-        ratelimit.register_failure(db, key)
+        ratelimit.register_failure(db, ip, by_email)
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, "E-mail ou senha inválidos")
-    ratelimit.reset(db, key)
+    ratelimit.reset(db, ip)
     return TokenOut(access_token=create_access_token(user.id), user=UserOut.model_validate(user))
 
 

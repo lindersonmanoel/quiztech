@@ -6,31 +6,45 @@ from sqlalchemy.orm import Session
 
 from .models import LoginFailure
 
-MAX_ATTEMPTS = 5
+# Dois tetos independentes: por IP + e-mail (barra um atacante único) e por e-mail (barra ataque distribuído).
+MAX_ATTEMPTS_PER_IP = 5
+MAX_ATTEMPTS_PER_EMAIL = 20
 WINDOW = timedelta(minutes=15)
 
 
-def make_key(client_ip: str, email: str) -> str:
-    return hashlib.sha256(f"{client_ip}|{email}".encode("utf-8")).hexdigest()
+def _hash(value: str) -> str:
+    return hashlib.sha256(value.encode("utf-8")).hexdigest()
+
+
+def ip_key(client_ip: str, email: str) -> str:
+    return _hash(f"ip|{client_ip}|{email}")
+
+
+def email_key(email: str) -> str:
+    return _hash(f"email|{email}")
 
 
 def _cutoff() -> datetime:
     return datetime.now(timezone.utc) - WINDOW
 
 
-def is_blocked(db: Session, key: str) -> bool:
-    recent = db.scalar(
+def _recent(db: Session, key: str) -> int:
+    return db.scalar(
         select(func.count(LoginFailure.id)).where(LoginFailure.key == key, LoginFailure.created_at > _cutoff())
-    )
-    return (recent or 0) >= MAX_ATTEMPTS
+    ) or 0
 
 
-def register_failure(db: Session, key: str) -> None:
+def is_blocked(db: Session, ip: str, email: str) -> bool:
+    return _recent(db, ip) >= MAX_ATTEMPTS_PER_IP or _recent(db, email) >= MAX_ATTEMPTS_PER_EMAIL
+
+
+def register_failure(db: Session, ip: str, email: str) -> None:
     db.execute(delete(LoginFailure).where(LoginFailure.created_at < _cutoff()))  # limpeza oportunista
-    db.add(LoginFailure(key=key))
+    db.add_all([LoginFailure(key=ip), LoginFailure(key=email)])
     db.commit()
 
 
-def reset(db: Session, key: str) -> None:
-    db.execute(delete(LoginFailure).where(LoginFailure.key == key))
+def reset(db: Session, ip: str) -> None:
+    """Login bem-sucedido zera só o contador do IP; o do e-mail expira sozinho (não dá para 'lavar' um ataque)."""
+    db.execute(delete(LoginFailure).where(LoginFailure.key == ip))
     db.commit()

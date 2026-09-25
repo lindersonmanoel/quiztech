@@ -149,8 +149,8 @@ class ReviewItem(BaseModel):
     points: int
     chosen_id: int | None
     chosen_text: str | None
-    correct_id: int
-    correct_text: str
+    correct_id: int | None  # None enquanto o usuário não for aprovado
+    correct_text: str | None
     is_correct: bool
 
 

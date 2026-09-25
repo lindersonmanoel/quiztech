@@ -48,7 +48,13 @@ export async function api(path, { method = "GET", body } = {}) {
   if (res.status === 204) return null;
   const data = await res.json().catch(() => null);
   if (!res.ok) {
-    if (res.status === 401 && token) clearSession(); // token expirado ou inválido
+    if (res.status === 401 && token) {
+      clearSession(); // token expirado ou inválido
+      if (document.body.dataset.auth === "required") {
+        const here = location.pathname.split("/").pop() + location.search;
+        location.replace(`login.html?next=${encodeURIComponent(here)}`);
+      }
+    }
     throw new ApiError(res.status, errorMessage(data, res.status));
   }
   return data;

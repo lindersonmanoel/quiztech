@@ -28,7 +28,14 @@ async def lifespan(_: FastAPI):
     yield
 
 
-app = FastAPI(title="QUIZ TECH API", version="1.0.0", lifespan=lifespan)
+app = FastAPI(
+    title="QUIZ TECH API",
+    version="1.0.0",
+    lifespan=lifespan,
+    docs_url="/docs" if config.DOCS_ENABLED else None,
+    redoc_url=None,
+    openapi_url="/openapi.json" if config.DOCS_ENABLED else None,
+)
 
 if config.IS_SERVERLESS:
     # Funções serverless não garantem o evento de lifespan: prepara o banco na partida a frio.
@@ -53,13 +60,21 @@ CSP = (
 )
 
 
+# O Swagger (só fora de produção) carrega scripts e estilos do jsDelivr e usa um script inline.
+DOCS_CSP = (
+    "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; "
+    "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data: https://fastapi.tiangolo.com; "
+    "frame-ancestors 'none'"
+)
+
+
 @app.middleware("http")
 async def security_headers(request: Request, call_next):
     response = await call_next(request)
     response.headers.setdefault("X-Content-Type-Options", "nosniff")
     response.headers.setdefault("X-Frame-Options", "DENY")
     response.headers.setdefault("Referrer-Policy", "strict-origin-when-cross-origin")
-    response.headers.setdefault("Content-Security-Policy", CSP)
+    response.headers.setdefault("Content-Security-Policy", DOCS_CSP if request.url.path == "/docs" else CSP)
     return response
 
 

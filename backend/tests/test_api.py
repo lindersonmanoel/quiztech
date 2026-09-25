@@ -100,6 +100,12 @@ def test_failing_score_gives_no_certificate(client, db_session):
     body = client.post(f"/api/quizzes/{quiz_id}/submit", json={"answers": answers}, headers=headers).json()
     assert body["percentage"] == 50 and body["passed"] is False and body["certificate"] is None
     assert body["correct_answers"] == 3 and body["wrong_answers"] == 3
+    wrong = [item for item in body["review"] if not item["is_correct"]]
+    assert len(wrong) == 3
+    assert all(item["correct_id"] is None and item["correct_text"] is None for item in wrong)
+    assert all(item["correct_id"] is None for item in body["review"])
+    stored = client.get(f"/api/results/{body['id']}", headers=headers).json()
+    assert all(item["correct_text"] is None for item in stored["review"])
 
 
 def test_forged_alternative_from_other_question_counts_as_wrong(client, db_session):
@@ -147,3 +153,91 @@ def test_admin_can_create_question_with_single_correct_answer(client):
     })
     assert ok.status_code == 201
     assert len(client.get(f"/api/quizzes/{quiz_id}").json()["questions"]) == 7
+
+
+def test_correct_answers_are_revealed_only_after_passing(client, db_session):
+    headers = register(client)
+    quiz_id = _quiz_id(client, "python")
+    answers = [{"question_id": q, "alternative_id": a} for q, a in _correct_answers(db_session, quiz_id).items()]
+    body = client.post(f"/api/quizzes/{quiz_id}/submit", json={"answers": answers}, headers=headers).json()
+    assert body["passed"] is True
+    assert all(item["correct_text"] for item in body["review"])
+
+
+def test_cannot_retake_failed_quiz_during_cooldown(client):
+    headers = register(client)
+    quiz_id = _quiz_id(client, "python")
+    first = client.post(f"/api/quizzes/{quiz_id}/submit", json={"answers": []}, headers=headers)
+    assert first.status_code == 201 and first.json()["passed"] is False
+
+    again = client.post(f"/api/quizzes/{quiz_id}/submit", json={"answers": []}, headers=headers)
+    assert again.status_code == 429 and "Retry-After" in again.headers
+    # o aviso aparece já ao abrir o quiz, antes de o usuário gastar tempo respondendo
+    assert client.get(f"/api/quizzes/{quiz_id}", headers=headers).status_code == 429
+    # quem não está logado (ou é outro usuário) continua vendo o quiz normalmente
+    assert client.get(f"/api/quizzes/{quiz_id}").status_code == 200
+    other = register(client, email="outra@example.com", name="Outra Pessoa")
+    assert client.get(f"/api/quizzes/{quiz_id}", headers=other).status_code == 200
+
+
+def test_retake_allowed_after_cooldown_expires(client, db_session, monkeypatch):
+    from app import config
+
+    headers = register(client)
+    quiz_id = _quiz_id(client, "python")
+    client.post(f"/api/quizzes/{quiz_id}/submit", json={"answers": []}, headers=headers)
+    monkeypatch.setattr(config, "RETAKE_COOLDOWN_SECONDS", 0)
+    assert client.post(f"/api/quizzes/{quiz_id}/submit", json={"answers": []}, headers=headers).status_code == 201
+
+
+def test_no_cooldown_for_users_who_already_have_the_certificate(client, db_session):
+    headers = register(client)
+    quiz_id = _quiz_id(client, "python")
+    answers = [{"question_id": q, "alternative_id": a} for q, a in _correct_answers(db_session, quiz_id).items()]
+    client.post(f"/api/quizzes/{quiz_id}/submit", json={"answers": []}, headers=headers)  # reprova
+    from app import config
+    config_cooldown = config.RETAKE_COOLDOWN_SECONDS
+    try:
+        config.RETAKE_COOLDOWN_SECONDS = 0
+        assert client.post(f"/api/quizzes/{quiz_id}/submit", json={"answers": answers}, headers=headers).status_code == 201
+    finally:
+        config.RETAKE_COOLDOWN_SECONDS = config_cooldown
+    # já certificado: refazer não tem intervalo
+    assert client.post(f"/api/quizzes/{quiz_id}/submit", json={"answers": []}, headers=headers).status_code == 201
+
+
+def test_forged_forwarded_ip_header_does_not_bypass_login_limit(client):
+    register(client)
+    codes = [
+        client.post(
+            "/api/auth/login",
+            json={"email": "ana@example.com", "password": "errada-123"},
+            headers={"x-vercel-forwarded-for": f"10.0.0.{i}", "x-forwarded-for": f"10.1.0.{i}"},
+        ).status_code
+        for i in range(8)
+    ]
+    assert 429 in codes
+
+
+def test_per_email_limit_blocks_distributed_attempts(client, db_session):
+    from app import ratelimit
+
+    register(client)
+    with db_session() as session:
+        for i in range(ratelimit.MAX_ATTEMPTS_PER_EMAIL):
+            ratelimit.register_failure(session, ratelimit.ip_key(f"203.0.113.{i}", "ana@example.com"),
+                                       ratelimit.email_key("ana@example.com"))
+    # IP nunca visto antes, senha correta: ainda assim bloqueado pelo teto por e-mail
+    ok = client.post("/api/auth/login", json={"email": "ana@example.com", "password": "senha-forte-1"})
+    assert ok.status_code == 429
+
+
+def test_api_docs_are_disabled_in_production():
+    import subprocess, sys, os
+    from pathlib import Path
+
+    code = "from app.main import app; print(app.docs_url, app.openapi_url)"
+    env = {**os.environ, "ENVIRONMENT": "production", "SECRET_KEY": "x" * 40, "DATABASE_URL": "sqlite://", "ENABLE_DOCS": ""}
+    out = subprocess.run([sys.executable, "-c", code], cwd=Path(__file__).resolve().parents[1], env=env,
+                         capture_output=True, text=True, timeout=60)
+    assert out.stdout.strip() == "None None", out.stderr[-400:]

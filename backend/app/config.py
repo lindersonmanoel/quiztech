@@ -15,6 +15,10 @@ if not SECRET_KEY:
     SECRET_KEY = "dev-only-change-me-not-for-production-0123456789"
 
 PASS_PERCENTAGE = 70  # aproveitamento mínimo para aprovação e emissão do certificado
+# Intervalo mínimo para refazer um quiz reprovado (impede tentar de novo em sequência com o que acabou de ver).
+RETAKE_COOLDOWN_SECONDS = int(os.getenv("RETAKE_COOLDOWN_SECONDS", "600"))
+# /docs e /openapi.json ficam desligados em produção (expõem a lista de rotas, inclusive as de admin).
+DOCS_ENABLED = ENVIRONMENT != "production" or os.getenv("ENABLE_DOCS") == "1"
 ACCESS_TOKEN_MINUTES = int(os.getenv("ACCESS_TOKEN_MINUTES", "720"))
 ADMIN_EMAIL = os.getenv("ADMIN_EMAIL", "").strip().lower()
 SEED_ON_STARTUP = os.getenv("SEED_ON_STARTUP", "1") == "1"

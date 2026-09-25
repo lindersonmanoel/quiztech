@@ -1,5 +1,7 @@
+import math
 import random
 import secrets
+from datetime import datetime, timedelta, timezone
 
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy import func, select
@@ -7,7 +9,7 @@ from sqlalchemy.orm import Session, selectinload
 
 from .. import config
 from ..database import get_db
-from ..deps import get_current_user
+from ..deps import get_current_user, get_optional_user
 from ..models import Category, Certificate, Quiz, Result, User
 from ..schemas import (
     CategoryOut,
@@ -17,7 +19,7 @@ from ..schemas import (
     ResultOut,
     SubmitIn,
 )
-from .results import certificate_out
+from .results import certificate_out, public_review
 
 router = APIRouter(prefix="/api", tags=["quizzes"])
 
@@ -78,9 +80,11 @@ def _load_quiz(db: Session, quiz_id: int) -> Quiz:
 
 
 @router.get("/quizzes/{quiz_id}", response_model=QuizDetail)
-def get_quiz(quiz_id: int, db: Session = Depends(get_db)):
+def get_quiz(quiz_id: int, user: User | None = Depends(get_optional_user), db: Session = Depends(get_db)):
     """Devolve o quiz SEM indicar a alternativa correta; a ordem das alternativas é embaralhada."""
     quiz = _load_quiz(db, quiz_id)
+    if user is not None:
+        _enforce_retake_cooldown(db, user, quiz)  # avisa antes de o usuário gastar o tempo respondendo
     questions = []
     for question in quiz.questions:
         alternatives = [{"id": a.id, "text": a.text} for a in question.alternatives]
@@ -98,6 +102,26 @@ def _new_certificate_code(db: Session) -> str:
             return code
 
 
+def _enforce_retake_cooldown(db: Session, user: User, quiz: Quiz) -> None:
+    """Depois de reprovar, é preciso esperar antes de refazer (a menos que o usuário já tenha o certificado)."""
+    if db.scalar(select(Certificate.id).where(Certificate.user_id == user.id, Certificate.quiz_id == quiz.id)):
+        return
+    last = db.scalar(
+        select(Result).where(Result.user_id == user.id, Result.quiz_id == quiz.id).order_by(Result.created_at.desc()).limit(1)
+    )
+    if last is None:
+        return
+    taken_at = last.created_at if last.created_at.tzinfo else last.created_at.replace(tzinfo=timezone.utc)
+    remaining = taken_at + timedelta(seconds=config.RETAKE_COOLDOWN_SECONDS) - datetime.now(timezone.utc)
+    if remaining.total_seconds() > 0:
+        minutes = math.ceil(remaining.total_seconds() / 60)
+        raise HTTPException(
+            status.HTTP_429_TOO_MANY_REQUESTS,
+            f"Aguarde {minutes} min para refazer este quiz. Aproveite para revisar o conteúdo.",
+            headers={"Retry-After": str(math.ceil(remaining.total_seconds()))},
+        )
+
+
 @router.post("/quizzes/{quiz_id}/submit", response_model=ResultOut, status_code=status.HTTP_201_CREATED)
 def submit_quiz(
     quiz_id: int,
@@ -107,6 +131,7 @@ def submit_quiz(
 ):
     """Corrige no servidor: o cliente nunca recebe o gabarito antes de responder."""
     quiz = _load_quiz(db, quiz_id)
+    _enforce_retake_cooldown(db, user, quiz)
     chosen = {a.question_id: a.alternative_id for a in data.answers}
 
     review, score, max_score, correct_count = [], 0, 0, 0
@@ -177,6 +202,6 @@ def submit_quiz(
         time_spent=time_spent,
         passed=passed,
         created_at=result.created_at,
-        review=review,
+        review=public_review(review, passed),
         certificate=certificate_out(certificate) if certificate else None,
     )

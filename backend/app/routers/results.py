@@ -24,6 +24,13 @@ def certificate_out(cert: Certificate) -> CertificateOut:
     )
 
 
+def public_review(review: list[dict], passed: bool) -> list[dict]:
+    """Só quem foi aprovado vê o gabarito; os demais veem apenas quais respostas estavam certas."""
+    if passed:
+        return review
+    return [{**item, "correct_id": None, "correct_text": None} for item in review]
+
+
 def _cert_query():
     return select(Certificate).options(
         selectinload(Certificate.user), selectinload(Certificate.quiz).selectinload(Quiz.category)
@@ -72,7 +79,7 @@ def get_result(result_id: int, user: User = Depends(get_current_user), db: Sessi
         time_spent=r.time_spent,
         passed=r.percentage >= config.PASS_PERCENTAGE,
         created_at=r.created_at,
-        review=r.review,
+        review=public_review(r.review, r.percentage >= config.PASS_PERCENTAGE),
         certificate=certificate_out(cert) if cert else None,
     )
 
