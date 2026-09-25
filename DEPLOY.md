@@ -108,6 +108,25 @@ Observações:
 4. O domínio do site aponta para o Vercel (Settings → Domains); coloque esse domínio em `FRONTEND_URL` e rode
    `docker compose ... up -d` para a API liberar o CORS dele.
 
+## 6b. E-mail (recuperação de senha)
+O link de "Esqueci minha senha" é enviado por SMTP. Preencha no `.env.production` e recrie a API
+(`docker compose --env-file .env.production -f docker-compose.prod.yml up -d --build`):
+```
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587            # 465 com SMTP_SECURE=true também funciona
+SMTP_USER=seu-email@gmail.com
+SMTP_PASS=senha-de-app   # Gmail: Conta Google > Segurança > Verificação em duas etapas > Senhas de app
+SMTP_FROM=QUIZ TECH <seu-email@gmail.com>
+```
+Serve qualquer provedor SMTP (Brevo, Resend, Mailgun...). Os links usam `APP_URL` (padrão: o primeiro endereço de
+`FRONTEND_URL`). Sem `SMTP_HOST` a tela "Esqueci minha senha" avisa que o recurso está desativado. Teste: peça a
+redefinição do seu próprio e-mail e confira também a caixa de spam. Nunca coloque a senha de app no Git (o
+`.env.production` já é ignorado).
+
+**Primeiro administrador:** quem se cadastrar com o e-mail de `ADMIN_EMAIL` vira administrador (cadastre-se logo após subir).
+Depois, os administradores promovem outros em Painel > Usuários. Se a conta já existir:
+`docker exec meu-bolso-digital-db-prod psql -U quiztech -d quiztech -c "UPDATE usuarios SET is_admin = true WHERE lower(email) = 'fulano@exemplo.com'"`.
+
 ## 7. Conferir
 ```bash
 FRONTEND_URL=https://seu-site API_URL=https://api.seu-dominio node scripts/smoke-producao.js

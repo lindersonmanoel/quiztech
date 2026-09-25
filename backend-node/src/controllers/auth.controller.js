@@ -3,7 +3,7 @@
 const authService = require("../services/auth.service");
 const usuarioModel = require("../models/usuario.model");
 const { AppError } = require("../utils/errors");
-const { validateRegister, validateLogin, validateNomePerfil } = require("../utils/validators");
+const { validateRegister, validateLogin, validateNomePerfil, validateEsqueciSenha, validateRedefinirSenha } = require("../utils/validators");
 
 function dadosInvalidos(erros) {
   return new AppError("Dados inválidos.", 422, erros);
@@ -60,4 +60,29 @@ async function deleteMe(req, res, next) {
   }
 }
 
-module.exports = { register, login, me, updateMe, deleteMe };
+async function forgotPassword(req, res, next) {
+  try {
+    const { valido, erros, email } = validateEsqueciSenha(req.body || {});
+    if (!valido) throw dadosInvalidos(erros);
+    // Resposta imediata e identica para qualquer e-mail; o envio acontece em segundo plano.
+    res.status(202).json({ mensagem: "Se o e-mail estiver cadastrado, enviamos um link para redefinir a senha. Confira também a caixa de spam." });
+    // eslint-disable-next-line no-console
+    authService.solicitarRedefinicao(email).catch((err) => console.error("[recuperação de senha] falha:", err.message));
+    return undefined;
+  } catch (err) {
+    return next(err);
+  }
+}
+
+async function resetPassword(req, res, next) {
+  try {
+    const { valido, erros } = validateRedefinirSenha(req.body || {});
+    if (!valido) throw dadosInvalidos(erros);
+    await authService.redefinirSenha({ token: req.body.token, senha: req.body.password });
+    return res.json({ mensagem: "Senha alterada. Entre com a nova senha." });
+  } catch (err) {
+    return next(err);
+  }
+}
+
+module.exports = { register, login, me, updateMe, deleteMe, forgotPassword, resetPassword };

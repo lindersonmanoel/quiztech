@@ -6,7 +6,7 @@
     "icone": "flow",
     "descricao": "Algoritmos, variáveis, condições, laços e raciocínio lógico.",
     "quiz": {
-      "titulo": "Quiz de Lógica de Programação",
+      "titulo": "Quiz de Lógica de Programação — Médio",
       "descricao": "Teste seus conhecimentos em Lógica de Programação. Algoritmos, variáveis, condições, laços e raciocínio lógico.",
       "dificuldade": "media",
       "limite_tempo": 300
@@ -81,7 +81,7 @@
     "icone": "python",
     "descricao": "Sintaxe, estruturas de dados e recursos da linguagem Python.",
     "quiz": {
-      "titulo": "Quiz de Python",
+      "titulo": "Quiz de Python — Médio",
       "descricao": "Teste seus conhecimentos em Python. Sintaxe, estruturas de dados e recursos da linguagem Python.",
       "dificuldade": "media",
       "limite_tempo": 300
@@ -156,7 +156,7 @@
     "icone": "braces",
     "descricao": "A linguagem da web: variáveis, funções, assincronismo e DOM.",
     "quiz": {
-      "titulo": "Quiz de JavaScript",
+      "titulo": "Quiz de JavaScript — Médio",
       "descricao": "Teste seus conhecimentos em JavaScript. A linguagem da web: variáveis, funções, assincronismo e DOM.",
       "dificuldade": "media",
       "limite_tempo": 300
@@ -231,7 +231,7 @@
     "icone": "cup",
     "descricao": "Orientação a objetos, JVM e o ecossistema Java.",
     "quiz": {
-      "titulo": "Quiz de Java",
+      "titulo": "Quiz de Java — Médio",
       "descricao": "Teste seus conhecimentos em Java. Orientação a objetos, JVM e o ecossistema Java.",
       "dificuldade": "media",
       "limite_tempo": 300
@@ -306,7 +306,7 @@
     "icone": "pointer",
     "descricao": "Programação de baixo nível, ponteiros e gerenciamento de memória.",
     "quiz": {
-      "titulo": "Quiz de C e C++",
+      "titulo": "Quiz de C e C++ — Médio",
       "descricao": "Teste seus conhecimentos em C e C++. Programação de baixo nível, ponteiros e gerenciamento de memória.",
       "dificuldade": "media",
       "limite_tempo": 300
@@ -381,7 +381,7 @@
     "icone": "hex-hash",
     "descricao": "A linguagem C# e a plataforma .NET da Microsoft.",
     "quiz": {
-      "titulo": "Quiz de C# e .NET",
+      "titulo": "Quiz de C# e .NET — Médio",
       "descricao": "Teste seus conhecimentos em C# e .NET. A linguagem C# e a plataforma .NET da Microsoft.",
       "dificuldade": "media",
       "limite_tempo": 300
@@ -456,7 +456,7 @@
     "icone": "browser",
     "descricao": "Estrutura e estilo de páginas web, layout e responsividade.",
     "quiz": {
-      "titulo": "Quiz de HTML e CSS",
+      "titulo": "Quiz de HTML e CSS — Médio",
       "descricao": "Teste seus conhecimentos em HTML e CSS. Estrutura e estilo de páginas web, layout e responsividade.",
       "dificuldade": "media",
       "limite_tempo": 300
@@ -531,7 +531,7 @@
     "icone": "server",
     "descricao": "APIs REST, HTTP, autenticação e arquitetura de servidores.",
     "quiz": {
-      "titulo": "Quiz de Back-end e APIs",
+      "titulo": "Quiz de Back-end e APIs — Médio",
       "descricao": "Teste seus conhecimentos em Back-end e APIs. APIs REST, HTTP, autenticação e arquitetura de servidores.",
       "dificuldade": "media",
       "limite_tempo": 300
@@ -606,7 +606,7 @@
     "icone": "phone",
     "descricao": "Apps para Android e iOS, frameworks multiplataforma e PWAs.",
     "quiz": {
-      "titulo": "Quiz de Desenvolvimento Mobile",
+      "titulo": "Quiz de Desenvolvimento Mobile — Médio",
       "descricao": "Teste seus conhecimentos em Desenvolvimento Mobile. Apps para Android e iOS, frameworks multiplataforma e PWAs.",
       "dificuldade": "media",
       "limite_tempo": 300
@@ -681,7 +681,7 @@
     "icone": "branch",
     "descricao": "Versionamento de código, branches e colaboração.",
     "quiz": {
-      "titulo": "Quiz de Git e GitHub",
+      "titulo": "Quiz de Git e GitHub — Médio",
       "descricao": "Teste seus conhecimentos em Git e GitHub. Versionamento de código, branches e colaboração.",
       "dificuldade": "media",
       "limite_tempo": 300
@@ -756,7 +756,7 @@
     "icone": "tree",
     "descricao": "Pilhas, filas, árvores, grafos, ordenação e complexidade.",
     "quiz": {
-      "titulo": "Quiz de Estruturas de Dados e Algoritmos",
+      "titulo": "Quiz de Estruturas de Dados e Algoritmos — Médio",
       "descricao": "Teste seus conhecimentos em Estruturas de Dados e Algoritmos. Pilhas, filas, árvores, grafos, ordenação e complexidade.",
       "dificuldade": "media",
       "limite_tempo": 300
@@ -831,7 +831,7 @@
     "icone": "checklist",
     "descricao": "Boas práticas, testes, modelagem e qualidade de software.",
     "quiz": {
-      "titulo": "Quiz de Engenharia de Software e Testes",
+      "titulo": "Quiz de Engenharia de Software e Testes — Médio",
       "descricao": "Teste seus conhecimentos em Engenharia de Software e Testes. Boas práticas, testes, modelagem e qualidade de software.",
       "dificuldade": "media",
       "limite_tempo": 300
@@ -906,7 +906,7 @@
     "icone": "gamepad",
     "descricao": "Motores gráficos, game loop, física e gráficos em tempo real.",
     "quiz": {
-      "titulo": "Quiz de Desenvolvimento de Jogos",
+      "titulo": "Quiz de Desenvolvimento de Jogos — Médio",
       "descricao": "Teste seus conhecimentos em Desenvolvimento de Jogos. Motores gráficos, game loop, física e gráficos em tempo real.",
       "dificuldade": "media",
       "limite_tempo": 300
@@ -981,7 +981,7 @@
     "icone": "database",
     "descricao": "Modelagem relacional, consultas SQL, transações e NoSQL.",
     "quiz": {
-      "titulo": "Quiz de Banco de Dados e SQL",
+      "titulo": "Quiz de Banco de Dados e SQL — Médio",
       "descricao": "Teste seus conhecimentos em Banco de Dados e SQL. Modelagem relacional, consultas SQL, transações e NoSQL.",
       "dificuldade": "media",
       "limite_tempo": 300
@@ -1056,7 +1056,7 @@
     "icone": "chart",
     "descricao": "Análise, estatística básica, ETL e visualização de dados.",
     "quiz": {
-      "titulo": "Quiz de Ciência de Dados e Analytics",
+      "titulo": "Quiz de Ciência de Dados e Analytics — Médio",
       "descricao": "Teste seus conhecimentos em Ciência de Dados e Analytics. Análise, estatística básica, ETL e visualização de dados.",
       "dificuldade": "media",
       "limite_tempo": 300
@@ -1131,7 +1131,7 @@
     "icone": "robot",
     "descricao": "Conceitos de IA, assistentes, linguagem natural e modelos de linguagem.",
     "quiz": {
-      "titulo": "Quiz de Inteligência Artificial",
+      "titulo": "Quiz de Inteligência Artificial — Médio",
       "descricao": "Teste seus conhecimentos em Inteligência Artificial. Conceitos de IA, assistentes, linguagem natural e modelos de linguagem.",
       "dificuldade": "media",
       "limite_tempo": 300
@@ -1206,7 +1206,7 @@
     "icone": "neural",
     "descricao": "Aprendizado supervisionado e não supervisionado, treino e avaliação de modelos.",
     "quiz": {
-      "titulo": "Quiz de Machine Learning",
+      "titulo": "Quiz de Machine Learning — Médio",
       "descricao": "Teste seus conhecimentos em Machine Learning. Aprendizado supervisionado e não supervisionado, treino e avaliação de modelos.",
       "dificuldade": "media",
       "limite_tempo": 300
@@ -1281,7 +1281,7 @@
     "icone": "globe",
     "descricao": "Protocolos, endereçamento IP, DNS, modelo OSI e TCP/IP.",
     "quiz": {
-      "titulo": "Quiz de Redes de Computadores",
+      "titulo": "Quiz de Redes de Computadores — Médio",
       "descricao": "Teste seus conhecimentos em Redes de Computadores. Protocolos, endereçamento IP, DNS, modelo OSI e TCP/IP.",
       "dificuldade": "media",
       "limite_tempo": 300
@@ -1356,7 +1356,7 @@
     "icone": "terminal",
     "descricao": "Processos, memória, permissões e linha de comando.",
     "quiz": {
-      "titulo": "Quiz de Sistemas Operacionais e Linux",
+      "titulo": "Quiz de Sistemas Operacionais e Linux — Médio",
       "descricao": "Teste seus conhecimentos em Sistemas Operacionais e Linux. Processos, memória, permissões e linha de comando.",
       "dificuldade": "media",
       "limite_tempo": 300
@@ -1431,7 +1431,7 @@
     "icone": "cloud",
     "descricao": "Computação em nuvem, modelos de serviço, serverless e CDN.",
     "quiz": {
-      "titulo": "Quiz de Cloud Computing",
+      "titulo": "Quiz de Cloud Computing — Médio",
       "descricao": "Teste seus conhecimentos em Cloud Computing. Computação em nuvem, modelos de serviço, serverless e CDN.",
       "dificuldade": "media",
       "limite_tempo": 300
@@ -1506,7 +1506,7 @@
     "icone": "container",
     "descricao": "Docker, Kubernetes, CI/CD e infraestrutura como código.",
     "quiz": {
-      "titulo": "Quiz de DevOps e Containers",
+      "titulo": "Quiz de DevOps e Containers — Médio",
       "descricao": "Teste seus conhecimentos em DevOps e Containers. Docker, Kubernetes, CI/CD e infraestrutura como código.",
       "dificuldade": "media",
       "limite_tempo": 300
@@ -1581,7 +1581,7 @@
     "icone": "chip",
     "descricao": "Processador, memórias, periféricos e representação de dados.",
     "quiz": {
-      "titulo": "Quiz de Hardware e Arquitetura de Computadores",
+      "titulo": "Quiz de Hardware e Arquitetura de Computadores — Médio",
       "descricao": "Teste seus conhecimentos em Hardware e Arquitetura de Computadores. Processador, memórias, periféricos e representação de dados.",
       "dificuldade": "media",
       "limite_tempo": 300
@@ -1656,7 +1656,7 @@
     "icone": "wifi",
     "descricao": "Internet das Coisas, sensores, microcontroladores e protocolos.",
     "quiz": {
-      "titulo": "Quiz de IoT e Eletrônica",
+      "titulo": "Quiz de IoT e Eletrônica — Médio",
       "descricao": "Teste seus conhecimentos em IoT e Eletrônica. Internet das Coisas, sensores, microcontroladores e protocolos.",
       "dificuldade": "media",
       "limite_tempo": 300
@@ -1731,7 +1731,7 @@
     "icone": "shield",
     "descricao": "Ameaças, boas práticas, autenticação e proteção de sistemas.",
     "quiz": {
-      "titulo": "Quiz de Segurança da Informação",
+      "titulo": "Quiz de Segurança da Informação — Médio",
       "descricao": "Teste seus conhecimentos em Segurança da Informação. Ameaças, boas práticas, autenticação e proteção de sistemas.",
       "dificuldade": "media",
       "limite_tempo": 300
@@ -1806,7 +1806,7 @@
     "icone": "lock",
     "descricao": "Chaves, hashes, assinaturas digitais, blockchain e contratos inteligentes.",
     "quiz": {
-      "titulo": "Quiz de Criptografia e Blockchain",
+      "titulo": "Quiz de Criptografia e Blockchain — Médio",
       "descricao": "Teste seus conhecimentos em Criptografia e Blockchain. Chaves, hashes, assinaturas digitais, blockchain e contratos inteligentes.",
       "dificuldade": "media",
       "limite_tempo": 300
@@ -1881,7 +1881,7 @@
     "icone": "layout",
     "descricao": "Experiência do usuário, interfaces, prototipagem e acessibilidade.",
     "quiz": {
-      "titulo": "Quiz de UX/UI Design",
+      "titulo": "Quiz de UX/UI Design — Médio",
       "descricao": "Teste seus conhecimentos em UX/UI Design. Experiência do usuário, interfaces, prototipagem e acessibilidade.",
       "dificuldade": "media",
       "limite_tempo": 300
@@ -1956,7 +1956,7 @@
     "icone": "kanban",
     "descricao": "Scrum, Kanban, backlog, sprints e entrega de valor.",
     "quiz": {
-      "titulo": "Quiz de Gestão de Projetos e Métodos Ágeis",
+      "titulo": "Quiz de Gestão de Projetos e Métodos Ágeis — Médio",
       "descricao": "Teste seus conhecimentos em Gestão de Projetos e Métodos Ágeis. Scrum, Kanban, backlog, sprints e entrega de valor.",
       "dificuldade": "media",
       "limite_tempo": 300
@@ -2031,7 +2031,7 @@
     "icone": "scale",
     "descricao": "Boas práticas de governança, gestão de serviços e proteção de dados pessoais.",
     "quiz": {
-      "titulo": "Quiz de Governança de TI, ITIL e LGPD",
+      "titulo": "Quiz de Governança de TI, ITIL e LGPD — Médio",
       "descricao": "Teste seus conhecimentos em Governança de TI, ITIL e LGPD. Boas práticas de governança, gestão de serviços e proteção de dados pessoais.",
       "dificuldade": "media",
       "limite_tempo": 300
@@ -2106,7 +2106,7 @@
     "icone": "rocket",
     "descricao": "Modelos de negócio, validação de ideias e startups de tecnologia.",
     "quiz": {
-      "titulo": "Quiz de Empreendedorismo e Startups",
+      "titulo": "Quiz de Empreendedorismo e Startups — Médio",
       "descricao": "Teste seus conhecimentos em Empreendedorismo e Startups. Modelos de negócio, validação de ideias e startups de tecnologia.",
       "dificuldade": "media",
       "limite_tempo": 300
@@ -2181,7 +2181,7 @@
     "icone": "monitor",
     "descricao": "Uso do computador, Office, diagnóstico de problemas e backup.",
     "quiz": {
-      "titulo": "Quiz de Suporte Técnico e Informática Básica",
+      "titulo": "Quiz de Suporte Técnico e Informática Básica — Médio",
       "descricao": "Teste seus conhecimentos em Suporte Técnico e Informática Básica. Uso do computador, Office, diagnóstico de problemas e backup.",
       "dificuldade": "media",
       "limite_tempo": 300
@@ -2256,7 +2256,7 @@
     "icone": "math",
     "descricao": "Bases numéricas, lógica booleana, potências, logaritmos e combinatória.",
     "quiz": {
-      "titulo": "Quiz de Matemática para Computação",
+      "titulo": "Quiz de Matemática para Computação — Médio",
       "descricao": "Teste seus conhecimentos em Matemática para Computação. Bases numéricas, lógica booleana, potências, logaritmos e combinatória.",
       "dificuldade": "media",
       "limite_tempo": 300
@@ -2331,7 +2331,7 @@
     "icone": "atom",
     "descricao": "5G, realidade aumentada, computação quântica, impressão 3D e edge computing.",
     "quiz": {
-      "titulo": "Quiz de Tecnologias Emergentes",
+      "titulo": "Quiz de Tecnologias Emergentes — Médio",
       "descricao": "Teste seus conhecimentos em Tecnologias Emergentes. 5G, realidade aumentada, computação quântica, impressão 3D e edge computing.",
       "dificuldade": "media",
       "limite_tempo": 300

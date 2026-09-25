@@ -43,4 +43,13 @@ async function remover(id) {
   return rowCount > 0;
 }
 
-module.exports = { findByEmail, findById, create, updateNome, tokenVersion, remover };
+/** Troca a senha na transacao do chamador e invalida os tokens (JWT) emitidos antes (token_version + 1). */
+async function atualizarSenha(client, id, senhaHash) {
+  const { rows } = await client.query(
+    "UPDATE usuarios SET senha_hash = $1, token_version = token_version + 1, atualizado_em = now() WHERE id = $2 RETURNING nome, email",
+    [senhaHash, id]
+  );
+  return rows[0] || null;
+}
+
+module.exports = { findByEmail, findById, create, updateNome, tokenVersion, remover, atualizarSenha };

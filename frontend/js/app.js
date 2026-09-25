@@ -41,7 +41,7 @@ function errorMessage(data, status) {
   return `Erro ${status}`;
 }
 
-const apiBase = () => window.API_BASE_URL || "/api";
+export const apiBase = () => window.API_BASE_URL || "/api";
 
 export async function api(path, { method = "GET", body } = {}) {
   const headers = {};
@@ -67,6 +67,16 @@ export async function api(path, { method = "GET", body } = {}) {
     throw new ApiError(res.status, errorMessage(data, res.status));
   }
   return data;
+}
+
+/** GET que devolve texto (ex.: o QR Code em SVG). Devolve null em qualquer falha: quem chama decide o que mostrar. */
+export async function apiText(path) {
+  try {
+    const res = await fetch(`${apiBase()}${path}`);
+    return res.ok ? await res.text() : null;
+  } catch {
+    return null;
+  }
 }
 
 export function el(tag, attrs = {}, ...children) {
@@ -101,7 +111,8 @@ export function fmtDate(iso) {
   return new Date(iso).toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" });
 }
 
-export const DIFFICULTY = { facil: "Fácil", media: "Média", dificil: "Difícil" };
+export const DIFFICULTY = { facil: "Fácil", media: "Médio", dificil: "Difícil" };
+export const NIVEIS = ["facil", "media", "dificil"];
 
 // Só aceita destinos internos simples (ex.: "quiz.html?id=3") para o parâmetro ?next=.
 export function safeNext(value, fallback = "quizzes.html") {
@@ -172,6 +183,7 @@ export function renderNav() {
   // Botao de instalar o app (PWA): so' aparece no Android e enquanto o app nao esta instalado (veja pwa.js).
   links.push(el("button", { type: "button", class: "btn small install-btn", "data-install": "", hidden: true, "aria-label": "Instalar o aplicativo QUIZ TECH" }, icone("download", { tamanho: 16 }), " Instalar app"));
   if (user) {
+    if (user.is_admin) links.push(link("admin.html", "Painel"));
     links.push(link("perfil.html", "Meu perfil"));
     links.push(el("button", { type: "button", onclick: () => { clearSession(); location.href = "index.html"; } }, "Sair"));
   } else {

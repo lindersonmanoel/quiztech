@@ -1,4 +1,4 @@
-import { api, clearSession, el, fmtDate, getUser, renderNav, requireLogin, setSession, getToken, showMessage, $ } from "./app.js";
+import { api, clearSession, DIFFICULTY, el, fmtDate, getUser, renderNav, requireLogin, setSession, getToken, showMessage, $ } from "./app.js";
 
 renderNav();
 
@@ -32,6 +32,7 @@ async function load() {
     $("#certs").replaceChildren(...(certs.length
       ? certs.map((c) => el("article", { class: "card" },
         el("h3", {}, c.category_name),
+        el("p", {}, el("span", { class: `badge nivel-${c.difficulty}` }, DIFFICULTY[c.difficulty] || "")),
         el("p", { class: "muted" }, `${c.percentage}% · emitido em ${fmtDate(c.issued_at)}`),
         el("a", { class: "btn small", href: `certificado.html?code=${encodeURIComponent(c.code)}` }, "Abrir certificado")))
       : [el("p", { class: "muted" }, "Você ainda não tem certificados. Acerte 70% ou mais em um quiz para receber o primeiro.")]));

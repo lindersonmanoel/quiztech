@@ -1,0 +1,110 @@
+{
+  "gestao-de-projetos-ageis": {
+    "facil": [
+      ["O que é um projeto?", "Um esforço temporário para criar um produto ou serviço único", ["Uma atividade repetida todos os dias, sem data para terminar", "Um tipo de contrato assinado entre a empresa e o cliente final", "Um software de planilhas usado para organizar as tarefas do time"]],
+      ["O que é o backlog do produto?", "A lista priorizada do que precisa ser feito no produto", ["O relatório final entregue ao cliente no término do projeto", "Uma reunião diária para alinhar as tarefas da equipe", "O contrato assinado com o cliente no início"]],
+      ["Qual é o papel do Scrum Master?", "Ajudar a equipe a seguir o Scrum e remover impedimentos", ["Definir sozinho todas as tarefas técnicas da equipe", "Aprovar o orçamento da empresa e contratar os programadores", "Programar sozinho todas as funções do sistema"]],
+      ["O que é a reunião diária (daily) no Scrum?", "Um encontro curto para alinhar o que foi feito e o que vem a seguir", ["Uma reunião mensal em que a equipe apresenta resultados aos investidores", "Uma revisão dos contratos assinados com os fornecedores", "Um treinamento de uma semana sobre metodologias ágeis"]],
+      ["Segundo o Manifesto Ágil, o que é mais valorizado?", "Software em funcionamento mais que documentação abrangente", ["Documentação abrangente mais que software em funcionamento", "Seguir um plano mais que responder a mudanças", "Contratos mais que colaboração com o cliente"]],
+      ["O que é um prazo (deadline)?", "A data limite para concluir uma entrega", ["O custo total previsto para a realização do projeto", "O nome dado à equipe responsável pelo projeto", "Um tipo de risco que ameaça o projeto"]]
+    ],
+    "dificil": [
+      ["O que é a velocidade (velocity) de uma equipe Scrum?", "O trabalho concluído por sprint, usado para prever entregas", ["A rapidez com que os membros da equipe escrevem o código", "O número de reuniões realizadas por semana pela equipe", "O tempo decorrido entre duas reuniões diárias consecutivas"]],
+      ["O que é a Definição de Pronto (Definition of Done)?", "Critérios para que uma entrega seja considerada concluída", ["A data final combinada com o cliente para o projeto", "A lista com os nomes e as funções dos membros da equipe", "O orçamento total aprovado para a execução do projeto"]],
+      ["O que é um limite de trabalho em progresso (WIP) no Kanban?", "Um teto de itens simultâneos em uma coluna, para evitar sobrecarga", ["O número máximo de pessoas que podem trabalhar no projeto ao mesmo tempo", "O prazo máximo permitido para concluir uma tarefa do quadro", "O tamanho máximo do quadro que fica exibido na parede da sala"]],
+      ["O que é o planning poker?", "Técnica de estimativa em que a equipe vota o esforço das histórias", ["Um jogo de cartas usado para escolher quem será o Product Owner", "Um sorteio que distribui as tarefas entre as pessoas da equipe", "Uma técnica de negociação de prazos e preços com os clientes"]],
+      ["Quais são os três pilares do empirismo no Scrum?", "Transparência, inspeção e adaptação", ["Planejamento, execução e controle", "Custo, prazo e escopo", "Velocidade, qualidade e preço"]],
+      ["O que é o triângulo de ferro (restrições) da gestão de projetos?", "Escopo, prazo e custo, que se influenciam entre si", ["Pessoas, máquinas e prédios necessários para o projeto", "Cliente, gerente e equipe, que dividem as decisões do projeto", "Planejar, fazer, verificar e agir em ciclos de melhoria"]]
+    ]
+  },
+  "governanca-ti-lgpd": {
+    "facil": [
+      ["O que significa a sigla LGPD?", "Lei Geral de Proteção de Dados", ["Lei Geral de Publicação Digital", "Lei de Gestão de Portais e Dados", "Lei Global de Privacidade Digital"]],
+      ["Quem é o titular de dados na LGPD?", "A pessoa a quem os dados pessoais se referem", ["A empresa que guarda os dados em seus servidores", "O servidor de banco de dados onde tudo fica armazenado", "O advogado que representa a empresa na justiça"]],
+      ["Qual destes é um dado pessoal?", "CPF", ["A cor do céu", "O preço de um produto", "A previsão do tempo"]],
+      ["O que é governança de TI?", "Práticas para alinhar a TI aos objetivos do negócio", ["Um tipo de antivírus usado em servidores de grandes empresas", "Um curso de programação voltado para a área de negócios", "Uma linguagem usada para consultar bancos de dados"]],
+      ["O que é uma política de privacidade?", "Um documento que explica como os dados pessoais são usados", ["Um contrato de trabalho entre empresa e funcionário", "Uma senha padrão criada pelo departamento de TI para os usuários", "Uma lista de preços dos serviços prestados pela empresa"]],
+      ["O que é o consentimento na LGPD?", "A concordância livre e informada do titular com o uso dos seus dados", ["Um aviso informando que os dados serão usados sem pedir nenhuma permissão", "Um pagamento feito ao titular pela empresa pelo uso dos seus dados", "Um tipo de senha exigida do titular para acessar os próprios dados"]]
+    ],
+    "dificil": [
+      ["Qual é o papel do encarregado (DPO) na LGPD?", "Ser o canal de comunicação entre o controlador, os titulares e a ANPD", ["Programar e manter todos os sistemas de informação da empresa", "Fiscalizar a empresa em nome da Receita Federal e do Ministério", "Ser o dono legal de todos os dados pessoais dos clientes"]],
+      ["Qual destes é um dado pessoal sensível, segundo a LGPD?", "Dado sobre saúde", ["Nome de um produto", "Endereço de um site público", "Número de um pedido"]],
+      ["Quais direitos o titular tem pela LGPD?", "Acessar, corrigir e pedir a eliminação de seus dados, entre outros", ["Apenas ler a política de privacidade publicada pela empresa", "Somente cancelar as assinaturas e os serviços contratados", "Nenhum, pois os dados passam a pertencer à empresa que os coletou"]],
+      ["O que é um incidente de segurança com dados pessoais?", "Evento que compromete a confidencialidade ou a integridade dos dados", ["Uma atualização de rotina feita no sistema da empresa", "Um pedido de exclusão de dados feito por um titular à empresa", "Um backup programado dos servidores e dos dados da empresa"]],
+      ["No ITIL, o que é um incidente?", "Uma interrupção não planejada ou queda de qualidade de um serviço de TI", ["Uma mudança planejada e aprovada feita em um servidor da empresa", "Um pedido de compra de novos equipamentos para a equipe", "Um contrato de longo prazo assinado com um fornecedor de TI"]],
+      ["Qual é a diferença entre controlador e operador na LGPD?", "O controlador decide sobre o tratamento; o operador trata os dados por ele", ["O operador decide sobre o tratamento e o controlador apenas executa", "Ambos são titulares dos dados tratados e decidem juntos", "Não há nenhuma diferença legal entre os dois papéis"]]
+    ]
+  },
+  "empreendedorismo-e-startups": {
+    "facil": [
+      ["O que é um empreendedor?", "Quem vê uma oportunidade e cria um negócio para aproveitá-la", ["Quem só trabalha como funcionário de uma grande empresa", "Quem apenas investe o seu dinheiro na bolsa de valores", "Quem apenas compra produtos prontos para revender depois"]],
+      ["O que é um investidor-anjo?", "Uma pessoa que investe dinheiro próprio em startups no início", ["Um funcionário da startup responsável pela área de vendas", "Um cliente fiel que compra sempre os produtos da startup", "Um fiscal do governo que analisa as contas da empresa"]],
+      ["O que é um plano de negócios?", "Um documento que descreve o negócio, o mercado e como dará resultado", ["Uma lista de compras feita pelo departamento financeiro", "Um contrato de aluguel do escritório onde a empresa funciona", "Um manual de instalação dos equipamentos da empresa"]],
+      ["O que é lucro?", "O que sobra da receita depois de pagar custos e despesas", ["Todo o dinheiro que entra no caixa da empresa em um mês", "O valor total dos custos fixos e das despesas do mês", "O dinheiro emprestado por bancos e por investidores"]],
+      ["O que é o público-alvo?", "O grupo de pessoas que a empresa quer atender", ["O time de vendedores que trabalha na empresa", "As empresas concorrentes que atuam no mesmo mercado", "Os fornecedores que entregam matéria-prima à empresa"]],
+      ["O que é a proposta de valor?", "O benefício que o produto entrega e por que o cliente o escolheria", ["O preço de custo do produto somado à margem de lucro desejada", "O nome e o slogan usados na divulgação dos produtos da empresa", "O endereço da sede da empresa e os dados de contato dos sócios"]]
+    ],
+    "dificil": [
+      ["O que é o CAC (Custo de Aquisição de Cliente)?", "Quanto a empresa gasta, em média, para conquistar um novo cliente", ["O custo mensal total de manter a equipe de desenvolvimento", "O valor pago pelo cliente por cada produto comprado", "O imposto cobrado pelo governo sobre as vendas da empresa"]],
+      ["O que é o LTV (Lifetime Value)?", "A receita total que um cliente tende a gerar enquanto for cliente", ["O valor de mercado do imóvel onde fica a sede da empresa", "O lucro líquido obtido pela empresa no último mês de vendas", "O custo mensal de manter o site e os servidores da empresa no ar"]],
+      ["O que significa pivotar em uma startup?", "Mudar a estratégia ou o modelo de negócio a partir do que se aprendeu", ["Encerrar as atividades da empresa por falta de dinheiro em caixa", "Contratar muitos funcionários para acelerar o crescimento da empresa", "Vender a startup para uma empresa maior do mesmo setor"]],
+      ["O que é bootstrapping?", "Financiar a empresa com recursos próprios e a receita gerada", ["Captar grandes investimentos de fundos de capital de risco", "Pegar dinheiro emprestado apenas com bancos e instituições", "Vender ações da empresa na bolsa de valores para investidores"]],
+      ["O que é um unicórnio no ecossistema de startups?", "Uma startup avaliada em mais de 1 bilhão de dólares", ["Uma startup fundada por uma única pessoa sem sócios", "Uma startup que ainda não tem nenhum funcionário", "Uma startup que teve um lucro de 1 milhão de reais no ano"]],
+      ["O que é o product-market fit?", "Quando o produto atende bem a uma demanda real do mercado", ["Quando o produto passa a ser vendido apenas a preço de custo", "Quando o produto já foi patenteado no órgão competente", "Quando o produto está disponível em muitas lojas físicas"]]
+    ]
+  },
+  "suporte-e-informatica-basica": {
+    "facil": [
+      ["Qual atalho cola o item copiado no Windows?", "Ctrl + V", ["Ctrl + X", "Ctrl + Z", "Ctrl + P"]],
+      ["Qual atalho desfaz a última ação na maioria dos programas?", "Ctrl + Z", ["Ctrl + S", "Ctrl + A", "Ctrl + P"]],
+      ["O que é um arquivo .pdf?", "Um documento portátil, que mantém a aparência em qualquer aparelho", ["Um programa executável que instala outros programas no computador", "Um vídeo de alta definição em formato compactado para a web", "Um arquivo de áudio em formato sem compressão de qualidade"]],
+      ["O que fazer primeiro quando um programa trava?", "Aguardar e, se não responder, fechar o programa e abri-lo de novo", ["Formatar o computador e instalar todos os programas do zero", "Trocar o processador e a memória por modelos mais rápidos", "Comprar um computador novo e descartar o computador antigo"]],
+      ["Qual é a função do Gerenciador de Tarefas do Windows?", "Ver e encerrar os programas e processos em execução", ["Editar fotos e imagens com ferramentas de desenho", "Navegar na internet e baixar arquivos e programas da web", "Escrever textos e criar documentos formatados"]],
+      ["O que é a extensão de um arquivo?", "As letras após o ponto no nome, que indicam o tipo do arquivo", ["A senha usada para proteger o arquivo contra cópias", "O tamanho do arquivo medido em kilobytes ou megabytes", "O local do disco onde o arquivo foi guardado pelo usuário"]]
+    ],
+    "dificil": [
+      ["Qual atalho abre diretamente o Gerenciador de Tarefas do Windows?", "Ctrl + Shift + Esc", ["Ctrl + Alt + Tab", "Alt + F4", "Win + L"]],
+      ["O que o comando ipconfig mostra no Windows?", "A configuração de rede, como o endereço IP", ["A temperatura atual da CPU e da placa de vídeo", "A lista de programas instalados no computador", "O espaço livre que resta em cada disco do computador"]],
+      ["Para que serve o comando ping?", "Testar se outro dispositivo responde na rede e em quanto tempo", ["Apagar arquivos temporários para liberar espaço no disco rígido", "Atualizar o sistema operacional para a última versão disponível", "Mostrar quais portas USB do computador estão em uso"]],
+      ["O que faz a restauração do sistema no Windows?", "Volta o sistema a um ponto anterior, sem apagar os documentos", ["Formata o disco e reinstala o sistema operacional do zero", "Troca a senha do usuário para uma senha padrão de fábrica", "Instala um antivírus e remove todos os programas antigos"]],
+      ["O que é uma partição de disco?", "Uma divisão lógica de um disco em áreas separadas", ["Uma peça física que se encaixa na placa-mãe", "Um tipo de vírus", "Um cabo de dados"]],
+      ["Qual é a boa prática ao atender um usuário com um problema?", "Reproduzir e registrar o problema antes de alterar configurações", ["Trocar as peças do computador assim que surgir o primeiro sintoma", "Formatar o computador de imediato para garantir a solução", "Ignorar o relato do usuário e buscar sozinho o defeito"]]
+    ]
+  },
+  "matematica-para-computacao": {
+    "facil": [
+      ["Quanto é 2³ (dois elevado a três)?", "8", ["6", "9", "5"]],
+      ["Qual é a raiz quadrada de 81?", "9", ["8", "7", "81"]],
+      ["Qual é o resultado de 17 dividido por 5, em divisão inteira?", "3", ["2", "4", "5"]],
+      ["Em lógica, a negação (NOT) de verdadeiro é:", "Falso", ["Verdadeiro", "Indefinido", "Nulo"]],
+      ["Quais dígitos o sistema binário usa?", "0 e 1", ["0 a 9", "0 a 7", "1 e 2"]],
+      ["Qual é a média de 4, 6 e 8?", "6", ["5", "7", "18"]]
+    ],
+    "dificil": [
+      ["Qual é o valor decimal do binário 11001?", "25", ["19", "27", "23"]],
+      ["Qual é o resultado da operação XOR entre 1 e 1?", "0", ["1", "2", "Indefinido"]],
+      ["Quantas combinações diferentes existem em 3 bits?", "8", ["6", "9", "3"]],
+      ["De quantas maneiras é possível ordenar 4 elementos distintos (permutações)?", "24", ["16", "12", "8"]],
+      ["Como se representa -1 em 8 bits usando complemento de dois?", "11111111", ["10000001", "00000001", "10000000"]],
+      ["Qual é o resto da divisão de 2¹⁰ por 7?", "2", ["1", "3", "0"]]
+    ]
+  },
+  "tecnologias-emergentes": {
+    "facil": [
+      ["O que é realidade virtual (VR)?", "Uma experiência imersiva em um ambiente simulado por computador", ["Uma sobreposição de informações digitais sobre o mundo real, vista pela câmera", "Um tipo de rede móvel de altíssima velocidade e baixa latência", "Um sistema operacional usado em computadores quânticos"]],
+      ["O que é o metaverso?", "Um conjunto de ambientes virtuais compartilhados e interativos", ["Um novo tipo de processador para computadores de alto desempenho", "Uma linguagem de programação voltada apenas para criar jogos", "Um antivírus voltado para proteger dispositivos móveis"]],
+      ["O que é um drone?", "Uma aeronave não tripulada, controlada à distância", ["Um tipo de impressora usada para imprimir em 3D", "Um carro elétrico com direção totalmente automática", "Um servidor usado para armazenamento de dados na nuvem"]],
+      ["O que é um assistente de voz?", "Um programa que responde a comandos falados", ["Um microfone sem fio usado em reuniões e transmissões", "Um alto-falante passivo sem amplificador interno", "Uma placa de som para computadores de mesa"]],
+      ["O que são carros autônomos?", "Veículos que dirigem com pouca ou nenhuma intervenção humana", ["Carros que só conseguem andar em linha reta e em velocidade fixa", "Carros movidos a vapor, como as antigas locomotivas", "Carros sem rodas que se deslocam flutuando sobre o ar"]],
+      ["O que é robótica?", "A área que projeta e constrói robôs", ["A área que cria fontes de texto", "A área que cria planilhas", "A área que desenha logotipos"]]
+    ],
+    "dificil": [
+      ["O que é um qubit?", "A unidade básica da computação quântica, em superposição de 0 e 1", ["Um bit comum que ocupa o dobro do espaço de memória de um byte", "Um tipo de sensor de temperatura usado em computadores quânticos", "Um cabo de fibra óptica de altíssima velocidade para data centers"]],
+      ["O que é a realidade mista (MR)?", "Objetos virtuais que interagem com o ambiente físico em tempo real", ["Um vídeo em 360 graus visto sem nenhum tipo de interação", "Um jogo em que dois jogadores usam óculos de realidade diferentes", "Uma tela com resolução mista para exibir vídeo e imagens"]],
+      ["O que é o aprendizado federado (federated learning)?", "Treinar modelos de forma distribuída, sem reunir os dados dos usuários", ["Treinar modelos apenas dentro de um único supercomputador central", "Treinar modelos somente com dados públicos disponíveis na internet", "Treinar modelos de forma totalmente automática, sem usar dados"]],
+      ["O que é a computação neuromórfica?", "Hardware inspirado no cérebro, com neurônios artificiais", ["Computação realizada apenas com partículas de luz e espelhos", "Computação em nuvem cobrada por meio de tokens digitais", "Um tipo de memória flash de altíssima capacidade e velocidade"]],
+      ["O que é a criptografia pós-quântica?", "Algoritmos projetados para resistir a ataques de computadores quânticos", ["Uma criptografia que só funciona em computadores quânticos", "Uma criptografia antiga já abandonada", "Um tipo de compressão de vídeo"]],
+      ["O que é a edge AI?", "Rodar modelos de IA no próprio dispositivo, sem depender da nuvem", ["Uma IA que só funciona dentro de grandes data centers na nuvem", "Uma IA que roda apenas em jogos e aplicativos de computador", "Uma técnica de compressão de imagens de alta resolução e vídeos"]]
+    ]
+  }
+}

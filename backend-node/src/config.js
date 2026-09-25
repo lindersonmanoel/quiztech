@@ -30,6 +30,12 @@ function buildConfig() {
     );
   }
 
+  // FRONTEND_URL aceita varias origens separadas por virgula (ex.: dominio novo + endereco antigo).
+  const frontendUrls = (process.env.FRONTEND_URL || "http://localhost:5500")
+    .split(",").map((u) => u.trim().replace(/\/+$/, "")).filter(Boolean);
+  const smtpPort = Number(process.env.SMTP_PORT) || 587;
+  const smtpUser = String(process.env.SMTP_USER || "").trim();
+
   return {
     nodeEnv,
     isProduction,
@@ -40,9 +46,22 @@ function buildConfig() {
     databaseSslCa: process.env.DATABASE_SSL_CA ? process.env.DATABASE_SSL_CA.replace(/\\n/g, "\n") : "",
     jwtSecret,
     jwtExpiresIn: process.env.JWT_EXPIRES_IN || "12h",
-    // FRONTEND_URL aceita varias origens separadas por virgula (ex.: dominio novo + endereco antigo).
-    frontendUrls: (process.env.FRONTEND_URL || "http://localhost:5500")
-      .split(",").map((u) => u.trim().replace(/\/+$/, "")).filter(Boolean),
+    frontendUrls,
+    // Endereco publico do SITE, usado nos links dos e-mails (redefinir senha) e no QR Code do certificado.
+    appUrl: String(process.env.APP_URL || frontendUrls[0]).trim().replace(/\/+$/, ""),
+    // Envio de e-mail (SMTP). Sem SMTP_HOST a recuperacao de senha nao consegue enviar o link.
+    smtp: {
+      host: String(process.env.SMTP_HOST || "").trim(),
+      port: smtpPort,
+      secure: boolFromEnv(process.env.SMTP_SECURE, smtpPort === 465),
+      user: smtpUser,
+      pass: String(process.env.SMTP_PASS || ""),
+      from: String(process.env.SMTP_FROM || "").trim() || (smtpUser ? `QUIZ TECH <${smtpUser}>` : ""),
+    },
+    // Validade do link de redefinicao de senha.
+    resetMinutos: Number(process.env.RESET_TOKEN_MINUTES) || 60,
+    // Fuso que define o inicio da semana (segunda) e do mes no ranking semanal/mensal.
+    rankingFuso: String(process.env.RANKING_TZ || "America/Sao_Paulo").trim(),
     // O usuario que se cadastrar com este e-mail vira administrador.
     adminEmail: String(process.env.ADMIN_EMAIL || "").trim().toLowerCase(),
     // Aproveitamento minimo (%) para aprovacao e emissao do certificado.

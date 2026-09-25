@@ -77,6 +77,9 @@ export const ICONES = {
 };
 
 export const ICONE_PADRAO = "code";
+
+/** Nomes de todos os ícones desenhados (o painel do administrador usa para escolher o ícone de uma área). */
+export const NOMES_DE_ICONES = Object.keys(ICONES);
 const SVG_NS = "http://www.w3.org/2000/svg";
 
 /** Cria o <svg> do ícone `nome` (se não existir, usa o ícone padrão). `tamanho` em px; a cor vem do texto (currentColor). */

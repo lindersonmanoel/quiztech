@@ -1,0 +1,164 @@
+{
+  "desenvolvimento-mobile": {
+    "facil": [
+      ["Qual loja oficial distribui aplicativos para Android?", "Google Play", ["App Store", "Microsoft Store", "Steam"]],
+      ["Qual IDE oficial do Google é usada para criar apps Android?", "Android Studio", ["Xcode", "NetBeans", "Eclipse"]],
+      ["Qual ferramenta da Apple é usada para desenvolver apps iOS?", "Xcode", ["Android Studio", "Unity Hub", "Visual Basic"]],
+      ["O que é um emulador de dispositivo móvel?", "Um programa que simula um celular no computador", ["Um cabo usado para carregar o celular no computador", "Um tipo de chip que guarda os dados do aparelho", "Uma loja onde se baixam aplicativos para o celular"]],
+      ["Qual extensão de arquivo é usada em instaladores de apps Android?", ".apk", [".exe", ".ipa", ".dmg"]],
+      ["O que é responsividade em um app?", "Adaptar a interface a diferentes tamanhos de tela", ["Responder automaticamente às mensagens dos usuários", "Continuar funcionando quando o aparelho está sem internet", "Abrir mais rápido em aparelhos mais antigos"]]
+    ],
+    "dificil": [
+      ["Qual é o formato de publicação exigido pela Google Play para novos apps?", "Android App Bundle (.aab)", ["Arquivo .ipa (o formato de instalação do iOS)", "Arquivo .jar assinado com certificado digital", "Arquivo .exe compactado em formato ZIP"]],
+      ["Qual é a função do arquivo AndroidManifest.xml?", "Declarar os componentes, as permissões e as configurações do app", ["Guardar todas as imagens e os ícones usados na interface do app", "Conter o código Kotlin da tela principal e das demais telas", "Registrar as vendas e as avaliações feitas na loja"]],
+      ["O que é o ciclo de vida de uma Activity no Android?", "Os estados da tela (criada, visível, pausada, destruída) e os callbacks de cada um", ["O tempo de duração da bateria do aparelho enquanto o app está aberto", "O intervalo de tempo entre duas atualizações do aplicativo na loja oficial", "A quantidade total de telas e de botões que o app possui"]],
+      ["Qual é a vantagem do hot reload do Flutter?", "Ver as alterações no app em execução quase na hora, sem reiniciá-lo", ["Compilar o app para iOS e Android ao mesmo tempo, em um só clique", "Reduzir o tamanho do arquivo APK gerado no fim do desenvolvimento", "Publicar o app automaticamente na loja assim que o código é salvo"]],
+      ["Por que uma operação de rede não deve rodar na thread principal (UI thread)?", "Porque bloqueia a interface e deixa o app travado", ["Porque a thread principal não tem acesso à internet", "Porque consome mais bateria em qualquer caso", "Porque a loja proíbe esse tipo de código"]],
+      ["O que faz o R8 (sucessor do ProGuard) em apps Android?", "Reduz e ofusca o código, gerando um app menor e mais difícil de analisar", ["Traduz automaticamente os textos do app para outros idiomas", "Publica o app na loja e envia atualizações aos usuários", "Cria o emulador usado para testar o app em diferentes tamanhos de tela"]]
+    ]
+  },
+  "git-e-github": {
+    "facil": [
+      ["Qual comando mostra o estado atual dos arquivos no repositório?", "git status", ["git show-state", "git list", "git check"]],
+      ["Qual comando inicia um novo repositório Git em uma pasta?", "git init", ["git start", "git new", "git create"]],
+      ["O que é um commit?", "Um registro (snapshot) das alterações no histórico do projeto", ["Um servidor remoto onde o projeto fica hospedado na internet", "Uma cópia completa do repositório salva em outra pasta do disco", "Um tipo especial de branch usado apenas para fazer testes"]],
+      ["O que é uma branch?", "Uma linha independente de desenvolvimento", ["Um arquivo de configuração guardado no repositório", "Uma senha usada para acessar o repositório", "Um commit que foi apagado do histórico"]],
+      ["Qual comando cria uma nova branch e já muda para ela?", "git checkout -b nome", ["git branch -d nome", "git merge --no-ff nome", "git clone -b nome"]],
+      ["O que é o GitHub?", "Uma plataforma para hospedar repositórios Git e colaborar", ["Um editor de código usado para escrever e testar programas", "Uma linguagem de programação voltada para a web", "Um sistema operacional feito para desenvolvedores"]]
+    ],
+    "dificil": [
+      ["O que o arquivo .gitignore faz?", "Lista arquivos e pastas que o Git não deve versionar", ["Apaga do disco todos os arquivos que não estão sendo usados", "Bloqueia o acesso de usuários ao repositório", "Compacta o histórico para diminuir o tamanho"]],
+      ["Qual comando desfaz um commit já publicado criando um novo commit que reverte as mudanças?", "git revert", ["git reset --hard", "git rebase", "git stash"]],
+      ["O que faz o git stash?", "Guarda as alterações não commitadas e limpa a área de trabalho", ["Apaga definitivamente o último commit do histórico local", "Envia as alterações ainda não commitadas ao repositório remoto", "Une duas branches diferentes criando um commit de merge"]],
+      ["O que é um merge fast-forward?", "O ponteiro da branch apenas avança, sem criar um commit de merge", ["Um merge que apaga a branch de origem depois de concluído", "Um merge que sempre termina com conflitos para resolver à mão", "Um merge feito automaticamente todos os dias pelo servidor"]],
+      ["Qual comando aplica na branch atual apenas um commit específico de outra branch?", "git cherry-pick", ["git merge --squash", "git blame", "git bisect"]],
+      ["O que faz git reset --hard HEAD~1?", "Move a branch para o commit anterior e descarta o último commit", ["Cria um novo commit vazio no topo da branch atual e o publica", "Envia o último commit ao repositório remoto sem pedir confirmação", "Renomeia o último commit sem alterar seu conteúdo"]]
+    ]
+  },
+  "estruturas-de-dados": {
+    "facil": [
+      ["Qual estrutura armazena elementos em posições numeradas a partir de zero?", "Array (vetor)", ["Pilha", "Árvore", "Grafo"]],
+      ["Em uma fila, quem sai primeiro?", "O primeiro que entrou", ["O último que entrou", "O maior valor", "O do meio"]],
+      ["Qual operação insere um elemento no topo de uma pilha?", "push", ["pop", "peek", "dequeue"]],
+      ["Uma lista ligada é formada por:", "Nós que guardam um valor e a referência para o próximo", ["Um único bloco contínuo de memória com posições numeradas", "Somente números inteiros ordenados de forma crescente", "Linhas e colunas organizadas como em uma tabela"]],
+      ["Qual busca percorre os elementos um a um, do início ao fim?", "Busca linear (sequencial)", ["Busca binária", "Busca em profundidade", "Busca por hash"]],
+      ["Como se chama o nó do topo de uma árvore?", "Raiz", ["Folha", "Filho", "Galho"]]
+    ],
+    "dificil": [
+      ["Qual é a complexidade do pior caso do quick sort?", "O(n²)", ["O(n log n)", "O(n)", "O(log n)"]],
+      ["Em um heap máximo, onde fica o maior elemento?", "Na raiz", ["Em uma folha", "No último nível, à direita", "No meio do vetor"]],
+      ["Qual é a complexidade de inserir no início de uma lista ligada simples?", "O(1)", ["O(n)", "O(log n)", "O(n²)"]],
+      ["Qual estrutura é ideal para saber rapidamente se um elemento já foi visto?", "Tabela hash (conjunto)", ["Lista ligada simples", "Pilha de chamadas", "Fila circular"]],
+      ["Qual algoritmo encontra o menor caminho em um grafo com pesos não negativos?", "Dijkstra", ["Kruskal", "Busca em profundidade", "Bubble sort"]],
+      ["Como a programação dinâmica evita recalcular subproblemas?", "Guarda os resultados já calculados (memoização ou tabulação)", ["Ordena os dados antes de processar", "Usa apenas recursão sem retorno", "Divide o problema em partes que nunca se repetem"]]
+    ]
+  },
+  "engenharia-de-software": {
+    "facil": [
+      ["O que é um requisito de software?", "Uma necessidade ou condição que o sistema deve atender", ["Um erro que aparece na tela durante a execução do programa", "Um tipo de linguagem usada para escrever sistemas", "Um computador que o cliente usa para testar o sistema"]],
+      ["O que é um bug?", "Um defeito que faz o software se comportar de forma incorreta", ["Uma nova funcionalidade pedida pelo cliente para o sistema", "Um tipo de backup feito automaticamente pelo sistema", "Um plano que organiza as etapas e os prazos do projeto"]],
+      ["O que é versionamento de código?", "Registrar o histórico de mudanças para acompanhá-lo e voltar atrás", ["Traduzir o código-fonte para outra linguagem de programação", "Compilar o código para gerar o programa que será executado", "Comprimir todos os arquivos do projeto para economizar espaço"]],
+      ["Qual destes é um modelo de ciclo de vida de software?", "Cascata (waterfall)", ["Firewall de rede", "Framework Bootstrap", "Contêiner Docker"]],
+      ["Para que serve a documentação de um sistema?", "Explicar como ele funciona, como usá-lo e como mantê-lo", ["Deixar o programa mais rápido quando ele é executado", "Substituir a necessidade de fazer testes no sistema", "Proteger o sistema contra vírus e invasões de hackers"]],
+      ["O que é um protótipo?", "Uma versão inicial e simples do sistema para validar ideias", ["A versão final e completa do sistema, vendida aos clientes", "Um erro de compilação que impede o programa de rodar", "Um backup completo do banco de dados do sistema"]]
+    ],
+    "dificil": [
+      ["O que é um requisito não funcional?", "Uma qualidade exigida do sistema, como desempenho ou segurança", ["Uma função que o sistema executa, como emitir um relatório", "Um requisito que não precisa ser cumprido pela equipe", "Um requisito que não gera nenhum custo para o projeto"]],
+      ["O que é a cobertura de testes?", "O percentual do código executado pelos testes", ["A quantidade de testadores da equipe", "O tempo total gasto testando", "O número de bugs corrigidos"]],
+      ["O que é dívida técnica?", "O custo futuro de manutenção causado por atalhos e soluções ruins", ["Dinheiro devido a fornecedores de software e de serviços", "Atraso no pagamento dos salários da equipe de desenvolvimento", "O valor da licença de uso cobrada por um software comercial"]],
+      ["Qual padrão de projeto garante uma única instância de uma classe?", "Singleton", ["Factory", "Observer", "Decorator"]],
+      ["O que diz o princípio da inversão de dependência (o D do SOLID)?", "Módulos de alto nível devem depender de abstrações, não de implementações concretas", ["Toda classe deve ter uma única responsabilidade", "Classes devem ser abertas à extensão e fechadas à modificação", "Subclasses devem poder substituir a classe-base sem quebrar o programa"]],
+      ["Qual é a diferença entre teste de integração e teste de unidade?", "O de integração testa vários componentes juntos; o de unidade, uma parte isolada", ["O de integração é sempre manual e o de unidade é sempre automático", "O de unidade testa o sistema inteiro, de ponta a ponta, com o usuário", "Não há diferença prática, pois os dois tipos de teste verificam o mesmo"]]
+    ]
+  },
+  "desenvolvimento-de-jogos": {
+    "facil": [
+      ["O que é um sprite em jogos 2D?", "Uma imagem ou animação de um personagem ou objeto", ["Um tipo de erro que trava o jogo durante a partida", "Um servidor que permite jogar com outras pessoas", "Uma música tocada como som de fundo da fase"]],
+      ["Qual motor de jogos é gratuito, de código aberto e usa a linguagem GDScript?", "Godot", ["Unity", "Unreal Engine", "Photoshop"]],
+      ["O que é um NPC?", "Um personagem que não é controlado pelo jogador", ["Uma placa de vídeo usada para rodar jogos pesados", "Um nível de pontuação que libera novas fases", "Um console de jogos portátil de última geração"]],
+      ["O que é uma colisão em um jogo?", "O contato entre dois objetos, detectado pelo jogo", ["Uma falha no servidor que derruba os jogadores", "A troca automática de uma fase para a seguinte", "Um tipo de textura aplicada aos objetos do cenário"]],
+      ["O que significa game design?", "Planejar as regras, a mecânica e a experiência do jogo", ["Instalar o jogo no computador ou no console do jogador", "Vender o jogo nas principais lojas digitais e físicas", "Traduzir os textos do jogo para vários idiomas"]],
+      ["O que é uma fase (level) de um jogo?", "Uma etapa ou cenário com objetivos próprios", ["Uma placa de som usada para ouvir o áudio do jogo", "Um cabo de rede usado para jogar em modo online", "Um tipo de licença necessária para publicar o jogo"]]
+    ],
+    "dificil": [
+      ["O que é uma hitbox?", "Uma área invisível usada para detectar colisões e acertos", ["O menu de configurações que aparece ao pausar o jogo", "A caixa onde ficam os itens do inventário do jogador", "Um modelo 3D de altíssima resolução usado em cenas de vídeo"]],
+      ["Para que serve o pathfinding (como o algoritmo A*)?", "Encontrar caminhos para os personagens se moverem pelo cenário", ["Comprimir as texturas do jogo para ele ocupar menos espaço", "Sincronizar em tempo real os movimentos dos jogadores online", "Gerar automaticamente os sons e as músicas de cada fase"]],
+      ["O que é um sistema de partículas?", "Simula muitos elementos pequenos, como fogo, fumaça e faíscas", ["Um tipo de inteligência artificial que controla os inimigos", "Um formato de arquivo usado para guardar o áudio do jogo", "Um método usado para salvar o progresso do jogador na nuvem"]],
+      ["O que é LOD (Level of Detail)?", "Usar versões mais simples do modelo quando ele está longe da câmera", ["Aumentar aos poucos a dificuldade do jogo com o passar do tempo", "Um sistema de conquistas e troféus para os jogadores", "Uma técnica de compressão usada nos arquivos de áudio e vídeo"]],
+      ["Por que se usa object pooling em jogos?", "Para reaproveitar objetos já criados, evitando alocar e destruir memória", ["Para aumentar o número máximo de jogadores que cabem em um mesmo servidor", "Para criptografar o progresso salvo do jogador na nuvem", "Para reduzir a resolução da tela quando o jogo perde desempenho"]],
+      ["O que é um servidor autoritativo em jogos online?", "O servidor decide o estado real do jogo; os clientes só enviam entradas", ["Cada cliente decide sozinho o próprio estado e avisa aos demais", "Um servidor que apenas guarda o chat entre os jogadores", "Um servidor especial que não tem limite de jogadores conectados"]]
+    ]
+  },
+  "banco-de-dados-e-sql": {
+    "facil": [
+      ["Qual comando SQL insere uma nova linha em uma tabela?", "INSERT", ["ADD ROW", "PUSH", "APPEND"]],
+      ["Qual comando SQL altera dados já existentes?", "UPDATE", ["CHANGE", "MODIFY", "EDIT"]],
+      ["O que é uma tabela em um banco relacional?", "Um conjunto de linhas e colunas com dados de um mesmo assunto", ["Um arquivo de imagem usado como ícone dentro do banco de dados", "Um servidor de e-mail usado para enviar relatórios do banco", "Uma senha de acesso ao banco de dados relacional"]],
+      ["Qual comando SQL remove linhas de uma tabela?", "DELETE", ["REMOVE", "ERASE", "CUT"]],
+      ["Qual cláusula ordena o resultado de uma consulta?", "ORDER BY", ["GROUP BY", "WHERE", "HAVING"]],
+      ["Qual função SQL conta linhas?", "COUNT()", ["SUM()", "AVG()", "MAX()"]]
+    ],
+    "dificil": [
+      ["Qual é a diferença entre WHERE e HAVING?", "WHERE filtra linhas antes de agrupar; HAVING filtra os grupos depois", ["WHERE filtra grupos depois de agrupar; HAVING filtra linhas antes", "São idênticos: as duas cláusulas filtram linhas da mesma forma", "HAVING só funciona com colunas de texto e WHERE com números"]],
+      ["O que um LEFT JOIN retorna?", "Todas as linhas da esquerda, com as correspondências da direita, se houver", ["Somente as linhas que têm correspondência em ambas as tabelas da consulta", "Todas as linhas da tabela da direita, mesmo sem correspondência", "O produto cartesiano: todas as combinações entre as duas tabelas"]],
+      ["O que é um índice em um banco de dados?", "Uma estrutura auxiliar que acelera buscas em determinadas colunas", ["Uma cópia de segurança da tabela, guardada em outro disco do servidor", "Uma regra que impede o uso de valores nulos em colunas", "Uma lista dos usuários que podem acessar o banco de dados"]],
+      ["O que é normalização?", "Organizar as tabelas para reduzir redundância e inconsistências", ["Criptografar os dados para que só usuários autorizados leiam", "Aumentar a velocidade da rede que liga o servidor aos clientes", "Converter as tabelas do banco em arquivos de texto simples"]],
+      ["Qual anomalia o nível de isolamento READ COMMITTED evita?", "Leitura suja (dirty read)", ["Leitura não repetível (non-repeatable read)", "Leitura fantasma (phantom read)", "Deadlock"]],
+      ["O que é um deadlock?", "Duas ou mais transações esperando uma pela outra, sem que nenhuma avance", ["Perda da conexão de rede entre o aplicativo e o servidor do banco", "Um índice corrompido que impede que as buscas na tabela funcionem", "Uma consulta sem cláusula WHERE que percorre toda a tabela"]]
+    ]
+  },
+  "ciencia-de-dados": {
+    "facil": [
+      ["O que é um conjunto de dados (dataset)?", "Uma coleção organizada de dados para análise", ["Um tipo de gráfico usado para comparar categorias", "Uma linguagem de programação voltada para estatística", "Um servidor que guarda as planilhas da empresa"]],
+      ["Qual medida é a soma dos valores dividida pela quantidade deles?", "Média", ["Mediana", "Moda", "Amplitude"]],
+      ["Qual gráfico é ideal para mostrar a evolução de um valor ao longo do tempo?", "Gráfico de linhas", ["Gráfico de pizza", "Histograma", "Diagrama de Venn"]],
+      ["Qual linguagem é muito usada em ciência de dados?", "Python", ["HTML", "CSS", "Assembly"]],
+      ["O que é um outlier?", "Um valor muito diferente da maioria dos outros", ["Uma coluna sem nenhum valor preenchido no conjunto de dados", "Um gráfico de barras com duas cores diferentes", "Um tipo de arquivo usado para guardar planilhas"]],
+      ["O que é a limpeza de dados?", "Corrigir ou remover dados errados, duplicados ou incompletos", ["Apagar todo o conjunto de dados e começar do zero", "Criar gráficos coloridos para apresentar os resultados", "Guardar uma cópia dos dados na nuvem para que não se percam"]]
+    ],
+    "dificil": [
+      ["Qual é a moda do conjunto [2, 3, 3, 5, 7, 7, 7, 9]?", "7", ["3", "5", "6"]],
+      ["O que é correlação?", "Uma medida de quanto duas variáveis variam juntas", ["A prova de que uma variável causa a outra", "A média de duas colunas", "Um tipo de gráfico"]],
+      ["Correlação implica causalidade?", "Não: duas variáveis podem se relacionar sem que uma cause a outra", ["Sim, sempre: se duas variáveis se relacionam, uma causa a outra", "Sim, mas apenas quando o coeficiente de correlação é positivo", "Apenas quando os dados são exibidos em gráficos de dispersão"]],
+      ["O que é o valor-p (p-value) em um teste de hipótese?", "A chance de obter um resultado tão extremo quanto o observado, se a hipótese nula for verdadeira", ["A probabilidade de a hipótese nula ser falsa, dado o resultado observado na amostra", "O percentual de dados ausentes e de valores atípicos da amostra do teste", "A média dos erros que o modelo estatístico comete ao prever os dados da amostra"]],
+      ["O que é a normalização min-max de uma variável?", "Reescalar os valores para um intervalo, como de 0 a 1", ["Remover todos os valores atípicos (outliers) do conjunto", "Transformar variáveis de texto em variáveis numéricas", "Dividir o conjunto de dados em partes de treino e de teste"]],
+      ["O que é o viés de amostragem?", "Quando a amostra não representa bem a população estudada", ["Um erro de digitação cometido na coluna de nomes dos dados", "O uso de poucas colunas para descrever cada registro", "O excesso de gráficos usados no relatório de resultados"]]
+    ]
+  },
+  "inteligencia-artificial": {
+    "facil": [
+      ["O que faz um sistema de reconhecimento facial?", "Identifica pessoas a partir de imagens de rostos", ["Traduz textos automaticamente de um idioma para outro", "Conserta computadores que apresentam defeitos de hardware", "Cria planilhas com fórmulas a partir de dados digitados"]],
+      ["Qual destes é um exemplo de IA no dia a dia?", "Recomendação de vídeos em plataformas de streaming", ["Uma calculadora simples de bolso que só faz operações básicas", "Uma lâmpada comum ligada a um interruptor de parede", "Um relógio de ponteiros movido a pilha"]],
+      ["O que é machine learning em relação à IA?", "Uma área da IA em que sistemas aprendem com dados", ["Um sinônimo de robô físico, com braços mecânicos e rodas", "Um tipo de sistema operacional para servidores", "Uma linguagem de programação criada para a IA"]],
+      ["O que é um prompt?", "A instrução ou pergunta enviada a um modelo de IA", ["Uma senha especial usada para entrar no sistema de IA", "Um tipo de vírus que ataca os modelos de IA", "Um cabo de rede usado para ligar servidores"]],
+      ["O que é visão computacional?", "A área da IA que ensina máquinas a interpretar imagens e vídeos", ["Uma técnica usada para imprimir imagens em alta resolução no papel", "Um tipo de monitor com tela sensível ao toque", "Um jogo de computador com gráficos tridimensionais"]],
+      ["O que é IA generativa?", "IA capaz de criar conteúdo novo, como texto, imagens e código", ["IA que apenas classifica e-mails em spam ou não spam", "IA usada apenas em robôs de linhas de produção industriais", "IA que só funciona quando o computador está sem internet"]]
+    ],
+    "dificil": [
+      ["O que é um token em um modelo de linguagem?", "Uma unidade de texto (palavra ou parte dela) processada pelo modelo", ["Uma senha de acesso que libera o uso do modelo pelo usuário", "Um tipo de moeda digital usada para pagar o treinamento", "Um servidor dedicado exclusivamente ao treinamento do modelo"]],
+      ["O que é RAG (Retrieval-Augmented Generation)?", "Buscar informações em uma base externa para embasar a resposta do modelo", ["Treinar novamente o modelo do zero a cada pergunta do usuário", "Comprimir o modelo para que ele possa rodar em um celular comum", "Um tipo de rede neural usada apenas para reconhecer imagens"]],
+      ["O que é fine-tuning?", "Ajustar um modelo já treinado com dados específicos de uma tarefa", ["Diminuir o erro do modelo apagando parte dos dados de treino", "Traduzir o modelo treinado para que funcione em outro idioma", "Instalar o modelo treinado em um celular ou em outro aparelho"]],
+      ["O que avalia o teste de Turing?", "Se uma máquina conversa de modo indistinguível de um humano", ["A velocidade de processamento de um computador em cálculos", "Se um código-fonte compila corretamente sem apresentar erros", "A segurança de uma rede corporativa contra invasões externas"]],
+      ["O que é viés algorítmico?", "Resultados injustos causados por dados ou modelagem enviesados", ["A lentidão do algoritmo em horários de maior uso do sistema", "Um erro de digitação cometido no código do algoritmo", "A falta de memória do servidor onde o algoritmo roda"]],
+      ["Qual arquitetura é a base dos modelos de linguagem modernos, como o GPT?", "Transformer", ["Perceptron de uma camada", "Árvore de decisão", "K-means"]]
+    ]
+  },
+  "machine-learning": {
+    "facil": [
+      ["O que é um modelo em machine learning?", "O resultado do treinamento: uma representação que faz previsões", ["Um tipo de planilha usada para guardar os dados de treino", "Um computador especial usado apenas para treinar algoritmos", "Um monitor de vídeo de alta resolução para gráficos"]],
+      ["Prever o preço de uma casa é um problema de:", "Regressão", ["Classificação", "Agrupamento", "Compressão"]],
+      ["Classificar e-mails como spam ou não spam é um problema de:", "Classificação", ["Regressão", "Compressão de dados", "Renderização"]],
+      ["O que são as características (features) dos dados?", "As variáveis usadas como entrada do modelo", ["Os erros que o programa apresenta ao ser executado", "As senhas cadastradas pelos usuários do sistema", "Os gráficos que aparecem no relatório final"]],
+      ["O que é treinar um modelo?", "Ajustar seus parâmetros a partir dos dados", ["Instalar o Python e as bibliotecas de dados", "Escrever o relatório final com os resultados", "Conectar o computador à internet para baixá-lo"]],
+      ["O que é acurácia?", "A proporção de previsões corretas", ["A velocidade do treinamento", "O tamanho do conjunto de dados", "O número de colunas"]]
+    ],
+    "dificil": [
+      ["O que é underfitting?", "O modelo é simples demais e não aprende bem nem os dados de treino", ["O modelo decora os dados de treino e por isso erra nos dados novos", "O modelo usa dados demais e por isso demora para treinar", "O modelo treina rápido demais e não chega a se ajustar"]],
+      ["Para que serve a validação cruzada (cross-validation)?", "Estimar o desempenho do modelo usando várias divisões dos dados", ["Traduzir os dados brutos para outro formato antes do treinamento", "Aumentar o número de colunas para o modelo aprender mais", "Remover automaticamente os outliers de todas as colunas"]],
+      ["Em um problema com 95% de exemplos negativos, por que a acurácia pode enganar?", "Um modelo que sempre prevê negativo acerta 95% sem detectar nenhum positivo", ["Porque a acurácia só pode ser usada em problemas de regressão linear", "Porque, nesses casos, a acurácia sempre resulta em exatos 50%", "Porque os exemplos negativos não contam no cálculo da métrica"]],
+      ["O que mede o recall (revocação)?", "Dos casos realmente positivos, quantos o modelo encontrou", ["Dos casos previstos como positivos, quantos estavam certos", "A velocidade das previsões", "A quantidade de features"]],
+      ["O que é regularização (como L1 e L2)?", "Penalizar a complexidade do modelo para reduzir o overfitting", ["Aumentar o número de camadas para o modelo aprender mais", "Normalizar os dados de entrada antes de iniciar o treinamento", "Dividir os dados em conjuntos de treino, validação e teste"]],
+      ["O que faz o algoritmo de gradiente descendente?", "Ajusta os parâmetros na direção que reduz a função de erro (custo)", ["Ordena os dados em ordem crescente antes de treinar o modelo", "Agrupa exemplos parecidos em conjuntos sem usar rótulos", "Sorteia valores para os parâmetros até encontrar algum que acerte"]]
+    ]
+  }
+}

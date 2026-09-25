@@ -23,7 +23,7 @@ describe("certificados", () => {
     const r = await aprovar(u);
     const publico = await request(app).get(`/api/certificates/${r.certificate.code.toLowerCase()}`);
     expect(publico.status).toBe(200);
-    expect(Object.keys(publico.body).sort()).toEqual(["category_name", "code", "issued_at", "percentage", "quiz_id", "quiz_title", "score", "user_name"]);
+    expect(Object.keys(publico.body).sort()).toEqual(["category_name", "code", "difficulty", "issued_at", "percentage", "quiz_id", "quiz_title", "score", "user_name"]);
     expect(publico.body.user_name).toBe("Ana Souza Lima");
     expect(JSON.stringify(publico.body)).not.toContain(u.dados.email);
     expect((await request(app).get("/api/certificates/QT-NAOEXISTE")).status).toBe(404);

@@ -1,0 +1,146 @@
+{
+  "logica-de-programacao": {
+    "facil": [
+      ["O que é uma variável em programação?", "Um espaço na memória que guarda um valor", ["Um comando que interrompe a execução do programa", "Um tipo de erro detectado na compilação", "Um arquivo salvo no disco do computador"]],
+      ["Qual estrutura escolhe um caminho de acordo com uma condição?", "Estrutura condicional (if/else)", ["Laço de repetição", "Comentário de código", "Declaração de constante"]],
+      ["Qual é o resultado de 4 + 3 * 2, na ordem de precedência usada pela maioria das linguagens?", "10", ["14", "24", "9"]],
+      ["Como se chama o texto que descreve um algoritmo em linguagem próxima da humana, sem seguir uma linguagem real?", "Pseudocódigo", ["Compilador", "Depurador", "Firmware"]],
+      ["Um valor que só pode ser verdadeiro ou falso pertence a qual tipo?", "Booleano (lógico)", ["Inteiro", "Texto (string)", "Real (ponto flutuante)"]],
+      ["O que significa depurar (debugar) um programa?", "Procurar e corrigir erros no código", ["Traduzir o código para outra linguagem", "Apagar os comentários do código", "Deixar o programa mais bonito"]]
+    ],
+    "dificil": [
+      ["Quantas vezes executa o corpo de um laço 'para i de 1 até 10, com passo 3'?", "4 vezes", ["3 vezes", "5 vezes", "10 vezes"]],
+      ["Qual é a complexidade de tempo de dois laços aninhados, ambos de 1 até n?", "O(n²)", ["O(n)", "O(log n)", "O(2ⁿ)"]],
+      ["Segundo as leis de De Morgan, 'não (A e B)' equivale a:", "(não A) ou (não B)", ["(não A) e (não B)", "A ou (não B)", "A e B"]],
+      ["O que é uma função pura?", "Dá sempre o mesmo resultado para as mesmas entradas, sem efeitos colaterais", ["Só pode ser chamada uma única vez durante toda a execução do programa", "Não recebe parâmetros e sempre retorna um valor numérico inteiro", "Modifica variáveis globais para guardar os seus resultados parciais"]],
+      ["Dada f(n) que retorna 1 se n ≤ 1 e n × f(n − 1) caso contrário, quanto vale f(5)?", "120", ["24", "60", "720"]],
+      ["Para que serve a pilha de chamadas (call stack)?", "Guardar parâmetros e ponto de retorno das funções em execução", ["Armazenar em ordem todos os arquivos que o programa mantém abertos", "Ordenar automaticamente os dados de entrada do usuário", "Traduzir o código-fonte em instruções binárias"]]
+    ]
+  },
+  "python": {
+    "facil": [
+      ["Qual símbolo atribui um valor a uma variável em Python?", "=", ["==", "=>", "<-"]],
+      ["Qual é o tipo do valor 3.14 em Python?", "float", ["int", "str", "bool"]],
+      ["Qual função lê um texto digitado pelo usuário?", "input()", ["read()", "scan()", "get()"]],
+      ["Qual palavra-chave define uma função em Python?", "def", ["function", "fun", "define"]],
+      ["Qual é o resultado de 'Py' + 'thon'?", "Python", ["Py thon", "Erro de sintaxe", "Py+thon"]],
+      ["Qual é o resultado de 10 // 3?", "3", ["3.33", "1", "4"]]
+    ],
+    "dificil": [
+      ["Qual é o resultado de bool([])?", "False", ["True", "None", "Gera um erro"]],
+      ["Qual é o resultado de [1, 2, 3][::-1]?", "[3, 2, 1]", ["[1, 2, 3]", "[3, 2]", "[2, 1]"]],
+      ["Qual é a diferença entre == e is em Python?", "== compara valores; is compara se são o mesmo objeto na memória", ["== compara os tipos das variáveis; is compara os valores armazenados", "São equivalentes, e a diferença é apenas de estilo de escrita", "is só pode ser usado para comparar números inteiros"]],
+      ["Para que serve o método especial __enter__ (junto com __exit__)?", "Permitir o uso do objeto em um bloco with (gerenciador de contexto)", ["Criar uma nova instância da classe assim que ela é importada", "Definir como o objeto será representado quando impresso como texto", "Comparar dois objetos para decidir se são iguais entre si"]],
+      ["Qual problema ocorre em def f(x, lista=[]): lista.append(x); return lista?", "A mesma lista é reutilizada entre as chamadas (padrão mutável)", ["A função sempre gera um TypeError ao ser chamada sem argumentos", "A lista é recriada vazia a cada nova chamada da função", "O método append não altera a lista dentro da função"]],
+      ["O que faz a palavra-chave yield dentro de uma função?", "Faz da função um gerador que produz valores sob demanda", ["Encerra o programa e devolve um código de saída ao sistema", "Cria uma nova thread para executar o restante da função", "Importa um módulo somente no momento em que ele é necessário"]]
+    ]
+  },
+  "javascript": {
+    "facil": [
+      ["Qual método exibe uma mensagem no console do navegador?", "console.log()", ["print()", "echo()", "console.write()"]],
+      ["Qual símbolo inicia um comentário de uma linha em JavaScript?", "//", ["#", "<!--", "--"]],
+      ["Qual palavra-chave declara uma variável cujo valor pode mudar, com escopo de bloco?", "let", ["const", "final", "static"]],
+      ["Qual é o resultado de '5' + 3 em JavaScript?", "53 (texto)", ["8", "Erro", "NaN"]],
+      ["O que o DOM representa?", "A estrutura da página HTML como uma árvore de objetos", ["Um banco de dados criado para guardar as senhas do navegador", "Um servidor que entrega as páginas ao navegador", "Um tipo de variável usado para guardar números"]],
+      ["Qual método transforma cada item de um array e devolve um novo array?", "map()", ["push()", "pop()", "forEach()"]]
+    ],
+    "dificil": [
+      ["Qual é o resultado de [] + []?", "Uma string vazia", ["0", "[]", "undefined"]],
+      ["Qual é o resultado de 0.1 + 0.2 === 0.3?", "false, por causa da representação em ponto flutuante", ["true, porque a soma decimal é sempre exata no JavaScript", "Gera um erro de tipo, pois não é possível somar decimais", "undefined, porque a comparação de decimais não é suportada"]],
+      ["O que é hoisting em JavaScript?", "Declarações são processadas antes da execução, como se subissem ao topo", ["O navegador guarda o script em cache para carregar mais rápido", "Uma função é chamada várias vezes seguidas para ganhar desempenho", "Variáveis globais são convertidas em constantes ao serem declaradas"]],
+      ["Em uma função tradicional, o valor de this depende de:", "Como a função é chamada", ["Onde a função foi escrita", "Do nome da função", "Do número de parâmetros"]],
+      ["Qual é a ordem de saída? console.log(1); setTimeout(() => console.log(2), 0); Promise.resolve().then(() => console.log(3)); console.log(4);", "1, 4, 3, 2", ["1, 2, 3, 4", "1, 4, 2, 3", "1, 3, 4, 2"]],
+      ["O que faz o operador ?? (nullish coalescing) em a ?? b?", "Devolve b somente se a for null ou undefined", ["Devolve b se a for qualquer valor falso (0, '', false)", "Compara a e b sem conversão de tipos", "Devolve sempre a"]]
+    ]
+  },
+  "java": {
+    "facil": [
+      ["Qual tipo primitivo do Java guarda números inteiros?", "int", ["String", "boolean", "double"]],
+      ["Qual comando exibe texto no console em Java?", "System.out.println()", ["console.log()", "print()", "echo()"]],
+      ["Qual extensão têm os arquivos de código-fonte Java?", ".java", [".class", ".jar", ".js"]],
+      ["O que o JDK oferece a quem desenvolve?", "Ferramentas de desenvolvimento, como o compilador javac", ["Apenas o navegador usado para executar applets antigos na web", "Somente um editor de texto para escrever o código-fonte", "Um banco de dados embutido para guardar os dados do programa"]],
+      ["Qual palavra-chave declara uma variável que não pode ser reatribuída?", "final", ["const", "static", "fixed"]],
+      ["Qual estrutura guarda vários valores do mesmo tipo com tamanho fixo?", "Array (vetor)", ["Interface", "Classe abstrata", "Pacote"]]
+    ],
+    "dificil": [
+      ["Qual é a diferença entre == e equals() ao comparar objetos String?", "== compara referências; equals() compara o conteúdo", ["== compara o conteúdo; equals() compara referências", "São idênticos para qualquer objeto", "equals() só funciona com números"]],
+      ["Qual modificador impede que uma classe seja estendida?", "final", ["abstract", "static", "private"]],
+      ["Qual é a saída de System.out.println(10 / 4)?", "2", ["2.5", "3", "2.0"]],
+      ["Qual interface define a ordem natural dos objetos com o método compareTo?", "Comparable", ["Comparator", "Iterable", "Serializable"]],
+      ["O que o try-with-resources garante?", "Fecha automaticamente os recursos que implementam AutoCloseable", ["Impede que qualquer exceção seja lançada dentro do bloco", "Executa o conteúdo do bloco em uma thread separada e segura", "Converte automaticamente exceções verificadas em não verificadas"]],
+      ["O que a palavra-chave synchronized garante?", "Que só uma thread por vez execute o trecho protegido pelo mesmo lock", ["Que o método rode mais rápido em máquinas com vários núcleos", "Que o método seja executado em uma nova thread dedicada a ele", "Que o valor da variável seja gravado no disco a cada alteração feita"]]
+    ]
+  },
+  "c-e-cpp": {
+    "facil": [
+      ["Qual função é o ponto de entrada de um programa em C?", "main()", ["start()", "init()", "run()"]],
+      ["Qual tipo de C guarda números inteiros?", "int", ["real", "string", "number"]],
+      ["Qual diretiva inclui a biblioteca padrão de entrada e saída em C?", "#include <stdio.h>", ["import stdio", "using stdio", "#define stdio"]],
+      ["Qual operador acessa o valor apontado por um ponteiro?", "* (asterisco)", ["& (e comercial)", "% (porcentagem)", "@ (arroba)"]],
+      ["Em C, quais são os índices válidos do vetor int v[5]?", "0 a 4", ["1 a 5", "0 a 5", "1 a 4"]],
+      ["Qual objeto de C++ envia dados para a saída padrão com o operador <<?", "cout", ["cin", "getline", "scanf"]]
+    ],
+    "dificil": [
+      ["O que é um segmentation fault?", "Acesso inválido à memória, geralmente por um ponteiro incorreto", ["Erro de sintaxe detectado pelo compilador antes da execução", "Falta de espaço livre no disco ao gravar um arquivo grande", "Estouro do contador de tempo do processador durante a execução"]],
+      ["Qual é a diferença entre new/delete e malloc/free em C++?", "new/delete chamam construtores e destrutores; malloc/free só alocam e liberam", ["malloc/free chamam construtores e destrutores; new/delete não chamam", "São idênticos em todos os aspectos, mudando apenas a sintaxe de uso", "new/delete só funcionam com tipos primitivos, como int e char, e não com classes"]],
+      ["Em void f(const int* p), o que o const garante?", "Que a função não altera o valor apontado por p", ["Que p não pode ser passado como argumento", "Que p aponta sempre para o mesmo endereço", "Que p é alocado na memória estática"]],
+      ["O que é um ponteiro pendente (dangling pointer)?", "Ponteiro que aponta para memória já liberada", ["Ponteiro que aponta para NULL e por isso não pode ser usado", "Ponteiro declarado sem tipo, que aceita qualquer endereço", "Ponteiro que aponta para uma função em vez de um dado"]],
+      ["Qual é a função do std::unique_ptr em C++ moderno?", "Gerenciar um objeto com posse exclusiva, liberando-o automaticamente", ["Compartilhar a posse entre vários ponteiros com contagem de referências", "Apontar para um objeto sem nunca liberá-lo", "Converter ponteiros em inteiros"]],
+      ["O que significa comportamento indefinido (undefined behavior) em C/C++?", "O padrão não define o que acontece; o resultado pode ser qualquer um", ["O programa sempre trava imediatamente e exibe uma mensagem de erro clara", "O compilador sempre recusa o código e não gera o executável", "O resultado é sempre zero, pois é o valor padrão da memória"]]
+    ]
+  },
+  "csharp-dotnet": {
+    "facil": [
+      ["Qual método exibe texto no console em C#?", "Console.WriteLine()", ["System.print()", "echo()", "Console.log()"]],
+      ["Qual tipo de C# guarda texto?", "string", ["str", "txt", "word"]],
+      ["Qual IDE da Microsoft é muito usada para desenvolver em C#?", "Visual Studio", ["Xcode", "Android Studio", "Eclipse"]],
+      ["Qual palavra-chave declara uma classe em C#?", "class", ["def", "object", "type"]],
+      ["Qual comando da CLI do .NET cria um projeto novo?", "dotnet new", ["dotnet make", "dotnet init", "dotnet create"]],
+      ["Qual é o resultado de 7 / 2 quando os dois valores são int em C#?", "3", ["3.5", "4", "3.0"]]
+    ],
+    "dificil": [
+      ["Em string s = null; qual é o resultado de s?.Length?", "null", ["0", "NullReferenceException", "Erro de compilação"]],
+      ["Para que serve a interface IDisposable?", "Liberar recursos não gerenciados de forma previsível, com using/Dispose", ["Comparar dois objetos pelo valor de seus campos em vez de pela referência", "Serializar objetos em JSON para enviá-los a uma API web remota", "Criar e agendar tarefas assíncronas de longa duração"]],
+      ["O que um método async Task<int> devolve ao chamador?", "Uma Task<int> que representa o resultado futuro", ["Um valor int imediatamente, bloqueando a execução até terminar", "Nada: métodos async sempre devolvem void ao chamador", "Sempre uma nova thread do sistema operacional já iniciada"]],
+      ["No LINQ, o que significa execução adiada (deferred execution)?", "A consulta só é executada quando o resultado é enumerado", ["A consulta roda em outra máquina", "A consulta é executada no momento em que é declarada", "A consulta nunca lê os dados originais"]],
+      ["Na injeção de dependência do ASP.NET Core, qual tempo de vida cria uma instância por requisição HTTP?", "Scoped", ["Singleton", "Transient", "Static"]],
+      ["O que um record faz em C# 9 ou superior?", "Cria um tipo com igualdade por valor, ideal para dados imutáveis", ["Grava automaticamente os dados do objeto em um arquivo de disco", "Cria um tipo de valor que não pode ter métodos nem propriedades", "Impede que o tipo seja herdado e que seus campos sejam lidos"]]
+    ]
+  },
+  "html-e-css": {
+    "facil": [
+      ["Qual tag cria um link em HTML?", "<a>", ["<link>", "<href>", "<url>"]],
+      ["Qual tag insere uma imagem na página?", "<img>", ["<image>", "<src>", "<pic>"]],
+      ["Qual propriedade CSS muda a cor de fundo de um elemento?", "background-color", ["color", "bgcolor()", "font-color"]],
+      ["Qual tag define um parágrafo?", "<p>", ["<par>", "<text>", "<pg>"]],
+      ["Como se seleciona uma classe chamada destaque em CSS?", ".destaque", ["#destaque", "destaque:", "*destaque"]],
+      ["Qual tag cria uma lista com marcadores?", "<ul>", ["<ol>", "<dl>", "<list>"]]
+    ],
+    "dificil": [
+      ["Qual valor de display faz o elemento ocupar toda a linha e aceitar largura e altura?", "block", ["inline", "none", "contents"]],
+      ["O que faz a regra box-sizing: border-box?", "Inclui a borda e o padding na largura e na altura declaradas", ["Remove a borda do elemento e a substitui por uma sombra", "Adiciona uma margem externa automática em volta do elemento", "Transforma o elemento em uma caixa flexível com itens alinhados"]],
+      ["Em um contêiner com display: flex, qual propriedade alinha os itens no eixo principal?", "justify-content", ["align-items", "align-content", "flex-wrap"]],
+      ["Qual elemento semântico representa o conteúdo principal e único de uma página?", "<main>", ["<section>", "<article>", "<div>"]],
+      ["Qual é a referência da unidade rem?", "O tamanho da fonte do elemento raiz (html)", ["O tamanho da fonte do elemento pai", "A largura da tela", "A altura do próprio elemento"]],
+      ["O que faz position: sticky?", "Age como relativo até atingir um limite de rolagem e então fica fixo", ["Fixa o elemento na janela do navegador durante todo o tempo", "Remove o elemento do fluxo normal e o posiciona sobre os demais", "Posiciona o elemento sempre em relação ao elemento avô mais próximo"]]
+    ]
+  },
+  "backend-e-apis": {
+    "facil": [
+      ["Qual método HTTP costuma criar um novo recurso?", "POST", ["GET", "DELETE", "HEAD"]],
+      ["Qual código HTTP indica sucesso?", "200", ["404", "500", "301"]],
+      ["O que é um endpoint?", "Um endereço (URL) da API que responde a requisições", ["Um banco de dados onde a API guarda todas as suas requisições", "Um tipo de senha usada para proteger a comunicação", "Uma linguagem de programação usada só no servidor"]],
+      ["Qual destes permite executar JavaScript no servidor?", "Node.js", ["Photoshop", "Excel", "Figma"]],
+      ["O que um servidor web faz?", "Recebe requisições e devolve respostas", ["Apenas armazena as senhas de todos os usuários do sistema", "Compila aplicativos móveis para Android e para iOS", "Desenha as interfaces gráficas que o usuário vê"]],
+      ["Qual método HTTP remove um recurso?", "DELETE", ["REMOVE", "CUT", "POP"]]
+    ],
+    "dificil": [
+      ["Qual código HTTP indica que o usuário não está autenticado?", "401", ["403", "404", "409"]],
+      ["O que significa dizer que um método HTTP é idempotente?", "Repetir a mesma requisição tem o mesmo efeito que fazê-la uma vez", ["Ele nunca altera os dados do servidor, apenas consulta informações", "Ele exige autenticação com token em todas as chamadas à API", "Ele só funciona quando o corpo da requisição está em formato JSON"]],
+      ["Para que serve o CORS?", "Controlar quais origens de navegador podem acessar a API", ["Comprimir as respostas da API para que trafeguem mais rápido", "Criptografar as informações guardadas no banco de dados da API", "Limitar a taxa de requisições que cada IP pode fazer"]],
+      ["O que é rate limiting?", "Limitar quantas requisições um cliente pode fazer em um período", ["Reduzir o tamanho das respostas para economizar dados do cliente", "Ordenar os resultados de uma consulta por um critério", "Repetir automaticamente as requisições que falharam no servidor"]],
+      ["O que é o problema N+1 em APIs com banco de dados?", "Uma consulta inicial mais uma consulta extra para cada item retornado", ["Abrir N conexões simultâneas ao banco para cada requisição", "Retornar N+1 páginas em uma listagem paginada por engano", "Repetir automaticamente a mesma requisição N+1 vezes após uma falha de rede"]],
+      ["Qual estratégia evita processar duas vezes a mesma operação quando o cliente repete um POST?", "Chave de idempotência enviada pelo cliente", ["Aumentar o tempo limite da requisição", "Usar apenas o método GET", "Compactar o corpo da requisição"]]
+    ]
+  }
+}

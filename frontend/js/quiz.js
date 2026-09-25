@@ -29,7 +29,7 @@ function renderIntro() {
   stage.replaceChildren(el("div", { class: "card" },
     el("h1", {}, quiz.title),
     el("p", { class: "muted" }, quiz.description),
-    el("p", {}, `${quiz.question_count} perguntas · ${quiz.total_points} pontos · dificuldade ${DIFFICULTY[quiz.difficulty]}`),
+    el("p", {}, `${quiz.question_count} perguntas · ${quiz.total_points} pontos · nível ${DIFFICULTY[quiz.difficulty]}`),
     quiz.time_limit
       ? el("p", {}, `Tempo limite: ${fmtTime(quiz.time_limit)}. Ao acabar o tempo, o quiz é enviado automaticamente.`)
       : null,

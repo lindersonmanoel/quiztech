@@ -61,6 +61,14 @@ async function main() {
 
     const rk = await buscar(`${API_URL}/api/ranking`);
     verificar("ranking responde", rk.status === 200);
+    for (const period of ["week", "month"]) {
+      const r = await buscar(`${API_URL}/api/ranking?period=${period}`);
+      verificar(`ranking ${period === "week" ? "semanal" : "mensal"} responde`, r.status === 200 && Array.isArray(await r.json()));
+    }
+    const quizzes = await (await buscar(`${API_URL}/api/quizzes`)).json();
+    verificar("tres niveis por area (96 quizzes)", Array.isArray(quizzes) && quizzes.length >= 96, `${quizzes.length} quizzes`);
+    const config = await (await buscar(`${API_URL}/api/config`)).json();
+    verificar("recuperacao de senha por e-mail ativa", config.password_reset === true, "configure o SMTP se falhar (DEPLOY.md)");
 
     // CORS: o site pode chamar a API; um site qualquer nao.
     const permitido = await buscar(`${API_URL}/api/categories`, { headers: { Origin: FRONTEND_URL } });

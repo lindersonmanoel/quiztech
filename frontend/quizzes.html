@@ -15,11 +15,12 @@
 <body>
   <main id="app">
     <h1>Escolha um quiz</h1>
-    <p class="muted">Cada quiz tem 6 perguntas. Com 70% de acertos ou mais você recebe um certificado.</p>
+    <p class="muted">Cada área tem três níveis — fácil, médio e difícil — de 6 perguntas cada. Com 70% de acertos ou mais você recebe um certificado de cada nível.</p>
     <div class="toolbar">
       <input id="search" type="search" placeholder="Buscar por tema (ex.: Python, Redes, LGPD)" aria-label="Buscar quizzes">
     </div>
     <div class="chips" id="filters" role="group" aria-label="Filtrar por grupo"></div>
+    <div class="chips" id="levels" role="group" aria-label="Filtrar por nível" style="margin-top:10px"></div>
     <div id="list" aria-live="polite"></div>
   </main>
   <script type="module" src="js/quizzes.js"></script>

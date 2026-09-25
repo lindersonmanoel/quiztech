@@ -21,6 +21,7 @@
   "shortcuts": [
     { "name": "Escolher um quiz", "short_name": "Quizzes", "url": "quizzes.html", "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192" }] },
     { "name": "Ranking", "url": "ranking.html", "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Ranking da semana", "short_name": "Semana", "url": "ranking.html?period=week", "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192" }] },
     { "name": "Meu perfil e certificados", "short_name": "Perfil", "url": "perfil.html", "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192" }] }
   ]
 }

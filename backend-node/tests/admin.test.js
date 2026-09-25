@@ -25,7 +25,7 @@ describe("controle de acesso", () => {
     const adm = await admin();
     const res = await request(app).get("/api/admin/stats").set(adm.headers);
     expect(res.status).toBe(200);
-    expect(res.body).toMatchObject({ users: 2, categories: 32, quizzes: 32, questions: 192, results: 0, certificates: 0 });
+    expect(res.body).toMatchObject({ users: 2, categories: 32, quizzes: 96, questions: 576, results: 0, certificates: 0 });
   });
 
   test("usuario comum nao consegue criar nada (todas as rotas de escrita)", async () => {

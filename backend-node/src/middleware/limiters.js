@@ -29,8 +29,25 @@ const emailDoCorpo = (req) => normalizeEmail(req.body && req.body.email);
 const MSG_TENTATIVAS = "Muitas tentativas. Tente novamente em alguns minutos.";
 
 /** Limitadores das rotas de conta. `opcoes` permite baixar os tetos nos testes. */
-function criarLimitadoresAuth({ testar = false, ipLimite = 5, emailLimite = 20, cadastroLimite = 10, exclusaoLimite = 5 } = {}) {
+function criarLimitadoresAuth({
+  testar = false, ipLimite = 5, emailLimite = 20, cadastroLimite = 10, exclusaoLimite = 5, esqueciIpLimite = 10, esqueciEmailLimite = 3,
+  redefinicaoLimite = 10,
+} = {}) {
   return {
+    // Esqueci a senha: conta TODO pedido (nao so' os que falham), senao daria para encher a caixa de alguem com e-mails.
+    esqueciPorIp: criarLimiter({
+      limit: esqueciIpLimite, mensagem: MSG_TENTATIVAS, respeitarLimiteEmTeste: testar,
+      keyGenerator: (req) => chave("esqueci-ip", clientIp(req)),
+    }),
+    esqueciPorEmail: criarLimiter({
+      limit: esqueciEmailLimite, mensagem: MSG_TENTATIVAS, respeitarLimiteEmTeste: testar,
+      keyGenerator: (req) => chave("esqueci-email", emailDoCorpo(req)),
+    }),
+    // Tentativas de usar um link/token invalido.
+    redefinicao: criarLimiter({
+      limit: redefinicaoLimite, mensagem: MSG_TENTATIVAS, skipSuccessfulRequests: true, respeitarLimiteEmTeste: testar,
+      keyGenerator: (req) => chave("redefinicao", clientIp(req)),
+    }),
     // So' conta as tentativas que FALHAM: entrar corretamente nao gasta o limite.
     loginPorIp: criarLimiter({
       limit: ipLimite, mensagem: MSG_TENTATIVAS, skipSuccessfulRequests: true, respeitarLimiteEmTeste: testar,

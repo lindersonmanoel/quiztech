@@ -1,9 +1,13 @@
 "use strict";
 
+const crypto = require("crypto");
 const bcrypt = require("../utils/senha");
 const jwt = require("jsonwebtoken");
 const config = require("../config");
+const pool = require("../database/pool");
 const usuarioModel = require("../models/usuario.model");
+const senhaResetModel = require("../models/senhaReset.model");
+const emailService = require("./email.service");
 const { AppError } = require("../utils/errors");
 
 // Em teste o custo minimo do bcrypt (4) deixa a suite bem mais rapida; producao segue com 12.
@@ -87,6 +91,48 @@ async function excluirConta(usuarioId, senha) {
   await usuarioModel.remover(usuarioId);
 }
 
+/**
+ * Esqueci a senha: se o e-mail tem conta, gera um link de uso unico e envia. Quem chama responde SEMPRE a mesma coisa
+ * (exista a conta ou nao) e nao espera esta funcao: assim nem a resposta nem o tempo dela revelam quais e-mails tem conta.
+ */
+async function solicitarRedefinicao(email) {
+  const usuario = await usuarioModel.findByEmail(email);
+  if (!usuario) return;
+  const token = crypto.randomBytes(32).toString("base64url");
+  await senhaResetModel.criar(usuario.id, token, config.resetMinutos);
+  // O token vai no fragmento (#): ele nao e' enviado ao servidor do site nem aparece em logs ou no Referer.
+  const link = `${config.appUrl}/redefinir-senha.html#token=${token}`;
+  await emailService.enviarRedefinicaoDeSenha({ para: usuario.email, nome: usuario.nome, link, minutos: config.resetMinutos });
+}
+
+/** Define a senha nova com o token do e-mail. Uso unico; encerra as sessoes abertas. */
+async function redefinirSenha({ token, senha }) {
+  const senhaHash = await bcrypt.hash(senha, SALT_ROUNDS);
+  const client = await pool.connect();
+  let usuario;
+  try {
+    await client.query("BEGIN");
+    const pedido = await senhaResetModel.buscarValidoParaUso(client, token);
+    if (!pedido) {
+      throw new AuthError("Este link é inválido ou já venceu. Peça um novo em \"Esqueci minha senha\".", 400, "token");
+    }
+    usuario = await usuarioModel.atualizarSenha(client, pedido.usuario_id, senhaHash);
+    await client.query("UPDATE senha_resets SET usado_em = now() WHERE usuario_id = $1 AND usado_em IS NULL", [pedido.usuario_id]);
+    await client.query("COMMIT");
+  } catch (err) {
+    await client.query("ROLLBACK").catch(() => {});
+    throw err;
+  } finally {
+    client.release();
+  }
+  if (usuario) {
+    emailService.enviarSenhaAlterada({ para: usuario.email, nome: usuario.nome })
+      // eslint-disable-next-line no-console
+      .catch((e) => console.error("[email] não foi possível avisar a troca de senha:", e.message));
+  }
+}
+
 module.exports = {
   AuthError, apresentarUsuario, assinarToken, decodificarToken, registrar, autenticar, atualizarNome, excluirConta,
+  solicitarRedefinicao, redefinirSenha,
 };

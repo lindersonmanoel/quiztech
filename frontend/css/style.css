@@ -278,3 +278,78 @@ footer a { margin-left: 4px; }
   .certificate .name { font-size: 1.5rem; }
   .auth-logo { width: 120px; height: 120px; }
 }
+
+/* ---------- Niveis (facil / medio / dificil) ---------- */
+.badge.nivel-facil { background: rgba(34, 197, 94, 0.18); color: #7be3a1; box-shadow: inset 0 0 0 1px rgba(34, 197, 94, 0.45); }
+.badge.nivel-media { background: rgba(1, 188, 248, 0.16); color: var(--cyan-bright); box-shadow: inset 0 0 0 1px rgba(1, 188, 248, 0.45); }
+.badge.nivel-dificil { background: rgba(255, 176, 32, 0.16); color: #ffcf6b; box-shadow: inset 0 0 0 1px rgba(255, 176, 32, 0.45); }
+.badge.ativo { background: rgba(34, 197, 94, 0.18); color: #7be3a1; }
+.badge.inativo { background: rgba(255, 91, 91, 0.16); color: #ff9a9a; }
+.levels { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 8px; margin-top: auto; }
+.level-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 8px 10px; border-radius: 10px; background: rgba(1, 14, 36, 0.6); box-shadow: inset 0 0 0 1px var(--line); }
+.level-row.done { box-shadow: inset 0 0 0 1px rgba(34, 197, 94, 0.5); }
+.level-row .badge { min-width: 62px; text-align: center; }
+.level-info { flex: 1 1 110px; font-size: 0.82rem; }
+.level-done { color: var(--ok); display: inline-flex; }
+.level-row .btn { margin-left: auto; }
+
+/* ---------- Ranking por periodo ---------- */
+.period-note { margin: 10px 0 0; font-size: 0.92rem; }
+.field select { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--blue-deep); background: var(--ink); color: var(--white); font: inherit; }
+
+/* ---------- QR Code do certificado ---------- */
+.cert-qr { margin: 22px auto 0; display: inline-block; text-align: center; }
+.cert-qr img { display: block; margin: 0 auto; width: 132px; height: 132px; padding: 6px; background: #fff; border: 2px solid var(--cyan); border-radius: 8px; }
+.cert-qr figcaption { margin-top: 6px; font-size: 0.78rem; color: #3b5580; max-width: 200px; }
+.field small { display: block; margin-top: 4px; }
+
+/* ---------- Painel administrativo ---------- */
+.admin-page main { max-width: 1180px; }
+.tabs { display: flex; gap: 6px; flex-wrap: wrap; margin: 4px 0 20px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.tab { border: 1px solid transparent; background: transparent; color: var(--white); padding: 9px 18px; border-radius: 10px; font: inherit; font-weight: 600; cursor: pointer; }
+.tab:hover { background: var(--navy); color: var(--cyan-bright); }
+.tab[aria-selected="true"] { background: var(--btn-gradient); border-color: var(--cyan); box-shadow: 0 0 16px rgba(1, 188, 248, 0.25); }
+.sub { font-family: var(--font-display); font-size: 1.05rem; margin: 26px 0 12px; color: var(--cyan-bright); }
+.admin-toolbar { align-items: center; margin-top: 4px; }
+.admin-toolbar select { padding: 12px; border-radius: 10px; border: 1px solid var(--blue-deep); background: var(--ink); color: var(--white); font: inherit; min-width: 170px; }
+.row-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+td.row-actions { min-width: 210px; }
+.form-wide { max-width: 860px; margin: 8px 0 20px; }
+.form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0 16px; }
+.field textarea { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--blue-deep); background: var(--ink); color: var(--white); font: inherit; resize: vertical; }
+.field textarea:focus { border-color: var(--cyan-bright); box-shadow: 0 0 0 3px rgba(1, 188, 248, 0.18); outline: none; }
+.top-areas { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.top-areas li { display: grid; grid-template-columns: minmax(110px, 200px) 1fr 44px; gap: 12px; align-items: center; }
+.top-nome { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.top-valor { text-align: right; font-variant-numeric: tabular-nums; color: var(--cyan-bright); font-weight: 700; }
+.bar { height: 10px; border-radius: 999px; background: var(--navy); overflow: hidden; }
+.bar > span { display: block; height: 100%; background: linear-gradient(90deg, var(--blue), var(--cyan-bright)); border-radius: 999px; }
+.pergunta-item { margin: 10px 0; }
+.pergunta-topo { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; margin-bottom: 8px; }
+.alternativas { list-style: none; margin: 0 0 12px; padding: 0; display: grid; gap: 4px; }
+.alternativas li { display: flex; gap: 8px; align-items: flex-start; color: var(--muted); }
+.alternativas li.correta { color: var(--white); font-weight: 600; }
+.alternativas .icone.certo { color: var(--ok); margin-top: 3px; }
+.alternativas .marcador { flex: none; width: 16px; height: 16px; margin-top: 4px; border-radius: 50%; box-shadow: inset 0 0 0 2px var(--blue-deep); }
+.alts-set { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin: 0 0 16px; }
+.alts-set legend { padding: 0 8px; color: var(--cyan-bright); font-weight: 600; }
+.alts { display: grid; gap: 8px; margin-bottom: 10px; }
+.alt-row { display: flex; gap: 10px; align-items: center; }
+.alt-row input[type="text"] { flex: 1; min-width: 0; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--blue-deep); background: var(--ink); color: var(--white); font: inherit; }
+.alt-row input[type="text"]:focus { border-color: var(--cyan-bright); outline: none; box-shadow: 0 0 0 3px rgba(1, 188, 248, 0.18); }
+.alt-correta { display: inline-flex; gap: 6px; align-items: center; flex: none; font-size: 0.85rem; color: var(--muted); cursor: pointer; }
+.icone-linha { display: flex; align-items: center; gap: 14px; }
+.icone-linha select { max-width: 260px; }
+.icone-previa, .icone-celula { color: var(--cyan-bright); display: inline-flex; }
+code { background: var(--ink); padding: 1px 6px; border-radius: 6px; font-size: 0.86rem; color: var(--ice); }
+@media (max-width: 600px) {
+  .alt-row { flex-wrap: wrap; }
+  .alt-row input[type="text"] { flex-basis: 100%; order: 3; }
+  .top-areas li { grid-template-columns: 1fr 44px; }
+  .top-areas .bar { grid-column: 1 / -1; order: 3; }
+  .level-row .btn { flex: 1 0 100%; text-align: center; }
+}
+@media print { .tabs, .admin-toolbar { display: none !important; } }
+
+/* O atributo hidden sempre esconde, mesmo em elementos com display definido por classe (abas, botoes). */
+[hidden] { display: none !important; }

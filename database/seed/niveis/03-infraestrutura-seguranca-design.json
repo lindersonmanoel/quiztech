@@ -1,0 +1,164 @@
+{
+  "redes-de-computadores": {
+    "facil": [
+      ["Qual equipamento distribui o sinal de internet sem fio em casa?", "Roteador Wi-Fi", ["Monitor", "Teclado", "Estabilizador"]],
+      ["O que significa LAN?", "Rede local (Local Area Network)", ["Rede de longa distância", "Rede via satélite", "Rede de telefonia celular"]],
+      ["Qual protocolo é usado para enviar e-mails?", "SMTP", ["FTP", "HTTP", "SSH"]],
+      ["O que é um endereço IPv4?", "Um número de 32 bits escrito em quatro partes, como 192.168.0.1", ["Uma senha usada para entrar em redes Wi-Fi protegidas", "O nome que identifica um site na internet, como exemplo.com.br", "Um tipo de cabo usado para ligar computadores em rede"]],
+      ["Qual cabo é o mais usado em redes locais cabeadas?", "Cabo de par trançado (Ethernet)", ["Cabo HDMI, usado para transmitir vídeo e áudio", "Cabo de energia, usado para ligar os equipamentos", "Cabo VGA, usado para conectar monitores antigos"]],
+      ["Qual sigla indica a velocidade de uma conexão em bits por segundo?", "bps (Mbps, Gbps)", ["dpi (pontos por polegada)", "fps (quadros por segundo)", "rpm (rotações por minuto)"]]
+    ],
+    "dificil": [
+      ["Qual é a porta padrão do HTTPS?", "443", ["80", "22", "25"]],
+      ["Qual protocolo atribui endereços IP automaticamente aos dispositivos de uma rede?", "DHCP", ["DNS", "ARP", "ICMP"]],
+      ["Quantos endereços de host utilizáveis existem em uma rede IPv4 /26?", "62", ["64", "30", "126"]],
+      ["Qual é a função do NAT em um roteador doméstico?", "Traduzir IPs privados em um IP público para acessar a internet", ["Criptografar todo o tráfego que sai da rede local para a internet", "Traduzir nomes de domínio, como google.com, em endereços IP", "Bloquear os anúncios exibidos nas páginas visitadas"]],
+      ["Qual protocolo descobre o endereço MAC correspondente a um IP na rede local?", "ARP", ["DHCP", "BGP", "SNMP"]],
+      ["Qual é a diferença entre um switch e um hub?", "O switch encaminha o quadro só à porta do destino; o hub o repete a todas", ["O hub encaminha o quadro só ao destino; o switch o repete para todas as portas", "Não há nenhuma diferença entre os dois equipamentos de rede", "O switch só funciona em redes sem fio e o hub apenas em redes cabeadas"]]
+    ]
+  },
+  "sistemas-operacionais-linux": {
+    "facil": [
+      ["Qual comando mostra o diretório atual no terminal Linux?", "pwd", ["cd ..", "dir", "where"]],
+      ["Qual comando cria uma nova pasta?", "mkdir", ["newdir", "touch", "folder"]],
+      ["Qual comando remove um arquivo?", "rm", ["cp", "mv", "ls"]],
+      ["Qual é o nome do superusuário (administrador) no Linux?", "root", ["admin", "master", "sudoer"]],
+      ["Qual comando exibe o conteúdo de um arquivo de texto no terminal?", "cat", ["ls", "cd", "chmod"]],
+      ["Qual destes é uma distribuição Linux?", "Ubuntu", ["Windows 11", "macOS", "iOS"]]
+    ],
+    "dificil": [
+      ["O que representa a permissão 755 em um arquivo?", "O dono lê, escreve e executa; grupo e outros leem e executam", ["Todos os usuários podem ler, escrever e executar o arquivo", "Somente o dono do arquivo consegue lê-lo, escrevê-lo e executá-lo", "Ninguém pode executar o arquivo; todos podem apenas lê-lo"]],
+      ["Qual comando mostra os processos em execução, atualizados em tempo real?", "top", ["cat /proc", "ls -l", "df -h"]],
+      ["O que faz o comando grep?", "Procura texto que corresponda a um padrão", ["Compacta arquivos e pastas em um único arquivo", "Lista os discos e as partições do sistema", "Muda as permissões de acesso de um arquivo"]],
+      ["O que o pipe (|) faz no terminal?", "Envia a saída de um comando como entrada do próximo", ["Executa dois comandos ao mesmo tempo em terminais diferentes", "Apaga a saída do comando para não exibi-la na tela", "Cria um arquivo com o resultado de cada comando executado"]],
+      ["Qual é o papel do PID 1 (init ou systemd) em um sistema Linux?", "É o primeiro processo iniciado e gerencia os demais serviços", ["É o processo do usuário root que controla os privilégios", "É o processo mais antigo que o navegador mantém aberto no sistema", "É o processo que apaga os arquivos temporários ao desligar"]],
+      ["O que é um link simbólico (symlink)?", "Um arquivo que aponta para outro arquivo ou pasta pelo caminho", ["Uma cópia independente do arquivo original em outra pasta", "Um arquivo criptografado que só o dono consegue abrir", "Um atalho que só funciona quando o sistema é o Windows"]]
+    ]
+  },
+  "cloud-computing": {
+    "facil": [
+      ["Qual destes é um provedor de nuvem?", "Microsoft Azure", ["Notepad", "Paint", "Calculadora"]],
+      ["O que é armazenamento em nuvem?", "Guardar arquivos em servidores acessados pela internet", ["Guardar arquivos apenas em um pen drive conectado ao PC", "Imprimir arquivos em impressoras conectadas à rede", "Comprimir arquivos no próprio computador para poupar espaço"]],
+      ["O que significa SaaS?", "Software como serviço", ["Servidor de aplicativos simples", "Sistema de arquivos seguro", "Suporte ao site"]],
+      ["Qual é uma vantagem da nuvem?", "Pagar apenas pelos recursos que se usa", ["Nunca precisar de conexão com a internet", "Não ter custo algum para nenhum serviço", "Nunca sofrer falhas ou indisponibilidade"]],
+      ["O Google Drive é um exemplo de:", "Serviço de armazenamento em nuvem", ["Sistema operacional", "Linguagem de programação", "Placa de vídeo"]],
+      ["O que é uma máquina virtual (VM)?", "Um computador simulado por software dentro de outro", ["Um computador que só existe dentro de jogos eletrônicos", "Um tipo de cabo usado para conectar servidores em nuvem", "Um monitor extra ligado ao computador principal"]]
+    ],
+    "dificil": [
+      ["O que significa PaaS?", "Plataforma como serviço", ["Programa como serviço", "Painel administrativo seguro", "Processador como serviço"]],
+      ["O que é uma região (region) em um provedor de nuvem?", "Uma localização geográfica com data centers do provedor", ["Um tipo de conta de usuário com poderes de administrador", "A moeda usada para cobrar os serviços em cada país", "Um plano de suporte técnico vendido pelo provedor"]],
+      ["O que é o auto scaling?", "Ajustar automaticamente os recursos conforme a demanda", ["Criptografar os dados automaticamente antes de guardá-los", "Atualizar o sistema operacional dos servidores sozinho", "Copiar os dados automaticamente para outra região"]],
+      ["O que faz um balanceador de carga (load balancer)?", "Distribui as requisições entre vários servidores", ["Reduz o valor da conta mensal cobrada pela nuvem", "Faz o backup automático dos dados dos servidores", "Bloqueia ataques feitos contra a aplicação web"]],
+      ["O que diz o modelo de responsabilidade compartilhada na nuvem?", "O provedor protege a infraestrutura; o cliente, seus dados e acessos", ["O provedor é responsável por tudo, inclusive pelas senhas do cliente", "O cliente é responsável por tudo, inclusive pelos data centers", "Ninguém responde pela segurança, pois a nuvem é pública"]],
+      ["O que é alta disponibilidade?", "Projetar o sistema para continuar funcionando mesmo com falhas", ["Ter o menor preço possível entre todos os provedores", "Concentrar tudo em um único servidor muito potente e caro", "Manter o sistema desligado durante a madrugada para economizar"]]
+    ]
+  },
+  "devops-e-containers": {
+    "facil": [
+      ["Qual comando do Docker lista os contêineres em execução?", "docker ps", ["docker list", "docker show", "docker run -l"]],
+      ["O que é um contêiner?", "Um ambiente isolado com uma aplicação e suas dependências", ["Um tipo de placa de rede usada em servidores de dados", "Um arquivo de planilha usado para listar todos os servidores", "Um monitor virtual que exibe o painel do servidor"]],
+      ["Qual é o objetivo principal do DevOps?", "Entregar software mais rápido, unindo desenvolvimento e operações", ["Substituir todos os programadores por ferramentas automáticas", "Vender servidores e equipamentos de infraestrutura às empresas", "Eliminar por completo os testes antes de cada entrega"]],
+      ["Qual arquivo descreve como construir uma imagem Docker?", "Dockerfile", ["README.md", "Makefile.txt", "config.ini"]],
+      ["O que é um pipeline de CI/CD?", "Uma sequência automática de etapas: construir, testar e publicar", ["Um cabo de rede especial que liga os servidores da empresa", "Um tipo de banco de dados usado para guardar os logs dos servidores", "Um editor de código com ferramentas de automação"]],
+      ["Qual ferramenta é muito usada para automatizar pipelines?", "GitHub Actions", ["Paint", "Excel", "Bloco de notas"]]
+    ],
+    "dificil": [
+      ["Qual comando executa um contêiner a partir de uma imagem?", "docker run", ["docker build", "docker pull", "docker push"]],
+      ["Para que serve o Docker Compose?", "Definir e executar aplicações com vários contêineres a partir de um YAML", ["Comprimir as imagens Docker para que ocupem menos espaço em disco", "Monitorar a temperatura e o consumo de energia do servidor", "Substituir o Dockerfile na criação e na publicação das imagens"]],
+      ["O que é um volume Docker?", "Um armazenamento persistente que sobrevive à remoção do contêiner", ["Um limite máximo de memória que cada contêiner pode utilizar", "O tamanho total que a imagem ocupa no disco do servidor", "Uma rede virtual privada que conecta vários contêineres entre si"]],
+      ["O que é um Pod no Kubernetes?", "A menor unidade implantável, com contêineres que compartilham rede", ["Um servidor físico que executa os contêineres do cluster", "Um repositório onde as imagens dos contêineres são guardadas", "Um arquivo de configuração YAML com as regras do cluster"]],
+      ["O que é um deploy blue-green?", "Manter dois ambientes idênticos e trocar o tráfego para o novo", ["Publicar as alterações somente em horários de baixo movimento", "Usar dois bancos de dados diferentes na mesma aplicação", "Instalar duas versões do programa dentro do mesmo contêiner"]],
+      ["O que o cache de camadas (layers) do Docker build otimiza?", "Reaproveita etapas do Dockerfile que não mudaram, acelerando novas builds", ["Reduz a quantidade de contêineres que ficam em execução ao mesmo tempo", "Faz o backup automático das imagens em outro servidor da empresa", "Comprime o código-fonte da aplicação antes de publicá-lo na nuvem"]]
+    ]
+  },
+  "hardware-e-arquitetura": {
+    "facil": [
+      ["Qual componente armazena os dados de forma permanente em um computador?", "Disco (HD ou SSD)", ["Memória RAM", "Cooler", "Fonte de alimentação"]],
+      ["Qual é a função da placa-mãe?", "Conectar os componentes e permitir que se comuniquem", ["Guardar somente os arquivos e programas do usuário", "Esfriar o processador para evitar o superaquecimento", "Exibir as imagens geradas pelo computador na tela"]],
+      ["Qual é a função da fonte de alimentação?", "Fornecer energia elétrica aos componentes", ["Processar os dados e executar os programas", "Armazenar os arquivos do usuário de forma permanente", "Conectar o computador à internet por cabo ou Wi-Fi"]],
+      ["Qual dispositivo de entrada é usado para digitar?", "Teclado", ["Monitor", "Caixa de som", "Impressora"]],
+      ["Qual dispositivo mostra as imagens geradas pelo computador?", "Monitor", ["Mouse", "Scanner", "Microfone"]],
+      ["O que é um SSD?", "Um armazenamento sem partes móveis, mais rápido que o HD", ["Uma placa de vídeo usada para rodar jogos e programas pesados", "Um tipo de memória RAM usada pelo processador em cálculos", "Um tipo de processador de baixo consumo usado em notebooks"]]
+    ],
+    "dificil": [
+      ["Qual é o valor decimal do hexadecimal 0xFF?", "255", ["256", "15", "127"]],
+      ["O que é o clock de um processador?", "A frequência dos ciclos que sincronizam suas operações", ["A temperatura máxima que o processador consegue suportar", "O número de núcleos disponíveis para executar tarefas", "O tamanho da memória cache dentro do processador"]],
+      ["Qual é a diferença entre as arquiteturas RISC e CISC?", "RISC usa poucas instruções simples; CISC tem muitas, algumas complexas", ["RISC tem muitas instruções complexas; CISC tem poucas e bem simples", "RISC só existe em celulares e tablets; CISC só existe em servidores", "CISC é uma arquitetura de memória e RISC é uma arquitetura de vídeo"]],
+      ["O que é a hierarquia de memória?", "Camadas de memória, dos registradores e cache (rápidos) ao disco (lento)", ["A organização das pastas e dos arquivos do sistema operacional", "A ordem de instalação dos programas no disco do computador", "A lista de usuários do sistema organizada por nível de acesso"]],
+      ["O que é pipeline em um processador?", "Executar partes de várias instruções ao mesmo tempo, em estágios", ["Um barramento que liga o processador à placa-mãe e à memória", "Um teste que mede a temperatura do processador sob carga", "Um tipo de memória cache de nível dois dentro do processador"]],
+      ["O que faz a MMU (Memory Management Unit)?", "Traduz endereços virtuais em físicos e controla o acesso à memória", ["Gerencia a energia que a fonte entrega a cada componente da placa", "Acelera o processamento de gráficos tridimensionais dos jogos", "Comprime os dados guardados na memória RAM para liberar espaço"]]
+    ]
+  },
+  "iot-e-eletronica": {
+    "facil": [
+      ["Qual componente limita a corrente elétrica em um circuito?", "Resistor", ["LED", "Botão", "Bateria"]],
+      ["O que é um LED?", "Um diodo emissor de luz", ["Um sensor de temperatura", "Um microcontrolador", "Um cabo de rede"]],
+      ["Qual unidade mede a tensão elétrica?", "Volt", ["Ampère", "Ohm", "Watt"]],
+      ["Qual unidade mede a corrente elétrica?", "Ampère", ["Volt", "Ohm", "Hertz"]],
+      ["Qual placa, muito usada em IoT, já traz Wi-Fi integrado?", "ESP32", ["Ryzen 9", "GeForce", "Xeon"]],
+      ["Para que serve uma protoboard?", "Montar circuitos de teste sem solda", ["Guardar o código-fonte escrito para o microcontrolador", "Carregar as baterias que alimentam o circuito", "Medir a temperatura do ambiente em que o circuito está"]]
+    ],
+    "dificil": [
+      ["Qual é a expressão da lei de Ohm?", "V = R × I", ["V = R / I", "P = V + I", "I = V × R"]],
+      ["Qual é a corrente em um resistor de 100 Ω ligado a 5 V?", "0,05 A (50 mA)", ["0,5 A", "20 A", "5 A"]],
+      ["Para que serve um resistor pull-up?", "Manter a entrada digital em nível alto quando nada está ligado", ["Aumentar a tensão que a fonte fornece ao restante do circuito", "Proteger o circuito contra descargas eletrostáticas apenas", "Reduzir o ruído do sinal de Wi-Fi do microcontrolador ESP32"]],
+      ["Qual protocolo serial usa dois fios (dados e clock) e endereços de dispositivos?", "I²C", ["SPI", "UART", "USB"]],
+      ["Qual é a função de um conversor analógico-digital (ADC)?", "Converter um sinal analógico em um valor digital", ["Converter um valor digital em som audível por um alto-falante", "Aumentar a tensão fornecida pela bateria ao circuito", "Criptografar os dados que o sensor envia pela rede"]],
+      ["Qual é a vantagem do deep sleep em dispositivos IoT a bateria?", "Reduz drasticamente o consumo de energia entre as leituras", ["Aumenta a velocidade de processamento do microcontrolador", "Melhora o alcance do sinal de Wi-Fi e do Bluetooth do dispositivo", "Apaga a memória do dispositivo a cada nova leitura do sensor"]]
+    ]
+  },
+  "seguranca-da-informacao": {
+    "facil": [
+      ["O que é um vírus de computador?", "Um programa malicioso que se copia e prejudica o sistema", ["Um tipo de cabo usado para conectar o computador ao roteador", "Um programa de proteção que remove ameaças do computador", "Uma peça de hardware que aquece demais o computador"]],
+      ["Qual é uma boa prática para evitar golpes por e-mail?", "Não clicar em links de remetentes desconhecidos", ["Abrir todos os anexos para conferir", "Responder informando a senha", "Encaminhar a mensagem a todos os contatos"]],
+      ["O que é um antivírus?", "Um programa que detecta e remove códigos maliciosos", ["Um tipo de vírus que apaga arquivos do computador todo dia", "Uma senha forte gerada de forma aleatória e sem repetição", "Uma rede social usada para denunciar golpes na internet"]],
+      ["Por que é importante atualizar o sistema e os aplicativos?", "Para corrigir falhas de segurança conhecidas", ["Para deixar o computador mais lento", "Para apagar os arquivos antigos", "Para desligar o antivírus"]],
+      ["O que é um backup?", "Uma cópia dos dados guardada para recuperação em caso de perda", ["Uma senha reserva usada quando o usuário esquece a senha principal", "Um tipo de vírus que se esconde dentro de arquivos comuns", "Um tipo de firewall que protege toda a rede da empresa"]],
+      ["Qual senha é a mais segura?", "Uma frase longa, com letras, números e símbolos, usada só em um site", ["12345678, porque é fácil de lembrar e digitar rapidamente", "O seu nome completo seguido do ano de nascimento e da cidade", "A mesma senha, curta e fácil, repetida em todos os sites e serviços"]]
+    ],
+    "dificil": [
+      ["O que é ransomware?", "Um malware que sequestra os dados, criptografando-os, e exige resgate", ["Um programa que acelera o computador ao limpar arquivos inúteis", "Um tipo de firewall que bloqueia todo o tráfego de entrada", "Um golpe aplicado apenas por telefone para roubar dinheiro de idosos"]],
+      ["O que é engenharia social?", "Manipular pessoas para obter informações ou acesso", ["Uma técnica de programação segura usada contra invasões", "Um tipo de criptografia usada em mensagens de redes sociais", "Um curso sobre o uso profissional de redes sociais"]],
+      ["O que é um ataque de negação de serviço distribuído (DDoS)?", "Sobrecarregar um serviço com tráfego de muitas origens até derrubá-lo", ["Roubar senhas dos usuários por meio de e-mails falsos e sites clonados", "Injetar código malicioso nas consultas feitas a um banco de dados", "Quebrar uma criptografia testando todas as chaves possíveis"]],
+      ["O que é o princípio do menor privilégio?", "Conceder a cada usuário apenas o acesso necessário à sua função", ["Dar acesso de administrador a todos os usuários para facilitar", "Usar sempre a senha mais curta que o sistema permitir", "Bloquear por padrão o acesso de todos os usuários ao sistema"]],
+      ["O que é XSS (Cross-Site Scripting)?", "A injeção de scripts maliciosos em páginas vistas por outros usuários", ["Um ataque que derruba a conexão de redes Wi-Fi domésticas", "Um vírus que infecta o setor de boot do disco do computador", "Uma falha de segurança que existe apenas em impressoras de rede"]],
+      ["Por que armazenar senhas com hash e salt?", "Para que um vazamento do banco não revele as senhas nem hashes repetidos", ["Para deixar o processo de login mais rápido para o usuário", "Para poder recuperar a senha original quando o usuário esquecer", "Para reduzir o espaço que o banco de dados ocupa no servidor"]]
+    ]
+  },
+  "criptografia-e-blockchain": {
+    "facil": [
+      ["O que significa descriptografar?", "Transformar dados cifrados de volta em dados legíveis", ["Apagar definitivamente os dados guardados no dispositivo", "Comprimir os dados para que ocupem menos espaço em disco", "Copiar os dados para outro dispositivo de armazenamento"]],
+      ["O Bitcoin é um exemplo de:", "Criptomoeda", ["Antivírus", "Sistema operacional", "Linguagem de programação"]],
+      ["O que é uma carteira (wallet) de criptomoedas?", "Uma ferramenta que guarda as chaves de acesso às moedas", ["Um cartão de crédito comum usado para comprar criptomoedas", "Um pen drive de boot com um sistema operacional instalado", "Um banco físico que guarda as moedas digitais em cofres"]],
+      ["Qual início de endereço indica que um site usa conexão criptografada?", "https://", ["ftp://", "http://", "file://"]],
+      ["O que um bloco de uma blockchain guarda?", "Um conjunto de transações e o hash do bloco anterior", ["Apenas as senhas dos usuários que participam da rede", "Apenas imagens e vídeos enviados pelos usuários da rede", "Dados isolados, sem nenhuma ligação com os demais blocos"]],
+      ["Por que a blockchain é considerada difícil de fraudar?", "Alterar um bloco exigiria refazer todos os seguintes, em toda a rede", ["Porque somente um computador central guarda todos os dados da rede", "Porque os dados ficam registrados em papel e trancados", "Porque não usa nenhum tipo de criptografia, hash ou assinatura"]]
+    ],
+    "dificil": [
+      ["Qual destes é um algoritmo de criptografia assimétrica?", "RSA", ["AES", "SHA-256", "CRC32"]],
+      ["O SHA-256 é um algoritmo de:", "Hash criptográfico", ["Criptografia simétrica", "Criptografia assimétrica", "Compressão de dados"]],
+      ["O que é uma assinatura digital?", "Um valor gerado com a chave privada que prova autoria e integridade", ["Uma foto da assinatura feita à mão, enviada por e-mail", "Uma senha compartilhada por e-mail entre o remetente e o destinatário", "Um certificado emitido por um programa antivírus para os arquivos"]],
+      ["O que é o consenso Proof of Work (prova de trabalho)?", "Mineradores resolvem problemas computacionais para validar blocos", ["Os usuários votam por e-mail para aprovar cada novo bloco da rede", "Um banco central valida uma a uma todas as transações da rede", "Os nós apenas copiam o último bloco publicado sem verificá-lo"]],
+      ["O que é um ataque de 51% em uma blockchain?", "Um grupo domina a maior parte do poder de validação e pode reescrever transações", ["Um vírus que infecta 51% dos computadores conectados à rede", "Uma taxa de 51% cobrada sobre as transações feitas na rede", "Quando 51% dos usuários da rede perdem a senha da própria carteira"]],
+      ["Qual é o papel de uma autoridade certificadora (CA)?", "Emitir certificados que vinculam uma chave pública a uma identidade", ["Guardar as senhas de todos os usuários em um cofre digital seguro", "Bloquear o acesso aos sites que oferecem risco de segurança", "Comprimir o tráfego HTTPS para acelerar o carregamento das páginas"]]
+    ]
+  },
+  "ux-ui-design": {
+    "facil": [
+      ["UI significa:", "User Interface (interface do usuário)", ["Universal Internet (internet universal)", "User Insight (percepção do usuário)", "Unified Input (entrada unificada)"]],
+      ["O que é uma paleta de cores?", "O conjunto de cores usadas em um design", ["Uma lista de senhas usadas pela equipe de design", "Um tipo de fonte especial usada em títulos e textos", "Um formato de arquivo usado para exportar imagens"]],
+      ["O que é uma persona em UX?", "Um personagem fictício que representa um grupo de usuários", ["Um usuário real convidado para testar o site antes do lançamento", "Um membro da equipe de vendas que atende clientes", "Uma marca registrada usada nos materiais do produto"]],
+      ["O que é tipografia?", "A escolha e o uso de fontes e textos", ["A escolha das cores usadas na interface", "O formato dos vídeos exibidos na página", "A velocidade com que o site carrega"]],
+      ["Qual é um objetivo de uma boa interface?", "Ser clara e fácil de usar", ["Ter o maior número possível de botões", "Ter textos pequenos e coloridos", "Esconder as opções principais"]],
+      ["O que é um protótipo de interface?", "Uma simulação navegável da tela antes do desenvolvimento", ["O código final e completo do site, publicado na internet", "Um banco de dados com os cadastros de todos os clientes", "Um relatório financeiro sobre os custos do projeto"]]
+    ],
+    "dificil": [
+      ["O que descreve o padrão F de leitura?", "Como os usuários varrem uma página: linhas no topo e depois descendo pela esquerda", ["Um padrão de cores frias muito usado em interfaces escuras e minimalistas", "Um tipo de grade de layout com doze colunas de mesma largura", "Uma regra sobre o uso de fontes em negrito nos títulos da página"]],
+      ["O que são as heurísticas de Nielsen?", "Princípios gerais para avaliar a usabilidade de interfaces", ["Um conjunto de fontes gratuitas criadas para interfaces digitais", "Um framework de JavaScript usado para criar interfaces web", "Um método de vendas focado em clientes de tecnologia"]],
+      ["O que é um teste A/B?", "Comparar duas versões de uma tela para ver qual rende mais", ["Testar se o site funciona em dois navegadores diferentes", "Testar o carregamento do site em duas velocidades de conexão", "Traduzir a interface do produto para dois idiomas diferentes"]],
+      ["O que é um design system?", "Um conjunto de componentes e diretrizes que mantém o produto consistente", ["Um sistema operacional criado especialmente para designers gráficos", "Um banco de imagens e ícones gratuitos para uso comercial", "Um programa de edição de vídeo usado por equipes de design"]],
+      ["O que afirma a lei de Fitts?", "O tempo para alcançar um alvo depende da distância e do seu tamanho", ["O número ideal de cores que uma tela de interface deve ter", "O tempo máximo de carregamento aceitável para uma página", "O tamanho mínimo que as fontes de uma interface podem ter"]],
+      ["O que é card sorting?", "Usuários agrupam itens em categorias para organizar a informação do produto", ["Um jogo de cartas usado nas reuniões da equipe de design", "Um teste que mede a velocidade de carregamento do site", "Uma técnica de criptografia usada para proteger dados de usuários"]]
+    ]
+  }
+}

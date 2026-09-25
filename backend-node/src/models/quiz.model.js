@@ -21,6 +21,20 @@ async function listarAtivos({ categoriaId = null, busca = null } = {}) {
   return rows;
 }
 
+/** Todos os quizzes (inclusive desativados) para o painel do administrador. */
+async function listarTodos({ categoriaId = null, dificuldade = null, busca = null } = {}) {
+  const { rows } = await pool.query(
+    `SELECT s.*, (SELECT COUNT(*)::int FROM resultados r WHERE r.quiz_id = s.id) AS total_resultados
+       FROM (${RESUMO_SQL}) s
+      WHERE ($1::int IS NULL OR s.categoria_id = $1)
+        AND ($2::text IS NULL OR s.dificuldade = $2)
+        AND ($3::text IS NULL OR s.titulo ILIKE '%' || $3 || '%' OR s.categoria_nome ILIKE '%' || $3 || '%')
+      ORDER BY s.categoria_nome, CASE s.dificuldade WHEN 'facil' THEN 1 WHEN 'media' THEN 2 ELSE 3 END, s.id`,
+    [categoriaId, dificuldade, busca]
+  );
+  return rows;
+}
+
 async function buscarResumo(id, { somenteAtivo = true } = {}) {
   const { rows } = await pool.query(`${RESUMO_SQL} WHERE q.id = $1 ${somenteAtivo ? "AND q.ativo" : ""}`, [id]);
   return rows[0] || null;
@@ -99,12 +113,36 @@ async function criarPergunta({ quizId, texto, pontos, alternativas }) {
   }
 }
 
+/** Troca enunciado, pontos e alternativas (as antigas saem e as novas entram, na mesma transacao). */
+async function atualizarPergunta(id, { texto, pontos, alternativas }) {
+  const client = await pool.connect();
+  try {
+    await client.query("BEGIN");
+    const { rowCount } = await client.query("UPDATE perguntas SET texto = $1, pontos = $2 WHERE id = $3", [texto, pontos, id]);
+    if (!rowCount) {
+      await client.query("ROLLBACK");
+      return false;
+    }
+    await client.query("DELETE FROM alternativas WHERE pergunta_id = $1", [id]);
+    for (const alt of alternativas) {
+      await client.query("INSERT INTO alternativas (pergunta_id, texto, correta) VALUES ($1, $2, $3)", [id, alt.texto, alt.correta]);
+    }
+    await client.query("COMMIT");
+    return true;
+  } catch (err) {
+    await client.query("ROLLBACK");
+    throw err;
+  } finally {
+    client.release();
+  }
+}
+
 async function excluirPergunta(id) {
   const { rowCount } = await pool.query("DELETE FROM perguntas WHERE id = $1", [id]);
   return rowCount > 0;
 }
 
 module.exports = {
-  listarAtivos, buscarResumo, buscarCompleto, criar, atualizar, contarResultados, desativar, excluir,
-  criarPergunta, excluirPergunta,
+  listarAtivos, listarTodos, buscarResumo, buscarCompleto, criar, atualizar, contarResultados, desativar, excluir,
+  criarPergunta, atualizarPergunta, excluirPergunta,
 };

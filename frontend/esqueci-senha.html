@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#010e24">
-  <title>Entrar — QUIZ TECH</title>
+  <title>Esqueci minha senha — QUIZ TECH</title>
   <link rel="icon" type="image/svg+xml" href="assets/logo/marca.svg">
   <link rel="icon" type="image/png" href="assets/logo/favicon.png">
   <link rel="manifest" href="manifest.webmanifest">
@@ -16,15 +16,14 @@
   <main id="app">
     <form class="card form auth-card" id="form" novalidate>
       <div class="auth-logo"><img src="assets/logo/logo.png" alt="QUIZ TECH" width="144" height="144"></div>
-      <h1>Entrar</h1>
+      <h1>Esqueci minha senha</h1>
+      <p class="muted">Informe o e-mail da sua conta. Se ele estiver cadastrado, enviamos um link para você escolher uma nova senha.</p>
       <div id="msg"></div>
       <div class="field"><label for="email">E-mail</label><input id="email" type="email" autocomplete="email" required></div>
-      <div class="field"><label for="password">Senha</label><input id="password" type="password" autocomplete="current-password" required></div>
-      <button class="btn block" type="submit" id="submit">Entrar</button>
-      <p class="muted" style="margin-top:16px"><a href="esqueci-senha.html">Esqueci minha senha</a></p>
-      <p class="muted">Ainda não tem conta? <a href="cadastro.html">Cadastre-se</a></p>
+      <button class="btn block" type="submit" id="submit">Enviar link</button>
+      <p class="muted" style="margin-top:16px"><a href="login.html">Voltar para o login</a></p>
     </form>
   </main>
-  <script type="module" src="js/login.js"></script>
+  <script type="module" src="js/esqueci-senha.js"></script>
 </body>
 </html>

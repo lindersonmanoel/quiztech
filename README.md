@@ -9,15 +9,18 @@ Plataforma web de quizzes de tecnologia com **certificado de conclusão**, insta
 
 ## O que já funciona
 - Cadastro, login (JWT) e edição do nome exibido no certificado.
-- **32 áreas** de tecnologia e correlatas, cada uma com um quiz de 6 perguntas (2 fáceis, 2 médias, 2 difíceis).
+- **32 áreas** de tecnologia e correlatas, cada uma com **3 níveis** (fácil, médio e difícil) de 6 perguntas: 96 quizzes e 576 perguntas.
 - Quiz com cronômetro; a correção é **no servidor** (o gabarito nunca vai ao navegador antes de responder).
 - **Certificado de conclusão** com 70% ou mais (5 de 6), uma vez por quiz, com código de verificação público e página para
   imprimir/salvar em PDF. O gabarito só aparece para quem foi aprovado; há 10 minutos de espera para refazer um quiz reprovado.
-- Ranking geral e por área, mostrando só "Primeiro nome + inicial".
+- Ranking **geral, mensal e semanal**, por área e por nível, mostrando só "Primeiro nome + inicial".
+- **QR Code no certificado** para conferir a autenticidade.
+- **Recuperação de senha por e-mail** (link de uso único; veja DEPLOY.md, seção de e-mail).
 - **LGPD:** política de privacidade, consentimento no cadastro e exclusão da própria conta.
 - **PWA:** botão **"Instalar app"** para todos os navegadores Android (instalação nativa no Chrome, Edge, Samsung Internet,
   Opera, Brave...; passo a passo no Firefox e afins) e abertura offline da "casca" do app.
-- API administrativa (categorias, quizzes, perguntas), versão e commit no rodapé e aviso de "Nova versão disponível".
+- **Painel administrativo** em HTML (`/admin.html`): resumo, quizzes e perguntas, áreas e usuários.
+- Versão e commit no rodapé e aviso de "Nova versão disponível".
 - **Ícones 100% SVG**: um pictograma por área, ícones de interface e a marca do QUIZ TECH, todos vetoriais e na cor do texto (`frontend/js/icons.js`).
 
 ## Estrutura

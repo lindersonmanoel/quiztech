@@ -3,17 +3,18 @@
 const request = require("supertest");
 const pool = require("../src/database/pool");
 const { run: migrar } = require("../src/database/migrate");
-const { semearAreas } = require("../src/database/seed");
+const { semearAreas, semearNiveis } = require("../src/database/seed");
 
 let contador = 0;
 
-/** Aplica as migracoes e carrega as 32 areas (idempotente). */
+/** Aplica as migracoes e carrega as 32 areas e seus 3 niveis (idempotente). */
 async function prepararBanco() {
   await migrar({ encerrarPool: false });
   const client = await pool.connect();
   try {
     await client.query("BEGIN");
     await semearAreas(client);
+    await semearNiveis(client);
     await client.query("COMMIT");
   } catch (err) {
     await client.query("ROLLBACK");
@@ -41,10 +42,11 @@ async function criarUsuario(app, over = {}) {
   return { dados, usuario: res.body.user, token: res.body.access_token, headers: { Authorization: `Bearer ${res.body.access_token}` } };
 }
 
-async function quizIdDaArea(slug) {
+/** Sem `dificuldade`, devolve o quiz de menor id da area (o nivel "media", carregado primeiro). */
+async function quizIdDaArea(slug, dificuldade = null) {
   const { rows } = await pool.query(
-    "SELECT q.id FROM quizzes q JOIN categorias c ON c.id = q.categoria_id WHERE c.slug = $1 ORDER BY q.id LIMIT 1",
-    [slug]
+    "SELECT q.id FROM quizzes q JOIN categorias c ON c.id = q.categoria_id WHERE c.slug = $1 AND ($2::text IS NULL OR q.dificuldade = $2) ORDER BY q.id LIMIT 1",
+    [slug, dificuldade]
   );
   return rows[0].id;
 }

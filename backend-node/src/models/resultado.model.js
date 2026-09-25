@@ -2,7 +2,7 @@
 
 const pool = require("../database/pool");
 
-const CAMPOS = `r.id, r.usuario_id, r.quiz_id, qz.titulo AS quiz_titulo, r.pontos, r.pontos_maximos, r.acertos, r.erros,
+const CAMPOS = `r.id, r.usuario_id, r.quiz_id, qz.titulo AS quiz_titulo, qz.dificuldade, r.pontos, r.pontos_maximos, r.acertos, r.erros,
                 r.percentual::float8 AS percentual, r.tempo_gasto, r.revisao, r.criado_em`;
 
 async function ultimoDoUsuario(usuarioId, quizId) {
@@ -42,20 +42,26 @@ async function buscarDoUsuario(id, usuarioId) {
   return rows[0] || null;
 }
 
-/** Soma a melhor pontuacao de cada usuario em cada quiz (refazer nao infla o ranking). */
-async function ranking({ categoriaId = null, quizId = null, limite = 50 } = {}) {
+/**
+ * Soma a melhor pontuacao de cada usuario em cada quiz (refazer nao infla o ranking).
+ * `periodo`: null = desde sempre; "week" = semana atual (a partir de segunda); "month" = mes atual. O inicio e' contado
+ * no fuso `fuso` (o do Brasil), nao em UTC: a semana vira na madrugada de segunda daqui.
+ */
+async function ranking({ categoriaId = null, quizId = null, dificuldade = null, periodo = null, fuso = "America/Sao_Paulo", limite = 50 } = {}) {
   const { rows } = await pool.query(
     `WITH melhores AS (
        SELECT r.usuario_id, r.quiz_id, MAX(r.pontos) AS melhor
          FROM resultados r JOIN quizzes q ON q.id = r.quiz_id
         WHERE ($1::int IS NULL OR r.quiz_id = $1) AND ($2::int IS NULL OR q.categoria_id = $2)
+          AND ($4::text IS NULL OR q.dificuldade = $4)
+          AND ($5::text IS NULL OR r.criado_em >= (date_trunc($5, now() AT TIME ZONE $6) AT TIME ZONE $6))
         GROUP BY r.usuario_id, r.quiz_id)
      SELECT u.nome, SUM(m.melhor)::int AS total, COUNT(*)::int AS quizzes
        FROM melhores m JOIN usuarios u ON u.id = m.usuario_id
       GROUP BY u.id, u.nome
       ORDER BY total DESC, u.nome
       LIMIT $3`,
-    [quizId, categoriaId, limite]
+    [quizId, categoriaId, limite, dificuldade, periodo, fuso]
   );
   return rows;
 }

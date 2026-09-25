@@ -64,6 +64,21 @@ function validateLogin({ email, password }) {
   return { valido: Object.keys(erros).length === 0, erros, email: emailLimpo };
 }
 
+function validateEsqueciSenha({ email }) {
+  const emailLimpo = normalizeEmail(email);
+  const valido = Boolean(emailLimpo) && emailLimpo.length <= EMAIL_MAX && EMAIL_RE.test(emailLimpo);
+  return { valido, erros: valido ? {} : { email: "Informe um e-mail válido." }, email: emailLimpo };
+}
+
+function validateRedefinirSenha({ token, password }) {
+  const erros = {};
+  const tokenOk = typeof token === "string" && /^[A-Za-z0-9_-]{20,100}$/.test(token);
+  if (!tokenOk) erros.token = "Link inválido. Abra novamente o link recebido por e-mail.";
+  const erroSenha = validarSenhaNova(password);
+  if (erroSenha) erros.password = erroSenha;
+  return { valido: Object.keys(erros).length === 0, erros };
+}
+
 function validateNomePerfil({ name }) {
   const nome = normalizeNome(name);
   const erro = validarNome(nome);
@@ -117,9 +132,9 @@ function validateQuiz(b = {}) {
   };
 }
 
-function validatePergunta(b = {}) {
+function validatePergunta(b = {}, { exigeQuiz = true } = {}) {
   const erros = {};
-  if (!inteiro(b.quiz_id)) erros.quiz_id = "Informe o quiz.";
+  if (exigeQuiz && !inteiro(b.quiz_id)) erros.quiz_id = "Informe o quiz.";
   const texto = String(b.text || "").trim();
   if (texto.length < 3 || texto.length > 1000) erros.text = "O enunciado deve ter de 3 a 1000 caracteres.";
   const pontos = b.points === undefined ? 10 : b.points;
@@ -140,6 +155,6 @@ function validatePergunta(b = {}) {
 
 module.exports = {
   EMAIL_RE, normalizeEmail, normalizeNome, validarSenhaNova,
-  validateRegister, validateLogin, validateNomePerfil, validateSubmit,
+  validateRegister, validateLogin, validateEsqueciSenha, validateRedefinirSenha, validateNomePerfil, validateSubmit,
   validateCategoria, validateQuiz, validatePergunta,
 };

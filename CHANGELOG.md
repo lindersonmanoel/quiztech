@@ -3,6 +3,29 @@
 Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e [versionamento semântico](https://semver.org/lang/pt-BR/).
 A versão em execução aparece no rodapé do site e em `/api/version`.
 
+## [2.3.0] - 2026-09-25
+
+### Adicionado
+- **Painel administrativo** (`admin.html`, link "Painel" só para administradores): resumo (totais, movimento dos últimos 7 dias,
+  taxa de aprovação, áreas mais feitas e últimos resultados), gestão de **quizzes** (criar, editar, ativar/desativar, excluir;
+  editor de perguntas e alternativas), **áreas** e **usuários** (busca, promover/rebaixar administrador; ninguém altera o
+  próprio acesso). Novas rotas `/api/admin`: `activity`, `quizzes` (lista e detalhe com o gabarito), `questions/:id` (PUT), `users`.
+- **Recuperação de senha por e-mail**: "Esqueci minha senha" gera um link de uso único (só o hash SHA-256 vai ao banco; o token
+  viaja no fragmento `#` da URL, que não chega a servidores nem ao Referer). Vale 60 min, um novo pedido invalida o anterior,
+  trocar a senha encerra as sessões abertas e avisa por e-mail. Resposta idêntica exista a conta ou não; limites por IP e por
+  e-mail. Configuração SMTP em `.env.production` (veja DEPLOY.md); sem SMTP a tela avisa que o recurso está desativado.
+- **Ranking semanal e mensal** (`/api/ranking?period=week|month|all`, também `difficulty=`): semana de segunda a domingo e mês
+  do calendário, no fuso do Brasil (`RANKING_TZ`). O site tem abas Geral / Este mês / Esta semana e filtro por nível.
+- **Três níveis por área** (fácil, médio e difícil): +64 quizzes e +384 perguntas (96 quizzes e 576 perguntas no total). O quiz
+  atual vira "— Médio". Fácil vale 60 pontos, médio 120 e difícil 180 no ranking. Cada nível rende um certificado próprio, e
+  a lista de quizzes marca os níveis já certificados. A carga é idempotente e um quiz apagado pelo administrador não volta.
+- **QR Code no certificado** (`/api/certificates/:codigo/qr.svg`) que abre a página pública de verificação, e nível no certificado.
+- PWA: novas páginas no cache offline (`quiztech-shell-v4`) e atalho "Ranking da semana".
+- `/api/config` público informa se a recuperação de senha está ativa.
+
+### Corrigido
+- O atributo `hidden` agora sempre esconde (abas e botões com `display` definido por classe apareciam mesmo escondidos).
+
 ## [2.2.0] - 2026-09-25
 
 ### Adicionado

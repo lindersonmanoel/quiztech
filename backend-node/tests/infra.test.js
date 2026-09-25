@@ -57,7 +57,7 @@ describe("banco de dados", () => {
       client.release();
     }
     const { rows } = await pool.query("SELECT (SELECT COUNT(*)::int FROM categorias) AS c, (SELECT COUNT(*)::int FROM perguntas) AS p");
-    expect(rows[0]).toEqual({ c: 32, p: 192 });
+    expect(rows[0]).toEqual({ c: 32, p: 576 });
   });
 
   test("o seed cria so' as areas que faltam", async () => {
@@ -119,5 +119,39 @@ describe("icones SVG das areas", () => {
     } finally {
       await pool.query("DELETE FROM categorias WHERE slug = 'teste-icone-novo'");
     }
+  });
+});
+
+describe("PWA e site estatico", () => {
+  const FRONT = path.join(RAIZ, "frontend");
+  const sw = fs.readFileSync(path.join(FRONT, "service-worker.js"), "utf8");
+  const emCache = [...sw.match(/const ARQUIVOS = \[([\s\S]*?)\];/)[1].matchAll(/"([^"]+)"/g)].map((m) => m[1]);
+
+  test("o service worker guarda TODAS as paginas e scripts do site (senao a pagina nova nao abre offline)", () => {
+    const paginas = fs.readdirSync(FRONT).filter((n) => n.endsWith(".html"));
+    const scripts = fs.readdirSync(path.join(FRONT, "js")).map((n) => `js/${n}`);
+    expect([...paginas, ...scripts].filter((f) => !emCache.includes(f))).toEqual([]);
+    expect(emCache.filter((f) => f !== "./" && !fs.existsSync(path.join(FRONT, f)))).toEqual([]);
+  });
+
+  test("toda pagina carrega config.js e o manifesto, e nenhuma usa script inline (CSP)", () => {
+    for (const nome of fs.readdirSync(FRONT).filter((n) => n.endsWith(".html") && n !== "offline.html")) { // a pagina offline nao usa a API
+      const html = fs.readFileSync(path.join(FRONT, nome), "utf8");
+      expect([nome, html.includes('src="js/config.js"')]).toEqual([nome, true]);
+      expect([nome, html.includes('rel="manifest"')]).toEqual([nome, true]);
+      const inline = [...html.matchAll(/<script(?![^>]*\bsrc=)[^>]*>/g)];
+      expect([nome, inline.length]).toEqual([nome, 0]);
+    }
+  });
+
+  test("o manifesto e' valido e os atalhos apontam para paginas que existem", () => {
+    const m = JSON.parse(fs.readFileSync(path.join(FRONT, "manifest.webmanifest"), "utf8"));
+    expect(m.display).toBe("standalone");
+    for (const atalho of m.shortcuts) expect(fs.existsSync(path.join(FRONT, atalho.url.split("?")[0]))).toBe(true);
+  });
+
+  test("a pagina de redefinir senha nao vaza o token pelo Referer", () => {
+    const html = fs.readFileSync(path.join(FRONT, "redefinir-senha.html"), "utf8");
+    expect(html).toContain('name="referrer" content="no-referrer"');
   });
 });

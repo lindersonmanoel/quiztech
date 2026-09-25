@@ -2,7 +2,7 @@
 
 const pool = require("../database/pool");
 
-const CAMPOS = `c.codigo, u.nome AS usuario_nome, c.quiz_id, q.titulo AS quiz_titulo, cat.nome AS categoria_nome,
+const CAMPOS = `c.codigo, u.nome AS usuario_nome, c.quiz_id, q.titulo AS quiz_titulo, q.dificuldade, cat.nome AS categoria_nome,
                 c.pontos, c.percentual::float8 AS percentual, c.emitido_em`;
 const JUNCOES = `FROM certificados c
                    JOIN usuarios u ON u.id = c.usuario_id

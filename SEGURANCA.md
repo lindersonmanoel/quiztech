@@ -35,7 +35,9 @@ Se algum desses falhar, o GitHub avisa por e-mail: trate como prioridade.
 - [ ] Consulta SQL só com parâmetros (`$1`, `$2`), nunca concatenando texto do usuário?
 - [ ] A resposta de erro não vaza SQL, caminho de arquivo nem stack trace? (o `errorHandler` cuida disso; não contorne)
 - [ ] Rota que testa senha ou envia algo em massa tem limitador (`middleware/limiters.js`)?
-- [ ] Nunca devolve o gabarito antes de o usuário ser aprovado?
+- [ ] Nunca devolve o gabarito antes de o usuário ser aprovado? (o gabarito só sai nas rotas `/api/admin`)
+- [ ] Rota de e-mail responde igual para conta existente e inexistente, envia em segundo plano e tem limite por IP e por e-mail?
+- [ ] Token de uso único guarda só o hash no banco e expira?
 - [ ] Tem teste (inclusive o caso de ataque: sem login, de outro usuário, dado inválido)?
 - [ ] Conteúdo do usuário entra na tela com `textContent` (nunca `innerHTML`)?
 

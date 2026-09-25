@@ -1,5 +1,7 @@
 "use strict";
 
+const QRCode = require("qrcode");
+const config = require("../config");
 const resultadoModel = require("../models/resultado.model");
 const certificadoModel = require("../models/certificado.model");
 const { AppError } = require("../utils/errors");
@@ -16,8 +18,8 @@ async function detalhe(id, usuarioId) {
   return apresentarResultadoCompleto(r, await certificadoModel.buscarPorResultado(r.id));
 }
 
-async function ranking({ categoriaId, quizId, limite }) {
-  const rows = await resultadoModel.ranking({ categoriaId, quizId, limite });
+async function ranking({ categoriaId, quizId, dificuldade, periodo, limite }) {
+  const rows = await resultadoModel.ranking({ categoriaId, quizId, dificuldade, periodo, fuso: config.rankingFuso, limite });
   return rows.map((r, i) => ({
     position: i + 1,
     user_name: nomePublico(r.nome),
@@ -37,4 +39,12 @@ async function verificarCertificado(codigo) {
   return apresentarCertificado(c);
 }
 
-module.exports = { listar, detalhe, ranking, certificadosDoUsuario, verificarCertificado };
+/** QR Code (SVG) que aponta para a pagina publica de verificacao do certificado. */
+async function qrDoCertificado(codigo) {
+  const c = await certificadoModel.buscarPorCodigo(String(codigo).trim().toUpperCase());
+  if (!c) throw new AppError("Certificado não encontrado.", 404);
+  const url = `${config.appUrl}/certificado.html?code=${encodeURIComponent(c.codigo)}`;
+  return QRCode.toString(url, { type: "svg", margin: 1, errorCorrectionLevel: "M", color: { dark: "#000000", light: "#ffffff" } });
+}
+
+module.exports = { listar, detalhe, ranking, certificadosDoUsuario, verificarCertificado, qrDoCertificado };

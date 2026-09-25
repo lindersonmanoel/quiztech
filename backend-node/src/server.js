@@ -7,6 +7,11 @@ const { version } = require("./version");
 
 const app = createApp();
 
+if (config.isProduction && !require("./services/email.service").configurado()) {
+  // eslint-disable-next-line no-console
+  console.warn("[config] SMTP_HOST não definido: a recuperação de senha por e-mail fica desativada (veja DEPLOY.md, seção de e-mail).");
+}
+
 const server = app.listen(config.port, () => {
   // eslint-disable-next-line no-console
   console.log(`[server] QUIZ TECH API v${version} rodando na porta ${config.port} (ambiente: ${config.nodeEnv})`);
