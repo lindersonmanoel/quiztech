@@ -10,7 +10,8 @@
 </head>
 <body>
   <main id="app">
-    <form class="card form" id="form" novalidate>
+    <form class="card form auth-card" id="form" novalidate>
+      <div class="auth-logo"><img src="assets/logo/logo.png" alt="QUIZ TECH" width="144" height="144"></div>
       <h1>Criar conta</h1>
       <div id="msg"></div>
       <div class="field"><label for="name">Nome completo</label><input id="name" type="text" autocomplete="name" minlength="2" maxlength="80" required>
@@ -19,7 +20,7 @@
       <div class="field"><label for="password">Senha (mínimo 8 caracteres)</label><input id="password" type="password" autocomplete="new-password" minlength="8" maxlength="72" required></div>
       <div class="field check"><label><input id="terms" type="checkbox" required>
         <span>Li e concordo com a <a href="privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</span></label></div>
-      <button class="btn" type="submit" id="submit">Cadastrar</button>
+      <button class="btn block" type="submit" id="submit">Cadastrar</button>
       <p class="muted" style="margin-top:16px">Já tem conta? <a href="login.html">Entrar</a></p>
     </form>
   </main>

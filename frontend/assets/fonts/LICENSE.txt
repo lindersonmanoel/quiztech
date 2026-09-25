@@ -1,0 +1,3 @@
+Orbitron
+Copyright 2018 The Orbitron Project Authors (https://github.com/theleagueof/orbitron)
+Licensed under the SIL Open Font License, Version 1.1 (https://openfontlicense.org)

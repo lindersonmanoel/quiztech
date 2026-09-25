@@ -67,10 +67,10 @@ function renderQuestion() {
     el("div", { class: "card" },
       el("p", { class: "question" }, question.text),
       el("div", { class: "options", role: "group", "aria-label": "Alternativas" },
-        question.alternatives.map((alt) => el("button", {
+        question.alternatives.map((alt, index) => el("button", {
           type: "button", class: "option", "aria-pressed": String(chosen.get(question.id) === alt.id),
           onclick: () => { chosen.set(question.id, alt.id); renderQuestion(); },
-        }, alt.text))),
+        }, el("span", { class: "key", "aria-hidden": "true" }, "ABCDEF"[index]), el("span", {}, alt.text)))),
       el("div", { class: "quiz-nav" },
         el("button", {
           class: "btn secondary", type: "button", disabled: current === 0,

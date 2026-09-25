@@ -10,12 +10,13 @@
 </head>
 <body>
   <main id="app">
-    <form class="card form" id="form" novalidate>
+    <form class="card form auth-card" id="form" novalidate>
+      <div class="auth-logo"><img src="assets/logo/logo.png" alt="QUIZ TECH" width="144" height="144"></div>
       <h1>Entrar</h1>
       <div id="msg"></div>
       <div class="field"><label for="email">E-mail</label><input id="email" type="email" autocomplete="email" required></div>
       <div class="field"><label for="password">Senha</label><input id="password" type="password" autocomplete="current-password" required></div>
-      <button class="btn" type="submit" id="submit">Entrar</button>
+      <button class="btn block" type="submit" id="submit">Entrar</button>
       <p class="muted" style="margin-top:16px">Ainda não tem conta? <a href="cadastro.html">Cadastre-se</a></p>
     </form>
   </main>
