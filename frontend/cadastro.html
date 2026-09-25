@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07152f">
+  <title>Cadastro — QUIZ TECH</title>
+  <link rel="icon" type="image/png" href="assets/logo/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main id="app">
+    <form class="card form" id="form" novalidate>
+      <h1>Criar conta</h1>
+      <div id="msg"></div>
+      <div class="field"><label for="name">Nome completo</label><input id="name" type="text" autocomplete="name" minlength="2" maxlength="80" required>
+        <small class="muted">Este nome aparecerá no seu certificado.</small></div>
+      <div class="field"><label for="email">E-mail</label><input id="email" type="email" autocomplete="email" required></div>
+      <div class="field"><label for="password">Senha (mínimo 8 caracteres)</label><input id="password" type="password" autocomplete="new-password" minlength="8" maxlength="72" required></div>
+      <button class="btn" type="submit" id="submit">Cadastrar</button>
+      <p class="muted" style="margin-top:16px">Já tem conta? <a href="login.html">Entrar</a></p>
+    </form>
+  </main>
+  <script type="module" src="js/cadastro.js"></script>
+</body>
+</html>

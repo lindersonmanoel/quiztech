@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07152f">
+  <title>Ranking — QUIZ TECH</title>
+  <link rel="icon" type="image/png" href="assets/logo/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main id="app">
+    <h1>Ranking</h1>
+    <p class="muted">Soma da melhor pontuação de cada pessoa em cada quiz. Refazer um quiz não infla a pontuação.</p>
+    <div class="toolbar"><div class="field" style="margin:0;min-width:260px"><label for="category">Área</label>
+      <select id="category"><option value="">Todas as áreas</option></select></div></div>
+    <div id="msg"></div>
+    <div class="card table-wrap"><table>
+      <thead><tr><th scope="col">#</th><th scope="col">Nome</th><th scope="col">Pontos</th><th scope="col">Quizzes</th></tr></thead>
+      <tbody id="rows"></tbody></table></div>
+  </main>
+  <script type="module" src="js/ranking.js"></script>
+</body>
+</html>
