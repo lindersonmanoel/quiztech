@@ -1,0 +1,8 @@
+backend/tests
+backend/.venv
+.venv
+**/__pycache__
+*.db
+Dockerfile
+railway.json
+.dockerignore

@@ -14,16 +14,28 @@ from .seed import seed_if_empty
 log = logging.getLogger("quiztech")
 
 
-@asynccontextmanager
-async def lifespan(_: FastAPI):
+def bootstrap() -> None:
+    """Cria as tabelas e carrega as áreas que faltam (idempotente)."""
     Base.metadata.create_all(engine)
     if config.SEED_ON_STARTUP:
         with SessionLocal() as db:
             seed_if_empty(db)
+
+
+@asynccontextmanager
+async def lifespan(_: FastAPI):
+    bootstrap()
     yield
 
 
 app = FastAPI(title="QUIZ TECH API", version="1.0.0", lifespan=lifespan)
+
+if config.IS_SERVERLESS:
+    # Funções serverless não garantem o evento de lifespan: prepara o banco na partida a frio.
+    try:
+        bootstrap()
+    except Exception:  # noqa: BLE001 - a API sobe e o erro aparece nos logs da função
+        log.exception("Falha ao preparar o banco de dados na inicialização")
 
 if config.CORS_ORIGINS:  # em produção o frontend é servido pela própria API (mesma origem)
     app.add_middleware(
@@ -34,12 +46,20 @@ if config.CORS_ORIGINS:  # em produção o frontend é servido pela própria API
     )
 
 
+# Mesma política aplicada aos arquivos estáticos pelo vercel.json.
+CSP = (
+    "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; "
+    "connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+)
+
+
 @app.middleware("http")
 async def security_headers(request: Request, call_next):
     response = await call_next(request)
     response.headers.setdefault("X-Content-Type-Options", "nosniff")
     response.headers.setdefault("X-Frame-Options", "DENY")
     response.headers.setdefault("Referrer-Policy", "strict-origin-when-cross-origin")
+    response.headers.setdefault("Content-Security-Policy", CSP)
     return response
 
 

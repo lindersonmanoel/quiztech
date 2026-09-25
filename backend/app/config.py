@@ -5,7 +5,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
+IS_SERVERLESS = bool(os.getenv("VERCEL"))  # o Vercel define esta variável nas funções
+ENVIRONMENT = os.getenv("ENVIRONMENT") or ("production" if IS_SERVERLESS else "development")
 
 SECRET_KEY = os.getenv("SECRET_KEY", "")
 if not SECRET_KEY:
@@ -21,7 +22,12 @@ CORS_ORIGINS = [o.strip() for o in os.getenv("CORS_ORIGINS", "").split(",") if o
 
 
 def _database_url() -> str:
-    url = os.getenv("DATABASE_URL", "sqlite:///./quiztech.db")
+    url = os.getenv("DATABASE_URL", "")
+    if not url:
+        if ENVIRONMENT == "production":
+            # SQLite em disco não persiste no Vercel/Railway: melhor falhar do que perder dados.
+            raise RuntimeError("DATABASE_URL é obrigatória em produção (use um PostgreSQL)")
+        url = "sqlite:///./quiztech.db"
     # O Railway entrega postgres:// ou postgresql://; o SQLAlchemy precisa do driver.
     if url.startswith("postgres://"):
         url = "postgresql://" + url[len("postgres://"):]

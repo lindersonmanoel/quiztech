@@ -1,4 +1,3 @@
-import time
 from datetime import datetime, timedelta, timezone
 
 import bcrypt
@@ -32,33 +31,3 @@ def decode_access_token(token: str) -> int | None:
         return int(payload["sub"])
     except (jwt.PyJWTError, KeyError, ValueError):
         return None
-
-
-class LoginLimiter:
-    """Limita tentativas de login por chave (IP + e-mail) numa janela de tempo."""
-
-    def __init__(self, max_attempts: int = 5, window_seconds: int = 900):
-        self.max_attempts = max_attempts
-        self.window = window_seconds
-        self._failures: dict[str, list[float]] = {}
-
-    def _recent(self, key: str) -> list[float]:
-        cutoff = time.monotonic() - self.window
-        recent = [t for t in self._failures.get(key, []) if t > cutoff]
-        if recent:
-            self._failures[key] = recent
-        else:
-            self._failures.pop(key, None)
-        return recent
-
-    def blocked(self, key: str) -> bool:
-        return len(self._recent(key)) >= self.max_attempts
-
-    def register_failure(self, key: str) -> None:
-        self._failures.setdefault(key, []).append(time.monotonic())
-
-    def reset(self, key: str) -> None:
-        self._failures.pop(key, None)
-
-
-login_limiter = LoginLimiter()

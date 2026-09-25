@@ -114,3 +114,13 @@ class Certificate(Base):
 
     user: Mapped[User] = relationship()
     quiz: Mapped[Quiz] = relationship()
+
+
+class LoginFailure(Base):
+    """Falhas de login recentes (chave = hash de IP + e-mail). Fica no banco para valer entre instâncias serverless."""
+
+    __tablename__ = "login_failures"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    key: Mapped[str] = mapped_column(String(64), index=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now, index=True)

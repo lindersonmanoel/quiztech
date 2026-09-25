@@ -15,7 +15,6 @@ from sqlalchemy.pool import StaticPool
 
 from app.database import Base, get_db
 from app.main import app
-from app.security import login_limiter
 from app.seed import seed_if_empty
 
 
@@ -38,7 +37,6 @@ def client(db_session):
             yield session
 
     app.dependency_overrides[get_db] = _override
-    login_limiter._failures.clear()
     yield TestClient(app)
     app.dependency_overrides.clear()
 
