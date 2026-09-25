@@ -65,6 +65,32 @@ Sem domínio próprio não há como fixar esse endereço: o túnel gratuito da C
 Ele muda sempre que o túnel ou o Docker reinicia (os contêineres voltam sozinhos, mas com um endereço novo). Por isso **não instale
 o app no celular a partir dele**: o aplicativo instalado fica preso ao endereço antigo. Espere o endereço fixo (5b).
 
+### 5c. Endereço fixo e GRATUITO, sem domínio próprio (Tailscale Funnel) — recomendado sem domínio
+Dá um endereço `https://quiztech.<sua-rede>.ts.net` que **não muda** quando o Docker ou a máquina reiniciam. O contêiner
+`quiztech-tailscale` entra na sua conta do Tailscale e publica a API (e o site) na internet, com HTTPS automático.
+
+1. Crie uma conta gratuita em tailscale.com (login com Google/Microsoft/GitHub).
+2. Em **Settings → Keys → Generate auth key**, gere uma chave de autenticação (`tskey-auth-…`). Ela vale só para o primeiro login.
+3. Grave-a sem deixar rastro no histórico: `powershell -File scripts	ailscale-entrar.ps1` e cole a chave no campo oculto
+   (ou preencha `TS_AUTHKEY=` no `.env.production` e rode `docker compose --env-file .env.production -f docker-compose.prod.yml --profile funnel up -d tailscale`).
+4. Na primeira vez o Tailscale mostra no log (`docker logs quiztech-tailscale`) um link para **liberar o Funnel** na sua rede:
+   abra-o e clique em *Enable Funnel*. O HTTPS e o Funnel precisam estar ativos no painel (*DNS → HTTPS Certificates*).
+5. Confira: `docker exec quiztech-tailscale tailscale --socket=/tmp/tailscaled.sock funnel status` deve mostrar
+   `https://quiztech.<sua-rede>.ts.net (Funnel on)`.
+6. **Depois do primeiro login, deixe `TS_AUTHKEY=` vazio** e recrie o contêiner (`… up -d --force-recreate tailscale`): o login fica
+   guardado no volume `tailscale_state` e sobrevive a reinícios.
+7. Deixe `CLIENT_IP_HEADER=` **vazio** no `.env.production` (com o Funnel a API usa o IP resolvido pelo proxy; se ele estivesse
+   preenchido, um visitante poderia forjar o cabeçalho e burlar o limite de tentativas de login) e pare o túnel de demonstração
+   (`docker compose … --profile demo stop demo-tunnel`).
+8. No site (Vercel), o endereço da API já aponta para o Funnel: `frontend/js/config.js` (`API_PRODUCAO`) e `vercel.json`
+   (`connect-src` da CSP). Se o seu for outro, troque nos dois e faça commit.
+
+Observações:
+- O nome demora alguns minutos para aparecer no DNS público logo depois de ligar o Funnel; alguns provedores demoram mais.
+  Se o seu computador não resolver o nome, teste por outro DNS (por exemplo o do celular em dados móveis).
+- O limite gratuito do Tailscale é folgado para este projeto (tráfego de Funnel tem teto de banda, sem custo por requisição).
+- A chave de API (`tskey-api-…`) dá controle total da rede: **nunca a cole em chat nem em arquivo do projeto**; revogue-a depois de usar.
+
 ### 5b. Endereço fixo (Cloudflare Tunnel nomeado)
 1. Painel da Cloudflare → **Zero Trust → Networks → Tunnels → Create a tunnel** (tipo *Cloudflared*), nome `quiztech-api`.
 2. Copie o valor depois de `--token` e cole em `CLOUDFLARE_TUNNEL_TOKEN` no `.env.production`.

@@ -3,6 +3,18 @@
 Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e [versionamento semântico](https://semver.org/lang/pt-BR/).
 A versão em execução aparece no rodapé do site e em `/api/version`.
 
+## [2.2.0] - 2026-09-25
+
+### Adicionado
+- **Endereço público fixo e gratuito, sem domínio próprio, com o Tailscale Funnel** (`https://quiztech.<rede>.ts.net`): contêiner
+  `quiztech-tailscale` no `docker-compose.prod.yml` (perfil `funnel`). O endereço não muda quando o Docker reinicia e o login
+  fica guardado em volume. Scripts `scripts/tailscale-entrar.ps1` (entrada por chave, sem link) e `scripts/endereco-publico.ps1`.
+
+### Alterado
+- O site (Vercel) passa a chamar a API pelo endereço do Funnel; a CSP e o teste de fumaça de produção também.
+- `CLIENT_IP_HEADER` fica vazio por padrão: com o Funnel a API usa o IP resolvido pelo proxy (testado: o limite de login não é
+  burlado por cabeçalhos de IP forjados).
+
 ## [2.1.0] - 2026-09-25
 
 ### Alterado

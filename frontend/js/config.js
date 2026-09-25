@@ -4,14 +4,15 @@
 // Cloudflare Tunnel), entao os enderecos sao diferentes e o navegador faz chamadas CORS.
 //   - Local: a API do backend-node em localhost:3100 (ou a mesma origem, se ela mesma serve o site).
 //   - Demonstracao (tunel trycloudflare): a propria API serve o site, entao e' a mesma origem.
-//   - Producao: o dominio publico da API. TROQUE pelo seu quando o tunel e o DNS estiverem prontos.
+//   - Site no Vercel: a API publicada pelo Tailscale Funnel (endereco fixo e gratuito, sem dominio proprio).
+//   - Aberto direto no endereco do Funnel (.ts.net): a propria API serve o site, entao e' a mesma origem.
 (function () {
-  const API_PRODUCAO = "https://api.quiztech.lumvix.com.br/api";
+  const API_PRODUCAO = "https://quiztech.tailfdf602.ts.net/api";
   const host = location.hostname;
   let base;
   if (host === "localhost" || host === "127.0.0.1") {
     base = location.port === "3100" ? "/api" : "http://localhost:3100/api";
-  } else if (host.endsWith(".trycloudflare.com")) {
+  } else if (host.endsWith(".trycloudflare.com") || host.endsWith(".ts.net")) {
     base = "/api";
   } else {
     base = API_PRODUCAO;

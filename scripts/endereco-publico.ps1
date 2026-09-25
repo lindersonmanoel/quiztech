@@ -4,6 +4,22 @@
 # docker escreve os logs no canal de erro; por isso nao usamos "Stop" aqui.
 $ErrorActionPreference = "Continue"
 
+# 1) Tailscale Funnel (endereco FIXO): se estiver ativo, e' este.
+$socket = "tailscale --socket=/tmp/tailscaled.sock"
+if (docker ps --format "{{.Names}}" | Select-String -SimpleMatch "quiztech-tailscale") {
+  $f = (cmd /c "docker exec quiztech-tailscale $socket funnel status 2>&1") | Out-String
+  if ($f -match 'https://[a-z0-9.-]+\.ts\.net') {
+    $url = $Matches[0]
+    Write-Host ""
+    Write-Host "Endereco publico FIXO do QUIZ TECH (Tailscale Funnel):" -ForegroundColor Cyan
+    Write-Host "  $url" -ForegroundColor Green
+    Set-Clipboard -Value $url
+    Write-Host "  copiado para a area de transferencia. Este endereco nao muda quando o Docker reinicia."
+    exit 0
+  }
+}
+
+# 2) Sem Funnel: tunel de demonstracao da Cloudflare (endereco temporario).
 $container = "quiztech-demo-tunnel"
 if (-not (docker ps --format "{{.Names}}" | Select-String -SimpleMatch $container)) {
   Write-Host "O tunel nao esta rodando. Suba com:" -ForegroundColor Yellow

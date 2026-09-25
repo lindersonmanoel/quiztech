@@ -5,7 +5,7 @@ Plataforma web de quizzes de tecnologia com **certificado de conclusão**, insta
 - **Site:** HTML5, CSS3 e JavaScript (sem framework e sem build), na pasta `frontend/`, publicado no **Vercel**.
 - **API:** Node.js + Express (`backend-node/`), no mesmo molde do backend do Meu Bolso Digital.
 - **Banco:** PostgreSQL. Em produção, o **mesmo servidor** do Meu Bolso Digital, em um banco e usuário próprios.
-- **Publicação:** API em contêiner na VM (Docker) com **Cloudflare Tunnel**, backup diário e CI no GitHub (veja [DEPLOY.md](DEPLOY.md)).
+- **Publicação:** API em contêiner na VM (Docker) com endereço fixo gratuito pelo **Tailscale Funnel** (ou Cloudflare Tunnel, se houver domínio), backup diário e CI no GitHub (veja [DEPLOY.md](DEPLOY.md)).
 
 ## O que já funciona
 - Cadastro, login (JWT) e edição do nome exibido no certificado.

@@ -70,6 +70,41 @@ services:
     networks:
       - banco
 
+  # Endereco PUBLICO FIXO E GRATUITO, sem dominio proprio: Tailscale Funnel (https://quiztech.<sua-rede>.ts.net).
+  # O contêiner entra na sua conta Tailscale (login uma unica vez, pelo link que aparece no log; sem prazo) e publica
+  # a API na internet. O nome nao muda quando o Docker ou a maquina reiniciam. Suba com: --profile funnel
+  # (A imagem "containerboot" do Tailscale desiste do login apos 60 s e reinicia gerando outro link, por isso o
+  # comando abaixo usa o tailscaled direto, esperando o login pelo tempo que for preciso.)
+  tailscale:
+    profiles: ["funnel"]
+    image: tailscale/tailscale:stable
+    container_name: quiztech-tailscale
+    hostname: quiztech
+    restart: unless-stopped
+    environment:
+      # Opcional: chave de autenticacao (Tailscale > Settings > Keys) para nao precisar abrir o link de login.
+      TS_AUTHKEY: ${TS_AUTHKEY:-}
+    volumes:
+      - tailscale_state:/var/lib/tailscale
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        tailscaled --tun=userspace-networking --state=/var/lib/tailscale/tailscaled.state --socket=/tmp/tailscaled.sock &
+        S="tailscale --socket=/tmp/tailscaled.sock"
+        for i in $$(seq 1 30); do [ -S /tmp/tailscaled.sock ] && break; sleep 1; done
+        $$S up --hostname=quiztech --accept-dns=false $${TS_AUTHKEY:+--authkey=$$TS_AUTHKEY} || exit 1
+        $$S funnel --bg --https=443 http://quiztech-api-prod:3100 || exit 1
+        $$S funnel status
+        wait
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - banco
+
+volumes:
+  tailscale_state:
+
 networks:
   # Rede do contêiner do Postgres compartilhado (ajuste REDE_DO_BANCO se a sua tiver outro nome: docker network ls).
   banco:
