@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07152f">
+  <title>Quizzes — QUIZ TECH</title>
+  <link rel="icon" type="image/png" href="assets/logo/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main id="app">
+    <h1>Escolha um quiz</h1>
+    <p class="muted">Cada quiz tem 6 perguntas. Com 70% de acertos ou mais você recebe um certificado.</p>
+    <div class="toolbar">
+      <input id="search" type="search" placeholder="Buscar por tema (ex.: Python, Redes, LGPD)" aria-label="Buscar quizzes">
+    </div>
+    <div class="chips" id="filters" role="group" aria-label="Filtrar por grupo"></div>
+    <div id="list" aria-live="polite"></div>
+  </main>
+  <script type="module" src="js/quizzes.js"></script>
+</body>
+</html>
