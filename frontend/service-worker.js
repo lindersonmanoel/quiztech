@@ -4,15 +4,16 @@
 // Regras de seguranca: NUNCA intercepta a API (login, respostas, certificados) nem qualquer outra origem;
 // so' arquivos estaticos do proprio site sao guardados.
 
-const CACHE = "quiztech-shell-v2";
+const CACHE = "quiztech-shell-v3";
 const ARQUIVOS = [
   "./", "index.html", "login.html", "cadastro.html", "quizzes.html", "quiz.html", "resultado.html", "ranking.html",
   "perfil.html", "certificado.html", "privacidade.html", "offline.html",
   "css/style.css",
   "js/config.js", "js/app.js", "js/pwa.js", "js/home.js", "js/login.js", "js/cadastro.js", "js/quizzes.js", "js/quiz.js",
-  "js/resultado.js", "js/ranking.js", "js/perfil.js", "js/certificado.js", "js/privacidade.js", "js/offline.js",
+  "js/resultado.js", "js/ranking.js", "js/perfil.js", "js/certificado.js", "js/privacidade.js", "js/offline.js", "js/icons.js",
   "assets/logo/logo.png", "assets/logo/favicon.png", "assets/fonts/orbitron-latin.woff2", "assets/bg-pattern.svg",
-  "assets/icons/icon-192.png", "manifest.webmanifest",
+  "assets/icons/icon-192.png", "assets/logo/marca.svg", "assets/icons/code-abre.svg", "assets/icons/code-fecha.svg", "assets/icons/code-tag.svg",
+  "manifest.webmanifest",
 ];
 const ESPERA_REDE_MS = 4000;
 

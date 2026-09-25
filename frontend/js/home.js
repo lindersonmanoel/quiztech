@@ -1,4 +1,4 @@
-import { api, el, renderNav, $ } from "./app.js";
+import { api, el, icone, renderNav, $ } from "./app.js";
 
 renderNav();
 
@@ -14,7 +14,7 @@ renderNav();
       stat("70%", "para certificar"),
     );
     $("#areas").replaceChildren(...categories.map((c) =>
-      el("a", { class: "chip", href: `quizzes.html?category=${c.id}`, style: "text-decoration:none" }, `${c.icon} ${c.name}`)));
+      el("a", { class: "chip", href: `quizzes.html?category=${c.id}`, style: "text-decoration:none" }, icone(c.icon, { tamanho: 16 }), ` ${c.name}`)));
   } catch {
     $("#stats").replaceChildren(el("p", { class: "muted" }, "Não foi possível carregar os dados agora."));
   }

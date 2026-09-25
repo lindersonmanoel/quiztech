@@ -3,6 +3,18 @@
 Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e [versionamento semântico](https://semver.org/lang/pt-BR/).
 A versão em execução aparece no rodapé do site e em `/api/version`.
 
+## [2.1.0] - 2026-09-25
+
+### Alterado
+- **Todos os ícones do site agora são SVG** (nada de emoji): 32 pictogramas, um por área de tecnologia, mais os ícones de
+  interface (instalar, certo/errado, troféu do ranking, menu). Herdam a cor do texto, ficam nítidos em qualquer tela e
+  não dependem das fontes de emoji de cada aparelho. Os passos de instalação do PWA também usam os ícones SVG do menu.
+- Marca do QUIZ TECH em SVG (`assets/logo/marca.svg`) na barra, no rodapé, no favicon e no manifesto do aplicativo; os
+  colchetes decorativos `< />` também são SVG.
+- As áreas guardam no banco o **nome do ícone** (por exemplo `python`, `database`) em vez do emoji; a migração `002`
+  converte as áreas existentes. Categorias criadas pelo administrador que usem um nome desconhecido mostram o ícone padrão.
+- 4 testes novos (77 no total).
+
 ## [2.0.0] - 2026-09-25
 
 Reescrita do backend em **Node.js**, no mesmo padrão do Meu Bolso Digital. As rotas da API continuam as mesmas; o site

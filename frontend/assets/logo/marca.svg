@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="QUIZ TECH">
+  <defs>
+    <linearGradient id="aro" x1="12%" y1="8%" x2="88%" y2="96%">
+      <stop offset="0" stop-color="#01d6fc"/>
+      <stop offset="0.45" stop-color="#0b79e8"/>
+      <stop offset="0.8" stop-color="#0950bd"/>
+      <stop offset="1" stop-color="#042872"/>
+    </linearGradient>
+    <linearGradient id="cauda" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#01bcf8"/>
+      <stop offset="1" stop-color="#0068fc"/>
+    </linearGradient>
+  </defs>
+  <rect width="100" height="100" rx="22" fill="#000"/>
+  <!-- aro do Q -->
+  <circle cx="50" cy="46" r="29" fill="none" stroke="url(#aro)" stroke-width="13"/>
+  <!-- cauda do Q -->
+  <path d="M55 58 L86 90 L67 90 L46 66 Z" fill="url(#cauda)"/>
+  <!-- faixa dos colchetes -->
+  <path d="M15 37 H85 L91 47 L85 57 H15 L9 47 Z" fill="#01183c" stroke="#0950bd" stroke-width="1.2"/>
+  <!-- < e > -->
+  <path d="M32 39.5 L21 47 L32 54.5" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M68 39.5 L79 47 L68 54.5" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -4,6 +4,8 @@
 //  - Navegadores embutidos (Instagram, Facebook, WhatsApp...) nao instalam: o aviso manda abrir no navegador.
 // Os botoes sao os elementos com o atributo [data-install]; ficam ocultos quando o app ja esta instalado.
 
+import { icone } from "./icons.js";
+
 const ANDROID = /Android/i.test(navigator.userAgent);
 
 let pedidoAdiado = null; // evento beforeinstallprompt guardado para disparar no clique
@@ -42,15 +44,15 @@ export function detectarNavegador(ua = navigator.userAgent) {
 }
 
 const PASSOS = {
-  chrome: ["Toque no menu ⋮ (canto superior direito).", "Toque em “Instalar app” (ou “Adicionar à tela inicial”).", "Confirme em “Instalar”."],
-  edge: ["Toque no menu ⋯ (parte inferior da tela).", "Toque em “Adicionar ao telefone” (ou “Instalar”).", "Confirme a instalação."],
-  firefox: ["Toque no menu ⋮ (canto superior direito).", "Toque em “Instalar” (ou “Adicionar à tela inicial”).", "Confirme em “Adicionar”."],
-  samsung: ["Toque no menu ☰ (parte inferior da tela).", "Toque em “Adicionar página a” e escolha “Tela inicial”.", "Confirme em “Adicionar”."],
-  opera: ["Toque no menu ⋮ (ou no ícone do Opera).", "Toque em “Adicionar à tela inicial” (ou “Instalar”).", "Confirme a instalação."],
-  duckduckgo: ["Toque no menu ⋮.", "Toque em “Adicionar à tela inicial”.", "Confirme em “Adicionar”."],
+  chrome: ["Toque no menu {kebab} (canto superior direito).", "Toque em “Instalar app” (ou “Adicionar à tela inicial”).", "Confirme em “Instalar”."],
+  edge: ["Toque no menu {kebab-h} (parte inferior da tela).", "Toque em “Adicionar ao telefone” (ou “Instalar”).", "Confirme a instalação."],
+  firefox: ["Toque no menu {kebab} (canto superior direito).", "Toque em “Instalar” (ou “Adicionar à tela inicial”).", "Confirme em “Adicionar”."],
+  samsung: ["Toque no menu {menu} (parte inferior da tela).", "Toque em “Adicionar página a” e escolha “Tela inicial”.", "Confirme em “Adicionar”."],
+  opera: ["Toque no menu {kebab} (ou no ícone do Opera).", "Toque em “Adicionar à tela inicial” (ou “Instalar”).", "Confirme a instalação."],
+  duckduckgo: ["Toque no menu {kebab}.", "Toque em “Adicionar à tela inicial”.", "Confirme em “Adicionar”."],
   vivaldi: ["Toque no menu do Vivaldi (ícone V).", "Toque em “Adicionar à tela inicial”.", "Confirme em “Adicionar”."],
-  outro: ["Abra o menu do seu navegador (⋮ ou ☰).", "Procure “Instalar app” ou “Adicionar à tela inicial”.", "Confirme."],
-  embutido: ["Você está dentro de outro aplicativo (Instagram, Facebook, WhatsApp...), que não permite instalar.", "Toque no menu ⋮ e escolha “Abrir no navegador” (ou copie o endereço).", "Abra no Chrome (ou no seu navegador) e toque em “Instalar app”."],
+  outro: ["Abra o menu do seu navegador ({kebab} ou {menu}).", "Procure “Instalar app” ou “Adicionar à tela inicial”.", "Confirme."],
+  embutido: ["Você está dentro de outro aplicativo (Instagram, Facebook, WhatsApp...), que não permite instalar.", "Toque no menu {kebab} e escolha “Abrir no navegador” (ou copie o endereço).", "Abra no Chrome (ou no seu navegador) e toque em “Instalar app”."],
 };
 
 const NOMES = {
@@ -69,6 +71,16 @@ function el(tag, attrs = {}, ...filhos) {
   return no;
 }
 
+/** Troca marcadores como {kebab} pelo icone SVG correspondente dentro do texto. */
+function comIcones(texto) {
+  const fragmento = document.createDocumentFragment();
+  for (const parte of texto.split(/(\{[a-z-]+\})/)) {
+    const marcador = parte.match(/^\{([a-z-]+)\}$/);
+    fragmento.append(marcador ? icone(marcador[1], { tamanho: 16, classe: "no-texto" }) : parte);
+  }
+  return fragmento;
+}
+
 function avisar(texto) {
   const aviso = el("div", { class: "toast", role: "status" }, texto);
   document.body.append(aviso);
@@ -81,7 +93,7 @@ function abrirInstrucoes() {
   const dialogo = el("dialog", { class: "install-dialog", "aria-labelledby": "install-titulo" },
     el("h2", { id: "install-titulo" }, "Instalar o QUIZ TECH"),
     el("p", { class: "muted" }, navegador === "embutido" ? "Este navegador não instala aplicativos." : `Instalação pelo ${NOMES[navegador]}:`),
-    el("ol", {}, ...passos.map((p) => el("li", {}, p))),
+    el("ol", {}, ...passos.map((p) => el("li", {}, comIcones(p)))),
     el("p", { class: "muted" }, "O ícone aparece na tela inicial e o site abre como um aplicativo, em tela cheia."),
     el("button", { class: "btn block", type: "button", onclick: () => dialogo.close() }, "Entendi"));
   dialogo.addEventListener("close", () => dialogo.remove());

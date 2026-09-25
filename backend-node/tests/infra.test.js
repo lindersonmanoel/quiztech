@@ -6,7 +6,13 @@ const pool = require("../src/database/pool");
 const { version } = require("../package.json");
 const { run: migrar } = require("../src/database/migrate");
 const { semearAreas } = require("../src/database/seed");
+const fs = require("fs");
+const path = require("path");
 const { prepararBanco } = require("./helpers");
+
+const RAIZ = path.join(__dirname, "..", "..");
+// Nomes dos icones SVG que o site sabe desenhar (frontend/js/icons.js).
+const ICONES_DO_SITE = new Set([...fs.readFileSync(path.join(RAIZ, "frontend", "js", "icons.js"), "utf8").matchAll(/^\s+"([a-z0-9-]+)":\s*[\[A-Z]/gm)].map((m) => m[1]));
 
 const app = createApp();
 
@@ -59,7 +65,7 @@ describe("banco de dados", () => {
     try {
       await client.query("BEGIN");
       const criadas = await semearAreas(client, [
-        { grupo: "Testes", nome: "Só Esta Área", slug: "teste-seed-parcial", icone: "🧪", descricao: "x",
+        { grupo: "Testes", nome: "Só Esta Área", slug: "teste-seed-parcial", icone: "code", descricao: "x",
           quiz: { titulo: "Quiz", descricao: "x", dificuldade: "facil", limite_tempo: 0 },
           perguntas: [{ texto: "Pergunta?", pontos: 10, correta: "sim", erradas: ["não", "talvez", "nunca"] }] },
       ]);
@@ -81,5 +87,37 @@ describe("banco de dados", () => {
     await expect(pool.query("INSERT INTO usuarios (nome, email, senha_hash) VALUES ('B', 'caixa@exemplo.com', 'x')"))
       .rejects.toMatchObject({ code: "23505" });
     await pool.query("DELETE FROM usuarios WHERE lower(email) = 'caixa@exemplo.com'");
+  });
+});
+
+
+describe("icones SVG das areas", () => {
+  test("o site conhece pelo menos as 32 areas + os icones de interface", () => {
+    expect(ICONES_DO_SITE.size).toBeGreaterThanOrEqual(38);
+    expect(ICONES_DO_SITE.has("code")).toBe(true); // icone padrao
+  });
+
+  test("toda area do seed usa um icone SVG que existe (nada de emoji)", () => {
+    const areas = JSON.parse(fs.readFileSync(path.join(RAIZ, "database", "seed", "areas.json"), "utf8"));
+    const invalidos = areas.filter((a) => !ICONES_DO_SITE.has(a.icone)).map((a) => `${a.slug}: ${a.icone}`);
+    expect(invalidos).toEqual([]);
+    expect(new Set(areas.map((a) => a.icone)).size).toBe(areas.length); // um icone diferente por area
+  });
+
+  test("o banco so' guarda nomes de icones validos", async () => {
+    const { rows } = await pool.query("SELECT slug, icone FROM categorias WHERE slug NOT LIKE 'teste-%'");
+    expect(rows.filter((r) => !ICONES_DO_SITE.has(r.icone))).toEqual([]);
+  });
+
+  test("a migracao 002 troca o emoji antigo pelo nome do icone e nao mexe em categorias novas", async () => {
+    await pool.query("UPDATE categorias SET icone = '🐍' WHERE slug = 'python'");
+    await pool.query("INSERT INTO categorias (nome, slug, grupo, icone) VALUES ('Categoria Nova', 'teste-icone-novo', 'Testes', '🧪')");
+    try {
+      await pool.query(fs.readFileSync(path.join(RAIZ, "database", "migrations", "002_icones_svg.sql"), "utf8"));
+      expect((await pool.query("SELECT icone FROM categorias WHERE slug = 'python'")).rows[0].icone).toBe("python");
+      expect((await pool.query("SELECT icone FROM categorias WHERE slug = 'teste-icone-novo'")).rows[0].icone).toBe("🧪");
+    } finally {
+      await pool.query("DELETE FROM categorias WHERE slug = 'teste-icone-novo'");
+    }
   });
 });

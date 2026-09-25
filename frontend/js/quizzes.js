@@ -1,4 +1,4 @@
-import { api, DIFFICULTY, el, params, renderNav, $ } from "./app.js";
+import { api, DIFFICULTY, el, icone, params, renderNav, $ } from "./app.js";
 
 renderNav();
 
@@ -31,7 +31,7 @@ function render() {
     el("div", { class: "grid" }, items.map((q) => {
       const cat = cats.get(q.category_id);
       return el("article", { class: "card quiz-card" },
-        el("div", { class: "icon", "aria-hidden": "true" }, cat.icon),
+        el("div", { class: "icon", "aria-hidden": "true" }, icone(cat.icon, { tamanho: 28 })),
         el("h3", {}, cat.name),
         el("p", { class: "muted" }, cat.description),
         el("div", { class: "meta" },

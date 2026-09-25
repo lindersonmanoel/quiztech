@@ -29,6 +29,7 @@ describe("catalogo", () => {
     const python = cats.find((c) => c.slug === "python");
     const porCat = (await request(app).get("/api/quizzes").query({ category_id: python.id })).body;
     expect(porCat).toHaveLength(1);
+    expect(python.icon).toBe("python");
     expect(porCat[0]).toMatchObject({ title: "Quiz de Python", question_count: 6, total_points: 120, difficulty: "media", time_limit: 300 });
     expect((await request(app).get("/api/quizzes").query({ q: "redes" })).body).toHaveLength(1);
     const injecao = await request(app).get("/api/quizzes").query({ q: "'; DROP TABLE usuarios; --" });

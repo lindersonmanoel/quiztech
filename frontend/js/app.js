@@ -2,6 +2,9 @@
 // Todo conteúdo dinâmico entra via textContent (nunca innerHTML) para evitar XSS.
 
 import { initPwa } from "./pwa.js";
+import { icone, montarIcones } from "./icons.js";
+
+export { icone };
 
 const TOKEN_KEY = "quiztech_token";
 const USER_KEY = "quiztech_user";
@@ -167,7 +170,7 @@ export function renderNav() {
   const link = (href, label) => el("a", { href, "aria-current": page === href ? "page" : false }, label);
   const links = [link("quizzes.html", "Quizzes"), link("ranking.html", "Ranking")];
   // Botao de instalar o app (PWA): so' aparece no Android e enquanto o app nao esta instalado (veja pwa.js).
-  links.push(el("button", { type: "button", class: "btn small install-btn", "data-install": "", hidden: true, "aria-label": "Instalar o aplicativo QUIZ TECH" }, "📲 Instalar app"));
+  links.push(el("button", { type: "button", class: "btn small install-btn", "data-install": "", hidden: true, "aria-label": "Instalar o aplicativo QUIZ TECH" }, icone("download", { tamanho: 16 }), " Instalar app"));
   if (user) {
     links.push(link("perfil.html", "Meu perfil"));
     links.push(el("button", { type: "button", onclick: () => { clearSession(); location.href = "index.html"; } }, "Sair"));
@@ -177,11 +180,12 @@ export function renderNav() {
   const nav = el("header", { class: "nav" },
     el("div", { class: "nav-inner" },
       el("a", { class: "brand", href: "index.html" },
-        el("img", { src: "assets/logo/favicon.png", alt: "" }),
+        el("img", { src: "assets/logo/marca.svg", alt: "", width: 40, height: 40 }),
         el("span", {}, "QUIZ ", el("b", {}, "TECH"))),
       el("nav", { class: "nav-links", "aria-label": "Principal" }, links)));
   document.body.prepend(nav);
-  document.body.append(el("footer", {}, el("img", { src: "assets/logo/favicon.png", alt: "" }), "QUIZ TECH · Aprenda, teste e certifique seus conhecimentos em tecnologia", el("a", { href: "privacidade.html" }, "Política de Privacidade"), el("span", { id: "app-version", class: "app-version" })));
+  document.body.append(el("footer", {}, el("img", { src: "assets/logo/marca.svg", alt: "", width: 26, height: 26 }), "QUIZ TECH · Aprenda, teste e certifique seus conhecimentos em tecnologia", el("a", { href: "privacidade.html" }, "Política de Privacidade"), el("span", { id: "app-version", class: "app-version" })));
   initVersion();
+  montarIcones();
   initPwa();
 }

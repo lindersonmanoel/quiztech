@@ -1,4 +1,4 @@
-import { api, el, fmtTime, params, renderNav, requireLogin, showMessage, $ } from "./app.js";
+import { api, el, fmtTime, icone, params, renderNav, requireLogin, showMessage, $ } from "./app.js";
 
 renderNav();
 
@@ -32,8 +32,9 @@ function render(r) {
     el("div", { class: "review" }, r.review.map((item, index) =>
       el("div", { class: `card review-item${item.is_correct ? " right" : ""}` },
         el("strong", {}, `${index + 1}. ${item.question}`),
-        el("p", { class: "answer" }, item.is_correct ? "✅ Você acertou: " : "❌ Sua resposta: ",
-          item.chosen_text ?? "(sem resposta)"),
+        el("p", { class: "answer" },
+          item.is_correct ? icone("check-circle", { tamanho: 18, classe: "certo" }) : icone("x-circle", { tamanho: 18, classe: "errado" }),
+          item.is_correct ? " Você acertou: " : " Sua resposta: ", item.chosen_text ?? "(sem resposta)"),
         item.is_correct
           ? null
           : item.correct_text

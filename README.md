@@ -18,6 +18,7 @@ Plataforma web de quizzes de tecnologia com **certificado de conclusão**, insta
 - **PWA:** botão **"Instalar app"** para todos os navegadores Android (instalação nativa no Chrome, Edge, Samsung Internet,
   Opera, Brave...; passo a passo no Firefox e afins) e abertura offline da "casca" do app.
 - API administrativa (categorias, quizzes, perguntas), versão e commit no rodapé e aviso de "Nova versão disponível".
+- **Ícones 100% SVG**: um pictograma por área, ícones de interface e a marca do QUIZ TECH, todos vetoriais e na cor do texto (`frontend/js/icons.js`).
 
 ## Estrutura
 ```
@@ -32,7 +33,7 @@ quiz-tech/
 ├── database/
 │   ├── migrations/          # 001_init.sql ... (aplicadas em ordem, registradas em _migrations)
 │   └── seed/areas.json      # as 32 áreas, quizzes e perguntas
-├── frontend/                # site + PWA (manifest, service worker, ícones)
+├── frontend/                # site + PWA (manifest, service worker, ícones SVG em js/icons.js e assets/)
 ├── scripts/                 # backup diário, criação do banco compartilhado, fumaça de produção, busca de segredos
 ├── .github/workflows/       # testes, segurança semanal, fumaça diária, aviso de deploy no Slack
 ├── Dockerfile  docker-compose.prod.yml  docker-compose.local.yml

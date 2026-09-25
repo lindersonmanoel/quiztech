@@ -46,7 +46,7 @@ describe("categorias, quizzes e perguntas", () => {
   test("cria categoria, quiz e pergunta; o quiz novo aparece para os jogadores sem gabarito", async () => {
     const adm = await admin();
     const cat = await request(app).post("/api/admin/categories").set(adm.headers)
-      .send({ name: "Teste Área", slug: "teste-area", group: "Testes", icon: "🧪", description: "Só para teste" });
+      .send({ name: "Teste Área", slug: "teste-area", group: "Testes", icon: "code", description: "Só para teste" });
     expect(cat.status).toBe(201);
     const quiz = await request(app).post("/api/admin/quizzes").set(adm.headers)
       .send({ title: "Quiz de teste", category_id: cat.body.id, difficulty: "facil", time_limit: 60 });

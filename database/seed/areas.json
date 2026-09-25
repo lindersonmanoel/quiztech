@@ -3,7 +3,7 @@
     "grupo": "Desenvolvimento",
     "nome": "Lógica de Programação",
     "slug": "logica-de-programacao",
-    "icone": "🧩",
+    "icone": "flow",
     "descricao": "Algoritmos, variáveis, condições, laços e raciocínio lógico.",
     "quiz": {
       "titulo": "Quiz de Lógica de Programação",
@@ -78,7 +78,7 @@
     "grupo": "Desenvolvimento",
     "nome": "Python",
     "slug": "python",
-    "icone": "🐍",
+    "icone": "python",
     "descricao": "Sintaxe, estruturas de dados e recursos da linguagem Python.",
     "quiz": {
       "titulo": "Quiz de Python",
@@ -153,7 +153,7 @@
     "grupo": "Desenvolvimento",
     "nome": "JavaScript",
     "slug": "javascript",
-    "icone": "🟨",
+    "icone": "braces",
     "descricao": "A linguagem da web: variáveis, funções, assincronismo e DOM.",
     "quiz": {
       "titulo": "Quiz de JavaScript",
@@ -228,7 +228,7 @@
     "grupo": "Desenvolvimento",
     "nome": "Java",
     "slug": "java",
-    "icone": "☕",
+    "icone": "cup",
     "descricao": "Orientação a objetos, JVM e o ecossistema Java.",
     "quiz": {
       "titulo": "Quiz de Java",
@@ -303,7 +303,7 @@
     "grupo": "Desenvolvimento",
     "nome": "C e C++",
     "slug": "c-e-cpp",
-    "icone": "⚙️",
+    "icone": "pointer",
     "descricao": "Programação de baixo nível, ponteiros e gerenciamento de memória.",
     "quiz": {
       "titulo": "Quiz de C e C++",
@@ -378,7 +378,7 @@
     "grupo": "Desenvolvimento",
     "nome": "C# e .NET",
     "slug": "csharp-dotnet",
-    "icone": "🔷",
+    "icone": "hex-hash",
     "descricao": "A linguagem C# e a plataforma .NET da Microsoft.",
     "quiz": {
       "titulo": "Quiz de C# e .NET",
@@ -453,7 +453,7 @@
     "grupo": "Desenvolvimento",
     "nome": "HTML e CSS",
     "slug": "html-e-css",
-    "icone": "🎨",
+    "icone": "browser",
     "descricao": "Estrutura e estilo de páginas web, layout e responsividade.",
     "quiz": {
       "titulo": "Quiz de HTML e CSS",
@@ -528,7 +528,7 @@
     "grupo": "Desenvolvimento",
     "nome": "Back-end e APIs",
     "slug": "backend-e-apis",
-    "icone": "🔌",
+    "icone": "server",
     "descricao": "APIs REST, HTTP, autenticação e arquitetura de servidores.",
     "quiz": {
       "titulo": "Quiz de Back-end e APIs",
@@ -603,7 +603,7 @@
     "grupo": "Desenvolvimento",
     "nome": "Desenvolvimento Mobile",
     "slug": "desenvolvimento-mobile",
-    "icone": "📱",
+    "icone": "phone",
     "descricao": "Apps para Android e iOS, frameworks multiplataforma e PWAs.",
     "quiz": {
       "titulo": "Quiz de Desenvolvimento Mobile",
@@ -678,7 +678,7 @@
     "grupo": "Desenvolvimento",
     "nome": "Git e GitHub",
     "slug": "git-e-github",
-    "icone": "🌿",
+    "icone": "branch",
     "descricao": "Versionamento de código, branches e colaboração.",
     "quiz": {
       "titulo": "Quiz de Git e GitHub",
@@ -753,7 +753,7 @@
     "grupo": "Desenvolvimento",
     "nome": "Estruturas de Dados e Algoritmos",
     "slug": "estruturas-de-dados",
-    "icone": "🌳",
+    "icone": "tree",
     "descricao": "Pilhas, filas, árvores, grafos, ordenação e complexidade.",
     "quiz": {
       "titulo": "Quiz de Estruturas de Dados e Algoritmos",
@@ -828,7 +828,7 @@
     "grupo": "Desenvolvimento",
     "nome": "Engenharia de Software e Testes",
     "slug": "engenharia-de-software",
-    "icone": "🛠️",
+    "icone": "checklist",
     "descricao": "Boas práticas, testes, modelagem e qualidade de software.",
     "quiz": {
       "titulo": "Quiz de Engenharia de Software e Testes",
@@ -903,7 +903,7 @@
     "grupo": "Desenvolvimento",
     "nome": "Desenvolvimento de Jogos",
     "slug": "desenvolvimento-de-jogos",
-    "icone": "🎮",
+    "icone": "gamepad",
     "descricao": "Motores gráficos, game loop, física e gráficos em tempo real.",
     "quiz": {
       "titulo": "Quiz de Desenvolvimento de Jogos",
@@ -978,7 +978,7 @@
     "grupo": "Dados e IA",
     "nome": "Banco de Dados e SQL",
     "slug": "banco-de-dados-e-sql",
-    "icone": "🗄️",
+    "icone": "database",
     "descricao": "Modelagem relacional, consultas SQL, transações e NoSQL.",
     "quiz": {
       "titulo": "Quiz de Banco de Dados e SQL",
@@ -1053,7 +1053,7 @@
     "grupo": "Dados e IA",
     "nome": "Ciência de Dados e Analytics",
     "slug": "ciencia-de-dados",
-    "icone": "📊",
+    "icone": "chart",
     "descricao": "Análise, estatística básica, ETL e visualização de dados.",
     "quiz": {
       "titulo": "Quiz de Ciência de Dados e Analytics",
@@ -1128,7 +1128,7 @@
     "grupo": "Dados e IA",
     "nome": "Inteligência Artificial",
     "slug": "inteligencia-artificial",
-    "icone": "🤖",
+    "icone": "robot",
     "descricao": "Conceitos de IA, assistentes, linguagem natural e modelos de linguagem.",
     "quiz": {
       "titulo": "Quiz de Inteligência Artificial",
@@ -1203,7 +1203,7 @@
     "grupo": "Dados e IA",
     "nome": "Machine Learning",
     "slug": "machine-learning",
-    "icone": "🧠",
+    "icone": "neural",
     "descricao": "Aprendizado supervisionado e não supervisionado, treino e avaliação de modelos.",
     "quiz": {
       "titulo": "Quiz de Machine Learning",
@@ -1278,7 +1278,7 @@
     "grupo": "Infraestrutura",
     "nome": "Redes de Computadores",
     "slug": "redes-de-computadores",
-    "icone": "🌐",
+    "icone": "globe",
     "descricao": "Protocolos, endereçamento IP, DNS, modelo OSI e TCP/IP.",
     "quiz": {
       "titulo": "Quiz de Redes de Computadores",
@@ -1353,7 +1353,7 @@
     "grupo": "Infraestrutura",
     "nome": "Sistemas Operacionais e Linux",
     "slug": "sistemas-operacionais-linux",
-    "icone": "🐧",
+    "icone": "terminal",
     "descricao": "Processos, memória, permissões e linha de comando.",
     "quiz": {
       "titulo": "Quiz de Sistemas Operacionais e Linux",
@@ -1428,7 +1428,7 @@
     "grupo": "Infraestrutura",
     "nome": "Cloud Computing",
     "slug": "cloud-computing",
-    "icone": "☁️",
+    "icone": "cloud",
     "descricao": "Computação em nuvem, modelos de serviço, serverless e CDN.",
     "quiz": {
       "titulo": "Quiz de Cloud Computing",
@@ -1503,7 +1503,7 @@
     "grupo": "Infraestrutura",
     "nome": "DevOps e Containers",
     "slug": "devops-e-containers",
-    "icone": "🚢",
+    "icone": "container",
     "descricao": "Docker, Kubernetes, CI/CD e infraestrutura como código.",
     "quiz": {
       "titulo": "Quiz de DevOps e Containers",
@@ -1578,7 +1578,7 @@
     "grupo": "Infraestrutura",
     "nome": "Hardware e Arquitetura de Computadores",
     "slug": "hardware-e-arquitetura",
-    "icone": "🖥️",
+    "icone": "chip",
     "descricao": "Processador, memórias, periféricos e representação de dados.",
     "quiz": {
       "titulo": "Quiz de Hardware e Arquitetura de Computadores",
@@ -1653,7 +1653,7 @@
     "grupo": "Infraestrutura",
     "nome": "IoT e Eletrônica",
     "slug": "iot-e-eletronica",
-    "icone": "📡",
+    "icone": "wifi",
     "descricao": "Internet das Coisas, sensores, microcontroladores e protocolos.",
     "quiz": {
       "titulo": "Quiz de IoT e Eletrônica",
@@ -1728,7 +1728,7 @@
     "grupo": "Segurança e Criptografia",
     "nome": "Segurança da Informação",
     "slug": "seguranca-da-informacao",
-    "icone": "🛡️",
+    "icone": "shield",
     "descricao": "Ameaças, boas práticas, autenticação e proteção de sistemas.",
     "quiz": {
       "titulo": "Quiz de Segurança da Informação",
@@ -1803,7 +1803,7 @@
     "grupo": "Segurança e Criptografia",
     "nome": "Criptografia e Blockchain",
     "slug": "criptografia-e-blockchain",
-    "icone": "🔐",
+    "icone": "lock",
     "descricao": "Chaves, hashes, assinaturas digitais, blockchain e contratos inteligentes.",
     "quiz": {
       "titulo": "Quiz de Criptografia e Blockchain",
@@ -1878,7 +1878,7 @@
     "grupo": "Design e Produto",
     "nome": "UX/UI Design",
     "slug": "ux-ui-design",
-    "icone": "✏️",
+    "icone": "layout",
     "descricao": "Experiência do usuário, interfaces, prototipagem e acessibilidade.",
     "quiz": {
       "titulo": "Quiz de UX/UI Design",
@@ -1953,7 +1953,7 @@
     "grupo": "Gestão e Negócios",
     "nome": "Gestão de Projetos e Métodos Ágeis",
     "slug": "gestao-de-projetos-ageis",
-    "icone": "📋",
+    "icone": "kanban",
     "descricao": "Scrum, Kanban, backlog, sprints e entrega de valor.",
     "quiz": {
       "titulo": "Quiz de Gestão de Projetos e Métodos Ágeis",
@@ -2028,7 +2028,7 @@
     "grupo": "Gestão e Negócios",
     "nome": "Governança de TI, ITIL e LGPD",
     "slug": "governanca-ti-lgpd",
-    "icone": "⚖️",
+    "icone": "scale",
     "descricao": "Boas práticas de governança, gestão de serviços e proteção de dados pessoais.",
     "quiz": {
       "titulo": "Quiz de Governança de TI, ITIL e LGPD",
@@ -2103,7 +2103,7 @@
     "grupo": "Gestão e Negócios",
     "nome": "Empreendedorismo e Startups",
     "slug": "empreendedorismo-e-startups",
-    "icone": "🚀",
+    "icone": "rocket",
     "descricao": "Modelos de negócio, validação de ideias e startups de tecnologia.",
     "quiz": {
       "titulo": "Quiz de Empreendedorismo e Startups",
@@ -2178,7 +2178,7 @@
     "grupo": "Fundamentos e Suporte",
     "nome": "Suporte Técnico e Informática Básica",
     "slug": "suporte-e-informatica-basica",
-    "icone": "💻",
+    "icone": "monitor",
     "descricao": "Uso do computador, Office, diagnóstico de problemas e backup.",
     "quiz": {
       "titulo": "Quiz de Suporte Técnico e Informática Básica",
@@ -2253,7 +2253,7 @@
     "grupo": "Fundamentos e Suporte",
     "nome": "Matemática para Computação",
     "slug": "matematica-para-computacao",
-    "icone": "➗",
+    "icone": "math",
     "descricao": "Bases numéricas, lógica booleana, potências, logaritmos e combinatória.",
     "quiz": {
       "titulo": "Quiz de Matemática para Computação",
@@ -2328,7 +2328,7 @@
     "grupo": "Fundamentos e Suporte",
     "nome": "Tecnologias Emergentes",
     "slug": "tecnologias-emergentes",
-    "icone": "🔭",
+    "icone": "atom",
     "descricao": "5G, realidade aumentada, computação quântica, impressão 3D e edge computing.",
     "quiz": {
       "titulo": "Quiz de Tecnologias Emergentes",
