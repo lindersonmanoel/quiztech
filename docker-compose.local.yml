@@ -1,0 +1,49 @@
+# Ambiente COMPLETO e independente (nao usa o Postgres do Meu Bolso): PostgreSQL proprio + API + site na mesma porta.
+# Serve para desenvolver, testar e demonstrar no seu computador.
+# Uso:  cp .env.local.example .env.local  (preencha) e depois
+#       docker compose --env-file .env.local -f docker-compose.local.yml up -d --build
+# Abra http://localhost:3100 .
+name: quiztech-local
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: quiztech-db-local
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: quiztech
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?defina POSTGRES_PASSWORD no .env.local}
+      POSTGRES_DB: quiztech
+    volumes:
+      - quiztech_pgdata_local:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U quiztech -d quiztech"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        GIT_COMMIT: ${GIT_COMMIT:-dev}
+    container_name: quiztech-api-local
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: "3100"
+      DATABASE_URL: postgresql://quiztech:${POSTGRES_PASSWORD}@postgres:5432/quiztech
+      DATABASE_SSL: "false"
+      JWT_SECRET: ${JWT_SECRET:?defina JWT_SECRET no .env.local}
+      FRONTEND_URL: http://localhost:3100
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-}
+      SERVE_FRONTEND: "1"
+    ports:
+      - "127.0.0.1:3100:3100"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  quiztech_pgdata_local:

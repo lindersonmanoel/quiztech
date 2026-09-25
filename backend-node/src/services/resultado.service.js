@@ -1,0 +1,40 @@
+"use strict";
+
+const resultadoModel = require("../models/resultado.model");
+const certificadoModel = require("../models/certificado.model");
+const { AppError } = require("../utils/errors");
+const { nomePublico } = require("../utils/publico");
+const { apresentarResumoResultado, apresentarResultadoCompleto, apresentarCertificado } = require("./apresentacao");
+
+async function listar(usuarioId) {
+  return (await resultadoModel.listarDoUsuario(usuarioId)).map(apresentarResumoResultado);
+}
+
+async function detalhe(id, usuarioId) {
+  const r = await resultadoModel.buscarDoUsuario(id, usuarioId);
+  if (!r) throw new AppError("Resultado não encontrado.", 404);
+  return apresentarResultadoCompleto(r, await certificadoModel.buscarPorResultado(r.id));
+}
+
+async function ranking({ categoriaId, quizId, limite }) {
+  const rows = await resultadoModel.ranking({ categoriaId, quizId, limite });
+  return rows.map((r, i) => ({
+    position: i + 1,
+    user_name: nomePublico(r.nome),
+    total_score: r.total,
+    quizzes_completed: r.quizzes,
+  }));
+}
+
+async function certificadosDoUsuario(usuarioId) {
+  return (await certificadoModel.listarDoUsuario(usuarioId)).map(apresentarCertificado);
+}
+
+/** Consulta publica por codigo (autenticidade). Nao expoe o e-mail. */
+async function verificarCertificado(codigo) {
+  const c = await certificadoModel.buscarPorCodigo(String(codigo).trim().toUpperCase());
+  if (!c) throw new AppError("Certificado não encontrado.", 404);
+  return apresentarCertificado(c);
+}
+
+module.exports = { listar, detalhe, ranking, certificadosDoUsuario, verificarCertificado };

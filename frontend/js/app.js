@@ -1,6 +1,8 @@
 // Utilitários compartilhados: API, sessão, navegação e helpers de DOM.
 // Todo conteúdo dinâmico entra via textContent (nunca innerHTML) para evitar XSS.
 
+import { initPwa } from "./pwa.js";
+
 const TOKEN_KEY = "quiztech_token";
 const USER_KEY = "quiztech_user";
 
@@ -27,12 +29,16 @@ export class ApiError extends Error {
   constructor(status, message) { super(message); this.status = status; }
 }
 
+// A API responde { erro, campos? }: "erro" e' a mensagem geral e "campos" traz o motivo de cada campo invalido.
 function errorMessage(data, status) {
-  const detail = data && data.detail;
-  if (typeof detail === "string") return detail;
-  if (Array.isArray(detail) && detail.length) return detail.map((d) => d.msg).join("; ");
+  if (data && typeof data.erro === "string") {
+    const campos = data.campos && typeof data.campos === "object" ? Object.values(data.campos).filter((c) => typeof c === "string") : [];
+    return campos.length ? campos.join(" ") : data.erro;
+  }
   return `Erro ${status}`;
 }
+
+const apiBase = () => window.API_BASE_URL || "/api";
 
 export async function api(path, { method = "GET", body } = {}) {
   const headers = {};
@@ -41,7 +47,7 @@ export async function api(path, { method = "GET", body } = {}) {
   if (body !== undefined) headers["Content-Type"] = "application/json";
   let res;
   try {
-    res = await fetch(`/api${path}`, { method, headers, body: body === undefined ? undefined : JSON.stringify(body) });
+    res = await fetch(`${apiBase()}${path}`, { method, headers, body: body === undefined ? undefined : JSON.stringify(body) });
   } catch {
     throw new ApiError(0, "Sem conexão com o servidor. Tente novamente.");
   }
@@ -117,7 +123,7 @@ const buildId = (build) => `${build.version}+${build.commit}`;
 
 async function fetchBuild() {
   try {
-    const res = await fetch("/api/version", { cache: "no-store" });
+    const res = await fetch(`${apiBase()}/version`, { cache: "no-store" });
     return res.ok ? await res.json() : null;
   } catch {
     return null;
@@ -160,6 +166,8 @@ export function renderNav() {
   const user = getUser();
   const link = (href, label) => el("a", { href, "aria-current": page === href ? "page" : false }, label);
   const links = [link("quizzes.html", "Quizzes"), link("ranking.html", "Ranking")];
+  // Botao de instalar o app (PWA): so' aparece no Android e enquanto o app nao esta instalado (veja pwa.js).
+  links.push(el("button", { type: "button", class: "btn small install-btn", "data-install": "", hidden: true, "aria-label": "Instalar o aplicativo QUIZ TECH" }, "📲 Instalar app"));
   if (user) {
     links.push(link("perfil.html", "Meu perfil"));
     links.push(el("button", { type: "button", onclick: () => { clearSession(); location.href = "index.html"; } }, "Sair"));
@@ -175,4 +183,5 @@ export function renderNav() {
   document.body.prepend(nav);
   document.body.append(el("footer", {}, el("img", { src: "assets/logo/favicon.png", alt: "" }), "QUIZ TECH · Aprenda, teste e certifique seus conhecimentos em tecnologia", el("a", { href: "privacidade.html" }, "Política de Privacidade"), el("span", { id: "app-version", class: "app-version" })));
   initVersion();
+  initPwa();
 }

@@ -1,220 +1,86 @@
 # QUIZ TECH
 
-Plataforma web de quizzes de tecnologia com **certificado de conclusão**.
+Plataforma web de quizzes de tecnologia com **certificado de conclusão**, instalável como aplicativo (PWA).
 
-- **Frontend:** HTML5, CSS3 e JavaScript (sem framework, sem build)
-- **Backend:** Python + FastAPI (API REST)
-- **Banco:** PostgreSQL em produção, SQLite no desenvolvimento
-- **Hospedagem:** Vercel (frontend estático + API como função serverless) ou Railway (contêiner Docker)
+- **Site:** HTML5, CSS3 e JavaScript (sem framework e sem build), na pasta `frontend/`, publicado no **Vercel**.
+- **API:** Node.js + Express (`backend-node/`), no mesmo molde do backend do Meu Bolso Digital.
+- **Banco:** PostgreSQL. Em produção, o **mesmo servidor** do Meu Bolso Digital, em um banco e usuário próprios.
+- **Publicação:** API em contêiner na VM (Docker) com **Cloudflare Tunnel**, backup diário e CI no GitHub (veja [DEPLOY.md](DEPLOY.md)).
 
 ## O que já funciona
+- Cadastro, login (JWT) e edição do nome exibido no certificado.
+- **32 áreas** de tecnologia e correlatas, cada uma com um quiz de 6 perguntas (2 fáceis, 2 médias, 2 difíceis).
+- Quiz com cronômetro; a correção é **no servidor** (o gabarito nunca vai ao navegador antes de responder).
+- **Certificado de conclusão** com 70% ou mais (5 de 6), uma vez por quiz, com código de verificação público e página para
+  imprimir/salvar em PDF. O gabarito só aparece para quem foi aprovado; há 10 minutos de espera para refazer um quiz reprovado.
+- Ranking geral e por área, mostrando só "Primeiro nome + inicial".
+- **LGPD:** política de privacidade, consentimento no cadastro e exclusão da própria conta.
+- **PWA:** botão **"Instalar app"** para todos os navegadores Android (instalação nativa no Chrome, Edge, Samsung Internet,
+  Opera, Brave...; passo a passo no Firefox e afins) e abertura offline da "casca" do app.
+- API administrativa (categorias, quizzes, perguntas), versão e commit no rodapé e aviso de "Nova versão disponível".
 
-- Cadastro, login (JWT) e edição do nome exibido no certificado
-- **32 áreas** de tecnologia e correlatas, cada uma com um quiz de 6 perguntas (2 fáceis, 2 médias, 2 difíceis)
-- Quiz com cronômetro, navegação entre perguntas e correção **no servidor** (o gabarito nunca vai ao navegador antes de responder)
-- Resultado com revisão pergunta a pergunta
-- **Certificado de conclusão** emitido automaticamente com 70% ou mais de acertos, uma vez por quiz, com código de verificação público e página para imprimir ou salvar em PDF
-- Ranking geral e por área (soma da melhor nota em cada quiz); mostra só "Primeiro nome + inicial" (o nome completo fica no certificado)
-- **LGPD:** política de privacidade, consentimento no cadastro e exclusão da própria conta (apaga resultados e certificados)
-- Visual com a **paleta da logo** (ciano `#01d6fc`, azul `#0068fc`, azul profundo `#0950bd`, royal `#042872`, preto `#000000`), definida como variáveis CSS em `frontend/css/style.css`
-- API administrativa para criar/editar/remover categorias, quizzes e perguntas
-
-### Áreas
-
-| Grupo | Áreas |
-|---|---|
-| Desenvolvimento | Lógica de Programação, Python, JavaScript, Java, C e C++, C# e .NET, HTML e CSS, Back-end e APIs, Desenvolvimento Mobile, Git e GitHub, Estruturas de Dados e Algoritmos, Engenharia de Software e Testes, Desenvolvimento de Jogos |
-| Dados e IA | Banco de Dados e SQL, Ciência de Dados e Analytics, Inteligência Artificial, Machine Learning |
-| Infraestrutura | Redes, Sistemas Operacionais e Linux, Cloud Computing, DevOps e Containers, Hardware e Arquitetura, IoT e Eletrônica |
-| Segurança e Criptografia | Segurança da Informação, Criptografia e Blockchain |
-| Design e Produto | UX/UI Design |
-| Gestão e Negócios | Gestão de Projetos e Métodos Ágeis, Governança de TI/ITIL/LGPD, Empreendedorismo e Startups |
-| Fundamentos e Suporte | Suporte Técnico e Informática Básica, Matemática para Computação, Tecnologias Emergentes |
-
-Para adicionar áreas ou perguntas, edite os arquivos em `backend/app/seed_data/`. Áreas novas (por `slug`) são criadas na próxima inicialização, sem apagar nada.
+## Estrutura
+```
+quiz-tech/
+├── backend-node/            # API (Express) — mesmo padrão do Meu Bolso Digital
+│   ├── src/  app.js  config.js  server.js  version.js
+│   │   ├── routes/ controllers/ services/ models/   # rotas → controladores → regras → SQL
+│   │   ├── middleware/      # auth, limitadores de tentativa, tratamento de erros
+│   │   ├── database/        # pool, migrate.js, seed.js
+│   │   └── utils/           # validadores, erros, senha (bcrypt nativo), IP do visitante
+│   └── tests/               # Jest + Supertest em PostgreSQL de verdade (73 testes)
+├── database/
+│   ├── migrations/          # 001_init.sql ... (aplicadas em ordem, registradas em _migrations)
+│   └── seed/areas.json      # as 32 áreas, quizzes e perguntas
+├── frontend/                # site + PWA (manifest, service worker, ícones)
+├── scripts/                 # backup diário, criação do banco compartilhado, fumaça de produção, busca de segredos
+├── .github/workflows/       # testes, segurança semanal, fumaça diária, aviso de deploy no Slack
+├── Dockerfile  docker-compose.prod.yml  docker-compose.local.yml
+├── DEPLOY.md  SEGURANCA.md  CHANGELOG.md
+└── vercel.json
+```
+> As pastas `backend/` e `api/` (mais `requirements.txt`) são o **backend antigo em Python**, substituído pelo `backend-node/`.
+> Ficam apenas como referência até você decidir removê-las; o Vercel e o Docker já as ignoram.
 
 ## Rodando localmente
 
+**Opção A: tudo em Docker** (sem instalar nada além do Docker Desktop):
 ```powershell
-cd backend
-python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
-copy .env.example .env        # opcional; defina ADMIN_EMAIL para virar administrador
-.\.venv\Scripts\python.exe -m uvicorn app.main:app --reload
+copy .env.local.example .env.local      # preencha as 3 variáveis
+docker compose --env-file .env.local -f docker-compose.local.yml up -d --build
 ```
+Abra http://localhost:3100 (a API serve o site).
 
-Abra http://127.0.0.1:8000 (site) ou http://127.0.0.1:8000/docs (documentação interativa da API).
-No primeiro início o banco SQLite (`quiztech.db`) é criado e populado sozinho.
+**Opção B: Node no seu computador** (precisa de Node 18+ e um PostgreSQL):
+```powershell
+cd backend-node
+npm install
+copy .env.example .env                  # ajuste DATABASE_URL e JWT_SECRET
+npm run migrate; npm run seed
+npm run dev                             # API em http://localhost:3100
+```
+Sirva a pasta `frontend/` em `http://localhost:5500` (por exemplo `npx serve frontend -l 5500`) ou defina `SERVE_FRONTEND=1`
+e abra a própria API. O `frontend/js/config.js` escolhe sozinho o endereço da API.
 
 ### Testes
-
+Precisam de um PostgreSQL só para testes (os testes apagam usuários e resultados dele!):
 ```powershell
-cd backend
-.\.venv\Scripts\python.exe -m pytest
+docker run -d --name qt-testdb -e POSTGRES_USER=quiztech_test -e POSTGRES_PASSWORD=teste -e POSTGRES_DB=quiztech_test -p 55432:5432 postgres:16-alpine
+cd backend-node
+copy .env.test.example .env.test
+npm test
 ```
 
 ## Versão e avisos de atualização
-
-- **Versão:** definida em `backend/app/version.py` (versionamento semântico; histórico no [CHANGELOG.md](CHANGELOG.md)). Aparece no rodapé do site como `v1.1.0 · abc1234` (versão · commit; ambientes que não são produção mostram o nome) e em `GET /api/version`.
-- **Commit:** o Vercel preenche sozinho (`VERCEL_GIT_COMMIT_SHA`). No Docker, informe no build: `$env:GIT_COMMIT = (git rev-parse --short HEAD); docker compose up -d --build`.
-- **Aviso dentro do site:** enquanto alguém usa o site, ele confere `/api/version` a cada 5 minutos e quando a aba volta ao foco. Se a versão ou o commit mudou, aparece "Nova versão disponível" com o botão *Atualizar agora* (durante um quiz o botão não aparece, para ninguém perder as respostas).
-- **Aviso de deploy no Slack:** o fluxo `.github/workflows/notify-deploy.yml` avisa cada deploy do Vercel (sucesso ou falha) com ambiente, versão e link. Para ativar, crie um *Incoming Webhook* no Slack (api.slack.com/apps → Incoming Webhooks → escolha o canal) e cadastre a URL como segredo `SLACK_WEBHOOK_URL` em GitHub → Settings → Secrets and variables → Actions. Sem o segredo o fluxo não faz nada.
-- **Avisos do próprio Vercel:** em Vercel → Settings → Notifications, ative os e-mails de deploy (sucesso, falha) e, se quiser, a integração oficial com o Slack.
-
-## Rodando na sua VM com Docker Desktop
-
-Sobe tudo com um comando: PostgreSQL + API + site. Não depende de Vercel, Neon nem Railway. O banco fica no volume `dbdata` (sobrevive a reinícios) e as migrações rodam sozinhas ao iniciar.
-
-1. **Docker Desktop** instalado e aberto na VM (com WSL 2).
-2. **Configure os segredos.** Na pasta do projeto:
-   ```powershell
-   copy .env.example .env
-   notepad .env
-   ```
-   Preencha `POSTGRES_PASSWORD`, `SECRET_KEY` (o `.env.example` mostra como gerar) e `ADMIN_EMAIL`. O `.env` não vai para o Git.
-3. **Suba:**
-   ```powershell
-   docker compose up -d --build
-   ```
-   Abra http://localhost:8000. De outro computador da rede: `http://IP-DA-VM:8000` (libere a porta 8000 no Firewall do Windows).
-4. **Cadastre-se** com o e-mail de `ADMIN_EMAIL` para virar administrador.
-
-**HTTPS com domínio próprio** (Let's Encrypt automático, via Caddy): aponte um registro DNS `A` do domínio para o IP público da VM, libere as portas 80 e 443, preencha `DOMAIN` no `.env` e use:
-
-```powershell
-docker compose -f docker-compose.yml -f docker-compose.https.yml up -d --build
-```
-
-Nesse modo a API deixa de ser publicada; só o Caddy (portas 80/443) fica exposto.
-
-**Endereço público temporário (Cloudflare Tunnel)**, sem conta, sem domínio e sem abrir portas no roteador:
-
-```powershell
-docker compose -f docker-compose.yml -f docker-compose.tunnel.yml up -d --build
-docker compose -f docker-compose.yml -f docker-compose.tunnel.yml logs tunnel | findstr trycloudflare
-```
-
-O segundo comando mostra o endereço `https://…trycloudflare.com`. Ele **muda toda vez que o túnel reinicia** (é um endereço de teste/demonstração, sem garantia de disponibilidade); para um endereço fixo use um domínio com o modo HTTPS acima. Nesse modo a API só escuta em `127.0.0.1`, e o IP real do visitante vem do cabeçalho `cf-connecting-ip` (`CLIENT_IP_HEADER`), que o cliente não consegue forjar; por isso o limite de tentativas de login continua valendo. Para desligar o acesso público: `docker compose -f docker-compose.yml -f docker-compose.tunnel.yml down` e suba de novo só com `docker compose up -d`.
-
-**Dia a dia**
-
-| Tarefa | Comando |
-|---|---|
-| Ver logs | `docker compose logs -f app` |
-| Ver estado e saúde | `docker compose ps` |
-| Atualizar depois de um `git pull` | `docker compose up -d --build` |
-| Parar (mantém os dados) | `docker compose down` |
-| Backup do banco | `docker compose exec -T db pg_dump -U quiztech quiztech > backup.sql` |
-| Restaurar backup | `Get-Content backup.sql \| docker compose exec -T db psql -U quiztech quiztech` |
-| **Apagar tudo, inclusive os dados** | `docker compose down -v` (cuidado) |
-
-Para o sistema voltar sozinho depois de reiniciar a VM, deixe **Settings → General → Start Docker Desktop when you sign in** marcado; os contêineres têm `restart: unless-stopped`.
-
-Faça backups regulares (`pg_dump`) e guarde-os fora da VM. Se a VM for exposta à internet, mantenha o Windows atualizado e use o modo HTTPS.
-
-## Publicando no Vercel
-
-O `vercel.json` já configura tudo: o Vercel serve a pasta `frontend/` como site estático e roda a API (`api/index.py`, que carrega `backend/app`) como função serverless em `/api/*`. Site e API ficam na **mesma origem**, então não há CORS.
-
-O Vercel não tem disco persistente, por isso o banco precisa ser um **PostgreSQL externo**. Sem `DATABASE_URL` a aplicação recusa iniciar em produção, de propósito.
-
-1. **Crie o banco.** No Vercel: **Storage → Create Database → Neon** (PostgreSQL gratuito, pelo Marketplace). Copie a URL de conexão **com pooling** (o host contém `-pooler`). Alternativas: Supabase ou o PostgreSQL do Railway.
-2. **Importe o projeto.** No Vercel: **Add New → Project**, escolha `lindersonmanoel/quiztech` e mantenha as configurações detectadas (Framework: *Other*; o `vercel.json` define o resto).
-3. **Variáveis de ambiente** (Settings → Environment Variables, ambiente *Production*):
-
-   | Variável | Valor |
-   |---|---|
-   | `SECRET_KEY` | chave aleatória longa: `python -c "import secrets; print(secrets.token_urlsafe(48))"` |
-   | `DATABASE_URL` | URL do PostgreSQL (se criou o Neon pelo Vercel, ela já vem preenchida) |
-   | `ADMIN_EMAIL` | o e-mail com que você vai se cadastrar como administrador |
-
-4. Clique em **Deploy**. Na primeira requisição a aplicação cria as tabelas e carrega as 32 áreas sozinha.
-5. Abra `https://SEU-PROJETO.vercel.app/api/health` (deve responder `{"status":"ok"}`) e depois o site.
-6. Cadastre-se com o e-mail de `ADMIN_EMAIL` para liberar as rotas `/api/admin/*`.
-
-Cada `git push` na branch `main` gera um novo deploy de produção; as demais branches geram previews. Previews usam as mesmas variáveis se você marcá-las também para *Preview*; para não misturar dados, use um banco separado nelas.
-
-**Como o projeto foi adaptado ao ambiente serverless**
-
-- Sem pool de conexões no processo (`NullPool`); o pool fica no provedor do banco (por isso o endereço `-pooler`).
-- Limite de tentativas de login guardado **no banco** (tabela `login_failures`), pois a memória não é compartilhada entre instâncias.
-- Tabelas e carga inicial são preparadas na partida a frio da função, sem depender de eventos de *lifespan*.
-- Cabeçalhos de segurança (CSP, `X-Frame-Options`, HSTS etc.) aplicados aos arquivos estáticos pelo `vercel.json` e às respostas da API pelo próprio FastAPI.
-
-## Publicando no Railway (alternativa)
-
-1. Suba este repositório no GitHub.
-2. No Railway: **New Project → Deploy from GitHub repo** e escolha o repositório. O `Dockerfile` e o `railway.json` da raiz já configuram build e healthcheck (`/api/health`).
-3. No mesmo projeto: **New → Database → PostgreSQL**.
-4. No serviço da aplicação, aba **Variables**:
-
-   | Variável | Valor |
-   |---|---|
-   | `SECRET_KEY` | uma chave aleatória longa: `python -c "import secrets; print(secrets.token_urlsafe(48))"` |
-   | `DATABASE_URL` | `${{Postgres.DATABASE_URL}}` (referência ao banco do projeto) |
-   | `ADMIN_EMAIL` | o e-mail com o qual você vai se cadastrar como administrador |
-
-   Sem `SECRET_KEY` a aplicação recusa iniciar em produção, de propósito.
-5. Em **Settings → Networking**, clique em **Generate Domain**.
-6. Cadastre-se no site com o e-mail definido em `ADMIN_EMAIL` para ter acesso às rotas `/api/admin/*`.
-
-## Migrações de banco (Alembic)
-
-O `create_all` cria tabelas que faltam, mas **não altera** colunas de tabelas existentes. Para mudar o esquema em produção use o Alembic (`backend/migrations/`):
-
-```powershell
-cd backend
-# 1) altere backend/app/models.py
-# 2) gere a migração
-.\.venv\Scripts\python.exe -m alembic revision --autogenerate -m "descrição"
-# 3) aplique (usa a DATABASE_URL do ambiente)
-.\.venv\Scripts\python.exe -m alembic upgrade head
-```
-
-**Banco que já existe** (criado antes pelo `create_all`, como o do Neon): rode **uma vez** `alembic stamp head` com a `DATABASE_URL` de produção para marcar o esquema atual como a migração `0001`. Depois disso use só `upgrade head`.
-
-## Integração contínua
-
-`.github/workflows/ci.yml` roda a cada push/PR: testes, verificação de que as migrações batem com os modelos, `pip-audit` (vulnerabilidades nas dependências) e `bandit` (análise estática). O Dependabot abre PRs semanais de atualização.
-
-## Estrutura
-
-```
-quiz-tech/
-├── backend/
-│   ├── app/
-│   │   ├── main.py            # app FastAPI, cabeçalhos de segurança, serve o frontend
-│   │   ├── models.py          # users, categories, quizzes, questions, alternatives, results, certificates
-│   │   ├── routers/           # auth, quizzes (+ correção), results (+ ranking, certificados), admin
-│   │   ├── seed.py            # carga idempotente das áreas
-│   │   └── seed_data/         # conteúdo das 32 áreas
-│   └── tests/
-├── frontend/
-│   ├── *.html                 # início, login, cadastro, quizzes, quiz, resultado, ranking, perfil, certificado
-│   ├── css/style.css
-│   ├── js/                    # um módulo por página + app.js (API, sessão, helpers)
-│   └── assets/logo/
-├── api/index.py               # entrada da função serverless do Vercel
-├── requirements.txt           # dependências de produção (backend/requirements-dev.txt = + testes)
-├── vercel.json                # Vercel: site estático, rewrite /api/*, cabeçalhos
-├── Dockerfile                 # alternativa: Railway/Docker
-└── railway.json
-```
+- **Versão:** `backend-node/package.json` (versionamento semântico; histórico em [CHANGELOG.md](CHANGELOG.md)). Aparece no rodapé
+  (`v2.0.0 · abc1234`) e em `GET /api/version`. O commit vem do Vercel (`VERCEL_GIT_COMMIT_SHA`) ou do build Docker (`GIT_COMMIT`).
+- **Aviso dentro do site:** com o site aberto, ele confere `/api/version` a cada 5 minutos e quando a aba volta ao foco; se
+  a versão mudou, mostra "Nova versão disponível" (durante um quiz o botão de recarregar não aparece).
+- **Aviso de deploy no Slack:** `.github/workflows/notify-deploy.yml` avisa cada deploy do Vercel. Crie um *Incoming Webhook*
+  no Slack e cadastre-o como segredo `SLACK_WEBHOOK_URL` (GitHub → Settings → Secrets and variables → Actions). Sem o segredo, não faz nada.
 
 ## Segurança
-
-- Senhas com hash **bcrypt**; nunca guardadas em texto puro
-- JWT assinado; `SECRET_KEY` obrigatória em produção
-- Limite de 10 cadastros por IP a cada 15 min
-- Limite de tentativas de login persistido no banco: 5 falhas em 15 min por IP + e-mail **e** 20 por e-mail (contra ataque distribuído). O cabeçalho de IP do Vercel só é confiado quando a app roda no Vercel
-- **Certificado protegido:** quem reprova vê quais respostas errou, mas o gabarito só aparece depois da aprovação, e há um intervalo de 10 min (`RETAKE_COOLDOWN_SECONDS`) para refazer um quiz reprovado. Isso é um freio, não uma garantia: o reforço definitivo é ter mais perguntas por área e sortear um subconjunto a cada tentativa
-- `/docs` e `/openapi.json` ficam **desligados em produção** (defina `ENABLE_DOCS=1` para ligar)
-- Gabarito só é enviado depois da correção; a nota é calculada no servidor
-- Rotas `/api/admin/*` exigem administrador
-- Consulta pública de certificado por código **não expõe e-mail**
-- O frontend insere conteúdo sempre com `textContent` (sem `innerHTML`), evitando XSS
-- Cabeçalhos `X-Content-Type-Options`, `X-Frame-Options` e `Referrer-Policy`
-
-## Próximos passos possíveis
-
-Painel administrativo em HTML, recuperação de senha por e-mail, PWA, ranking semanal/mensal, mais de um quiz por área (níveis fácil/médio/difícil) e QR Code no certificado.
+Veja [SEGURANCA.md](SEGURANCA.md) (rotina de revisão, checklist de novas rotas e o que fazer em caso de incidente). Em resumo:
+senhas com bcrypt; JWT com versão (trocar a senha derruba sessões); correção no servidor; limite de tentativas de login
+(por IP+e-mail e por e-mail), de cadastros e de exclusão de conta; CORS estrito; CSP sem script inline; nenhuma resposta de
+erro vaza SQL; o banco impõe uma única alternativa correta por pergunta e um certificado por usuário e quiz.

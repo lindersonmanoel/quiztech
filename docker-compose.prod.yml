@@ -1,0 +1,77 @@
+# Producao na VM, no mesmo esquema do Meu Bolso Digital: a API roda em contêiner e usa o MESMO servidor PostgreSQL
+# (contêiner "meu-bolso-digital-db-prod"), num banco proprio ("quiztech") com usuario proprio. Um projeto nao enxerga
+# os dados do outro. O site fica no Vercel e chama a API pelo Cloudflare Tunnel; nenhuma porta e' aberta no firewall.
+#
+# Passo a passo completo: DEPLOY.md.
+# Uso:  docker compose --env-file .env.production -f docker-compose.prod.yml up -d --build
+name: quiztech-prod
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        GIT_COMMIT: ${GIT_COMMIT:-dev}
+    container_name: quiztech-api-prod
+    restart: unless-stopped
+    env_file: .env.production
+    # So' na propria maquina (127.0.0.1): para conferir a saude e para o tunel de demonstracao. Nao vai para a internet.
+    ports:
+      - "127.0.0.1:3100:3100"
+    networks:
+      - banco
+
+  # Backup diario do banco "quiztech" (scripts/backup-loop.sh): dump comprimido em ./backups, guarda 14 dias.
+  # COPIE ./backups para fora desta maquina de vez em quando (outro disco/nuvem).
+  backup:
+    image: postgres:16-alpine
+    container_name: quiztech-backup-prod
+    restart: unless-stopped
+    environment:
+      PGHOST: ${DB_HOST:-meu-bolso-digital-db-prod}
+      PGUSER: quiztech
+      PGDATABASE: quiztech
+      PGPASSWORD: ${QUIZTECH_DB_PASSWORD:?defina QUIZTECH_DB_PASSWORD no .env.production}
+      BACKUP_KEEP_DAYS: ${BACKUP_KEEP_DAYS:-14}
+    volumes:
+      - ./backups:/backups
+      - ./scripts/backup-loop.sh:/backup-loop.sh:ro
+    entrypoint: ["sh", "/backup-loop.sh"]
+    networks:
+      - banco
+
+  # Endereco PUBLICO FIXO: tunel nomeado da Cloudflare (docker compose ... --profile tunnel up -d).
+  cloudflared:
+    profiles: ["tunnel"]
+    image: cloudflare/cloudflared:latest
+    container_name: quiztech-tunnel
+    restart: unless-stopped
+    command: tunnel run
+    environment:
+      TUNNEL_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN:?defina CLOUDFLARE_TUNNEL_TOKEN no .env.production}
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - banco
+
+  # Endereco PUBLICO TEMPORARIO (https://<aleatorio>.trycloudflare.com), sem conta e sem dominio: so' para demonstracao.
+  # O endereco muda a cada reinicio. Nesse modo a API tambem serve o site (SERVE_FRONTEND=1 no .env.production).
+  demo-tunnel:
+    profiles: ["demo"]
+    image: cloudflare/cloudflared:latest
+    container_name: quiztech-demo-tunnel
+    restart: unless-stopped
+    command: tunnel --no-autoupdate --url http://backend:3100
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - banco
+
+networks:
+  # Rede do contêiner do Postgres compartilhado (ajuste REDE_DO_BANCO se a sua tiver outro nome: docker network ls).
+  banco:
+    name: ${REDE_DO_BANCO:-meubolsodigital_default}
+    external: true

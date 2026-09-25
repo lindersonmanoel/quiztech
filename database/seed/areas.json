@@ -1,0 +1,2402 @@
+[
+  {
+    "grupo": "Desenvolvimento",
+    "nome": "Lógica de Programação",
+    "slug": "logica-de-programacao",
+    "icone": "🧩",
+    "descricao": "Algoritmos, variáveis, condições, laços e raciocínio lógico.",
+    "quiz": {
+      "titulo": "Quiz de Lógica de Programação",
+      "descricao": "Teste seus conhecimentos em Lógica de Programação. Algoritmos, variáveis, condições, laços e raciocínio lógico.",
+      "dificuldade": "media",
+      "limite_tempo": 300
+    },
+    "perguntas": [
+      {
+        "texto": "O que é um algoritmo?",
+        "pontos": 10,
+        "correta": "Uma sequência finita de passos para resolver um problema",
+        "erradas": [
+          "Um tipo de linguagem de programação",
+          "Um componente físico do computador",
+          "Um erro de execução do programa"
+        ]
+      },
+      {
+        "texto": "Qual estrutura repete um bloco de código várias vezes?",
+        "pontos": 10,
+        "correta": "Laço de repetição (loop)",
+        "erradas": [
+          "Comentário",
+          "Declaração de variável",
+          "Operador de atribuição"
+        ]
+      },
+      {
+        "texto": "Qual é o resultado de 7 % 3 na maioria das linguagens?",
+        "pontos": 20,
+        "correta": "1",
+        "erradas": [
+          "2",
+          "0",
+          "3"
+        ]
+      },
+      {
+        "texto": "Um fluxograma serve principalmente para:",
+        "pontos": 20,
+        "correta": "Representar graficamente o fluxo de um algoritmo",
+        "erradas": [
+          "Compilar o código-fonte",
+          "Armazenar dados em disco",
+          "Criptografar mensagens"
+        ]
+      },
+      {
+        "texto": "Qual é o valor final de x? x←5; enquanto x>0 faça x←x−2",
+        "pontos": 30,
+        "correta": "-1",
+        "erradas": [
+          "0",
+          "1",
+          "-2"
+        ]
+      },
+      {
+        "texto": "Uma recursão sem caso base tende a causar:",
+        "pontos": 30,
+        "correta": "Estouro de pilha (stack overflow)",
+        "erradas": [
+          "Uma compilação mais rápida",
+          "Um laço finito",
+          "Redução do uso de memória"
+        ]
+      }
+    ]
+  },
+  {
+    "grupo": "Desenvolvimento",
+    "nome": "Python",
+    "slug": "python",
+    "icone": "🐍",
+    "descricao": "Sintaxe, estruturas de dados e recursos da linguagem Python.",
+    "quiz": {
+      "titulo": "Quiz de Python",
+      "descricao": "Teste seus conhecimentos em Python. Sintaxe, estruturas de dados e recursos da linguagem Python.",
+      "dificuldade": "media",
+      "limite_tempo": 300
+    },
+    "perguntas": [
+      {
+        "texto": "Qual função exibe texto na tela em Python?",
+        "pontos": 10,
+        "correta": "print()",
+        "erradas": [
+          "echo()",
+          "console.log()",
+          "printf()"
+        ]
+      },
+      {
+        "texto": "Como se escreve um comentário de uma linha em Python?",
+        "pontos": 10,
+        "correta": "# comentário",
+        "erradas": [
+          "// comentário",
+          "/* comentário */",
+          "-- comentário"
+        ]
+      },
+      {
+        "texto": "Qual é o resultado de len([1, 2, 3, 4])?",
+        "pontos": 20,
+        "correta": "4",
+        "erradas": [
+          "3",
+          "5",
+          "Erro"
+        ]
+      },
+      {
+        "texto": "Qual estrutura de dados do Python é imutável?",
+        "pontos": 20,
+        "correta": "Tupla (tuple)",
+        "erradas": [
+          "Lista (list)",
+          "Dicionário (dict)",
+          "Conjunto (set)"
+        ]
+      },
+      {
+        "texto": "O que produz a expressão [x*x for x in range(4)]?",
+        "pontos": 30,
+        "correta": "[0, 1, 4, 9]",
+        "erradas": [
+          "[1, 4, 9, 16]",
+          "[0, 2, 4, 6]",
+          "Um erro de sintaxe"
+        ]
+      },
+      {
+        "texto": "No CPython, o que é o GIL (Global Interpreter Lock)?",
+        "pontos": 30,
+        "correta": "Um mecanismo que permite só uma thread executar bytecode Python por vez",
+        "erradas": [
+          "Um gerenciador de pacotes",
+          "Um otimizador que compila para C",
+          "Uma biblioteca de interface gráfica"
+        ]
+      }
+    ]
+  },
+  {
+    "grupo": "Desenvolvimento",
+    "nome": "JavaScript",
+    "slug": "javascript",
+    "icone": "🟨",
+    "descricao": "A linguagem da web: variáveis, funções, assincronismo e DOM.",
+    "quiz": {
+      "titulo": "Quiz de JavaScript",
+      "descricao": "Teste seus conhecimentos em JavaScript. A linguagem da web: variáveis, funções, assincronismo e DOM.",
+      "dificuldade": "media",
+      "limite_tempo": 300
+    },
+    "perguntas": [
+      {
+        "texto": "Qual palavra-chave declara uma constante em JavaScript moderno?",
+        "pontos": 10,
+        "correta": "const",
+        "erradas": [
+          "let",
+          "var",
+          "static"
+        ]
+      },
+      {
+        "texto": "Qual método adiciona um item ao final de um array?",
+        "pontos": 10,
+        "correta": "push()",
+        "erradas": [
+          "pop()",
+          "shift()",
+          "unshift()"
+        ]
+      },
+      {
+        "texto": "Qual é o resultado de typeof null?",
+        "pontos": 20,
+        "correta": "\"object\"",
+        "erradas": [
+          "\"null\"",
+          "\"undefined\"",
+          "\"number\""
+        ]
+      },
+      {
+        "texto": "O operador === compara:",
+        "pontos": 20,
+        "correta": "Valor e tipo, sem conversão",
+        "erradas": [
+          "Apenas o valor, com conversão de tipo",
+          "Apenas o tipo",
+          "Sempre referências de memória"
+        ]
+      },
+      {
+        "texto": "O que uma Promise representa?",
+        "pontos": 30,
+        "correta": "O resultado futuro de uma operação assíncrona",
+        "erradas": [
+          "Uma variável global protegida",
+          "Um laço de repetição infinito",
+          "Um módulo de estilos CSS"
+        ]
+      },
+      {
+        "texto": "Em JavaScript, o que é uma closure?",
+        "pontos": 30,
+        "correta": "Uma função que mantém acesso ao escopo onde foi criada",
+        "erradas": [
+          "Uma função que fecha o navegador",
+          "Um método exclusivo de arrays",
+          "Um erro de escopo em tempo de compilação"
+        ]
+      }
+    ]
+  },
+  {
+    "grupo": "Desenvolvimento",
+    "nome": "Java",
+    "slug": "java",
+    "icone": "☕",
+    "descricao": "Orientação a objetos, JVM e o ecossistema Java.",
+    "quiz": {
+      "titulo": "Quiz de Java",
+      "descricao": "Teste seus conhecimentos em Java. Orientação a objetos, JVM e o ecossistema Java.",
+      "dificuldade": "media",
+      "limite_tempo": 300
+    },
+    "perguntas": [
+      {
+        "texto": "Java é uma linguagem:",
+        "pontos": 10,
+        "correta": "Orientada a objetos e executada na JVM",
+        "erradas": [
+          "Interpretada exclusivamente pelo navegador",
+          "Usada apenas para bancos de dados",
+          "Sem tipagem"
+        ]
+      },
+      {
+        "texto": "Qual palavra-chave cria uma instância de uma classe em Java?",
+        "pontos": 10,
+        "correta": "new",
+        "erradas": [
+          "this",
+          "class",
+          "extends"
+        ]
+      },
+      {
+        "texto": "O ponto de entrada de uma aplicação Java é o método:",
+        "pontos": 20,
+        "correta": "public static void main(String[] args)",
+        "erradas": [
+          "start()",
+          "init()",
+          "execute()"
+        ]
+      },
+      {
+        "texto": "Qual palavra-chave é usada para herança de classes em Java?",
+        "pontos": 20,
+        "correta": "extends",
+        "erradas": [
+          "implements",
+          "inherits",
+          "super"
+        ]
+      },
+      {
+        "texto": "Qual é a função do Garbage Collector na JVM?",
+        "pontos": 30,
+        "correta": "Liberar memória de objetos que não são mais referenciados",
+        "erradas": [
+          "Compilar o código-fonte",
+          "Criptografar variáveis",
+          "Gerenciar conexões de rede"
+        ]
+      },
+      {
+        "texto": "Qual coleção NÃO admite elementos duplicados?",
+        "pontos": 30,
+        "correta": "HashSet",
+        "erradas": [
+          "ArrayList",
+          "LinkedList",
+          "Vector"
+        ]
+      }
+    ]
+  },
+  {
+    "grupo": "Desenvolvimento",
+    "nome": "C e C++",
+    "slug": "c-e-cpp",
+    "icone": "⚙️",
+    "descricao": "Programação de baixo nível, ponteiros e gerenciamento de memória.",
+    "quiz": {
+      "titulo": "Quiz de C e C++",
+      "descricao": "Teste seus conhecimentos em C e C++. Programação de baixo nível, ponteiros e gerenciamento de memória.",
+      "dificuldade": "media",
+      "limite_tempo": 300
+    },
+    "perguntas": [
+      {
+        "texto": "Qual símbolo obtém o endereço de memória de uma variável em C?",
+        "pontos": 10,
+        "correta": "&",
+        "erradas": [
+          "*",
+          "#",
+          "@"
+        ]
+      },
+      {
+        "texto": "Qual função da biblioteca padrão de C exibe texto formatado?",
+        "pontos": 10,
+        "correta": "printf()",
+        "erradas": [
+          "print()",
+          "echo()",
+          "cout()"
+        ]
+      },
+      {
+        "texto": "Em C, o que é um ponteiro?",
+        "pontos": 20,
+        "correta": "Uma variável que armazena um endereço de memória",
+        "erradas": [
+          "Um tipo de laço",
+          "Uma função recursiva",
+          "Um comentário especial"
+        ]
+      },
+      {
+        "texto": "Qual a relação entre malloc e free?",
+        "pontos": 20,
+        "correta": "malloc aloca memória dinamicamente e free a libera",
+        "erradas": [
+          "malloc libera e free aloca",
+          "Ambos alocam memória na pilha",
+          "Ambos servem para ler arquivos"
+        ]
+      },
+      {
+        "texto": "Qual recurso existe em C++ e não existe em C?",
+        "pontos": 30,
+        "correta": "Classes e orientação a objetos",
+        "erradas": [
+          "Ponteiros",
+          "Funções",
+          "Laços for"
+        ]
+      },
+      {
+        "texto": "O que é RAII em C++?",
+        "pontos": 30,
+        "correta": "Vincular a vida de um recurso à vida de um objeto (construtor/destrutor)",
+        "erradas": [
+          "Um compilador de código",
+          "Uma biblioteca gráfica",
+          "Um tipo de ponteiro nulo"
+        ]
+      }
+    ]
+  },
+  {
+    "grupo": "Desenvolvimento",
+    "nome": "C# e .NET",
+    "slug": "csharp-dotnet",
+    "icone": "🔷",
+    "descricao": "A linguagem C# e a plataforma .NET da Microsoft.",
+    "quiz": {
+      "titulo": "Quiz de C# e .NET",
+      "descricao": "Teste seus conhecimentos em C# e .NET. A linguagem C# e a plataforma .NET da Microsoft.",
+      "dificuldade": "media",
+      "limite_tempo": 300
+    },
+    "perguntas": [
+      {
+        "texto": "C# foi desenvolvida pela:",
+        "pontos": 10,
+        "correta": "Microsoft",
+        "erradas": [
+          "Oracle",
+          "Google",
+          "Apple"
+        ]
+      },
+      {
+        "texto": "Qual é o ponto de entrada tradicional de um programa C#?",
+        "pontos": 10,
+        "correta": "Main",
+        "erradas": [
+          "Start",
+          "Init",
+          "Run"
+        ]
+      },
+      {
+        "texto": "O que é o .NET?",
+        "pontos": 20,
+        "correta": "Uma plataforma para desenvolver e executar aplicações",
+        "erradas": [
+          "Um banco de dados",
+          "Um sistema operacional",
+          "Um navegador"
+        ]
+      },
+      {
+        "texto": "O LINQ em C# serve para:",
+        "pontos": 20,
+        "correta": "Consultar coleções de dados com sintaxe integrada à linguagem",
+        "erradas": [
+          "Compilar para código nativo em C++",
+          "Criar interfaces móveis",
+          "Gerenciar servidores Linux"
+        ]
+      },
+      {
+        "texto": "Qual palavra-chave aguarda uma operação assíncrona em C#?",
+        "pontos": 30,
+        "correta": "await",
+        "erradas": [
+          "yield",
+          "defer",
+          "wait"
+        ]
+      },
+      {
+        "texto": "Em C#, qual a diferença entre struct e class?",
+        "pontos": 30,
+        "correta": "struct é tipo de valor e class é tipo de referência",
+        "erradas": [
+          "struct é sempre maior que class",
+          "class não pode ter métodos",
+          "struct só existe em interfaces"
+        ]
+      }
+    ]
+  },
+  {
+    "grupo": "Desenvolvimento",
+    "nome": "HTML e CSS",
+    "slug": "html-e-css",
+    "icone": "🎨",
+    "descricao": "Estrutura e estilo de páginas web, layout e responsividade.",
+    "quiz": {
+      "titulo": "Quiz de HTML e CSS",
+      "descricao": "Teste seus conhecimentos em HTML e CSS. Estrutura e estilo de páginas web, layout e responsividade.",
+      "dificuldade": "media",
+      "limite_tempo": 300
+    },
+    "perguntas": [
+      {
+        "texto": "HTML significa:",
+        "pontos": 10,
+        "correta": "HyperText Markup Language",
+        "erradas": [
+          "High Text Machine Language",
+          "Hyper Tool Multi Language",
+          "HyperTransfer Markup Logic"
+        ]
+      },
+      {
+        "texto": "Qual tag define o título de maior nível em uma página?",
+        "pontos": 10,
+        "correta": "<h1>",
+        "erradas": [
+          "<title>",
+          "<head>",
+          "<h6>"
+        ]
+      },
+      {
+        "texto": "Qual propriedade CSS altera a cor do texto?",
+        "pontos": 20,
+        "correta": "color",
+        "erradas": [
+          "font-style",
+          "text-decoration",
+          "background-color"
+        ]
+      },
+      {
+        "texto": "Qual recurso do CSS cria layouts em grade bidimensional?",
+        "pontos": 20,
+        "correta": "CSS Grid",
+        "erradas": [
+          "float",
+          "position: static",
+          "display: inline"
+        ]
+      },
+      {
+        "texto": "O que faz a meta tag viewport?",
+        "pontos": 30,
+        "correta": "Controla a largura e a escala da página em dispositivos móveis",
+        "erradas": [
+          "Define o título da aba",
+          "Carrega scripts externos",
+          "Bloqueia o acesso de robôs"
+        ]
+      },
+      {
+        "texto": "Qual seletor CSS tem MAIOR especificidade?",
+        "pontos": 30,
+        "correta": "Seletor de ID (#id)",
+        "erradas": [
+          "Seletor de elemento (p)",
+          "Seletor de classe (.classe)",
+          "Seletor universal (*)"
+        ]
+      }
+    ]
+  },
+  {
+    "grupo": "Desenvolvimento",
+    "nome": "Back-end e APIs",
+    "slug": "backend-e-apis",
+    "icone": "🔌",
+    "descricao": "APIs REST, HTTP, autenticação e arquitetura de servidores.",
+    "quiz": {
+      "titulo": "Quiz de Back-end e APIs",
+      "descricao": "Teste seus conhecimentos em Back-end e APIs. APIs REST, HTTP, autenticação e arquitetura de servidores.",
+      "dificuldade": "media",
+      "limite_tempo": 300
+    },
+    "perguntas": [
+      {
+        "texto": "O que significa API?",
+        "pontos": 10,
+        "correta": "Application Programming Interface",
+        "erradas": [
+          "Advanced Program Installation",
+          "Automatic Protocol Internet",
+          "Application Process Integration"
+        ]
+      },
+      {
+        "texto": "Qual método HTTP é normalmente usado para buscar dados?",
+        "pontos": 10,
+        "correta": "GET",
+        "erradas": [
+          "POST",
+          "DELETE",
+          "PUT"
+        ]
+      },
+      {
+        "texto": "Qual código HTTP indica que o recurso não foi encontrado?",
+        "pontos": 20,
+        "correta": "404",
+        "erradas": [
+          "200",
+          "500",
+          "301"
+        ]
+      },
+      {
+        "texto": "Qual formato de dados é o mais usado em APIs REST?",
+        "pontos": 20,
+        "correta": "JSON",
+        "erradas": [
+          "BMP",
+          "MP3",
+          "EXE"
+        ]
+      },
+      {
+        "texto": "O que caracteriza uma API REST?",
+        "pontos": 30,
+        "correta": "Recursos identificados por URLs, operações via métodos HTTP e sem estado no servidor",
+        "erradas": [
+          "Uso obrigatório de XML e SOAP",
+          "Conexão permanente entre cliente e servidor",
+          "Execução de código no navegador do cliente"
+        ]
+      },
+      {
+        "texto": "Para que serve um JWT em uma API?",
+        "pontos": 30,
+        "correta": "Transportar, de forma assinada, dados de identidade e autorização",
+        "erradas": [
+          "Comprimir imagens",
+          "Criar tabelas em bancos de dados",
+          "Compilar código no servidor"
+        ]
+      }
+    ]
+  },
+  {
+    "grupo": "Desenvolvimento",
+    "nome": "Desenvolvimento Mobile",
+    "slug": "desenvolvimento-mobile",
+    "icone": "📱",
+    "descricao": "Apps para Android e iOS, frameworks multiplataforma e PWAs.",
+    "quiz": {
+      "titulo": "Quiz de Desenvolvimento Mobile",
+      "descricao": "Teste seus conhecimentos em Desenvolvimento Mobile. Apps para Android e iOS, frameworks multiplataforma e PWAs.",
+      "dificuldade": "media",
+      "limite_tempo": 300
+    },
+    "perguntas": [
+      {
+        "texto": "Qual linguagem é oficial no Android moderno, junto com Java?",
+        "pontos": 10,
+        "correta": "Kotlin",
+        "erradas": [
+          "Swift",
+          "Ruby",
+          "Perl"
+        ]
+      },
+      {
+        "texto": "Qual linguagem é usada nativamente em apps iOS modernos?",
+        "pontos": 10,
+        "correta": "Swift",
+        "erradas": [
+          "Kotlin",
+          "Go",
+          "PHP"
+        ]
+      },
+      {
+        "texto": "Qual linguagem o Flutter utiliza?",
+        "pontos": 20,
+        "correta": "Dart",
+        "erradas": [
+          "Kotlin",
+          "Swift",
+          "C#"
+        ]
+      },
+      {
+        "texto": "O React Native permite:",
+        "pontos": 20,
+        "correta": "Criar apps móveis usando JavaScript e React",
+        "erradas": [
+          "Rodar apenas no navegador desktop",
+          "Substituir o sistema Android",
+          "Compilar apps só para Windows"
+        ]
+      },
+      {
+        "texto": "O que é um app multiplataforma?",
+        "pontos": 30,
+        "correta": "Um único código-base que atende mais de um sistema operacional",
+        "erradas": [
+          "Um app que só funciona sem internet",
+          "Um app exclusivo de um fabricante",
+          "Um app que dispensa a loja de aplicativos"
+        ]
+      },
+      {
+        "texto": "O que é uma PWA?",
+        "pontos": 30,
+        "correta": "Aplicação web instalável que usa service workers e manifest",
+        "erradas": [
+          "Um antivírus para celular",
+          "Um formato de imagem",
+          "Um banco de dados móvel"
+        ]
+      }
+    ]
+  },
+  {
+    "grupo": "Desenvolvimento",
+    "nome": "Git e GitHub",
+    "slug": "git-e-github",
+    "icone": "🌿",
+    "descricao": "Versionamento de código, branches e colaboração.",
+    "quiz": {
+      "titulo": "Quiz de Git e GitHub",
+      "descricao": "Teste seus conhecimentos em Git e GitHub. Versionamento de código, branches e colaboração.",
+      "dificuldade": "media",
+      "limite_tempo": 300
+    },
+    "perguntas": [
+      {
+        "texto": "Qual comando cria uma cópia local de um repositório remoto?",
+        "pontos": 10,
+        "correta": "git clone",
+        "erradas": [
+          "git commit",
+          "git init",
+          "git push"
+        ]
+      },
+      {
+        "texto": "Qual comando registra as mudanças preparadas no histórico local?",
+        "pontos": 10,
+        "correta": "git commit",
+        "erradas": [
+          "git pull",
+          "git add",
+          "git status"
+        ]
+      },
+      {
+        "texto": "O que faz o comando git add?",
+        "pontos": 20,
+        "correta": "Adiciona alterações à área de preparação (staging)",
+        "erradas": [
+          "Envia ao servidor",
+          "Apaga o histórico",
+          "Cria uma branch"
+        ]
+      },
+      {
+        "texto": "Qual comando envia commits locais ao repositório remoto?",
+        "pontos": 20,
+        "correta": "git push",
+        "erradas": [
+          "git fetch",
+          "git merge",
+          "git stash"
+        ]
+      },
+      {
+        "texto": "Qual a diferença entre git fetch e git pull?",
+        "pontos": 30,
+        "correta": "fetch só baixa as mudanças; pull baixa e integra à branch atual",
+        "erradas": [
+          "fetch envia e pull apaga",
+          "São idênticos",
+          "pull só funciona em repositórios vazios"
+        ]
+      },
+      {
+        "texto": "O que faz o git rebase?",
+        "pontos": 30,
+        "correta": "Reaplica commits sobre outra base, reescrevendo o histórico",
+        "erradas": [
+          "Exclui o repositório remoto",
+          "Apenas renomeia arquivos",
+          "Cria uma tag de versão automática"
+        ]
+      }
+    ]
+  },
+  {
+    "grupo": "Desenvolvimento",
+    "nome": "Estruturas de Dados e Algoritmos",
+    "slug": "estruturas-de-dados",
+    "icone": "🌳",
+    "descricao": "Pilhas, filas, árvores, grafos, ordenação e complexidade.",
+    "quiz": {
+      "titulo": "Quiz de Estruturas de Dados e Algoritmos",
+      "descricao": "Teste seus conhecimentos em Estruturas de Dados e Algoritmos. Pilhas, filas, árvores, grafos, ordenação e complexidade.",
+      "dificuldade": "media",
+      "limite_tempo": 300
+    },
+    "perguntas": [
+      {
+        "texto": "Qual estrutura segue a regra LIFO (último a entrar, primeiro a sair)?",
+        "pontos": 10,
+        "correta": "Pilha (stack)",
+        "erradas": [
+          "Fila (queue)",
+          "Lista ligada",
+          "Árvore"
+        ]
+      },
+      {
+        "texto": "Qual estrutura segue a regra FIFO (primeiro a entrar, primeiro a sair)?",
+        "pontos": 10,
+        "correta": "Fila (queue)",
+        "erradas": [
+          "Pilha",
+          "Heap",
+          "Grafo"
+        ]
+      },
+      {
+        "texto": "Qual é a complexidade da busca binária em um vetor ordenado?",
+        "pontos": 20,
+        "correta": "O(log n)",
+        "erradas": [
+          "O(n)",
+          "O(n²)",
+          "O(1)"
+        ]
+      },
+      {
+        "texto": "Uma tabela hash busca elementos, em média, em:",
+        "pontos": 20,
+        "correta": "O(1)",
+        "erradas": [
+          "O(n)",
+          "O(log n)",
+          "O(n log n)"
+        ]
+      },
+      {
+        "texto": "Qual algoritmo de ordenação tem complexidade O(n log n) no pior caso?",
+        "pontos": 30,
+        "correta": "Merge sort",
+        "erradas": [
+          "Bubble sort",
+          "Insertion sort",
+          "Selection sort"
+        ]
+      },
+      {
+        "texto": "Qual estrutura auxiliar é usada na busca em largura (BFS)?",
+        "pontos": 30,
+        "correta": "Fila",
+        "erradas": [
+          "Pilha",
+          "Tabela hash",
+          "Heap máximo"
+        ]
+      }
+    ]
+  },
+  {
+    "grupo": "Desenvolvimento",
+    "nome": "Engenharia de Software e Testes",
+    "slug": "engenharia-de-software",
+    "icone": "🛠️",
+    "descricao": "Boas práticas, testes, modelagem e qualidade de software.",
+    "quiz": {
+      "titulo": "Quiz de Engenharia de Software e Testes",
+      "descricao": "Teste seus conhecimentos em Engenharia de Software e Testes. Boas práticas, testes, modelagem e qualidade de software.",
+      "dificuldade": "media",
+      "limite_tempo": 300
+    },
+    "perguntas": [
+      {
+        "texto": "O que é um teste unitário?",
+        "pontos": 10,
+        "correta": "Teste de uma pequena parte isolada do código, como uma função",
+        "erradas": [
+          "Teste do sistema inteiro em produção",
+          "Teste apenas visual",
+          "Teste de carga da rede"
+        ]
+      },
+      {
+        "texto": "O que significa a sigla UML?",
+        "pontos": 10,
+        "correta": "Unified Modeling Language",
+        "erradas": [
+          "Universal Machine Logic",
+          "User Management Layer",
+          "Unique Model List"
+        ]
+      },
+      {
+        "texto": "O que é refatoração?",
+        "pontos": 20,
+        "correta": "Melhorar a estrutura do código sem alterar seu comportamento externo",
+        "erradas": [
+          "Adicionar novas funcionalidades",
+          "Apagar o código antigo",
+          "Traduzir o código para outra linguagem"
+        ]
+      },
+      {
+        "texto": "O que é integração contínua (CI)?",
+        "pontos": 20,
+        "correta": "Integrar e testar o código automaticamente a cada mudança",
+        "erradas": [
+          "Um tipo de banco de dados",
+          "Um método de criptografia",
+          "Um sistema de backup"
+        ]
+      },
+      {
+        "texto": "O 'S' do princípio SOLID significa:",
+        "pontos": 30,
+        "correta": "Responsabilidade única (Single Responsibility)",
+        "erradas": [
+          "Segurança total",
+          "Simplicidade de sintaxe",
+          "Servidor único"
+        ]
+      },
+      {
+        "texto": "O que é TDD?",
+        "pontos": 30,
+        "correta": "Escrever os testes antes do código que os faz passar",
+        "erradas": [
+          "Testar apenas após a entrega",
+          "Um padrão de banco de dados",
+          "Uma linguagem de testes"
+        ]
+      }
+    ]
+  },
+  {
+    "grupo": "Desenvolvimento",
+    "nome": "Desenvolvimento de Jogos",
+    "slug": "desenvolvimento-de-jogos",
+    "icone": "🎮",
+    "descricao": "Motores gráficos, game loop, física e gráficos em tempo real.",
+    "quiz": {
+      "titulo": "Quiz de Desenvolvimento de Jogos",
+      "descricao": "Teste seus conhecimentos em Desenvolvimento de Jogos. Motores gráficos, game loop, física e gráficos em tempo real.",
+      "dificuldade": "media",
+      "limite_tempo": 300
+    },
+    "perguntas": [
+      {
+        "texto": "Qual motor de jogos usa C# como linguagem principal de scripts?",
+        "pontos": 10,
+        "correta": "Unity",
+        "erradas": [
+          "Unreal Engine",
+          "Photoshop",
+          "Blender"
+        ]
+      },
+      {
+        "texto": "O que significa FPS em desempenho gráfico?",
+        "pontos": 10,
+        "correta": "Quadros por segundo",
+        "erradas": [
+          "Fotos por sessão",
+          "Formatos por sistema",
+          "Filtros por sombra"
+        ]
+      },
+      {
+        "texto": "Qual linguagem a Unreal Engine usa em seu código nativo?",
+        "pontos": 20,
+        "correta": "C++",
+        "erradas": [
+          "Python",
+          "Ruby",
+          "Swift"
+        ]
+      },
+      {
+        "texto": "O que é um game loop?",
+        "pontos": 20,
+        "correta": "Ciclo que processa entradas, atualiza o estado e renderiza continuamente",
+        "erradas": [
+          "Um bug que trava o jogo",
+          "Um tipo de textura",
+          "Um servidor multiplayer"
+        ]
+      },
+      {
+        "texto": "O que faz um shader?",
+        "pontos": 30,
+        "correta": "Programa executado na GPU que define como vértices e pixels são desenhados",
+        "erradas": [
+          "Salva o progresso do jogo",
+          "Compacta áudio",
+          "Gerencia a rede"
+        ]
+      },
+      {
+        "texto": "O que é delta time em jogos?",
+        "pontos": 30,
+        "correta": "Tempo entre dois quadros, para movimento independente do FPS",
+        "erradas": [
+          "Tempo total da partida",
+          "Latência do servidor",
+          "Duração do áudio"
+        ]
+      }
+    ]
+  },
+  {
+    "grupo": "Dados e IA",
+    "nome": "Banco de Dados e SQL",
+    "slug": "banco-de-dados-e-sql",
+    "icone": "🗄️",
+    "descricao": "Modelagem relacional, consultas SQL, transações e NoSQL.",
+    "quiz": {
+      "titulo": "Quiz de Banco de Dados e SQL",
+      "descricao": "Teste seus conhecimentos em Banco de Dados e SQL. Modelagem relacional, consultas SQL, transações e NoSQL.",
+      "dificuldade": "media",
+      "limite_tempo": 300
+    },
+    "perguntas": [
+      {
+        "texto": "SQL é uma linguagem para:",
+        "pontos": 10,
+        "correta": "Consultar e manipular bancos de dados relacionais",
+        "erradas": [
+          "Criar interfaces gráficas",
+          "Editar imagens",
+          "Compilar programas em C"
+        ]
+      },
+      {
+        "texto": "Qual comando SQL busca dados de uma tabela?",
+        "pontos": 10,
+        "correta": "SELECT",
+        "erradas": [
+          "INSERT",
+          "DROP",
+          "GRANT"
+        ]
+      },
+      {
+        "texto": "Qual cláusula filtra as linhas de uma consulta?",
+        "pontos": 20,
+        "correta": "WHERE",
+        "erradas": [
+          "ORDER BY",
+          "GROUP BY",
+          "LIMIT"
+        ]
+      },
+      {
+        "texto": "O que é uma chave primária?",
+        "pontos": 20,
+        "correta": "Coluna que identifica cada registro de forma única",
+        "erradas": [
+          "Coluna que guarda senhas",
+          "Índice de texto completo",
+          "Cópia de segurança da tabela"
+        ]
+      },
+      {
+        "texto": "Qual JOIN retorna apenas as linhas com correspondência nas duas tabelas?",
+        "pontos": 30,
+        "correta": "INNER JOIN",
+        "erradas": [
+          "LEFT JOIN",
+          "FULL OUTER JOIN",
+          "CROSS JOIN"
+        ]
+      },
+      {
+        "texto": "O que significa o 'A' de ACID em transações?",
+        "pontos": 30,
+        "correta": "Atomicidade: a transação ocorre por completo ou não ocorre",
+        "erradas": [
+          "Autenticação",
+          "Acesso",
+          "Alocação"
+        ]
+      }
+    ]
+  },
+  {
+    "grupo": "Dados e IA",
+    "nome": "Ciência de Dados e Analytics",
+    "slug": "ciencia-de-dados",
+    "icone": "📊",
+    "descricao": "Análise, estatística básica, ETL e visualização de dados.",
+    "quiz": {
+      "titulo": "Quiz de Ciência de Dados e Analytics",
+      "descricao": "Teste seus conhecimentos em Ciência de Dados e Analytics. Análise, estatística básica, ETL e visualização de dados.",
+      "dificuldade": "media",
+      "limite_tempo": 300
+    },
+    "perguntas": [
+      {
+        "texto": "Qual biblioteca Python é muito usada para manipular tabelas de dados?",
+        "pontos": 10,
+        "correta": "pandas",
+        "erradas": [
+          "Flask",
+          "Pygame",
+          "Django"
+        ]
+      },
+      {
+        "texto": "O que é um dashboard?",
+        "pontos": 10,
+        "correta": "Painel visual com indicadores e gráficos",
+        "erradas": [
+          "Um tipo de banco de dados",
+          "Um vírus",
+          "Um protocolo de rede"
+        ]
+      },
+      {
+        "texto": "O que significa ETL?",
+        "pontos": 20,
+        "correta": "Extrair, Transformar e Carregar dados",
+        "erradas": [
+          "Editar, Testar e Lançar",
+          "Enviar, Traduzir e Listar",
+          "Estimar, Treinar e Liberar"
+        ]
+      },
+      {
+        "texto": "Qual é a mediana do conjunto [1, 3, 3, 6, 7, 8, 9]?",
+        "pontos": 20,
+        "correta": "6",
+        "erradas": [
+          "3",
+          "5,29",
+          "7"
+        ]
+      },
+      {
+        "texto": "O que mede o desvio padrão?",
+        "pontos": 30,
+        "correta": "A dispersão dos valores em torno da média",
+        "erradas": [
+          "O maior valor do conjunto",
+          "A quantidade de registros",
+          "O valor mais frequente"
+        ]
+      },
+      {
+        "texto": "Qual gráfico é mais adequado para mostrar a distribuição de uma variável numérica?",
+        "pontos": 30,
+        "correta": "Histograma",
+        "erradas": [
+          "Gráfico de pizza",
+          "Gráfico de dispersão de duas categorias",
+          "Organograma"
+        ]
+      }
+    ]
+  },
+  {
+    "grupo": "Dados e IA",
+    "nome": "Inteligência Artificial",
+    "slug": "inteligencia-artificial",
+    "icone": "🤖",
+    "descricao": "Conceitos de IA, assistentes, linguagem natural e modelos de linguagem.",
+    "quiz": {
+      "titulo": "Quiz de Inteligência Artificial",
+      "descricao": "Teste seus conhecimentos em Inteligência Artificial. Conceitos de IA, assistentes, linguagem natural e modelos de linguagem.",
+      "dificuldade": "media",
+      "limite_tempo": 300
+    },
+    "perguntas": [
+      {
+        "texto": "A sigla IA significa:",
+        "pontos": 10,
+        "correta": "Inteligência Artificial",
+        "erradas": [
+          "Interface Avançada",
+          "Integração Analógica",
+          "Instrução Automática"
+        ]
+      },
+      {
+        "texto": "Qual é um exemplo de assistente virtual?",
+        "pontos": 10,
+        "correta": "Alexa ou Google Assistente",
+        "erradas": [
+          "Photoshop",
+          "Excel",
+          "Bloco de Notas"
+        ]
+      },
+      {
+        "texto": "O que é um chatbot?",
+        "pontos": 20,
+        "correta": "Programa que conversa com usuários por texto ou voz",
+        "erradas": [
+          "Um antivírus",
+          "Um tipo de processador",
+          "Um formato de vídeo"
+        ]
+      },
+      {
+        "texto": "O que é NLP?",
+        "pontos": 20,
+        "correta": "Processamento de linguagem natural",
+        "erradas": [
+          "Navegação local por pacotes",
+          "Rede de longa proximidade",
+          "Numeração lógica de portas"
+        ]
+      },
+      {
+        "texto": "O que é um LLM?",
+        "pontos": 30,
+        "correta": "Modelo de linguagem de grande porte treinado com muito texto",
+        "erradas": [
+          "Um protocolo de rede local",
+          "Um tipo de placa de vídeo",
+          "Uma linguagem de marcação"
+        ]
+      },
+      {
+        "texto": "O que é 'alucinação' em modelos de linguagem?",
+        "pontos": 30,
+        "correta": "Gerar informação plausível, porém incorreta ou inventada",
+        "erradas": [
+          "Falha de hardware da GPU",
+          "Erro de digitação do usuário",
+          "Lentidão da internet"
+        ]
+      }
+    ]
+  },
+  {
+    "grupo": "Dados e IA",
+    "nome": "Machine Learning",
+    "slug": "machine-learning",
+    "icone": "🧠",
+    "descricao": "Aprendizado supervisionado e não supervisionado, treino e avaliação de modelos.",
+    "quiz": {
+      "titulo": "Quiz de Machine Learning",
+      "descricao": "Teste seus conhecimentos em Machine Learning. Aprendizado supervisionado e não supervisionado, treino e avaliação de modelos.",
+      "dificuldade": "media",
+      "limite_tempo": 300
+    },
+    "perguntas": [
+      {
+        "texto": "Machine Learning é:",
+        "pontos": 10,
+        "correta": "Técnica em que sistemas aprendem padrões a partir de dados",
+        "erradas": [
+          "Um tipo de hardware",
+          "Programar cada regra manualmente",
+          "Um sistema operacional"
+        ]
+      },
+      {
+        "texto": "Qual biblioteca Python é comum em Machine Learning clássico?",
+        "pontos": 10,
+        "correta": "scikit-learn",
+        "erradas": [
+          "Tkinter",
+          "Requests",
+          "Pillow"
+        ]
+      },
+      {
+        "texto": "O aprendizado supervisionado utiliza dados:",
+        "pontos": 20,
+        "correta": "Rotulados, com a resposta esperada",
+        "erradas": [
+          "Sem nenhum dado",
+          "Apenas imagens",
+          "Sempre criptografados"
+        ]
+      },
+      {
+        "texto": "Qual é um exemplo de aprendizado não supervisionado?",
+        "pontos": 20,
+        "correta": "Agrupamento (clustering)",
+        "erradas": [
+          "Classificação de spam com exemplos rotulados",
+          "Previsão de preço com histórico rotulado",
+          "Regressão linear com alvo conhecido"
+        ]
+      },
+      {
+        "texto": "O que é overfitting?",
+        "pontos": 30,
+        "correta": "O modelo se ajusta demais ao treino e generaliza mal",
+        "erradas": [
+          "O modelo é simples demais e erra tudo",
+          "Excesso de dados de teste",
+          "Falta de memória no servidor"
+        ]
+      },
+      {
+        "texto": "Para que serve dividir os dados em conjuntos de treino e teste?",
+        "pontos": 30,
+        "correta": "Avaliar o desempenho do modelo em dados que ele não viu",
+        "erradas": [
+          "Acelerar a internet",
+          "Criptografar os dados",
+          "Reduzir o tamanho do arquivo"
+        ]
+      }
+    ]
+  },
+  {
+    "grupo": "Infraestrutura",
+    "nome": "Redes de Computadores",
+    "slug": "redes-de-computadores",
+    "icone": "🌐",
+    "descricao": "Protocolos, endereçamento IP, DNS, modelo OSI e TCP/IP.",
+    "quiz": {
+      "titulo": "Quiz de Redes de Computadores",
+      "descricao": "Teste seus conhecimentos em Redes de Computadores. Protocolos, endereçamento IP, DNS, modelo OSI e TCP/IP.",
+      "dificuldade": "media",
+      "limite_tempo": 300
+    },
+    "perguntas": [
+      {
+        "texto": "Qual protocolo é usado para navegar em páginas web com criptografia?",
+        "pontos": 10,
+        "correta": "HTTPS",
+        "erradas": [
+          "FTP",
+          "SMTP",
+          "Telnet"
+        ]
+      },
+      {
+        "texto": "O que o endereço IP identifica?",
+        "pontos": 10,
+        "correta": "Um dispositivo em uma rede",
+        "erradas": [
+          "Um arquivo",
+          "Um usuário de e-mail",
+          "Uma senha"
+        ]
+      },
+      {
+        "texto": "Qual é a função do DNS?",
+        "pontos": 20,
+        "correta": "Traduzir nomes de domínio em endereços IP",
+        "erradas": [
+          "Criptografar o tráfego",
+          "Distribuir energia",
+          "Bloquear anúncios"
+        ]
+      },
+      {
+        "texto": "Qual camada do modelo OSI é a de Transporte?",
+        "pontos": 20,
+        "correta": "Camada 4",
+        "erradas": [
+          "Camada 2",
+          "Camada 3",
+          "Camada 7"
+        ]
+      },
+      {
+        "texto": "Qual é a máscara de sub-rede equivalente a /24?",
+        "pontos": 30,
+        "correta": "255.255.255.0",
+        "erradas": [
+          "255.255.0.0",
+          "255.0.0.0",
+          "255.255.255.128"
+        ]
+      },
+      {
+        "texto": "Qual a principal diferença entre TCP e UDP?",
+        "pontos": 30,
+        "correta": "TCP é orientado à conexão e confiável; UDP não garante entrega",
+        "erradas": [
+          "UDP é sempre mais seguro",
+          "TCP não usa portas",
+          "UDP exige handshake de três vias"
+        ]
+      }
+    ]
+  },
+  {
+    "grupo": "Infraestrutura",
+    "nome": "Sistemas Operacionais e Linux",
+    "slug": "sistemas-operacionais-linux",
+    "icone": "🐧",
+    "descricao": "Processos, memória, permissões e linha de comando.",
+    "quiz": {
+      "titulo": "Quiz de Sistemas Operacionais e Linux",
+      "descricao": "Teste seus conhecimentos em Sistemas Operacionais e Linux. Processos, memória, permissões e linha de comando.",
+      "dificuldade": "media",
+      "limite_tempo": 300
+    },
+    "perguntas": [
+      {
+        "texto": "Qual comando lista os arquivos de um diretório no Linux?",
+        "pontos": 10,
+        "correta": "ls",
+        "erradas": [
+          "cd",
+          "rm",
+          "mv"
+        ]
+      },
+      {
+        "texto": "O Linux é, essencialmente:",
+        "pontos": 10,
+        "correta": "Um kernel de código aberto usado em várias distribuições",
+        "erradas": [
+          "Um software de edição de imagens",
+          "Um navegador",
+          "Um jogo"
+        ]
+      },
+      {
+        "texto": "Qual comando altera as permissões de um arquivo no Linux?",
+        "pontos": 20,
+        "correta": "chmod",
+        "erradas": [
+          "ls",
+          "pwd",
+          "echo"
+        ]
+      },
+      {
+        "texto": "O que é um processo em um sistema operacional?",
+        "pontos": 20,
+        "correta": "Um programa em execução",
+        "erradas": [
+          "Um arquivo de texto",
+          "Um tipo de disco",
+          "Um driver de vídeo"
+        ]
+      },
+      {
+        "texto": "O que faz o comando sudo?",
+        "pontos": 30,
+        "correta": "Executa um comando com privilégios de outro usuário, geralmente o root",
+        "erradas": [
+          "Apaga o sistema",
+          "Atualiza a BIOS",
+          "Abre o navegador"
+        ]
+      },
+      {
+        "texto": "O que é memória virtual?",
+        "pontos": 30,
+        "correta": "Uso de disco como extensão da memória RAM",
+        "erradas": [
+          "Memória exclusiva da GPU",
+          "Cache do processador",
+          "Memória ROM da BIOS"
+        ]
+      }
+    ]
+  },
+  {
+    "grupo": "Infraestrutura",
+    "nome": "Cloud Computing",
+    "slug": "cloud-computing",
+    "icone": "☁️",
+    "descricao": "Computação em nuvem, modelos de serviço, serverless e CDN.",
+    "quiz": {
+      "titulo": "Quiz de Cloud Computing",
+      "descricao": "Teste seus conhecimentos em Cloud Computing. Computação em nuvem, modelos de serviço, serverless e CDN.",
+      "dificuldade": "media",
+      "limite_tempo": 300
+    },
+    "perguntas": [
+      {
+        "texto": "Qual destes é um provedor de nuvem pública?",
+        "pontos": 10,
+        "correta": "Amazon Web Services (AWS)",
+        "erradas": [
+          "Bloco de Notas",
+          "Paint",
+          "Calculadora"
+        ]
+      },
+      {
+        "texto": "O que é computação em nuvem?",
+        "pontos": 10,
+        "correta": "Entrega de recursos de TI pela internet, sob demanda",
+        "erradas": [
+          "Instalar servidores apenas locais",
+          "Um tipo de antivírus",
+          "Guardar dados só em pendrive"
+        ]
+      },
+      {
+        "texto": "O que significa IaaS?",
+        "pontos": 20,
+        "correta": "Infraestrutura como serviço",
+        "erradas": [
+          "Internet como serviço",
+          "Interface como sistema",
+          "Integração ao servidor"
+        ]
+      },
+      {
+        "texto": "O que é escalabilidade na nuvem?",
+        "pontos": 20,
+        "correta": "Capacidade de aumentar ou reduzir recursos conforme a demanda",
+        "erradas": [
+          "Diminuir a qualidade da imagem",
+          "Ter um único servidor",
+          "Proibir acessos"
+        ]
+      },
+      {
+        "texto": "O que caracteriza uma arquitetura serverless?",
+        "pontos": 30,
+        "correta": "O provedor gerencia os servidores e você paga pela execução do código",
+        "erradas": [
+          "Não usa nenhum computador",
+          "O código roda só no navegador",
+          "Exige comprar servidores físicos"
+        ]
+      },
+      {
+        "texto": "O que é uma CDN?",
+        "pontos": 30,
+        "correta": "Rede que distribui cópias de conteúdo em locais próximos aos usuários",
+        "erradas": [
+          "Um banco de dados relacional",
+          "Um protocolo de e-mail",
+          "Um tipo de firewall"
+        ]
+      }
+    ]
+  },
+  {
+    "grupo": "Infraestrutura",
+    "nome": "DevOps e Containers",
+    "slug": "devops-e-containers",
+    "icone": "🚢",
+    "descricao": "Docker, Kubernetes, CI/CD e infraestrutura como código.",
+    "quiz": {
+      "titulo": "Quiz de DevOps e Containers",
+      "descricao": "Teste seus conhecimentos em DevOps e Containers. Docker, Kubernetes, CI/CD e infraestrutura como código.",
+      "dificuldade": "media",
+      "limite_tempo": 300
+    },
+    "perguntas": [
+      {
+        "texto": "O Docker é usado para:",
+        "pontos": 10,
+        "correta": "Empacotar e executar aplicações em contêineres",
+        "erradas": [
+          "Editar vídeos",
+          "Criar planilhas",
+          "Desenhar interfaces"
+        ]
+      },
+      {
+        "texto": "O que significa DevOps?",
+        "pontos": 10,
+        "correta": "Integração entre desenvolvimento e operações",
+        "erradas": [
+          "Design e Vendas",
+          "Dados e Otimização",
+          "Desktop e Office"
+        ]
+      },
+      {
+        "texto": "O que é uma imagem Docker?",
+        "pontos": 20,
+        "correta": "Modelo somente leitura a partir do qual os contêineres são criados",
+        "erradas": [
+          "Uma foto do servidor",
+          "Um vídeo do deploy",
+          "Um backup de banco de dados"
+        ]
+      },
+      {
+        "texto": "O que significa CI/CD?",
+        "pontos": 20,
+        "correta": "Integração contínua e entrega/implantação contínuas",
+        "erradas": [
+          "Controle de Internet e Dados",
+          "Código Interno e Digital",
+          "Cache Inteligente e Dinâmico"
+        ]
+      },
+      {
+        "texto": "Qual ferramenta orquestra contêineres em larga escala?",
+        "pontos": 30,
+        "correta": "Kubernetes",
+        "erradas": [
+          "Photoshop",
+          "Git",
+          "Excel"
+        ]
+      },
+      {
+        "texto": "O que é Infraestrutura como Código (IaC)?",
+        "pontos": 30,
+        "correta": "Definir e provisionar infraestrutura por meio de arquivos versionáveis",
+        "erradas": [
+          "Escrever código diretamente em servidores físicos",
+          "Um tipo de virtualização de jogos",
+          "Documentar a rede em papel"
+        ]
+      }
+    ]
+  },
+  {
+    "grupo": "Infraestrutura",
+    "nome": "Hardware e Arquitetura de Computadores",
+    "slug": "hardware-e-arquitetura",
+    "icone": "🖥️",
+    "descricao": "Processador, memórias, periféricos e representação de dados.",
+    "quiz": {
+      "titulo": "Quiz de Hardware e Arquitetura de Computadores",
+      "descricao": "Teste seus conhecimentos em Hardware e Arquitetura de Computadores. Processador, memórias, periféricos e representação de dados.",
+      "dificuldade": "media",
+      "limite_tempo": 300
+    },
+    "perguntas": [
+      {
+        "texto": "Qual componente é considerado o 'cérebro' do computador?",
+        "pontos": 10,
+        "correta": "CPU (processador)",
+        "erradas": [
+          "Fonte",
+          "Gabinete",
+          "Monitor"
+        ]
+      },
+      {
+        "texto": "Qual memória é volátil, perdendo os dados ao desligar?",
+        "pontos": 10,
+        "correta": "RAM",
+        "erradas": [
+          "SSD",
+          "HD",
+          "ROM"
+        ]
+      },
+      {
+        "texto": "Quantos bits formam um byte?",
+        "pontos": 20,
+        "correta": "8",
+        "erradas": [
+          "4",
+          "16",
+          "10"
+        ]
+      },
+      {
+        "texto": "O que é uma GPU?",
+        "pontos": 20,
+        "correta": "Unidade de processamento gráfico",
+        "erradas": [
+          "Unidade de gestão de portas",
+          "Gerador de pulso universal",
+          "Gravador de programas únicos"
+        ]
+      },
+      {
+        "texto": "Qual é a função da memória cache do processador?",
+        "pontos": 30,
+        "correta": "Guardar dados acessados com frequência para acelerar o acesso",
+        "erradas": [
+          "Armazenar arquivos do usuário",
+          "Refrigerar o chip",
+          "Conectar à internet"
+        ]
+      },
+      {
+        "texto": "Qual é o valor decimal do binário 1010?",
+        "pontos": 30,
+        "correta": "10",
+        "erradas": [
+          "8",
+          "12",
+          "14"
+        ]
+      }
+    ]
+  },
+  {
+    "grupo": "Infraestrutura",
+    "nome": "IoT e Eletrônica",
+    "slug": "iot-e-eletronica",
+    "icone": "📡",
+    "descricao": "Internet das Coisas, sensores, microcontroladores e protocolos.",
+    "quiz": {
+      "titulo": "Quiz de IoT e Eletrônica",
+      "descricao": "Teste seus conhecimentos em IoT e Eletrônica. Internet das Coisas, sensores, microcontroladores e protocolos.",
+      "dificuldade": "media",
+      "limite_tempo": 300
+    },
+    "perguntas": [
+      {
+        "texto": "A sigla IoT significa:",
+        "pontos": 10,
+        "correta": "Internet das Coisas",
+        "erradas": [
+          "Internet de Ouro",
+          "Interface Ótica",
+          "Integração Online Total"
+        ]
+      },
+      {
+        "texto": "O Arduino é:",
+        "pontos": 10,
+        "correta": "Uma plataforma de prototipagem eletrônica com microcontrolador",
+        "erradas": [
+          "Um sistema operacional",
+          "Um navegador",
+          "Um antivírus"
+        ]
+      },
+      {
+        "texto": "O que é um sensor?",
+        "pontos": 20,
+        "correta": "Dispositivo que mede grandezas físicas e as converte em sinais",
+        "erradas": [
+          "Um tipo de tela",
+          "Um cabo de rede",
+          "Um software de edição"
+        ]
+      },
+      {
+        "texto": "O protocolo MQTT é muito usado em IoT por ser:",
+        "pontos": 20,
+        "correta": "Leve e baseado em publicar/assinar",
+        "erradas": [
+          "Pesado, feito para transferir vídeos",
+          "Exclusivo para e-mails",
+          "Exclusivo para bancos de dados"
+        ]
+      },
+      {
+        "texto": "O que é um microcontrolador?",
+        "pontos": 30,
+        "correta": "Um chip que reúne CPU, memória e periféricos para tarefas embarcadas",
+        "erradas": [
+          "Um monitor de vídeo",
+          "Um cabo especial",
+          "Um tipo de HD"
+        ]
+      },
+      {
+        "texto": "Para que serve o PWM em eletrônica?",
+        "pontos": 30,
+        "correta": "Controlar potência ou velocidade simulando níveis analógicos com pulsos digitais",
+        "erradas": [
+          "Criptografar dados",
+          "Compactar arquivos",
+          "Nomear domínios"
+        ]
+      }
+    ]
+  },
+  {
+    "grupo": "Segurança e Criptografia",
+    "nome": "Segurança da Informação",
+    "slug": "seguranca-da-informacao",
+    "icone": "🛡️",
+    "descricao": "Ameaças, boas práticas, autenticação e proteção de sistemas.",
+    "quiz": {
+      "titulo": "Quiz de Segurança da Informação",
+      "descricao": "Teste seus conhecimentos em Segurança da Informação. Ameaças, boas práticas, autenticação e proteção de sistemas.",
+      "dificuldade": "media",
+      "limite_tempo": 300
+    },
+    "perguntas": [
+      {
+        "texto": "Qual é uma boa prática para senhas?",
+        "pontos": 10,
+        "correta": "Usar senhas longas, únicas e um gerenciador de senhas",
+        "erradas": [
+          "Repetir a mesma senha em todos os sites",
+          "Usar a data de nascimento",
+          "Anotar em um post-it no monitor"
+        ]
+      },
+      {
+        "texto": "O que é phishing?",
+        "pontos": 10,
+        "correta": "Golpe que induz a vítima a fornecer dados por meio de mensagens falsas",
+        "erradas": [
+          "Um tipo de firewall",
+          "Uma atualização do sistema",
+          "Um backup automático"
+        ]
+      },
+      {
+        "texto": "O que é autenticação de dois fatores (2FA)?",
+        "pontos": 20,
+        "correta": "Uso de dois métodos distintos para confirmar a identidade",
+        "erradas": [
+          "Duas senhas iguais",
+          "Login em dois sites ao mesmo tempo",
+          "Cópia da senha em dois locais"
+        ]
+      },
+      {
+        "texto": "O que faz um firewall?",
+        "pontos": 20,
+        "correta": "Filtra o tráfego de rede conforme regras de segurança",
+        "erradas": [
+          "Acelera o processador",
+          "Recupera arquivos apagados",
+          "Limpa o cache do navegador"
+        ]
+      },
+      {
+        "texto": "Qual ataque insere comandos maliciosos em consultas a bancos de dados?",
+        "pontos": 30,
+        "correta": "SQL Injection",
+        "erradas": [
+          "Ataque de negação de serviço (DDoS)",
+          "Man-in-the-Middle",
+          "Ransomware"
+        ]
+      },
+      {
+        "texto": "Quais são as três propriedades da tríade CIA?",
+        "pontos": 30,
+        "correta": "Confidencialidade, Integridade e Disponibilidade",
+        "erradas": [
+          "Controle, Identidade e Acesso",
+          "Criptografia, Internet e Autenticação",
+          "Cópia, Isolamento e Auditoria"
+        ]
+      }
+    ]
+  },
+  {
+    "grupo": "Segurança e Criptografia",
+    "nome": "Criptografia e Blockchain",
+    "slug": "criptografia-e-blockchain",
+    "icone": "🔐",
+    "descricao": "Chaves, hashes, assinaturas digitais, blockchain e contratos inteligentes.",
+    "quiz": {
+      "titulo": "Quiz de Criptografia e Blockchain",
+      "descricao": "Teste seus conhecimentos em Criptografia e Blockchain. Chaves, hashes, assinaturas digitais, blockchain e contratos inteligentes.",
+      "dificuldade": "media",
+      "limite_tempo": 300
+    },
+    "perguntas": [
+      {
+        "texto": "A criptografia serve para:",
+        "pontos": 10,
+        "correta": "Proteger a informação, tornando-a ilegível a quem não tem a chave",
+        "erradas": [
+          "Acelerar downloads",
+          "Aumentar o brilho da tela",
+          "Apagar vírus"
+        ]
+      },
+      {
+        "texto": "O que é blockchain?",
+        "pontos": 10,
+        "correta": "Cadeia de blocos de registros ligados por criptografia",
+        "erradas": [
+          "Um tipo de pendrive",
+          "Uma rede social",
+          "Uma linguagem de programação"
+        ]
+      },
+      {
+        "texto": "Na criptografia assimétrica, quantas chaves são usadas?",
+        "pontos": 20,
+        "correta": "Duas: uma pública e uma privada",
+        "erradas": [
+          "Apenas uma",
+          "Nenhuma",
+          "Quatro"
+        ]
+      },
+      {
+        "texto": "O que é um hash criptográfico?",
+        "pontos": 20,
+        "correta": "Resumo de tamanho fixo gerado a partir de dados",
+        "erradas": [
+          "Uma chave privada",
+          "Um tipo de backup",
+          "Um certificado de site"
+        ]
+      },
+      {
+        "texto": "O que é um contrato inteligente (smart contract)?",
+        "pontos": 30,
+        "correta": "Código que executa automaticamente regras registradas em uma blockchain",
+        "erradas": [
+          "Um contrato impresso e assinado à mão",
+          "Um antivírus",
+          "Um aplicativo de banco"
+        ]
+      },
+      {
+        "texto": "Qual destes é um algoritmo de criptografia simétrica?",
+        "pontos": 30,
+        "correta": "AES",
+        "erradas": [
+          "RSA",
+          "ECDSA",
+          "Diffie-Hellman"
+        ]
+      }
+    ]
+  },
+  {
+    "grupo": "Design e Produto",
+    "nome": "UX/UI Design",
+    "slug": "ux-ui-design",
+    "icone": "✏️",
+    "descricao": "Experiência do usuário, interfaces, prototipagem e acessibilidade.",
+    "quiz": {
+      "titulo": "Quiz de UX/UI Design",
+      "descricao": "Teste seus conhecimentos em UX/UI Design. Experiência do usuário, interfaces, prototipagem e acessibilidade.",
+      "dificuldade": "media",
+      "limite_tempo": 300
+    },
+    "perguntas": [
+      {
+        "texto": "UX significa:",
+        "pontos": 10,
+        "correta": "User Experience (experiência do usuário)",
+        "erradas": [
+          "User Extension",
+          "Unified Exchange",
+          "Ultra Xray"
+        ]
+      },
+      {
+        "texto": "O que é um wireframe?",
+        "pontos": 10,
+        "correta": "Esboço estrutural de uma tela, sem foco no visual final",
+        "erradas": [
+          "Um código de banco de dados",
+          "Um vídeo institucional",
+          "Um teste de segurança"
+        ]
+      },
+      {
+        "texto": "Qual ferramenta é muito usada para prototipar interfaces?",
+        "pontos": 20,
+        "correta": "Figma",
+        "erradas": [
+          "Docker",
+          "PostgreSQL",
+          "Nginx"
+        ]
+      },
+      {
+        "texto": "O que é acessibilidade digital?",
+        "pontos": 20,
+        "correta": "Garantir que pessoas com diferentes necessidades consigam usar o produto",
+        "erradas": [
+          "Deixar o site mais rápido apenas",
+          "Usar apenas cores escuras",
+          "Bloquear o acesso por celular"
+        ]
+      },
+      {
+        "texto": "Qual a razão mínima de contraste (WCAG AA) para texto normal?",
+        "pontos": 30,
+        "correta": "4,5:1",
+        "erradas": [
+          "1,5:1",
+          "2:1",
+          "10:1"
+        ]
+      },
+      {
+        "texto": "O que é um teste de usabilidade?",
+        "pontos": 30,
+        "correta": "Observar usuários reais realizando tarefas para achar problemas de uso",
+        "erradas": [
+          "Medir o consumo de energia",
+          "Testar a velocidade do servidor",
+          "Revisar o código-fonte"
+        ]
+      }
+    ]
+  },
+  {
+    "grupo": "Gestão e Negócios",
+    "nome": "Gestão de Projetos e Métodos Ágeis",
+    "slug": "gestao-de-projetos-ageis",
+    "icone": "📋",
+    "descricao": "Scrum, Kanban, backlog, sprints e entrega de valor.",
+    "quiz": {
+      "titulo": "Quiz de Gestão de Projetos e Métodos Ágeis",
+      "descricao": "Teste seus conhecimentos em Gestão de Projetos e Métodos Ágeis. Scrum, Kanban, backlog, sprints e entrega de valor.",
+      "dificuldade": "media",
+      "limite_tempo": 300
+    },
+    "perguntas": [
+      {
+        "texto": "Qual framework ágil organiza o trabalho em sprints?",
+        "pontos": 10,
+        "correta": "Scrum",
+        "erradas": [
+          "ITIL",
+          "COBIT",
+          "UML"
+        ]
+      },
+      {
+        "texto": "Um quadro Kanban organiza as tarefas em:",
+        "pontos": 10,
+        "correta": "Colunas por etapa do fluxo de trabalho",
+        "erradas": [
+          "Apenas uma lista",
+          "Gráficos de pizza",
+          "Tabelas de banco de dados"
+        ]
+      },
+      {
+        "texto": "Quem prioriza o backlog do produto no Scrum?",
+        "pontos": 20,
+        "correta": "O Product Owner",
+        "erradas": [
+          "O Scrum Master",
+          "O testador",
+          "O cliente final, sempre"
+        ]
+      },
+      {
+        "texto": "Qual é a duração típica de uma sprint?",
+        "pontos": 20,
+        "correta": "De 1 a 4 semanas",
+        "erradas": [
+          "1 dia",
+          "6 meses",
+          "Não tem prazo definido"
+        ]
+      },
+      {
+        "texto": "O que é um MVP?",
+        "pontos": 30,
+        "correta": "Produto Mínimo Viável: versão inicial para validar a ideia",
+        "erradas": [
+          "Melhor Versão Possível, já final",
+          "Módulo de Vendas Pago",
+          "Modelo Visual Padrão"
+        ]
+      },
+      {
+        "texto": "Qual é o objetivo da retrospectiva da sprint?",
+        "pontos": 30,
+        "correta": "Refletir sobre o trabalho e melhorar o processo da equipe",
+        "erradas": [
+          "Demitir integrantes",
+          "Apresentar o produto só ao cliente",
+          "Planejar as férias"
+        ]
+      }
+    ]
+  },
+  {
+    "grupo": "Gestão e Negócios",
+    "nome": "Governança de TI, ITIL e LGPD",
+    "slug": "governanca-ti-lgpd",
+    "icone": "⚖️",
+    "descricao": "Boas práticas de governança, gestão de serviços e proteção de dados pessoais.",
+    "quiz": {
+      "titulo": "Quiz de Governança de TI, ITIL e LGPD",
+      "descricao": "Teste seus conhecimentos em Governança de TI, ITIL e LGPD. Boas práticas de governança, gestão de serviços e proteção de dados pessoais.",
+      "dificuldade": "media",
+      "limite_tempo": 300
+    },
+    "perguntas": [
+      {
+        "texto": "A LGPD é a lei brasileira de:",
+        "pontos": 10,
+        "correta": "Proteção de dados pessoais",
+        "erradas": [
+          "Direitos autorais de software",
+          "Impostos sobre tecnologia",
+          "Registro de domínios"
+        ]
+      },
+      {
+        "texto": "O que é um dado pessoal, segundo a LGPD?",
+        "pontos": 10,
+        "correta": "Informação relacionada a uma pessoa natural identificada ou identificável",
+        "erradas": [
+          "Apenas o CPF",
+          "Somente senhas",
+          "Apenas dados de empresas"
+        ]
+      },
+      {
+        "texto": "Quem é o controlador de dados na LGPD?",
+        "pontos": 20,
+        "correta": "Quem toma as decisões sobre o tratamento dos dados pessoais",
+        "erradas": [
+          "Quem apenas guarda os backups",
+          "O titular dos dados, sempre",
+          "O invasor do sistema"
+        ]
+      },
+      {
+        "texto": "O ITIL é um conjunto de boas práticas para:",
+        "pontos": 20,
+        "correta": "Gerenciamento de serviços de TI",
+        "erradas": [
+          "Desenvolvimento de jogos",
+          "Design gráfico",
+          "Fabricação de hardware"
+        ]
+      },
+      {
+        "texto": "Qual órgão fiscaliza a LGPD no Brasil?",
+        "pontos": 30,
+        "correta": "ANPD",
+        "erradas": [
+          "ANATEL",
+          "CADE",
+          "ABNT"
+        ]
+      },
+      {
+        "texto": "O que é o COBIT?",
+        "pontos": 30,
+        "correta": "Um framework de governança e gestão de TI",
+        "erradas": [
+          "Uma linguagem de programação",
+          "Um sistema operacional",
+          "Um banco de dados NoSQL"
+        ]
+      }
+    ]
+  },
+  {
+    "grupo": "Gestão e Negócios",
+    "nome": "Empreendedorismo e Startups",
+    "slug": "empreendedorismo-e-startups",
+    "icone": "🚀",
+    "descricao": "Modelos de negócio, validação de ideias e startups de tecnologia.",
+    "quiz": {
+      "titulo": "Quiz de Empreendedorismo e Startups",
+      "descricao": "Teste seus conhecimentos em Empreendedorismo e Startups. Modelos de negócio, validação de ideias e startups de tecnologia.",
+      "dificuldade": "media",
+      "limite_tempo": 300
+    },
+    "perguntas": [
+      {
+        "texto": "O que é uma startup?",
+        "pontos": 10,
+        "correta": "Empresa nascente, geralmente inovadora, com modelo de negócio escalável",
+        "erradas": [
+          "Toda empresa antiga",
+          "Uma loja física comum",
+          "Um órgão público"
+        ]
+      },
+      {
+        "texto": "O que é um modelo de negócio?",
+        "pontos": 10,
+        "correta": "A forma como a empresa cria, entrega e captura valor",
+        "erradas": [
+          "O logotipo da empresa",
+          "O contrato de trabalho",
+          "A planta do escritório"
+        ]
+      },
+      {
+        "texto": "O que é um 'pitch'?",
+        "pontos": 20,
+        "correta": "Apresentação curta para convencer investidores ou clientes",
+        "erradas": [
+          "Um tipo de código",
+          "Um relatório fiscal",
+          "Um contrato"
+        ]
+      },
+      {
+        "texto": "O que significa um negócio ser 'escalável'?",
+        "pontos": 20,
+        "correta": "Crescer a receita sem crescer os custos na mesma proporção",
+        "erradas": [
+          "Ter muitos funcionários",
+          "Ter escritório grande",
+          "Vender apenas localmente"
+        ]
+      },
+      {
+        "texto": "O que é o Business Model Canvas?",
+        "pontos": 30,
+        "correta": "Quadro visual de 9 blocos que descreve um modelo de negócio",
+        "erradas": [
+          "Um software de desenho 3D",
+          "Uma planilha contábil oficial",
+          "Um contrato padrão"
+        ]
+      },
+      {
+        "texto": "O que é 'burn rate'?",
+        "pontos": 30,
+        "correta": "A velocidade com que a empresa consome seu caixa",
+        "erradas": [
+          "A taxa de juros do banco",
+          "A velocidade do servidor",
+          "O lucro mensal"
+        ]
+      }
+    ]
+  },
+  {
+    "grupo": "Fundamentos e Suporte",
+    "nome": "Suporte Técnico e Informática Básica",
+    "slug": "suporte-e-informatica-basica",
+    "icone": "💻",
+    "descricao": "Uso do computador, Office, diagnóstico de problemas e backup.",
+    "quiz": {
+      "titulo": "Quiz de Suporte Técnico e Informática Básica",
+      "descricao": "Teste seus conhecimentos em Suporte Técnico e Informática Básica. Uso do computador, Office, diagnóstico de problemas e backup.",
+      "dificuldade": "media",
+      "limite_tempo": 300
+    },
+    "perguntas": [
+      {
+        "texto": "Qual atalho copia o item selecionado no Windows?",
+        "pontos": 10,
+        "correta": "Ctrl + C",
+        "erradas": [
+          "Ctrl + V",
+          "Ctrl + Z",
+          "Ctrl + P"
+        ]
+      },
+      {
+        "texto": "Qual é a extensão comum de arquivos do Word?",
+        "pontos": 10,
+        "correta": ".docx",
+        "erradas": [
+          ".xlsx",
+          ".pptx",
+          ".jpg"
+        ]
+      },
+      {
+        "texto": "Qual função do Excel soma os valores de um intervalo?",
+        "pontos": 20,
+        "correta": "SOMA (SUM)",
+        "erradas": [
+          "MÉDIA (AVERAGE)",
+          "CONT.SE (COUNTIF)",
+          "PROCV (VLOOKUP)"
+        ]
+      },
+      {
+        "texto": "O que verificar primeiro quando um computador não liga?",
+        "pontos": 20,
+        "correta": "Cabo de energia, tomada e fonte",
+        "erradas": [
+          "Formatar o sistema",
+          "Trocar o processador",
+          "Comprar outro computador"
+        ]
+      },
+      {
+        "texto": "O que é um driver?",
+        "pontos": 30,
+        "correta": "Software que permite ao sistema operacional usar um hardware",
+        "erradas": [
+          "Um cabo",
+          "Um tipo de vírus",
+          "Uma extensão de arquivo"
+        ]
+      },
+      {
+        "texto": "Qual a diferença entre backup completo e incremental?",
+        "pontos": 30,
+        "correta": "O incremental copia só o que mudou desde o último backup",
+        "erradas": [
+          "O completo copia só arquivos novos",
+          "São idênticos",
+          "O incremental apaga os dados originais"
+        ]
+      }
+    ]
+  },
+  {
+    "grupo": "Fundamentos e Suporte",
+    "nome": "Matemática para Computação",
+    "slug": "matematica-para-computacao",
+    "icone": "➗",
+    "descricao": "Bases numéricas, lógica booleana, potências, logaritmos e combinatória.",
+    "quiz": {
+      "titulo": "Quiz de Matemática para Computação",
+      "descricao": "Teste seus conhecimentos em Matemática para Computação. Bases numéricas, lógica booleana, potências, logaritmos e combinatória.",
+      "dificuldade": "media",
+      "limite_tempo": 300
+    },
+    "perguntas": [
+      {
+        "texto": "Quanto é 2 elevado a 10?",
+        "pontos": 10,
+        "correta": "1024",
+        "erradas": [
+          "1000",
+          "512",
+          "2048"
+        ]
+      },
+      {
+        "texto": "Qual é o resultado de 15 mod 4?",
+        "pontos": 10,
+        "correta": "3",
+        "erradas": [
+          "1",
+          "4",
+          "0"
+        ]
+      },
+      {
+        "texto": "Na lógica booleana, a operação AND resulta em verdadeiro quando:",
+        "pontos": 20,
+        "correta": "Ambas as entradas são verdadeiras",
+        "erradas": [
+          "Ao menos uma entrada é verdadeira",
+          "Ambas as entradas são falsas",
+          "As entradas são diferentes"
+        ]
+      },
+      {
+        "texto": "O número decimal 13 em binário é:",
+        "pontos": 20,
+        "correta": "1101",
+        "erradas": [
+          "1011",
+          "1110",
+          "1001"
+        ]
+      },
+      {
+        "texto": "Qual é o valor de log₂(8)?",
+        "pontos": 30,
+        "correta": "3",
+        "erradas": [
+          "2",
+          "4",
+          "8"
+        ]
+      },
+      {
+        "texto": "Quantos subconjuntos possui um conjunto de 4 elementos?",
+        "pontos": 30,
+        "correta": "16",
+        "erradas": [
+          "8",
+          "4",
+          "24"
+        ]
+      }
+    ]
+  },
+  {
+    "grupo": "Fundamentos e Suporte",
+    "nome": "Tecnologias Emergentes",
+    "slug": "tecnologias-emergentes",
+    "icone": "🔭",
+    "descricao": "5G, realidade aumentada, computação quântica, impressão 3D e edge computing.",
+    "quiz": {
+      "titulo": "Quiz de Tecnologias Emergentes",
+      "descricao": "Teste seus conhecimentos em Tecnologias Emergentes. 5G, realidade aumentada, computação quântica, impressão 3D e edge computing.",
+      "dificuldade": "media",
+      "limite_tempo": 300
+    },
+    "perguntas": [
+      {
+        "texto": "O que significa 5G?",
+        "pontos": 10,
+        "correta": "Quinta geração de redes móveis",
+        "erradas": [
+          "Cinco gigabytes",
+          "Quinto Google",
+          "Cinco gateways"
+        ]
+      },
+      {
+        "texto": "Qual tecnologia sobrepõe elementos virtuais ao mundo real?",
+        "pontos": 10,
+        "correta": "Realidade aumentada (AR)",
+        "erradas": [
+          "Impressão 3D",
+          "Blockchain",
+          "Computação em nuvem"
+        ]
+      },
+      {
+        "texto": "O que é computação quântica?",
+        "pontos": 20,
+        "correta": "Computação que usa princípios da mecânica quântica, como os qubits",
+        "erradas": [
+          "Computação em nuvem",
+          "Computação sem energia",
+          "Um tipo de HD"
+        ]
+      },
+      {
+        "texto": "O que faz uma impressora 3D?",
+        "pontos": 20,
+        "correta": "Constrói objetos adicionando material camada por camada",
+        "erradas": [
+          "Imprime apenas em papel",
+          "Corta o material",
+          "Escaneia documentos"
+        ]
+      },
+      {
+        "texto": "O que é um gêmeo digital (digital twin)?",
+        "pontos": 30,
+        "correta": "Réplica virtual de um objeto ou sistema físico, atualizada com dados reais",
+        "erradas": [
+          "Um clone de e-mail",
+          "Um backup de site",
+          "Um par de monitores"
+        ]
+      },
+      {
+        "texto": "O que é computação de borda (edge computing)?",
+        "pontos": 30,
+        "correta": "Processar dados perto de onde são gerados, reduzindo a latência",
+        "erradas": [
+          "Processar tudo em um único datacenter distante",
+          "Computar apenas nos cabos",
+          "Desligar os sensores"
+        ]
+      }
+    ]
+  }
+]

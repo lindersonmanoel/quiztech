@@ -5,3 +5,18 @@ __pycache__/
 .env
 *.db
 .DS_Store
+
+# Node
+node_modules/
+
+# Segredos e arquivos de ambiente (so' os .example vao para o Git)
+.env
+.env.*
+!.env.example
+!.env.*.example
+backend-node/.env
+backend-node/.env.test
+
+# Backups do banco (copie para fora da maquina)
+backups/
+*.dump

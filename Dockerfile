@@ -1,30 +1,29 @@
-FROM python:3.12-slim
-
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+# Imagem de producao da API do QUIZ TECH (Node.js).
+# Contexto de build: a raiz do repositorio (precisa enxergar backend-node/, database/ e frontend/ juntos:
+# as migracoes e o seed ficam em database/, e o site so' e' servido se SERVE_FRONTEND=1).
+FROM node:20-alpine
 
 WORKDIR /app
 
-COPY requirements.txt requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+COPY --chown=node:node backend-node/package.json backend-node/package-lock.json ./backend-node/
+RUN cd backend-node && npm ci --omit=dev
 
-COPY backend backend
-COPY frontend frontend
+COPY --chown=node:node backend-node ./backend-node
+COPY --chown=node:node database ./database
+COPY --chown=node:node frontend ./frontend
 
-RUN useradd --create-home appuser
-USER appuser
-
-WORKDIR /app/backend
-ENV ENVIRONMENT=production
-
-# Informe o commit no build (docker compose lê GIT_COMMIT do ambiente); aparece em /api/version.
+WORKDIR /app/backend-node
+ENV NODE_ENV=production
+# Commit do build (aparece em /api/version e no rodape do site): docker compose le GIT_COMMIT do ambiente.
 ARG GIT_COMMIT=dev
 ENV GIT_COMMIT=$GIT_COMMIT
+EXPOSE 3100
+USER node
 
-EXPOSE 8000
-
-# O Railway/Compose podem definir $PORT; sem ele usa 8000.
+# Saudavel = processo de pe E banco respondendo (/api/health/ready). Alpine ja traz o wget (busybox).
 HEALTHCHECK --interval=30s --timeout=5s --start-period=40s --retries=3 \
-    CMD python -c "import os, urllib.request; urllib.request.urlopen('http://127.0.0.1:%s/api/health' % os.getenv('PORT', '8000'), timeout=4)" || exit 1
+  CMD wget -qO- http://127.0.0.1:${PORT:-3100}/api/health/ready >/dev/null || exit 1
 
-ENTRYPOINT ["sh", "/app/backend/docker-entrypoint.sh"]
+# Aplica migracoes e a carga inicial a cada deploy (idempotentes) e sobe a API. ";" e nao "&&" de proposito: se algo
+# falhar, a API anterior continua de pe e o erro fica no log.
+CMD ["sh", "-c", "node src/database/migrate.js || echo '[migrate] ATENCAO: falha ao aplicar migracoes - veja o erro acima'; node src/database/seed.js || echo '[seed] ATENCAO: falha na carga inicial - veja o erro acima'; exec node src/server.js"]

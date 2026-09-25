@@ -1,4 +1,4 @@
-name: CI
+name: Testes do backend
 
 on:
   push:
@@ -9,48 +9,41 @@ permissions:
   contents: read
 
 jobs:
-  tests:
-    name: Testes do backend
+  backend:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: pip
-          cache-dependency-path: |
-            requirements.txt
-            backend/requirements-dev.txt
-      - run: pip install -r backend/requirements-dev.txt
-      - name: pytest
-        working-directory: backend
-        run: python -m pytest -q
-      - name: Migrações batem com os modelos
-        working-directory: backend
+    services:
+      postgres:
+        image: postgres:16-alpine
         env:
-          DATABASE_URL: sqlite:///./ci.db
+          POSTGRES_USER: quiztech
+          POSTGRES_PASSWORD: teste
+          POSTGRES_DB: quiztech_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U quiztech -d quiztech_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    defaults:
+      run:
+        working-directory: backend-node
+    env:
+      NODE_ENV: test
+      DATABASE_URL: postgresql://quiztech:teste@localhost:5432/quiztech_test
+      JWT_SECRET: segredo-so-para-ci-com-mais-de-32-caracteres
+      FRONTEND_URL: http://localhost:5500
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: backend-node/package-lock.json
+      - run: npm ci
+      - name: Aplicar migracoes e carga inicial no banco de teste
         run: |
-          python -m alembic upgrade head
-          python -m alembic check
-
-  dependencias:
-    name: Vulnerabilidades nas dependências
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - run: pip install pip-audit
-      - run: pip-audit -r backend/requirements-dev.txt
-
-  analise-estatica:
-    name: Análise estática (bandit)
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - run: pip install bandit
-      - run: bandit -r backend/app -ll
+          npm run migrate
+          npm run seed
+      - name: Rodar testes
+        run: npm test

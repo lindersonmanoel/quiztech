@@ -32,7 +32,7 @@ jobs:
             echo "SLACK_WEBHOOK_URL não configurado; nenhuma notificação enviada."
             exit 0
           fi
-          VERSION=$(sed -n 's/^__version__ = "\(.*\)"/\1/p' backend/app/version.py)
+          VERSION=$(node -p "require('./backend-node/package.json').version")
           SHORT=$(printf '%s' "$SHA" | cut -c1-7)
           if [ "$STATE" = "success" ]; then ICON=":white_check_mark:"; WHAT="publicado"; else ICON=":x:"; WHAT="FALHOU"; fi
           LINK="${DEPLOY_URL:-$LOG_URL}"

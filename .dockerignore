@@ -1,9 +1,13 @@
 .git
-.venv
-**/.venv
-**/__pycache__
-**/.pytest_cache
-backend/tests
-*.db
-.env
 .github
+**/node_modules
+backend-node/tests
+backend-node/.env*
+.env*
+*.db
+backups
+legacy
+# codigo Python antigo (substituido pelo backend-node)
+backend
+api
+requirements.txt

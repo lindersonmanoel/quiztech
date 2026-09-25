@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#010e24">
+  <title>Sem conexão — QUIZ TECH</title>
+  <link rel="icon" type="image/png" href="assets/logo/favicon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main id="app">
+    <form class="card form auth-card" onsubmit="return false">
+      <div class="auth-logo"><img src="assets/logo/logo.png" alt="QUIZ TECH" width="144" height="144"></div>
+      <h1>Sem conexão</h1>
+      <p class="muted">Você está offline. Os quizzes precisam de internet para serem corrigidos e para emitir o certificado.</p>
+      <p class="muted">Conecte-se e tente de novo.</p>
+      <button class="btn block" type="button" id="retry">Tentar de novo</button>
+    </form>
+  </main>
+  <script src="js/offline.js"></script>
+</body>
+</html>

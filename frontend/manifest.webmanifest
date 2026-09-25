@@ -1,0 +1,25 @@
+{
+  "id": "./",
+  "name": "QUIZ TECH",
+  "short_name": "QUIZ TECH",
+  "description": "Quizzes de tecnologia com certificado de conclusão.",
+  "start_url": "./index.html?source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "background_color": "#000000",
+  "theme_color": "#010e24",
+  "categories": ["education", "technology"],
+  "icons": [
+    { "src": "assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Escolher um quiz", "short_name": "Quizzes", "url": "quizzes.html", "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Ranking", "url": "ranking.html", "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Meu perfil e certificados", "short_name": "Perfil", "url": "perfil.html", "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192" }] }
+  ]
+}

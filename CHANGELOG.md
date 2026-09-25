@@ -3,6 +3,30 @@
 Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e [versionamento semântico](https://semver.org/lang/pt-BR/).
 A versão em execução aparece no rodapé do site e em `/api/version`.
 
+## [2.0.0] - 2026-09-25
+
+Reescrita do backend em **Node.js**, no mesmo padrão do Meu Bolso Digital. As rotas da API continuam as mesmas; o site
+segue funcionando (mudou só o formato das mensagens de erro: `{ "erro", "campos" }`).
+
+### Adicionado
+- **Instalar como aplicativo (PWA):** botão "Instalar app" para todos os navegadores Android, com instalação nativa quando o
+  navegador oferece e passo a passo específico (Chrome, Edge, Firefox, Samsung Internet, Opera, Brave, DuckDuckGo, Vivaldi)
+  ou aviso para abrir fora de navegadores embutidos (Instagram, Facebook...). Manifesto, ícones, atalhos e abertura offline.
+- Backend Express em camadas (rotas → controladores → serviços → models) com PostgreSQL, migrações `.sql` e 73 testes.
+- Publicação no esquema do Meu Bolso: API em contêiner na VM, banco no **mesmo servidor PostgreSQL** (banco e usuário
+  próprios, isolados), Cloudflare Tunnel, backup diário, CI de testes, segurança semanal e fumaça diária de produção.
+- `DEPLOY.md` e `SEGURANCA.md`.
+- Endereço da API configurável no site (`frontend/js/config.js`), para o site (Vercel) e a API (VM) ficarem em endereços diferentes.
+
+### Alterado
+- O site no Vercel é só estático; a API roda na VM. `vercel.json` sem função serverless.
+- A API escuta na porta 3100 (a 3000 é do Meu Bolso Digital).
+- O e-mail do administrador continua definido por `ADMIN_EMAIL`; agora o limite de tentativas usa o IP real do visitante
+  vindo do Cloudflare (`CLIENT_IP_HEADER`), que o cliente não consegue forjar.
+
+### Removido
+- Backend Python/FastAPI, função serverless do Vercel e Alembic (o código antigo fica em `backend/` e `api/` só como referência).
+
 ## [1.1.0] - 2026-09-25
 
 ### Adicionado
@@ -30,7 +54,7 @@ A versão em execução aparece no rodapé do site e em `/api/version`.
 
 ## Como publicar uma nova versão
 
-1. Altere `__version__` em `backend/app/version.py` e descreva as mudanças aqui.
-2. Faça o commit e o push na branch `main`. O Vercel publica em produção.
-3. Opcional: crie a etiqueta da versão: `git tag v1.1.0 && git push --tags`.
+1. Altere `version` em `backend-node/package.json` e descreva as mudanças aqui.
+2. Faça o commit e o push na branch `main`. O Vercel publica o site; na VM: `git pull` e `docker compose ... up -d --build` (DEPLOY.md).
+3. Opcional: crie a etiqueta da versão: `git tag v2.0.0 && git push --tags`.
 4. Quem estiver com o site aberto verá o aviso de nova versão em até 5 minutos.
