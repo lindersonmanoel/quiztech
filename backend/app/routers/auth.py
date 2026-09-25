@@ -14,6 +14,10 @@ router = APIRouter(prefix="/api", tags=["auth"])
 
 
 def _client_ip(request: Request) -> str:
+    if config.CLIENT_IP_HEADER:  # proxy confiável configurado (ex.: túnel do Cloudflare)
+        value = request.headers.get(config.CLIENT_IP_HEADER)
+        if value:
+            return value.split(",")[0].strip()
     # Só o Vercel sobrescreve este cabeçalho; em qualquer outro host o cliente poderia forjá-lo.
     if config.IS_SERVERLESS:
         forwarded = request.headers.get("x-vercel-forwarded-for")

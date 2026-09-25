@@ -300,3 +300,22 @@ def test_quiz_detail_has_no_n_plus_one_queries(client, db_session):
         event.remove(engine, "before_cursor_execute", listener)
     # quiz + categoria + perguntas + alternativas; antes eram 9 (uma consulta por pergunta)
     assert len(count) <= 4, f"{len(count)} consultas"
+
+
+def test_client_ip_header_is_only_trusted_when_configured(client, monkeypatch):
+    from app import config
+
+    register(client)
+    attempt = lambda ip: client.post(  # noqa: E731
+        "/api/auth/login", json={"email": "ana@example.com", "password": "errada-1234"}, headers={"cf-connecting-ip": ip}
+    ).status_code
+
+    # sem configuração o cabeçalho é ignorado: trocar de "IP" não ajuda
+    assert 429 in [attempt(f"9.9.9.{i}") for i in range(8)]
+
+    # com o proxy confiável configurado, cada IP real tem o seu próprio contador
+    monkeypatch.setattr(config, "CLIENT_IP_HEADER", "cf-connecting-ip")
+    from app import ratelimit
+    with_header = [attempt("8.8.8.8") for _ in range(ratelimit.MAX_ATTEMPTS_PER_IP + 1)]
+    assert with_header[-1] == 429
+    assert attempt("7.7.7.7") == 401  # outro IP real ainda não estourou o limite (mas o teto por e-mail é 20)

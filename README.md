@@ -79,6 +79,15 @@ docker compose -f docker-compose.yml -f docker-compose.https.yml up -d --build
 
 Nesse modo a API deixa de ser publicada; só o Caddy (portas 80/443) fica exposto.
 
+**Endereço público temporário (Cloudflare Tunnel)**, sem conta, sem domínio e sem abrir portas no roteador:
+
+```powershell
+docker compose -f docker-compose.yml -f docker-compose.tunnel.yml up -d --build
+docker compose -f docker-compose.yml -f docker-compose.tunnel.yml logs tunnel | findstr trycloudflare
+```
+
+O segundo comando mostra o endereço `https://…trycloudflare.com`. Ele **muda toda vez que o túnel reinicia** (é um endereço de teste/demonstração, sem garantia de disponibilidade); para um endereço fixo use um domínio com o modo HTTPS acima. Nesse modo a API só escuta em `127.0.0.1`, e o IP real do visitante vem do cabeçalho `cf-connecting-ip` (`CLIENT_IP_HEADER`), que o cliente não consegue forjar; por isso o limite de tentativas de login continua valendo. Para desligar o acesso público: `docker compose -f docker-compose.yml -f docker-compose.tunnel.yml down` e suba de novo só com `docker compose up -d`.
+
 **Dia a dia**
 
 | Tarefa | Comando |

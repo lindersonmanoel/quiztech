@@ -19,6 +19,9 @@ PASS_PERCENTAGE = 70  # aproveitamento mínimo para aprovação e emissão do ce
 RETAKE_COOLDOWN_SECONDS = int(os.getenv("RETAKE_COOLDOWN_SECONDS", "600"))
 # /docs e /openapi.json ficam desligados em produção (expõem a lista de rotas, inclusive as de admin).
 DOCS_ENABLED = ENVIRONMENT != "production" or os.getenv("ENABLE_DOCS") == "1"
+# Cabeçalho, escrito por um proxy confiável, que traz o IP real do visitante (ex.: cf-connecting-ip no Cloudflare).
+# Só defina se TODO o tráfego passar por esse proxy; caso contrário o cliente poderia forjá-lo.
+CLIENT_IP_HEADER = os.getenv("CLIENT_IP_HEADER", "").strip().lower()
 ACCESS_TOKEN_MINUTES = int(os.getenv("ACCESS_TOKEN_MINUTES", "720"))
 ADMIN_EMAIL = os.getenv("ADMIN_EMAIL", "").strip().lower()
 SEED_ON_STARTUP = os.getenv("SEED_ON_STARTUP", "1") == "1"

@@ -1,0 +1,19 @@
+# Endereço público temporário (https://<aleatório>.trycloudflare.com) via Cloudflare Tunnel, sem conta e sem domínio:
+#   docker compose -f docker-compose.yml -f docker-compose.tunnel.yml up -d --build
+#   docker compose -f docker-compose.yml -f docker-compose.tunnel.yml logs tunnel | findstr trycloudflare
+# O endereço muda cada vez que o túnel reinicia. Para um endereço fixo use um domínio (docker-compose.https.yml).
+services:
+  app:
+    # A API só fica acessível na própria VM (127.0.0.1); o mundo de fora entra apenas pelo túnel.
+    ports: !override
+      - "127.0.0.1:${APP_PORT:-8000}:8000"
+    environment:
+      # O Cloudflare escreve este cabeçalho com o IP real do visitante (o cliente não consegue forjá-lo).
+      CLIENT_IP_HEADER: cf-connecting-ip
+
+  tunnel:
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    command: tunnel --no-autoupdate --url http://app:8000
+    depends_on:
+      - app
