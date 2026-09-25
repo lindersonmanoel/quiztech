@@ -8,6 +8,7 @@ $("#form").addEventListener("submit", async (event) => {
   event.preventDefault();
   const button = $("#submit");
   const password = $("#password").value;
+  if (!$("#terms").checked) return showMessage($("#msg"), "Para se cadastrar, aceite a Política de Privacidade.");
   if (password.length < 8) return showMessage($("#msg"), "A senha precisa ter pelo menos 8 caracteres.");
   button.disabled = true;
   showMessage($("#msg"), "");

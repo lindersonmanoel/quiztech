@@ -44,6 +44,22 @@ def register_failure(db: Session, ip: str, email: str) -> None:
     db.commit()
 
 
+MAX_REGISTRATIONS_PER_IP = 10
+
+
+def registration_key(client_ip: str) -> str:
+    return _hash(f"register|{client_ip}")
+
+
+def registration_blocked(db: Session, key: str) -> bool:
+    return _recent(db, key) >= MAX_REGISTRATIONS_PER_IP
+
+
+def record_registration_attempt(db: Session, key: str) -> None:
+    db.add(LoginFailure(key=key))
+    db.commit()
+
+
 def reset(db: Session, ip: str) -> None:
     """Login bem-sucedido zera só o contador do IP; o do e-mail expira sozinho (não dá para 'lavar' um ataque)."""
     db.execute(delete(LoginFailure).where(LoginFailure.key == ip))

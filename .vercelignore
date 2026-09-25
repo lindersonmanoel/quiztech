@@ -6,3 +6,7 @@ backend/.venv
 Dockerfile
 railway.json
 .dockerignore
+
+.github
+backend/migrations
+backend/alembic.ini

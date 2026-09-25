@@ -1,13 +1,13 @@
 from fastapi import APIRouter, Depends, HTTPException, Request, status
-from sqlalchemy import select
+from sqlalchemy import delete, select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from .. import config, ratelimit
 from ..database import get_db
 from ..deps import get_current_user
-from ..models import User
-from ..schemas import LoginIn, RegisterIn, TokenOut, UserOut, UserUpdate
+from ..models import Certificate, Result, User
+from ..schemas import DeleteAccountIn, LoginIn, RegisterIn, TokenOut, UserOut, UserUpdate
 from ..security import create_access_token, hash_password, verify_password
 
 router = APIRouter(prefix="/api", tags=["auth"])
@@ -27,7 +27,11 @@ _DUMMY_HASH = hash_password("senha-inexistente")
 
 
 @router.post("/auth/register", response_model=TokenOut, status_code=status.HTTP_201_CREATED)
-def register(data: RegisterIn, db: Session = Depends(get_db)):
+def register(data: RegisterIn, request: Request, db: Session = Depends(get_db)):
+    reg_key = ratelimit.registration_key(_client_ip(request))
+    if ratelimit.registration_blocked(db, reg_key):
+        raise HTTPException(status.HTTP_429_TOO_MANY_REQUESTS, "Muitos cadastros deste endereço. Tente novamente mais tarde.")
+    ratelimit.record_registration_attempt(db, reg_key)
     email = data.email.lower()
     if db.scalar(select(User).where(User.email == email)):
         raise HTTPException(status.HTTP_409_CONFLICT, "E-mail já cadastrado")
@@ -73,3 +77,25 @@ def update_me(data: UserUpdate, user: User = Depends(get_current_user), db: Sess
     user.name = " ".join(data.name.split())
     db.commit()
     return user
+
+
+@router.post("/users/me/delete", status_code=status.HTTP_204_NO_CONTENT)
+def delete_me(
+    data: DeleteAccountIn,
+    request: Request,
+    user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """Direito de exclusão (LGPD): apaga conta, resultados e certificados. Exige a senha."""
+    ip = ratelimit.ip_key(_client_ip(request), user.email)
+    by_email = ratelimit.email_key(user.email)
+    if ratelimit.is_blocked(db, ip, by_email):
+        raise HTTPException(status.HTTP_429_TOO_MANY_REQUESTS, "Muitas tentativas. Tente novamente em alguns minutos.")
+    if not verify_password(data.password, user.password_hash):
+        ratelimit.register_failure(db, ip, by_email)
+        # 403 (e não 401) para o frontend não interpretar como sessão expirada
+        raise HTTPException(status.HTTP_403_FORBIDDEN, "Senha incorreta")
+    db.execute(delete(Certificate).where(Certificate.user_id == user.id))
+    db.execute(delete(Result).where(Result.user_id == user.id))
+    db.delete(user)
+    db.commit()

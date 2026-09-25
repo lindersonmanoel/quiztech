@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#010e24">
+  <title>Política de Privacidade — QUIZ TECH</title>
+  <link rel="icon" type="image/png" href="assets/logo/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main id="app">
+    <article class="prose">
+      <h1>Política de Privacidade</h1>
+      <p class="muted">Como o QUIZ TECH trata os seus dados pessoais, em conformidade com a Lei Geral de Proteção de Dados (LGPD, Lei 13.709/2018).</p>
+
+      <h2>1. Quais dados coletamos</h2>
+      <ul>
+        <li><strong>Cadastro:</strong> nome, e-mail e senha. A senha nunca é guardada em texto: armazenamos apenas um hash irreversível (bcrypt).</li>
+        <li><strong>Uso da plataforma:</strong> respostas e pontuação dos quizzes, tempo gasto e certificados emitidos.</li>
+        <li><strong>Segurança:</strong> para limitar tentativas de login e de cadastro em excesso, guardamos por até 15 minutos um código irreversível (hash) derivado do endereço IP e do e-mail. Não guardamos o IP em si.</li>
+      </ul>
+
+      <h2>2. Para que usamos</h2>
+      <ul>
+        <li>Criar e proteger a sua conta;</li>
+        <li>Corrigir os quizzes, guardar o seu histórico e emitir certificados de conclusão;</li>
+        <li>Montar o ranking e prevenir abusos e fraudes.</li>
+      </ul>
+      <p>Não vendemos nem usamos os dados para publicidade.</p>
+
+      <h2>3. O que aparece para outras pessoas</h2>
+      <ul>
+        <li><strong>Ranking público:</strong> apenas seu primeiro nome e a inicial do último sobrenome (por exemplo, "Ana S."), pontos e número de quizzes.</li>
+        <li><strong>Certificado:</strong> quem tiver o código de verificação vê o seu nome completo, a área, a nota e a data. O e-mail nunca é exibido.</li>
+      </ul>
+
+      <h2>4. Onde os dados ficam</h2>
+      <p>A hospedagem do site e da API é feita pela Vercel, e o banco de dados PostgreSQL fica em um provedor de nuvem contratado para o projeto. Esses provedores tratam os dados apenas para nos prestar o serviço.</p>
+
+      <h2>5. Cookies e armazenamento local</h2>
+      <p>Não usamos cookies de rastreamento nem ferramentas de análise. Guardamos no seu navegador (localStorage) somente o token de sessão e seu nome, para manter você conectado por até 12 horas.</p>
+
+      <h2>6. Por quanto tempo guardamos</h2>
+      <p>Enquanto a sua conta existir. Ao excluí-la, removemos conta, resultados e certificados.</p>
+
+      <h2>7. Seus direitos</h2>
+      <p>Você pode, a qualquer momento: confirmar e acessar seus dados, corrigir o nome (página <a href="perfil.html">Meu perfil</a>) e <strong>excluir a conta</strong> definitivamente (também em Meu perfil, ao final da página). Para outros pedidos previstos no art. 18 da LGPD, abra uma solicitação em <a href="https://github.com/lindersonmanoel/quiztech/issues" rel="noopener">github.com/lindersonmanoel/quiztech/issues</a>.</p>
+
+      <h2>8. Segurança</h2>
+      <p>Usamos conexão criptografada (HTTPS), senhas com hash, limitação de tentativas de login e correção dos quizzes no servidor. Nenhum sistema é 100% imune, mas trabalhamos para reduzir riscos.</p>
+
+      <h2>9. Alterações</h2>
+      <p>Podemos atualizar esta política. A versão vigente sempre estará nesta página.</p>
+
+      <p><a class="btn secondary small" href="cadastro.html">Voltar ao cadastro</a></p>
+    </article>
+  </main>
+  <script type="module" src="js/privacidade.js"></script>
+</body>
+</html>

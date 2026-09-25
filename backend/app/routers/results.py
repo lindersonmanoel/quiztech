@@ -24,6 +24,14 @@ def certificate_out(cert: Certificate) -> CertificateOut:
     )
 
 
+def public_name(full_name: str) -> str:
+    """Ranking é público: mostra só o primeiro nome e a inicial do último (o nome completo fica no certificado)."""
+    parts = full_name.split()
+    if len(parts) < 2:
+        return parts[0] if parts else "Anônimo"
+    return f"{parts[0]} {parts[-1][0].upper()}."
+
+
 def public_review(review: list[dict], passed: bool) -> list[dict]:
     """Só quem foi aprovado vê o gabarito; os demais veem apenas quais respostas estavam certas."""
     if passed:
@@ -109,7 +117,7 @@ def ranking(
         .limit(limit)
     ).all()
     return [
-        RankingEntry(position=i, user_name=name, total_score=int(total), quizzes_completed=int(done))
+        RankingEntry(position=i, user_name=public_name(name), total_score=int(total), quizzes_completed=int(done))
         for i, (name, total, done) in enumerate(rows, start=1)
     ]
 

@@ -10,7 +10,7 @@ from sqlalchemy.orm import Session, selectinload
 from .. import config
 from ..database import get_db
 from ..deps import get_current_user, get_optional_user
-from ..models import Category, Certificate, Quiz, Result, User
+from ..models import Category, Certificate, Question, Quiz, Result, User
 from ..schemas import (
     CategoryOut,
     QuestionPublic,
@@ -72,7 +72,7 @@ def _load_quiz(db: Session, quiz_id: int) -> Quiz:
     quiz = db.scalar(
         select(Quiz)
         .where(Quiz.id == quiz_id, Quiz.is_active.is_(True))
-        .options(selectinload(Quiz.category), selectinload(Quiz.questions))
+        .options(selectinload(Quiz.category), selectinload(Quiz.questions).selectinload(Question.alternatives))
     )
     if quiz is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Quiz não encontrado")

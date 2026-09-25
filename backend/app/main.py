@@ -22,6 +22,21 @@ def bootstrap() -> None:
             seed_if_empty(db)
 
 
+_ready = False
+
+
+def ensure_ready() -> None:
+    """Prepara o banco uma vez; se falhar (ex.: banco fora do ar na partida a frio), tenta de novo na próxima requisição."""
+    global _ready
+    if _ready:
+        return
+    try:
+        bootstrap()
+        _ready = True
+    except Exception:  # noqa: BLE001 - a API sobe e o erro aparece nos logs da função
+        log.exception("Falha ao preparar o banco de dados")
+
+
 @asynccontextmanager
 async def lifespan(_: FastAPI):
     bootstrap()
@@ -39,10 +54,7 @@ app = FastAPI(
 
 if config.IS_SERVERLESS:
     # Funções serverless não garantem o evento de lifespan: prepara o banco na partida a frio.
-    try:
-        bootstrap()
-    except Exception:  # noqa: BLE001 - a API sobe e o erro aparece nos logs da função
-        log.exception("Falha ao preparar o banco de dados na inicialização")
+    ensure_ready()
 
 if config.CORS_ORIGINS:  # em produção o frontend é servido pela própria API (mesma origem)
     app.add_middleware(
@@ -70,6 +82,8 @@ DOCS_CSP = (
 
 @app.middleware("http")
 async def security_headers(request: Request, call_next):
+    if config.IS_SERVERLESS and not _ready:
+        ensure_ready()
     response = await call_next(request)
     response.headers.setdefault("X-Content-Type-Options", "nosniff")
     response.headers.setdefault("X-Frame-Options", "DENY")

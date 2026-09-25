@@ -14,7 +14,9 @@ Plataforma web de quizzes de tecnologia com **certificado de conclusão**.
 - Quiz com cronômetro, navegação entre perguntas e correção **no servidor** (o gabarito nunca vai ao navegador antes de responder)
 - Resultado com revisão pergunta a pergunta
 - **Certificado de conclusão** emitido automaticamente com 70% ou mais de acertos, uma vez por quiz, com código de verificação público e página para imprimir ou salvar em PDF
-- Ranking geral e por área (soma da melhor nota em cada quiz)
+- Ranking geral e por área (soma da melhor nota em cada quiz); mostra só "Primeiro nome + inicial" (o nome completo fica no certificado)
+- **LGPD:** política de privacidade, consentimento no cadastro e exclusão da própria conta (apaga resultados e certificados)
+- Visual com a **paleta da logo** (ciano `#01d6fc`, azul `#0068fc`, azul profundo `#0950bd`, royal `#042872`, preto `#000000`), definida como variáveis CSS em `frontend/css/style.css`
 - API administrativa para criar/editar/remover categorias, quizzes e perguntas
 
 ### Áreas
@@ -97,6 +99,25 @@ Cada `git push` na branch `main` gera um novo deploy de produção; as demais br
 5. Em **Settings → Networking**, clique em **Generate Domain**.
 6. Cadastre-se no site com o e-mail definido em `ADMIN_EMAIL` para ter acesso às rotas `/api/admin/*`.
 
+## Migrações de banco (Alembic)
+
+O `create_all` cria tabelas que faltam, mas **não altera** colunas de tabelas existentes. Para mudar o esquema em produção use o Alembic (`backend/migrations/`):
+
+```powershell
+cd backend
+# 1) altere backend/app/models.py
+# 2) gere a migração
+.\.venv\Scripts\python.exe -m alembic revision --autogenerate -m "descrição"
+# 3) aplique (usa a DATABASE_URL do ambiente)
+.\.venv\Scripts\python.exe -m alembic upgrade head
+```
+
+**Banco que já existe** (criado antes pelo `create_all`, como o do Neon): rode **uma vez** `alembic stamp head` com a `DATABASE_URL` de produção para marcar o esquema atual como a migração `0001`. Depois disso use só `upgrade head`.
+
+## Integração contínua
+
+`.github/workflows/ci.yml` roda a cada push/PR: testes, verificação de que as migrações batem com os modelos, `pip-audit` (vulnerabilidades nas dependências) e `bandit` (análise estática). O Dependabot abre PRs semanais de atualização.
+
 ## Estrutura
 
 ```
@@ -125,6 +146,7 @@ quiz-tech/
 
 - Senhas com hash **bcrypt**; nunca guardadas em texto puro
 - JWT assinado; `SECRET_KEY` obrigatória em produção
+- Limite de 10 cadastros por IP a cada 15 min
 - Limite de tentativas de login persistido no banco: 5 falhas em 15 min por IP + e-mail **e** 20 por e-mail (contra ataque distribuído). O cabeçalho de IP do Vercel só é confiado quando a app roda no Vercel
 - **Certificado protegido:** quem reprova vê quais respostas errou, mas o gabarito só aparece depois da aprovação, e há um intervalo de 10 min (`RETAKE_COOLDOWN_SECONDS`) para refazer um quiz reprovado. Isso é um freio, não uma garantia: o reforço definitivo é ter mais perguntas por área e sortear um subconjunto a cada tentativa
 - `/docs` e `/openapi.json` ficam **desligados em produção** (defina `ENABLE_DOCS=1` para ligar)

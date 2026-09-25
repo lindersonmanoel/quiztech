@@ -127,7 +127,7 @@ def test_ranking_counts_best_score_per_quiz(client, db_session):
     client.post(f"/api/quizzes/{quiz_id}/submit", json={"answers": full}, headers=headers)
     client.post(f"/api/quizzes/{quiz_id}/submit", json={"answers": full}, headers=headers)
     ranking = client.get("/api/ranking").json()
-    assert ranking == [{"position": 1, "user_name": "Ana Souza", "total_score": 120, "quizzes_completed": 1}]
+    assert ranking == [{"position": 1, "user_name": "Ana S.", "total_score": 120, "quizzes_completed": 1}]
 
 
 def test_admin_routes_are_protected_and_admin_email_gets_role(client):
@@ -241,3 +241,62 @@ def test_api_docs_are_disabled_in_production():
     out = subprocess.run([sys.executable, "-c", code], cwd=Path(__file__).resolve().parents[1], env=env,
                          capture_output=True, text=True, timeout=60)
     assert out.stdout.strip() == "None None", out.stderr[-400:]
+
+
+def test_ranking_hides_full_names_but_certificate_keeps_it(client, db_session):
+    headers = register(client, name="Linderson Manoel Brito Venancio", email="lin@example.com")
+    quiz_id = _quiz_id(client, "python")
+    answers = [{"question_id": q, "alternative_id": a} for q, a in _correct_answers(db_session, quiz_id).items()]
+    body = client.post(f"/api/quizzes/{quiz_id}/submit", json={"answers": answers}, headers=headers).json()
+    assert [e["user_name"] for e in client.get("/api/ranking").json()] == ["Linderson V."]
+    assert body["certificate"]["user_name"] == "Linderson Manoel Brito Venancio"
+
+
+def test_user_can_delete_own_account_and_data(client, db_session):
+    headers = register(client)
+    quiz_id = _quiz_id(client, "python")
+    answers = [{"question_id": q, "alternative_id": a} for q, a in _correct_answers(db_session, quiz_id).items()]
+    code = client.post(f"/api/quizzes/{quiz_id}/submit", json={"answers": answers}, headers=headers).json()["certificate"]["code"]
+
+    wrong = client.post("/api/users/me/delete", json={"password": "senha-errada-1"}, headers=headers)
+    assert wrong.status_code == 403  # não 401: o frontend não pode tratar como sessão expirada
+    assert client.get("/api/users/me", headers=headers).status_code == 200
+
+    ok = client.post("/api/users/me/delete", json={"password": "senha-forte-1"}, headers=headers)
+    assert ok.status_code == 204
+    assert client.get("/api/users/me", headers=headers).status_code == 401
+    assert client.get(f"/api/certificates/{code}").status_code == 404
+    assert client.get("/api/ranking").json() == []
+    login = client.post("/api/auth/login", json={"email": "ana@example.com", "password": "senha-forte-1"})
+    assert login.status_code == 401
+
+
+def test_delete_account_requires_authentication(client):
+    assert client.post("/api/users/me/delete", json={"password": "x"}).status_code == 401
+
+
+def test_mass_registration_from_one_ip_is_limited(client):
+    from app import ratelimit
+
+    codes = [
+        client.post("/api/auth/register", json={"name": "Spam Bot", "email": f"bot{i}@example.com", "password": "senha-forte-1"}).status_code
+        for i in range(ratelimit.MAX_REGISTRATIONS_PER_IP + 3)
+    ]
+    assert codes.count(201) == ratelimit.MAX_REGISTRATIONS_PER_IP
+    assert codes[-3:] == [429, 429, 429]
+
+
+def test_quiz_detail_has_no_n_plus_one_queries(client, db_session):
+    from sqlalchemy import event
+
+    quiz_id = _quiz_id(client, "python")
+    engine = db_session.kw["bind"]
+    count = []
+    listener = lambda *args: count.append(1)  # noqa: E731
+    event.listen(engine, "before_cursor_execute", listener)
+    try:
+        assert client.get(f"/api/quizzes/{quiz_id}").status_code == 200
+    finally:
+        event.remove(engine, "before_cursor_execute", listener)
+    # quiz + categoria + perguntas + alternativas; antes eram 9 (uma consulta por pergunta)
+    assert len(count) <= 4, f"{len(count)} consultas"

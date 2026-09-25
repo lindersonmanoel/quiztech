@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#07152f">
+  <meta name="theme-color" content="#010e24">
   <title>Meu perfil — QUIZ TECH</title>
   <link rel="icon" type="image/png" href="assets/logo/favicon.png">
   <link rel="stylesheet" href="css/style.css">
@@ -19,6 +19,13 @@
     <div class="card table-wrap"><table>
       <thead><tr><th scope="col">Quiz</th><th scope="col">Pontos</th><th scope="col">Acertos</th><th scope="col">Situação</th><th scope="col"></th></tr></thead>
       <tbody id="history"></tbody></table></div>
+    <h2 style="margin-top:28px">Excluir conta</h2>
+    <form class="card danger" id="delete-form" novalidate>
+      <p>Apaga definitivamente sua conta, seus resultados e seus certificados. Esta ação não pode ser desfeita.</p>
+      <div class="field"><label for="delete-password">Confirme sua senha</label>
+        <input id="delete-password" type="password" autocomplete="current-password" required></div>
+      <button class="btn danger-btn small" type="submit">Excluir minha conta</button>
+    </form>
   </main>
   <script type="module" src="js/perfil.js"></script>
 </body>

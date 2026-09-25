@@ -122,9 +122,9 @@ export function renderNav() {
   const nav = el("header", { class: "nav" },
     el("div", { class: "nav-inner" },
       el("a", { class: "brand", href: "index.html" },
-        el("img", { src: "assets/logo/logo.png", alt: "" }),
+        el("img", { src: "assets/logo/favicon.png", alt: "" }),
         el("span", {}, "QUIZ ", el("b", {}, "TECH"))),
       el("nav", { class: "nav-links", "aria-label": "Principal" }, links)));
   document.body.prepend(nav);
-  document.body.append(el("footer", {}, "QUIZ TECH · Aprenda, teste e certifique seus conhecimentos em tecnologia"));
+  document.body.append(el("footer", {}, "QUIZ TECH · Aprenda, teste e certifique seus conhecimentos em tecnologia", el("a", { href: "privacidade.html" }, "Política de Privacidade")));
 }

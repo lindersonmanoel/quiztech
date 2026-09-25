@@ -1,4 +1,4 @@
-import { api, el, fmtDate, getUser, renderNav, requireLogin, setSession, getToken, showMessage, $ } from "./app.js";
+import { api, clearSession, el, fmtDate, getUser, renderNav, requireLogin, setSession, getToken, showMessage, $ } from "./app.js";
 
 renderNav();
 
@@ -48,6 +48,20 @@ async function load() {
     showMessage($("#msg"), error.message);
   }
 }
+
+$("#delete-form").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const password = $("#delete-password").value;
+  if (!password) return showMessage($("#msg"), "Informe sua senha para confirmar.");
+  if (!confirm("Tem certeza? Sua conta, resultados e certificados serão apagados para sempre.")) return;
+  try {
+    await api("/users/me/delete", { method: "POST", body: { password } });
+    clearSession();
+    location.href = "index.html";
+  } catch (error) {
+    showMessage($("#msg"), error.message);
+  }
+});
 
 // Mostra o nome salvo enquanto a API responde.
 const cached = getUser();
