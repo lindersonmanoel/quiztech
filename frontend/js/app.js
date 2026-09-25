@@ -108,6 +108,53 @@ export function requireLogin() {
   return true;
 }
 
+// ---------- Versão e aviso de atualização ----------
+const VERSION_CHECK_MS = 5 * 60 * 1000; // confere a cada 5 min e quando a aba volta ao foco
+let loadedBuild = null;
+let dismissedBuild = null;
+
+const buildId = (build) => `${build.version}+${build.commit}`;
+
+async function fetchBuild() {
+  try {
+    const res = await fetch("/api/version", { cache: "no-store" });
+    return res.ok ? await res.json() : null;
+  } catch {
+    return null;
+  }
+}
+
+function showUpdateBanner(build) {
+  if (document.getElementById("update-banner") || buildId(build) === dismissedBuild) return;
+  const onQuiz = location.pathname.endsWith("quiz.html"); // não recarrega no meio de um quiz
+  const banner = el("div", { id: "update-banner", class: "update-banner", role: "status" },
+    el("span", {}, `Nova versão disponível: v${build.version} (${build.commit}).`,
+      onQuiz ? " Termine o quiz e depois atualize a página." : ""),
+    onQuiz ? null : el("button", { class: "btn small", type: "button", onclick: () => location.reload() }, "Atualizar agora"),
+    el("button", {
+      class: "btn small secondary", type: "button",
+      onclick: () => { dismissedBuild = buildId(build); banner.remove(); },
+    }, "Depois"));
+  document.body.append(banner);
+}
+
+async function initVersion() {
+  const build = await fetchBuild();
+  if (!build) return;
+  loadedBuild = buildId(build);
+  const label = document.getElementById("app-version");
+  if (label) {
+    label.textContent = `v${build.version} · ${build.commit}${build.environment === "production" ? "" : ` · ${build.environment}`}`;
+    label.title = `QUIZ TECH ${build.version}, commit ${build.commit}, ambiente ${build.environment}`;
+  }
+  const check = async () => {
+    const latest = await fetchBuild();
+    if (latest && buildId(latest) !== loadedBuild) showUpdateBanner(latest);
+  };
+  setInterval(check, VERSION_CHECK_MS);
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) check(); });
+}
+
 export function renderNav() {
   const page = location.pathname.split("/").pop() || "index.html";
   const user = getUser();
@@ -126,5 +173,6 @@ export function renderNav() {
         el("span", {}, "QUIZ ", el("b", {}, "TECH"))),
       el("nav", { class: "nav-links", "aria-label": "Principal" }, links)));
   document.body.prepend(nav);
-  document.body.append(el("footer", {}, el("img", { src: "assets/logo/favicon.png", alt: "" }), "QUIZ TECH · Aprenda, teste e certifique seus conhecimentos em tecnologia", el("a", { href: "privacidade.html" }, "Política de Privacidade")));
+  document.body.append(el("footer", {}, el("img", { src: "assets/logo/favicon.png", alt: "" }), "QUIZ TECH · Aprenda, teste e certifique seus conhecimentos em tecnologia", el("a", { href: "privacidade.html" }, "Política de Privacidade"), el("span", { id: "app-version", class: "app-version" })));
+  initVersion();
 }

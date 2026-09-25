@@ -1,7 +1,7 @@
 import logging
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
@@ -10,6 +10,7 @@ from . import config
 from .database import Base, SessionLocal, engine
 from .routers import admin, auth, quizzes, results
 from .seed import seed_if_empty
+from .version import __version__, build_info
 
 log = logging.getLogger("quiztech")
 
@@ -45,7 +46,7 @@ async def lifespan(_: FastAPI):
 
 app = FastAPI(
     title="QUIZ TECH API",
-    version="1.0.0",
+    version=__version__,
     lifespan=lifespan,
     docs_url="/docs" if config.DOCS_ENABLED else None,
     redoc_url=None,
@@ -96,6 +97,13 @@ async def security_headers(request: Request, call_next):
 async def unhandled(request: Request, exc: Exception):
     log.exception("Erro não tratado em %s %s", request.method, request.url.path)
     return JSONResponse({"detail": "Erro interno do servidor"}, status_code=500)
+
+
+@app.get("/api/version", tags=["infra"])
+def version(response: Response):
+    """Versão e commit em execução; o frontend usa para mostrar a versão e avisar quando sai uma nova."""
+    response.headers["Cache-Control"] = "no-store"
+    return build_info()
 
 
 @app.get("/api/health", tags=["infra"])

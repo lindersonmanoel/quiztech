@@ -17,6 +17,10 @@ USER appuser
 WORKDIR /app/backend
 ENV ENVIRONMENT=production
 
+# Informe o commit no build (docker compose lê GIT_COMMIT do ambiente); aparece em /api/version.
+ARG GIT_COMMIT=dev
+ENV GIT_COMMIT=$GIT_COMMIT
+
 EXPOSE 8000
 
 # O Railway/Compose podem definir $PORT; sem ele usa 8000.

@@ -319,3 +319,29 @@ def test_client_ip_header_is_only_trusted_when_configured(client, monkeypatch):
     with_header = [attempt("8.8.8.8") for _ in range(ratelimit.MAX_ATTEMPTS_PER_IP + 1)]
     assert with_header[-1] == 429
     assert attempt("7.7.7.7") == 401  # outro IP real ainda não estourou o limite (mas o teto por e-mail é 20)
+
+
+def test_version_endpoint_reports_build_and_is_not_cached(client, monkeypatch):
+    from app import version as v
+
+    monkeypatch.setenv("GIT_COMMIT", "abc1234def5678")
+    r = client.get("/api/version")
+    assert r.status_code == 200
+    body = r.json()
+    assert body["name"] == "QUIZ TECH" and body["version"] == v.__version__
+    assert body["commit"] == "abc1234"  # só os 7 primeiros caracteres
+    assert r.headers["cache-control"] == "no-store"
+
+
+def test_vercel_commit_takes_precedence_and_environment_is_reported(client, monkeypatch):
+    monkeypatch.setenv("VERCEL_GIT_COMMIT_SHA", "fedcba9876543210")
+    monkeypatch.setenv("VERCEL_ENV", "production")
+    body = client.get("/api/version").json()
+    assert body["commit"] == "fedcba9" and body["environment"] == "production"
+
+
+def test_version_is_valid_semver():
+    import re
+    from app.version import __version__
+
+    assert re.fullmatch(r"\d+\.\d+\.\d+", __version__)

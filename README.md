@@ -53,6 +53,14 @@ cd backend
 .\.venv\Scripts\python.exe -m pytest
 ```
 
+## Versão e avisos de atualização
+
+- **Versão:** definida em `backend/app/version.py` (versionamento semântico; histórico no [CHANGELOG.md](CHANGELOG.md)). Aparece no rodapé do site como `v1.1.0 · abc1234` (versão · commit; ambientes que não são produção mostram o nome) e em `GET /api/version`.
+- **Commit:** o Vercel preenche sozinho (`VERCEL_GIT_COMMIT_SHA`). No Docker, informe no build: `$env:GIT_COMMIT = (git rev-parse --short HEAD); docker compose up -d --build`.
+- **Aviso dentro do site:** enquanto alguém usa o site, ele confere `/api/version` a cada 5 minutos e quando a aba volta ao foco. Se a versão ou o commit mudou, aparece "Nova versão disponível" com o botão *Atualizar agora* (durante um quiz o botão não aparece, para ninguém perder as respostas).
+- **Aviso de deploy no Slack:** o fluxo `.github/workflows/notify-deploy.yml` avisa cada deploy do Vercel (sucesso ou falha) com ambiente, versão e link. Para ativar, crie um *Incoming Webhook* no Slack (api.slack.com/apps → Incoming Webhooks → escolha o canal) e cadastre a URL como segredo `SLACK_WEBHOOK_URL` em GitHub → Settings → Secrets and variables → Actions. Sem o segredo o fluxo não faz nada.
+- **Avisos do próprio Vercel:** em Vercel → Settings → Notifications, ative os e-mails de deploy (sucesso, falha) e, se quiser, a integração oficial com o Slack.
+
 ## Rodando na sua VM com Docker Desktop
 
 Sobe tudo com um comando: PostgreSQL + API + site. Não depende de Vercel, Neon nem Railway. O banco fica no volume `dbdata` (sobrevive a reinícios) e as migrações rodam sozinhas ao iniciar.

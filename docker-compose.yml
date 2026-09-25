@@ -23,7 +23,10 @@ services:
     # Sem "ports": o banco só é acessível pela rede interna do Compose.
 
   app:
-    build: .
+    build:
+      context: .
+      args:
+        GIT_COMMIT: ${GIT_COMMIT:-dev}
     restart: unless-stopped
     depends_on:
       db:

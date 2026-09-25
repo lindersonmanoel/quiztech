@@ -1,0 +1,42 @@
+name: Notificação de deploy
+
+# O Vercel registra cada deploy no GitHub (evento "deployment_status"). Este fluxo avisa no Slack quando um deploy
+# termina (com sucesso ou com falha), informando ambiente, versão e link.
+# Só funciona se existir o segredo SLACK_WEBHOOK_URL (Settings > Secrets and variables > Actions); sem ele, não faz nada.
+on:
+  deployment_status:
+
+permissions:
+  contents: read
+
+jobs:
+  slack:
+    name: Avisar no Slack
+    if: contains(fromJSON('["success", "failure", "error"]'), github.event.deployment_status.state)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.deployment.sha }}
+      - name: Enviar mensagem
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          STATE: ${{ github.event.deployment_status.state }}
+          TARGET: ${{ github.event.deployment.environment }}
+          DEPLOY_URL: ${{ github.event.deployment_status.environment_url }}
+          LOG_URL: ${{ github.event.deployment_status.log_url }}
+          SHA: ${{ github.event.deployment.sha }}
+          REPO: ${{ github.repository }}
+        run: |
+          if [ -z "$SLACK_WEBHOOK_URL" ]; then
+            echo "SLACK_WEBHOOK_URL não configurado; nenhuma notificação enviada."
+            exit 0
+          fi
+          VERSION=$(sed -n 's/^__version__ = "\(.*\)"/\1/p' backend/app/version.py)
+          SHORT=$(printf '%s' "$SHA" | cut -c1-7)
+          if [ "$STATE" = "success" ]; then ICON=":white_check_mark:"; WHAT="publicado"; else ICON=":x:"; WHAT="FALHOU"; fi
+          LINK="${DEPLOY_URL:-$LOG_URL}"
+          TEXT="$ICON *QUIZ TECH v$VERSION* ($SHORT) $WHAT em *$TARGET*"
+          if [ -n "$LINK" ]; then TEXT="$TEXT\n<$LINK|Abrir>"; fi
+          PAYLOAD=$(jq -n --arg text "$(printf '%b' "$TEXT")" '{text: $text}')
+          curl -sS --fail -X POST -H 'Content-type: application/json' --data "$PAYLOAD" "$SLACK_WEBHOOK_URL"
