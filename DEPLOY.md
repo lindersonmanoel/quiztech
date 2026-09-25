@@ -57,6 +57,14 @@ docker logs quiztech-demo-tunnel 2>&1 | grep trycloudflare
 ```
 O endereço `https://<aleatório>.trycloudflare.com` serve o site **e** a API juntos. Ele muda a cada reinício: só para testes.
 
+Para descobrir o endereço **atual** (e copiá-lo para a área de transferência), na raiz do projeto:
+```powershell
+powershell -File scripts\endereco-publico.ps1
+```
+Sem domínio próprio não há como fixar esse endereço: o túnel gratuito da Cloudflare não garante o mesmo nome nem tempo no ar.
+Ele muda sempre que o túnel ou o Docker reinicia (os contêineres voltam sozinhos, mas com um endereço novo). Por isso **não instale
+o app no celular a partir dele**: o aplicativo instalado fica preso ao endereço antigo. Espere o endereço fixo (5b).
+
 ### 5b. Endereço fixo (Cloudflare Tunnel nomeado)
 1. Painel da Cloudflare → **Zero Trust → Networks → Tunnels → Create a tunnel** (tipo *Cloudflared*), nome `quiztech-api`.
 2. Copie o valor depois de `--token` e cole em `CLOUDFLARE_TUNNEL_TOKEN` no `.env.production`.
