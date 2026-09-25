@@ -53,6 +53,48 @@ cd backend
 .\.venv\Scripts\python.exe -m pytest
 ```
 
+## Rodando na sua VM com Docker Desktop
+
+Sobe tudo com um comando: PostgreSQL + API + site. Não depende de Vercel, Neon nem Railway. O banco fica no volume `dbdata` (sobrevive a reinícios) e as migrações rodam sozinhas ao iniciar.
+
+1. **Docker Desktop** instalado e aberto na VM (com WSL 2).
+2. **Configure os segredos.** Na pasta do projeto:
+   ```powershell
+   copy .env.example .env
+   notepad .env
+   ```
+   Preencha `POSTGRES_PASSWORD`, `SECRET_KEY` (o `.env.example` mostra como gerar) e `ADMIN_EMAIL`. O `.env` não vai para o Git.
+3. **Suba:**
+   ```powershell
+   docker compose up -d --build
+   ```
+   Abra http://localhost:8000. De outro computador da rede: `http://IP-DA-VM:8000` (libere a porta 8000 no Firewall do Windows).
+4. **Cadastre-se** com o e-mail de `ADMIN_EMAIL` para virar administrador.
+
+**HTTPS com domínio próprio** (Let's Encrypt automático, via Caddy): aponte um registro DNS `A` do domínio para o IP público da VM, libere as portas 80 e 443, preencha `DOMAIN` no `.env` e use:
+
+```powershell
+docker compose -f docker-compose.yml -f docker-compose.https.yml up -d --build
+```
+
+Nesse modo a API deixa de ser publicada; só o Caddy (portas 80/443) fica exposto.
+
+**Dia a dia**
+
+| Tarefa | Comando |
+|---|---|
+| Ver logs | `docker compose logs -f app` |
+| Ver estado e saúde | `docker compose ps` |
+| Atualizar depois de um `git pull` | `docker compose up -d --build` |
+| Parar (mantém os dados) | `docker compose down` |
+| Backup do banco | `docker compose exec -T db pg_dump -U quiztech quiztech > backup.sql` |
+| Restaurar backup | `Get-Content backup.sql \| docker compose exec -T db psql -U quiztech quiztech` |
+| **Apagar tudo, inclusive os dados** | `docker compose down -v` (cuidado) |
+
+Para o sistema voltar sozinho depois de reiniciar a VM, deixe **Settings → General → Start Docker Desktop when you sign in** marcado; os contêineres têm `restart: unless-stopped`.
+
+Faça backups regulares (`pg_dump`) e guarde-os fora da VM. Se a VM for exposta à internet, mantenha o Windows atualizado e use o modo HTTPS.
+
 ## Publicando no Vercel
 
 O `vercel.json` já configura tudo: o Vercel serve a pasta `frontend/` como site estático e roda a API (`api/index.py`, que carrega `backend/app`) como função serverless em `/api/*`. Site e API ficam na **mesma origem**, então não há CORS.

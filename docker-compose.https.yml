@@ -1,0 +1,29 @@
+# HTTPS automático (Let's Encrypt) com Caddy na frente da API. Use junto com o arquivo base:
+#   docker compose -f docker-compose.yml -f docker-compose.https.yml up -d --build
+# Requisitos: um domínio apontando para o IP da VM e as portas 80 e 443 liberadas.
+services:
+  app:
+    # A API deixa de ser publicada: só o Caddy (rede interna) fala com ela.
+    ports: !reset []
+    environment:
+      # Seguro aqui porque só o Caddy alcança a API, e ele sobrescreve o X-Forwarded-For do cliente.
+      FORWARDED_ALLOW_IPS: "*"
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    depends_on:
+      - app
+    environment:
+      DOMAIN: "${DOMAIN:?defina DOMAIN no arquivo .env, por exemplo quiz.seudominio.com}"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+  caddy_config:

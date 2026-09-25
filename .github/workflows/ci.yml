@@ -42,7 +42,7 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install pip-audit
-      - run: pip-audit -r requirements.txt
+      - run: pip-audit -r backend/requirements-dev.txt
 
   analise-estatica:
     name: Análise estática (bandit)

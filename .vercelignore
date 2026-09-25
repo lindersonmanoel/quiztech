@@ -10,3 +10,7 @@ railway.json
 .github
 backend/migrations
 backend/alembic.ini
+docker-compose.yml
+docker-compose.https.yml
+Caddyfile
+.env.example

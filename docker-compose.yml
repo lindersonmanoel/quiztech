@@ -1,0 +1,41 @@
+# QUIZ TECH: API + site + PostgreSQL.
+#   1) copie .env.example para .env e preencha
+#   2) docker compose up -d --build
+#   3) abra http://localhost:8000
+# Para HTTPS com domínio próprio, veja docker-compose.https.yml.
+name: quiztech
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: quiztech
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?defina POSTGRES_PASSWORD no arquivo .env}
+      POSTGRES_DB: quiztech
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U quiztech -d quiztech"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    # Sem "ports": o banco só é acessível pela rede interna do Compose.
+
+  app:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SECRET_KEY: ${SECRET_KEY:?defina SECRET_KEY no arquivo .env}
+      DATABASE_URL: postgresql://quiztech:${POSTGRES_PASSWORD}@db:5432/quiztech
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-}
+      # Só confie no cabeçalho X-Forwarded-For quando houver um proxy na frente (veja docker-compose.https.yml).
+      FORWARDED_ALLOW_IPS: ${FORWARDED_ALLOW_IPS:-127.0.0.1}
+    ports:
+      - "${APP_PORT:-8000}:8000"
+
+volumes:
+  dbdata:
