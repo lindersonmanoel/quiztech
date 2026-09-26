@@ -1,6 +1,6 @@
 # QUIZ TECH
 
-**🔗 Link principal do projeto: https://quiztech-lindersonmanoel.vercel.app**
+**🔗 Link principal do projeto: https://quiztech.vercel.app**
 
 Plataforma web de quizzes de tecnologia com **certificado de conclusão**, instalável como aplicativo (PWA).
 
