@@ -4,9 +4,17 @@
 // suba a versão aqui, acrescente a entrada NO TOPO do histórico, e faça o mesmo em CHANGELOG.md e em backend-node/package.json.
 // Os testes (backend-node/tests/infra.test.js) reprovam se essas coisas ficarem diferentes entre si.
 
-export const APP_VERSION = "2.4.5";
+export const APP_VERSION = "2.5.0";
 
 export const CHANGELOG = [
+  {
+    versao: "2.5.0",
+    data: "2026-09-26",
+    mudancas: [
+      "Atualização simultânea: o site no navegador e o aplicativo instalado passam a receber cada nova versão ao mesmo tempo, com aviso, contagem e recarga automática",
+      "O aplicativo confere se há atualização ao ser aberto, ao voltar do segundo plano, ao recuperar a conexão e a cada 10 minutos",
+    ],
+  },
   {
     versao: "2.4.5",
     data: "2026-09-26",

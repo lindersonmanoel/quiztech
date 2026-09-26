@@ -3,6 +3,13 @@
 Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e [versionamento semântico](https://semver.org/lang/pt-BR/).
 A versão do site aparece no rodapé; a do servidor, em `/api/version`.
 
+## [2.5.0] - 2026-09-26
+
+### Adicionado
+- **Atualização simultânea do site e do aplicativo instalado (PWA)**: o service worker é conferido ao abrir o app, ao voltar do segundo plano, ao
+  recuperar a internet e a cada 10 minutos. Ao chegar uma versão nova, aparece o aviso com o que mudou e uma contagem de 10 s, após a qual a página
+  recarrega sozinha (não durante um quiz, no painel administrativo ou com um campo em edição; "Mais tarde" cancela). Alterações só da API não recarregam.
+
 ## [2.4.5] - 2026-09-26
 
 ### Corrigido

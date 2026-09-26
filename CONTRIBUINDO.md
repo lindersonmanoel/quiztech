@@ -29,6 +29,7 @@ a **mesma coisa que o site faz hoje**, cada mudança passa por este checklist. O
 4. Atualize o **README** se for algo novo ou que mudou de comportamento.
 5. Rode os testes (`cd backend-node && npm test`) e abra o pull request: o modelo já traz o checklist.
 6. `git push` na `main`: o Vercel publica o site sozinho (e o GitHub Actions publica a API, se os segredos estiverem configurados: `DEPLOY.md`, seção 0).
+   Com isso o navegador e o aplicativo instalado recebem a versão nova ao mesmo tempo (aviso, contagem e recarga automática; ver `frontend/js/pwa.js` e `app.js`).
 
 ## Página nova
 

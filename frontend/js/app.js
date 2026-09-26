@@ -151,6 +151,7 @@ async function fetchBuild() {
   }
 }
 
+const ATUALIZA_SOZINHO_S = 10; // segundos de contagem antes de recarregar sozinho depois de uma atualização do site
 const versaoNumerica = (v) => String(v).split(".").map((n) => Number(n) || 0);
 function maiorQue(a, b) {
   const [x, y] = [versaoNumerica(a), versaoNumerica(b)];
@@ -176,7 +177,13 @@ async function showUpdateBanner(build) {
   if (document.getElementById("update-banner")) return;
   const novidades = historico.filter((item) => maiorQue(item.versao, APP_VERSION));
   const mudancas = (novidades.length ? novidades : historico.slice(0, 1)).flatMap((item) => item.mudancas).slice(0, 4);
-  const onQuiz = location.pathname.endsWith("quiz.html"); // não recarrega no meio de um quiz
+  const pagina = location.pathname.split("/").pop();
+  const onQuiz = pagina === "quiz.html"; // não recarrega no meio de um quiz
+  // Atualização do SITE: a página recarrega sozinha após uma contagem, para o navegador e o aplicativo instalado ficarem
+  // sempre na mesma versão. Não faz isso durante um quiz, no painel (formulários longos) nem com um campo em edição.
+  const emEdicao = /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement?.tagName || "");
+  const automatica = !build && !onQuiz && pagina !== "admin.html" && !emEdicao;
+  const contagem = el("span", { class: "muted", "aria-live": "off" });
   const banner = el("div", { id: "update-banner", class: "update-banner", role: "status" },
     el("div", { class: "update-linha" },
       icone("download", { tamanho: 20 }),
@@ -185,10 +192,21 @@ async function showUpdateBanner(build) {
       onQuiz ? null : el("button", { class: "btn small", type: "button", onclick: () => location.reload() }, "Atualizar agora"),
       el("button", {
         class: "btn small secondary", type: "button", "aria-label": "Fechar o aviso de atualização",
-        onclick: () => { dismissedBuild = id; banner.remove(); },
-      }, "Mais tarde")),
+        onclick: () => { dismissedBuild = id; clearInterval(cronometro); banner.remove(); },
+      }, "Mais tarde"),
+      automatica ? contagem : null),
     mudancas.length ? el("ul", { class: "update-lista" }, mudancas.map((texto) => el("li", {}, texto))) : null);
   document.body.append(banner);
+  let cronometro = 0;
+  if (automatica) {
+    let restante = ATUALIZA_SOZINHO_S;
+    const mostrar = () => { contagem.textContent = `Atualização automática em ${restante} s`; };
+    mostrar();
+    cronometro = setInterval(() => {
+      restante -= 1;
+      if (restante <= 0) { clearInterval(cronometro); location.reload(); } else mostrar();
+    }, 1000);
+  }
 }
 
 // O site (arquivos) foi atualizado: um service worker novo assumiu a página que já estava aberta.

@@ -132,6 +132,18 @@ function atualizarBotoes() {
   for (const botao of document.querySelectorAll("[data-install]")) botao.hidden = !deveMostrar();
 }
 
+// Atualizacao simultanea (site no navegador e aplicativo instalado): o navegador so' compara o service worker ao abrir uma
+// pagina; um aplicativo que fica aberto ou em segundo plano precisaria esperar. Por isso a conferencia tambem roda ao voltar
+// para o aplicativo, ao recuperar a internet e a cada 10 minutos. Achando arquivo novo, o service worker assume sozinho
+// (skipWaiting + claim) e app.js mostra o aviso e recarrega.
+const CONFERE_ATUALIZACAO_MS = 10 * 60 * 1000;
+function vigiarAtualizacoes(registro) {
+  const conferir = () => { registro.update().catch(() => { /* sem rede: tenta na proxima */ }); };
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) conferir(); });
+  window.addEventListener("online", conferir);
+  setInterval(conferir, CONFERE_ATUALIZACAO_MS);
+}
+
 /** Liga os botoes [data-install] da pagina e registra o service worker. Chame depois de montar a navegacao. */
 export function initPwa() {
   for (const botao of document.querySelectorAll("[data-install]")) {
@@ -143,6 +155,6 @@ export function initPwa() {
 
   const seguro = location.protocol === "https:" || location.hostname === "localhost" || location.hostname === "127.0.0.1";
   if ("serviceWorker" in navigator && seguro) {
-    navigator.serviceWorker.register("service-worker.js").catch(() => { /* sem service worker o site funciona igual */ });
+    navigator.serviceWorker.register("service-worker.js").then(vigiarAtualizacoes).catch(() => { /* sem service worker o site funciona igual */ });
   }
 }
