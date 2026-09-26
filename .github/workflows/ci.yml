@@ -35,7 +35,7 @@ jobs:
       FRONTEND_URL: http://localhost:5500
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 20
           cache: npm
