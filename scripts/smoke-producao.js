@@ -7,7 +7,7 @@
 // Sai com codigo 1 se algo falhar (o CI avisa por e-mail).
 
 const FRONTEND_URL = (process.env.FRONTEND_URL || "https://quiztech.vercel.app").replace(/\/+$/, "");
-const API_URL = (process.env.API_URL || "https://quiztech-api-production.up.railway.app").replace(/\/+$/, "");
+const API_URL = (process.env.API_URL || "https://quiztech-api.vercel.app").replace(/\/+$/, "");
 
 let falhas = 0;
 function verificar(rotulo, ok, detalhe = "") {

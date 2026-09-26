@@ -9,7 +9,7 @@
 //     https://quiztech-api.vercel.app), so' trocar este endereco e o connect-src do vercel.json.
 //   - Aberto direto no endereco do Funnel (.ts.net): a propria API serve o site, entao e' a mesma origem.
 (function () {
-  const API_PRODUCAO = "https://quiztech-api-production.up.railway.app/api";
+  const API_PRODUCAO = "https://quiztech-api.vercel.app/api";
   const host = location.hostname;
   let base;
   if (host === "localhost" || host === "127.0.0.1") {
