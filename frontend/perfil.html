@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#010e24">
   <title>Meu perfil — QUIZ TECH</title>
+  <meta name="description" content="Seu perfil no QUIZ TECH: dados, certificados conquistados, histórico de resultados e novidades da plataforma.">
   <link rel="icon" type="image/svg+xml" href="assets/logo/marca.svg">
   <link rel="icon" type="image/png" href="assets/logo/favicon.png">
   <link rel="manifest" href="manifest.webmanifest">
@@ -26,6 +27,12 @@
     <div class="card table-wrap"><table>
       <thead><tr><th scope="col">Quiz</th><th scope="col">Pontos</th><th scope="col">Acertos</th><th scope="col">Situação</th><th scope="col"></th></tr></thead>
       <tbody id="history"></tbody></table></div>
+    <h2 style="margin-top:28px">Novidades do QUIZ TECH</h2>
+    <section class="card" id="novidades">
+      <p class="muted">Você está na versão <strong id="versao-atual"></strong>. Veja o que mudou nas últimas atualizações:</p>
+      <div id="lista-novidades"></div>
+      <p class="muted" style="margin:12px 0 0"><a href="ajuda.html#novidades">Ver o histórico completo</a></p>
+    </section>
     <h2 style="margin-top:28px">Excluir conta</h2>
     <form class="card danger" id="delete-form" novalidate>
       <p>Apaga definitivamente sua conta, seus resultados e seus certificados. Esta ação não pode ser desfeita.</p>

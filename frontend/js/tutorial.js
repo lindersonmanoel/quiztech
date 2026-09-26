@@ -80,6 +80,7 @@ const TOURS = {
       { alvo: "#profile", titulo: "Seus dados", texto: "Confira seu e-mail e ajuste o nome. É o nome que sai no certificado; certificados novos usam o nome atualizado." },
       { alvo: "#certs", titulo: "Certificados", texto: "Todos os certificados que você conquistou. Abra um para imprimir, salvar em PDF ou compartilhar." },
       { alvo: "#history", titulo: "Histórico", texto: "Todas as suas tentativas, com pontos, acertos e se você foi aprovado." },
+      { alvo: "#novidades", titulo: "Novidades", texto: "Aqui você vê a versão do QUIZ TECH que está usando e o que mudou nas últimas atualizações. Quando sair uma versão nova, um aviso aparece na tela com um botão para atualizar." },
       { alvo: "#delete-form", titulo: "Excluir a conta", texto: "Se quiser sair de vez, aqui você apaga a conta e todos os dados (direito previsto na LGPD). Não dá para desfazer." },
     ],
   },

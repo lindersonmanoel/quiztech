@@ -17,6 +17,16 @@ const emModoApp = () =>
   window.matchMedia("(display-mode: minimal-ui)").matches ||
   window.navigator.standalone === true;
 
+// Atualizacao do SITE: se ja havia um service worker controlando a pagina, uma troca de controlador depois disso e'
+// uma atualizacao de verdade (e nao a primeira instalacao). app.js mostra o aviso "Nova versao disponivel".
+if ("serviceWorker" in navigator) {
+  let controladorAntes = navigator.serviceWorker.controller;
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+    if (controladorAntes) document.dispatchEvent(new CustomEvent("quiztech:atualizado"));
+    controladorAntes = navigator.serviceWorker.controller;
+  });
+}
+
 // Escuta ja na carga do modulo: o evento pode chegar antes de a pagina montar a navegacao.
 window.addEventListener("beforeinstallprompt", (evento) => {
   evento.preventDefault(); // guarda para usar no clique do nosso botao

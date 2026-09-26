@@ -1,10 +1,13 @@
 # Histórico de versões
 
 Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e [versionamento semântico](https://semver.org/lang/pt-BR/).
-A versão em execução aparece no rodapé do site e em `/api/version`.
+A versão do site aparece no rodapé; a do servidor, em `/api/version`.
 
-## [Não lançado] - hospedagem sem depender de computador
+## [2.4.0] - 2026-09-26
 
+Hospedagem sem depender de computador, tutorial e ajuda, suporte a tablet e TV, e novidades/aviso de atualização com o resumo do que mudou.
+
+- **Novidades e aviso de atualização** (no molde do Meu Bolso Digital): `frontend/js/versao.js` (`APP_VERSION` + `CHANGELOG`) alimenta o aviso "Nova versão disponível" (com o que mudou, lido do servidor), o cartão "Novidades" (Meu perfil e Ajuda) e o número do rodapé. O aviso dispara quando o site é atualizado (service worker novo) ou quando a API muda. Testes conferem que versão, histórico, CHANGELOG.md, package.json e cache do service worker batem; meta description em todas as páginas. Checklist em `CONTRIBUINDO.md`.
 - **Tutorial e ajuda**: boas-vindas em 6 telas no primeiro acesso, tour guiado por página (destaca cada elemento), botão "?" em todas as telas, Central de Ajuda (`ajuda.html`) e caixas explicativas em quizzes, quiz, resultado, ranking, perfil e certificado. O progresso do tutorial fica no aparelho.
 - **Todos os aparelhos**: layout para celular (menu rolável, deitado), tablet (vertical/horizontal), monitores grandes e TV (letras grandes, foco visível, setas do controle remoto, botão Voltar; `?tv=1` força o modo). Atalhos A–F / 1–6 no quiz. Manifesto sem travar a orientação.
 
@@ -124,7 +127,7 @@ segue funcionando (mudou só o formato das mensagens de erro: `{ "erro", "campos
 
 ## Como publicar uma nova versão
 
-1. Altere `version` em `backend-node/package.json` e descreva as mudanças aqui.
+1. Siga o checklist de `CONTRIBUINDO.md`: mesma versão em `backend-node/package.json`, `frontend/js/versao.js` (`APP_VERSION` + entrada no topo do histórico), nome do cache em `frontend/service-worker.js` e uma seção aqui. Os testes conferem.
 2. Faça o commit e o push na branch `main`. O Vercel publica o site; na VM: `git pull` e `docker compose ... up -d --build` (DEPLOY.md).
 3. Opcional: crie a etiqueta da versão: `git tag v2.0.0 && git push --tags`.
 4. Quem estiver com o site aberto verá o aviso de nova versão em até 5 minutos.

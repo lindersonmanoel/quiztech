@@ -417,7 +417,7 @@ details > p { margin: 0 0 0.7rem 1.2rem; color: var(--muted); }
 .ajuda-item { display: flex; align-items: center; gap: 0.7rem; width: 100%; padding: 0.8rem 0.9rem; border: 0; border-radius: 10px; background: none; color: var(--white); font: inherit; text-align: left; text-decoration: none; cursor: pointer; }
 .ajuda-item:hover, .ajuda-item:focus-visible { background: var(--royal); color: var(--white); }
 .ajuda-item .icone { color: var(--cyan-bright); }
-body:has(.update-banner) .ajuda-fab { bottom: calc(max(1rem, env(safe-area-inset-bottom)) + 4.5rem); }
+body:has(.update-banner) .ajuda-fab { display: none; } /* o aviso de atualização tem prioridade sobre o botão de ajuda */
 
 /* Tutorial: tour e boas-vindas */
 .tour-root { position: fixed; inset: 0; z-index: 100; }
@@ -501,3 +501,16 @@ html[data-dispositivo="tv"] .install-btn { display: none; }
 html[data-dispositivo="tv"] .nav { position: static; }
 
 @media print { .ajuda-fab, .ajuda-menu, .tour-root, .dica.no-print { display: none !important; } }
+
+/* Aviso de atualização com o resumo do que mudou */
+.update-banner { width: min(48rem, calc(100vw - 1.5rem)); flex-direction: column; align-items: stretch; text-align: left; max-height: calc(100vh - 2rem); overflow-y: auto; }
+.update-linha { display: flex; align-items: center; gap: 0.6rem 0.8rem; flex-wrap: wrap; justify-content: center; }
+.update-linha .icone { color: var(--cyan-bright); }
+.update-lista { margin: 0.6rem 0 0; padding-left: 1.2rem; color: var(--muted); font-size: 0.92rem; }
+.update-lista li { margin-bottom: 0.25rem; }
+
+/* Cartão Novidades */
+.novidade-item { margin-bottom: 1rem; }
+.novidade-item:last-child { margin-bottom: 0; }
+.novidade-item ul { margin: 0.35rem 0 0; padding-left: 1.2rem; }
+.novidade-item li { margin-bottom: 0.3rem; }

@@ -154,6 +154,44 @@ describe("PWA e site estatico", () => {
     for (const ancora of ["comecar", "quiz", "niveis", "certificado", "ranking", "perfil", "aparelhos", "faq"]) expect(ajuda).toContain(`id="${ancora}"`);
   });
 
+  // ---- Versao e novidades (mesma disciplina do Meu Bolso Digital: CONTRIBUINDO.md) ----
+  function lerVersao() {
+    const fonte = fs.readFileSync(path.join(FRONT, "js/versao.js"), "utf8").replace(/export const/g, "const");
+    return new Function(`${fonte}; return { APP_VERSION, CHANGELOG };`)();
+  }
+  const cmp = (a, b) => { const [x, y] = [a, b].map((v) => v.split(".").map(Number)); return (x[0] - y[0]) || (x[1] - y[1]) || (x[2] - y[2]); };
+
+  test("versao: APP_VERSION e' a primeira do historico, em ordem decrescente, com data e sem entradas vazias", () => {
+    const { APP_VERSION, CHANGELOG } = lerVersao();
+    expect(CHANGELOG.length).toBeGreaterThan(0);
+    expect(APP_VERSION).toBe(CHANGELOG[0].versao);
+    CHANGELOG.forEach((item, i) => {
+      expect([item.versao, item.mudancas.length > 0]).toEqual([item.versao, true]);
+      expect([item.versao, item.data]).toEqual([item.versao, expect.stringMatching(/^\d{4}-\d{2}-\d{2}$/)]);
+      if (i > 0) expect(cmp(CHANGELOG[i - 1].versao, item.versao)).toBeGreaterThan(0);
+    });
+  });
+
+  test("a versao do site, o CHANGELOG.md, o package.json e o nome do cache do service worker dizem o mesmo numero", () => {
+    const { APP_VERSION } = lerVersao();
+    const md = fs.readFileSync(path.join(RAIZ, "CHANGELOG.md"), "utf8");
+    expect(md.match(/^## \[(\d+\.\d+\.\d+)\]/m)[1]).toBe(APP_VERSION);
+    expect(version).toBe(APP_VERSION);
+    expect(sw.match(/const CACHE = "([^"]+)"/)[1]).toBe(`quiztech-shell-v${APP_VERSION}`);
+  });
+
+  test("toda pagina tem <meta name=description> unica, de 40 a 160 caracteres", () => {
+    const vistas = new Map();
+    for (const nome of fs.readdirSync(FRONT).filter((n) => n.endsWith(".html"))) {
+      const html = fs.readFileSync(path.join(FRONT, nome), "utf8");
+      const desc = (html.match(/<meta name="description" content="([^"]*)"/) || [])[1];
+      expect([nome, Boolean(desc)]).toEqual([nome, true]);
+      expect([nome, desc.length >= 40 && desc.length <= 160]).toEqual([nome, true]);
+      expect(vistas.has(desc)).toBe(false); // repetida em outra pagina
+      vistas.set(desc, nome);
+    }
+  });
+
   test("o manifesto e' valido e os atalhos apontam para paginas que existem", () => {
     const m = JSON.parse(fs.readFileSync(path.join(FRONT, "manifest.webmanifest"), "utf8"));
     expect(m.display).toBe("standalone");

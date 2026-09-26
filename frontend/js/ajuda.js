@@ -1,7 +1,9 @@
 import { renderNav } from "./app.js";
 import { reiniciarTutorial } from "./tutorial.js";
+import { renderizarNovidades } from "./novidades.js";
 
 renderNav(); // monta o menu e troca os marcadores data-icone pelos ícones
+renderizarNovidades(document.getElementById("lista-novidades"), document.getElementById("versao-atual"));
 
 // Abre o assunto pedido na URL (ajuda.html#faq).
 const alvo = location.hash ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null;

@@ -22,7 +22,9 @@ Plataforma web de quizzes de tecnologia com **certificado de conclusão**, insta
 - **PWA:** botão **"Instalar app"** para todos os navegadores Android (instalação nativa no Chrome, Edge, Samsung Internet,
   Opera, Brave...; passo a passo no Firefox e afins) e abertura offline da "casca" do app.
 - **Painel administrativo** em HTML (`/admin.html`): resumo, quizzes e perguntas, áreas e usuários.
-- Versão e commit no rodapé e aviso de "Nova versão disponível".
+- **Tutorial e ajuda:** boas-vindas no primeiro acesso, tour guiado por página, botão "?" em todas as telas e Central de Ajuda (`/ajuda.html`).
+- **Todos os aparelhos:** celular, tablet, computador e TV (setas do controle remoto; `?tv=1` força o modo TV).
+- **Novidades:** versão no rodapé, cartão "Novidades" (Meu perfil e Ajuda) e aviso "Nova versão disponível" com o que mudou.
 - **Ícones 100% SVG**: um pictograma por área, ícones de interface e a marca do QUIZ TECH, todos vetoriais e na cor do texto (`frontend/js/icons.js`).
 
 ## Estrutura
@@ -78,10 +80,13 @@ npm test
 ```
 
 ## Versão e avisos de atualização
-- **Versão:** `backend-node/package.json` (versionamento semântico; histórico em [CHANGELOG.md](CHANGELOG.md)). Aparece no rodapé
-  (`v2.0.0 · abc1234`) e em `GET /api/version`. O commit vem do Vercel (`VERCEL_GIT_COMMIT_SHA`) ou do build Docker (`GIT_COMMIT`).
-- **Aviso dentro do site:** com o site aberto, ele confere `/api/version` a cada 5 minutos e quando a aba volta ao foco; se
-  a versão mudou, mostra "Nova versão disponível" (durante um quiz o botão de recarregar não aparece).
+- **Versão:** `frontend/js/versao.js` (`APP_VERSION` + `CHANGELOG` em linguagem simples, a fonte do que aparece para as pessoas), espelhada em
+  `backend-node/package.json`, [CHANGELOG.md](CHANGELOG.md) e no nome do cache do service worker; os testes conferem que batem. Aparece no rodapé
+  (`v2.4.0`) e no cartão "Novidades"; o servidor informa a sua em `GET /api/version` (o commit vem do Vercel ou do build Docker).
+  Passo a passo para cada mudança: [CONTRIBUINDO.md](CONTRIBUINDO.md).
+- **Aviso dentro do site:** quando o site é atualizado (o service worker novo assume a página aberta) ou a API muda (conferida a cada
+  5 minutos e quando a aba volta ao foco), aparece "Nova versão disponível" com o resumo do que mudou e o botão "Atualizar agora"
+  (durante um quiz o botão não aparece).
 - **Aviso de deploy no Slack:** `.github/workflows/notify-deploy.yml` avisa cada deploy do Vercel. Crie um *Incoming Webhook*
   no Slack e cadastre-o como segredo `SLACK_WEBHOOK_URL` (GitHub → Settings → Secrets and variables → Actions). Sem o segredo, não faz nada.
 

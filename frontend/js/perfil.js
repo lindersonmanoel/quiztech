@@ -1,6 +1,8 @@
+import { renderizarNovidades } from "./novidades.js";
 import { api, clearSession, DIFFICULTY, el, fmtDate, getUser, renderNav, requireLogin, setSession, getToken, showMessage, $ } from "./app.js";
 
 renderNav();
+renderizarNovidades(document.getElementById("lista-novidades"), document.getElementById("versao-atual"));
 
 function renderProfile(user) {
   const input = el("input", { id: "name", type: "text", value: user.name, minlength: "2", maxlength: "80", required: true });

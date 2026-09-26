@@ -3,6 +3,7 @@
 
 import { initPwa } from "./pwa.js";
 import { icone, montarIcones } from "./icons.js";
+import { APP_VERSION, CHANGELOG } from "./versao.js";
 import "./dispositivo.js"; // marca o tipo de aparelho (celular, tablet, computador, TV) e liga a navegação por setas na TV
 
 export { icone };
@@ -145,19 +146,48 @@ async function fetchBuild() {
   }
 }
 
-function showUpdateBanner(build) {
-  if (document.getElementById("update-banner") || buildId(build) === dismissedBuild) return;
+const versaoNumerica = (v) => String(v).split(".").map((n) => Number(n) || 0);
+function maiorQue(a, b) {
+  const [x, y] = [versaoNumerica(a), versaoNumerica(b)];
+  for (let i = 0; i < 3; i++) if ((x[i] || 0) !== (y[i] || 0)) return (x[i] || 0) > (y[i] || 0);
+  return false;
+}
+
+/** Lê o histórico de novidades MAIS RECENTE do servidor (a página aberta ainda tem o antigo na memória). */
+async function historicoAtualizado() {
+  try {
+    const novo = await import(`./versao.js?atualizado=${Date.now()}`);
+    return { versao: novo.APP_VERSION, historico: novo.CHANGELOG };
+  } catch {
+    return { versao: APP_VERSION, historico: CHANGELOG };
+  }
+}
+
+/** "Nova versão disponível" com o que mudou. `build` (opcional) é a versão da API, quando foi ela que mudou. */
+async function showUpdateBanner(build) {
+  const id = build ? buildId(build) : "site";
+  if (document.getElementById("update-banner") || id === dismissedBuild) return;
+  const { versao, historico } = await historicoAtualizado();
+  if (document.getElementById("update-banner")) return;
+  const novidades = historico.filter((item) => maiorQue(item.versao, APP_VERSION));
+  const mudancas = (novidades.length ? novidades : historico.slice(0, 1)).flatMap((item) => item.mudancas).slice(0, 4);
   const onQuiz = location.pathname.endsWith("quiz.html"); // não recarrega no meio de um quiz
   const banner = el("div", { id: "update-banner", class: "update-banner", role: "status" },
-    el("span", {}, `Nova versão disponível: v${build.version} (${build.commit}).`,
-      onQuiz ? " Termine o quiz e depois atualize a página." : ""),
-    onQuiz ? null : el("button", { class: "btn small", type: "button", onclick: () => location.reload() }, "Atualizar agora"),
-    el("button", {
-      class: "btn small secondary", type: "button",
-      onclick: () => { dismissedBuild = buildId(build); banner.remove(); },
-    }, "Depois"));
+    el("div", { class: "update-linha" },
+      icone("download", { tamanho: 20 }),
+      el("strong", {}, `Nova versão disponível (v${maiorQue(versao, APP_VERSION) ? versao : (build ? build.version : versao)})`),
+      onQuiz ? el("span", { class: "muted" }, "Termine o quiz e depois atualize a página.") : null,
+      onQuiz ? null : el("button", { class: "btn small", type: "button", onclick: () => location.reload() }, "Atualizar agora"),
+      el("button", {
+        class: "btn small secondary", type: "button", "aria-label": "Fechar o aviso de atualização",
+        onclick: () => { dismissedBuild = id; banner.remove(); },
+      }, "Depois")),
+    mudancas.length ? el("ul", { class: "update-lista" }, mudancas.map((texto) => el("li", {}, texto))) : null);
   document.body.append(banner);
 }
+
+// O site (arquivos) foi atualizado: um service worker novo assumiu a página que já estava aberta.
+document.addEventListener("quiztech:atualizado", () => showUpdateBanner(null));
 
 async function initVersion() {
   const build = await fetchBuild();
@@ -165,8 +195,8 @@ async function initVersion() {
   loadedBuild = buildId(build);
   const label = document.getElementById("app-version");
   if (label) {
-    label.textContent = `v${build.version} · ${build.commit}${build.environment === "production" ? "" : ` · ${build.environment}`}`;
-    label.title = `QUIZ TECH ${build.version}, commit ${build.commit}, ambiente ${build.environment}`;
+    label.textContent = `v${APP_VERSION}${build.environment === "production" ? "" : ` · ${build.environment}`}`;
+    label.title = `QUIZ TECH ${APP_VERSION} · servidor ${build.version} (commit ${build.commit}), ambiente ${build.environment}`;
   }
   const check = async () => {
     const latest = await fetchBuild();
