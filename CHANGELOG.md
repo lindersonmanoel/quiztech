@@ -6,6 +6,9 @@ A versão em execução aparece no rodapé do site e em `/api/version`.
 ## [Não lançado] - hospedagem sem depender de computador
 
 ### Alterado
+- **API principal passa a rodar no Railway** (`https://quiztech-api-production.up.railway.app`, serviço `quiztech-api` + PostgreSQL no mesmo
+  projeto, deploy automático do GitHub), como o Meu Bolso Digital. `CLIENT_IP_HEADER=x-real-ip` (o Railway sobrescreve o cabeçalho).
+  A alternativa Vercel + Supabase (abaixo) continua no ar como reserva.
 - **A API e o banco saíram do computador do dono.** O PostgreSQL agora é um banco gerenciado no **Supabase** (São Paulo) e a API
   roda como função no **Vercel** (`https://quiztech-api.vercel.app`, região gru1). O site chama esse endereço. Cada chamada à API
   caiu de ~1,4–2,2 s (Tailscale Funnel + PC de casa) para ~0,12–0,16 s.

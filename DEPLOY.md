@@ -144,6 +144,9 @@ npx @railway/cli variables set NODE_ENV=production DATABASE_SSL=false JWT_SECRET
 npx @railway/cli up --detach                 # constrói pelo Dockerfile e publica
 npx @railway/cli domain                      # gera o endereço público (https://...up.railway.app)
 ```
+- **IP do visitante (IMPORTANTE):** defina `CLIENT_IP_HEADER=x-real-ip`. O Railway sobrescreve esse cabeçalho com o IP real; sem isso (ou
+  com um cabeçalho que o Railway não controla, como o `fly-client-ip` do Fly.io) o cliente forja `X-Forwarded-For` e burla o limite de
+  tentativas de login. Verificado: forjando X-Real-IP e X-Forwarded-For, 5 falhas dão 401 e a 6ª dá 429.
 - **Banco:** com o PostgreSQL do Railway, use `DATABASE_SSL=false` (rede interna). Para continuar no Supabase, use a URL do modo
   **sessão** (porta 5432, exigida pelas migrações), `DATABASE_SSL=true` e `DATABASE_SSL_CA`.
 - Depois: troque `API_PRODUCAO` em `frontend/js/config.js` e o `connect-src` do `vercel.json` pelo endereço novo, e inclua os endereços
