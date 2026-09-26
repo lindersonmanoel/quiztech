@@ -99,7 +99,11 @@ Observações:
 4. Suba o túnel: `docker compose --env-file .env.production -f docker-compose.prod.yml --profile tunnel up -d`.
 5. Coloque `SERVE_FRONTEND=0` no `.env.production` e `docker compose ... up -d` de novo.
 
-## 5d. API no Vercel + banco no Supabase (sem depender do seu computador) — configuração atual
+## 5d. (DESATIVADA) API no Vercel + banco no Supabase
+> **Não está em uso.** A API de produção roda só no Railway (seção 5e). Esta seção fica como alternativa documentada; os projetos
+> `quiztech-api` (Vercel) e `quiztech` (Supabase) foram desligados. Para reativar: crie o banco, rode as migrações e aponte o site.
+>
+> Configuração que existia:
 O site (projeto `quiztech` no Vercel) chama a API em `https://quiztech-api.vercel.app/api`, que roda como função do Vercel
 (projeto `quiztech-api`, região gru1) e usa um PostgreSQL gerenciado no Supabase (projeto `quiztech`, sa-east-1). Nada disso
 precisa do seu PC ligado.
