@@ -1,4 +1,4 @@
-import { api, el, fmtTime, icone, params, renderNav, requireLogin, showMessage, $ } from "./app.js";
+import { api, el, fmtTime, icone, params, renderNav, requireLogin, showMessage, tituloQuiz, $ } from "./app.js";
 
 renderNav();
 
@@ -18,7 +18,7 @@ function render(r) {
   $("#result").replaceChildren(
     el("div", { class: `card score${r.passed ? "" : " fail"}` },
       el("h1", {}, r.passed ? "Parabéns, você foi aprovado" : "Resultado abaixo da nota mínima"),
-      el("p", { class: "muted" }, r.quiz_title),
+      el("p", { class: "muted" }, tituloQuiz(r.quiz_title)),
       el("div", { class: "big" }, `${r.percentage}%`),
       el("p", {}, `${r.score} de ${r.max_score} pontos · ${r.correct_answers} acertos · ${r.wrong_answers} erros · tempo ${fmtTime(r.time_spent)}`),
       cert

@@ -1,7 +1,7 @@
 // Painel do administrador. Toda a seguranca esta no servidor (as rotas /admin exigem login E perfil de administrador);
 // esta tela so' organiza o uso. Todo texto dinamico entra por textContent (el()), nunca por innerHTML.
 
-import { api, DIFFICULTY, NIVEIS, el, fmtDate, getToken, getUser, icone, renderNav, requireLogin, setSession, showMessage, $ } from "./app.js";
+import { api, DIFFICULTY, NIVEIS, el, fmtDate, getToken, getUser, icone, renderNav, requireLogin, setSession, showMessage, tituloQuiz, $ } from "./app.js";
 import { NOMES_DE_ICONES } from "./icons.js";
 
 renderNav();
@@ -104,7 +104,7 @@ async function viewResumo() {
     el("h2", { class: "sub" }, "Últimos resultados"),
     tabela(["Quando", "Pessoa", "Quiz", "Nível", "Acertos", "Situação"],
       atividade.map((a) => el("tr", {},
-        el("td", {}, dataHora(a.created_at)), el("td", {}, a.user_name), el("td", {}, a.quiz_title),
+        el("td", {}, dataHora(a.created_at)), el("td", {}, a.user_name), el("td", {}, tituloQuiz(a.quiz_title)),
         el("td", {}, insigniaNivel(a.difficulty)), el("td", {}, `${a.percentage}%`),
         el("td", {}, a.passed ? (a.certificate ? "Aprovado · certificado" : "Aprovado") : "Não aprovado"))),
       "Nenhum quiz foi respondido até o momento."));
@@ -139,7 +139,7 @@ async function viewQuizzes() {
       lista.replaceChildren(el("p", { class: "muted" }, `${quizzes.length} quiz(zes)`), tabela(
         ["Quiz", "Área", "Nível", "Perguntas", "Resultados", "Situação", "Ações"],
         quizzes.map((quiz) => el("tr", {},
-          el("td", {}, quiz.title), el("td", {}, quiz.category_name), el("td", {}, insigniaNivel(quiz.difficulty)),
+          el("td", {}, tituloQuiz(quiz.title)), el("td", {}, quiz.category_name), el("td", {}, insigniaNivel(quiz.difficulty)),
           el("td", {}, quiz.question_count), el("td", {}, quiz.result_count), el("td", {}, insigniaEstado(quiz.is_active)),
           el("td", { class: "row-actions" },
             el("button", { class: "btn small", type: "button", onclick: () => editarQuiz(quiz.id) }, "Editar"),

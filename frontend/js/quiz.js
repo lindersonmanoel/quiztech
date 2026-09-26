@@ -1,4 +1,4 @@
-import { api, DIFFICULTY, el, fmtTime, params, renderNav, requireLogin, showMessage, $ } from "./app.js";
+import { api, DIFFICULTY, el, fmtTime, params, renderNav, requireLogin, showMessage, tituloQuiz, $ } from "./app.js";
 import { ajudaVisivel } from "./tutorial.js";
 
 renderNav();
@@ -28,7 +28,7 @@ async function load() {
 
 function renderIntro() {
   stage.replaceChildren(el("div", { class: "card" },
-    el("h1", {}, quiz.title),
+    el("h1", {}, tituloQuiz(quiz.title)),
     el("p", { class: "muted" }, quiz.description),
     el("p", {}, `${quiz.question_count} perguntas · ${quiz.total_points} pontos · nível ${DIFFICULTY[quiz.difficulty]}`),
     quiz.time_limit

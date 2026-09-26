@@ -4,9 +4,14 @@
 // suba a versão aqui, acrescente a entrada NO TOPO do histórico, e faça o mesmo em CHANGELOG.md e em backend-node/package.json.
 // Os testes (backend-node/tests/infra.test.js) reprovam se essas coisas ficarem diferentes entre si.
 
-export const APP_VERSION = "2.4.2";
+export const APP_VERSION = "2.4.3";
 
 export const CHANGELOG = [
+  {
+    versao: "2.4.3",
+    data: "2026-09-26",
+    mudancas: ["Padronização dos títulos dos quizzes por nível (por exemplo, “Quiz de Python (Médio)”) em todas as telas, inclusive nos certificados"],
+  },
   {
     versao: "2.4.2",
     data: "2026-09-26",

@@ -113,6 +113,11 @@ export function fmtDate(iso) {
   return new Date(iso).toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" });
 }
 
+/** Titulo de quiz sem travessao: "Quiz de Python (travessao) Medio" vira "Quiz de Python (Médio)". Cobre titulos ainda gravados no formato antigo. */
+export const tituloQuiz = (texto) => String(texto ?? "")
+  .replace(/ [\u2014\u2013] (Fácil|Médio|Difícil)$/, " ($1)")
+  .replace(/ [\u2014\u2013] /g, ": ");
+
 export const DIFFICULTY = { facil: "Fácil", media: "Médio", dificil: "Difícil" };
 export const NIVEIS = ["facil", "media", "dificil"];
 

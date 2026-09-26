@@ -1,5 +1,5 @@
 import { renderizarNovidades } from "./novidades.js";
-import { api, clearSession, DIFFICULTY, el, fmtDate, getUser, renderNav, requireLogin, setSession, getToken, showMessage, $ } from "./app.js";
+import { api, clearSession, DIFFICULTY, el, fmtDate, getUser, renderNav, requireLogin, setSession, getToken, showMessage, tituloQuiz, $ } from "./app.js";
 
 renderNav();
 renderizarNovidades(document.getElementById("lista-novidades"), document.getElementById("versao-atual"));
@@ -41,7 +41,7 @@ async function load() {
 
     $("#history").replaceChildren(...(results.length
       ? results.map((r) => el("tr", {},
-        el("td", {}, r.quiz_title),
+        el("td", {}, tituloQuiz(r.quiz_title)),
         el("td", {}, `${r.score}/${r.max_score}`),
         el("td", {}, `${r.percentage}%`),
         el("td", {}, r.passed ? "Aprovado" : "Não aprovado"),

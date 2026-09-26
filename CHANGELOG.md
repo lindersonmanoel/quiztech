@@ -3,6 +3,11 @@
 Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e [versionamento semântico](https://semver.org/lang/pt-BR/).
 A versão do site aparece no rodapé; a do servidor, em `/api/version`.
 
+## [2.4.3] - 2026-09-26
+
+### Corrigido
+- Títulos de quiz no formato antigo (com travessão) são exibidos como "Quiz de X (Médio)" em todas as telas, mesmo antes de a migração 006 ser aplicada ao banco.
+
 ## [2.4.2] - 2026-09-26
 
 ### Corrigido

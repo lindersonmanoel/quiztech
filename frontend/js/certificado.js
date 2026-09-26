@@ -1,4 +1,4 @@
-import { api, apiText, DIFFICULTY, el, fmtDate, params, renderNav, showMessage, $ } from "./app.js";
+import { api, apiText, DIFFICULTY, el, fmtDate, params, renderNav, showMessage, tituloQuiz, $ } from "./app.js";
 
 renderNav();
 
@@ -32,7 +32,7 @@ async function load() {
       el("p", { class: "text" }, "Certificamos que"),
       el("div", { class: "name" }, c.user_name),
       el("p", { class: "text" },
-        `concluiu com aproveitamento de ${c.percentage}% (${c.score} pontos) o quiz `, el("strong", {}, c.quiz_title),
+        `concluiu com aproveitamento de ${c.percentage}% (${c.score} pontos) o quiz `, el("strong", {}, tituloQuiz(c.quiz_title)),
         nivel && !nivelNoTitulo ? `, nível ${nivel}` : "",
         `, da área de ${c.category_name}, na plataforma QUIZ TECH, em ${fmtDate(c.issued_at)}.`),
       qr,
