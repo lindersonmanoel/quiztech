@@ -15,8 +15,10 @@ COPY --chown=node:node frontend ./frontend
 WORKDIR /app/backend-node
 ENV NODE_ENV=production
 # Commit do build (aparece em /api/version e no rodape do site): docker compose le GIT_COMMIT do ambiente.
+# Railway informa o commit em RAILWAY_GIT_COMMIT_SHA (build arg); o Docker Compose usa GIT_COMMIT.
 ARG GIT_COMMIT=dev
-ENV GIT_COMMIT=$GIT_COMMIT
+ARG RAILWAY_GIT_COMMIT_SHA
+ENV GIT_COMMIT=${RAILWAY_GIT_COMMIT_SHA:-$GIT_COMMIT}
 EXPOSE 3100
 USER node
 
