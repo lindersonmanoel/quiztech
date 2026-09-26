@@ -4,9 +4,16 @@
 // suba a versão aqui, acrescente a entrada NO TOPO do histórico, e faça o mesmo em CHANGELOG.md e em backend-node/package.json.
 // Os testes (backend-node/tests/infra.test.js) reprovam se essas coisas ficarem diferentes entre si.
 
-export const APP_VERSION = "2.4.1";
+export const APP_VERSION = "2.4.2";
 
 export const CHANGELOG = [
+  {
+    versao: "2.4.2",
+    data: "2026-09-26",
+    mudancas: [
+      "Correção do enquadramento no celular: o menu passou a exibir todos os itens (o botão Cadastrar ficava cortado) e a página não ultrapassa mais a largura da tela",
+    ],
+  },
   {
     versao: "2.4.1",
     data: "2026-09-26",

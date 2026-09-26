@@ -4,7 +4,7 @@
 // Regras de seguranca: NUNCA intercepta a API (login, respostas, certificados) nem qualquer outra origem;
 // so' arquivos estaticos do proprio site sao guardados.
 
-const CACHE = "quiztech-shell-v2.4.1"; // acompanha APP_VERSION (js/versao.js); um teste confere
+const CACHE = "quiztech-shell-v2.4.2"; // acompanha APP_VERSION (js/versao.js); um teste confere
 const ARQUIVOS = [
   "./", "index.html", "login.html", "cadastro.html", "quizzes.html", "quiz.html", "resultado.html", "ranking.html",
   "perfil.html", "certificado.html", "privacidade.html", "offline.html", "esqueci-senha.html", "redefinir-senha.html", "admin.html", "ajuda.html",

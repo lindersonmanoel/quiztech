@@ -3,6 +3,11 @@
 Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e [versionamento semântico](https://semver.org/lang/pt-BR/).
 A versão do site aparece no rodapé; a do servidor, em `/api/version`.
 
+## [2.4.2] - 2026-09-26
+
+### Corrigido
+- **Celular**: o menu quebra em linhas e mostra todos os itens (o botão "Cadastrar" ficava cortado na lateral), sem rolagem lateral, e deixa de ser fixo no topo.
+
 ## [2.4.1] - 2026-09-26
 
 ### Alterado

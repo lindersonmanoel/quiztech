@@ -451,14 +451,19 @@ body:has(.update-banner) .ajuda-fab { display: none; } /* o aviso de atualizaç�
   .nav-links a, .nav-links button { display: inline-flex; align-items: center; }
 }
 
-/* Celular: menu numa linha só, rolável, sem ocupar meia tela */
+/* Celular: o menu quebra em linhas, para todos os itens ficarem visiveis (nada cortado nas bordas) */
 @media (max-width: 640px) {
+  .nav { position: static; } /* menu de duas linhas: nao fica fixo, para nao ocupar a tela */
   .nav-inner { gap: 6px 12px; }
-  .nav-links { flex: 1 0 100%; margin-left: 0; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; -webkit-overflow-scrolling: touch; }
-  .nav-links::-webkit-scrollbar { display: none; }
-  .nav-links > * { flex: none; white-space: nowrap; }
+  .nav-links { flex: 1 0 100%; margin-left: 0; flex-wrap: wrap; gap: 4px; }
+  .nav-links a, .nav-links button { padding: 0.5rem 0.65rem; font-size: 0.95rem; }
+  .nav-links .btn { padding: 0.45rem 0.8rem; }
   .actions .btn { flex: 1 1 100%; text-align: center; }
+  main { padding-bottom: 5.5rem; }
   footer { padding-bottom: 5.5rem; }
+  .ajuda-fab { min-height: 3rem; padding: 0.6rem; }
+  img, table, pre { max-width: 100%; }
+}
 }
 
 /* Tablet (vertical e horizontal) */
