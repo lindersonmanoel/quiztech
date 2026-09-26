@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#010e24">
   <title>Início — QUIZ TECH</title>
   <link rel="icon" type="image/svg+xml" href="assets/logo/marca.svg">
@@ -25,8 +25,41 @@
       </div>
     </section>
     <section class="stats" id="stats" aria-live="polite"></section>
-    <h2>Áreas disponíveis</h2>
+    <h2 class="titulo-linha">Áreas disponíveis</h2>
     <div class="chips" id="areas"></div>
+
+    <section id="como-funciona" aria-labelledby="como-titulo">
+      <h2 class="titulo-linha" id="como-titulo">Como funciona</h2>
+      <ol class="passos">
+        <li class="card passo"><div class="passo-icone" aria-hidden="true"><span data-icone="list" data-tamanho="30"></span></div><h3>1. Escolha</h3>
+          <p class="muted">Escolha uma área de tecnologia e um nível: Fácil, Médio ou Difícil. Cada quiz tem 6 perguntas.</p></li>
+        <li class="card passo"><div class="passo-icone" aria-hidden="true"><span data-icone="clock" data-tamanho="30"></span></div><h3>2. Responda</h3>
+          <p class="muted">Uma pergunta por vez, com tempo limite de 5 a 7 minutos. Dá para voltar e trocar respostas.</p></li>
+        <li class="card passo"><div class="passo-icone" aria-hidden="true"><span data-icone="award" data-tamanho="30"></span></div><h3>3. Certifique-se</h3>
+          <p class="muted">Com 70% de acertos ou mais você ganha um certificado com QR Code para imprimir ou salvar em PDF.</p></li>
+        <li class="card passo"><div class="passo-icone" aria-hidden="true"><span data-icone="trophy" data-tamanho="30"></span></div><h3>4. Suba no ranking</h3>
+          <p class="muted">Seus pontos entram no ranking geral, do mês e da semana. Vale a sua melhor nota em cada quiz.</p></li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="aparelhos-titulo">
+      <h2 class="titulo-linha" id="aparelhos-titulo">Em qualquer aparelho</h2>
+      <div class="grid aparelhos">
+        <article class="card"><div class="passo-icone" aria-hidden="true"><span data-icone="phone" data-tamanho="30"></span></div><h3>Celular</h3>
+          <p class="muted">Instale como aplicativo (botão “Instalar app”) e abra direto da tela inicial.</p></article>
+        <article class="card"><div class="passo-icone" aria-hidden="true"><span data-icone="tablet" data-tamanho="30"></span></div><h3>Tablet</h3>
+          <p class="muted">Layout ajustado para telas maiores, na vertical e na horizontal, com botões fáceis de tocar.</p></article>
+        <article class="card"><div class="passo-icone" aria-hidden="true"><span data-icone="monitor" data-tamanho="30"></span></div><h3>Computador</h3>
+          <p class="muted">Use o mouse ou o teclado: as teclas A a F escolhem a resposta durante o quiz.</p></article>
+        <article class="card"><div class="passo-icone" aria-hidden="true"><span data-icone="tv" data-tamanho="30"></span></div><h3>TV</h3>
+          <p class="muted">Letras grandes e navegação pelas setas do controle remoto. Abra o endereço no navegador da TV.</p></article>
+      </div>
+    </section>
+
+    <div class="actions" style="margin-top:28px">
+      <a class="btn" href="ajuda.html">Abrir a Central de ajuda</a>
+      <button class="btn secondary" type="button" data-tutorial="boas-vindas">Ver o tutorial</button>
+    </div>
   </main>
   <script type="module" src="js/home.js"></script>
 </body>

@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#010e24">
   <title>Ranking — QUIZ TECH</title>
   <link rel="icon" type="image/svg+xml" href="assets/logo/marca.svg">
@@ -16,6 +16,14 @@
   <main id="app">
     <h1>Ranking</h1>
     <p class="muted">Soma da melhor pontuação de cada pessoa em cada quiz do período. Refazer um quiz não infla a pontuação, e quizzes mais difíceis valem mais pontos.</p>
+    <aside class="dica" aria-label="Como o ranking funciona">
+      <h2 class="dica-titulo">Como o ranking funciona</h2>
+      <ul>
+        <li><strong>Geral, mês e semana:</strong> o ranking do mês recomeça no dia 1 e o da semana toda segunda-feira. O geral nunca zera.</li>
+        <li><strong>Pontos:</strong> conta a melhor pontuação de cada pessoa em cada quiz. Refazer não soma de novo, mas uma nota melhor substitui a antiga.</li>
+        <li><strong>Privacidade:</strong> aparecem só o primeiro nome e a inicial do sobrenome. Para entrar no ranking, basta fazer um quiz logado.</li>
+      </ul>
+    </aside>
     <div class="chips" id="periods" role="group" aria-label="Período do ranking"></div>
     <p class="muted period-note" id="period-note" aria-live="polite"></p>
     <div class="toolbar">

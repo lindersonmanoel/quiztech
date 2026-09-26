@@ -3,6 +3,7 @@
 
 import { initPwa } from "./pwa.js";
 import { icone, montarIcones } from "./icons.js";
+import "./dispositivo.js"; // marca o tipo de aparelho (celular, tablet, computador, TV) e liga a navegação por setas na TV
 
 export { icone };
 
@@ -179,7 +180,7 @@ export function renderNav() {
   const page = location.pathname.split("/").pop() || "index.html";
   const user = getUser();
   const link = (href, label) => el("a", { href, "aria-current": page === href ? "page" : false }, label);
-  const links = [link("quizzes.html", "Quizzes"), link("ranking.html", "Ranking")];
+  const links = [link("quizzes.html", "Quizzes"), link("ranking.html", "Ranking"), link("ajuda.html", "Ajuda")];
   // Botao de instalar o app (PWA): so' aparece no Android e enquanto o app nao esta instalado (veja pwa.js).
   links.push(el("button", { type: "button", class: "btn small install-btn", "data-install": "", hidden: true, "aria-label": "Instalar o aplicativo QUIZ TECH" }, icone("download", { tamanho: 16 }), " Instalar app"));
   if (user) {
@@ -196,8 +197,10 @@ export function renderNav() {
         el("span", {}, "QUIZ ", el("b", {}, "TECH"))),
       el("nav", { class: "nav-links", "aria-label": "Principal" }, links)));
   document.body.prepend(nav);
-  document.body.append(el("footer", {}, el("img", { src: "assets/logo/marca.svg", alt: "", width: 26, height: 26 }), "QUIZ TECH · Aprenda, teste e certifique seus conhecimentos em tecnologia", el("a", { href: "privacidade.html" }, "Política de Privacidade"), el("span", { id: "app-version", class: "app-version" })));
+  document.body.append(el("footer", {}, el("img", { src: "assets/logo/marca.svg", alt: "", width: 26, height: 26 }), "QUIZ TECH · Aprenda, teste e certifique seus conhecimentos em tecnologia", el("a", { href: "ajuda.html" }, "Ajuda"), el("a", { href: "privacidade.html" }, "Política de Privacidade"), el("span", { id: "app-version", class: "app-version" })));
   initVersion();
   montarIcones();
   initPwa();
+  // Tutorial de boas-vindas, tour de cada página e botão "?": carregados depois, para não atrasar a página.
+  import("./tutorial.js").then((t) => t.iniciarTutorial()).catch(() => { /* o site funciona igual sem o tutorial */ });
 }

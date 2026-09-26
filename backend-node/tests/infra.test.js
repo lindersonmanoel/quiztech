@@ -144,9 +144,20 @@ describe("PWA e site estatico", () => {
     }
   });
 
+  test("a ajuda e o tutorial existem e estao ligados ao menu, ao rodape e ao service worker", () => {
+    const app = fs.readFileSync(path.join(FRONT, "js/app.js"), "utf8");
+    expect(app).toContain('link("ajuda.html", "Ajuda")');
+    expect(app).toContain('import("./tutorial.js")');
+    expect(app).toContain('import "./dispositivo.js"');
+    for (const arq of ["ajuda.html", "js/ajuda.js", "js/tutorial.js", "js/dispositivo.js"]) expect(emCache).toContain(arq);
+    const ajuda = fs.readFileSync(path.join(FRONT, "ajuda.html"), "utf8");
+    for (const ancora of ["comecar", "quiz", "niveis", "certificado", "ranking", "perfil", "aparelhos", "faq"]) expect(ajuda).toContain(`id="${ancora}"`);
+  });
+
   test("o manifesto e' valido e os atalhos apontam para paginas que existem", () => {
     const m = JSON.parse(fs.readFileSync(path.join(FRONT, "manifest.webmanifest"), "utf8"));
     expect(m.display).toBe("standalone");
+    expect(m.orientation).toBe("any"); // "portrait" travaria o app em tablet e TV
     for (const atalho of m.shortcuts) expect(fs.existsSync(path.join(FRONT, atalho.url.split("?")[0]))).toBe(true);
   });
 

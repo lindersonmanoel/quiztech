@@ -1,4 +1,5 @@
 import { api, DIFFICULTY, el, fmtTime, params, renderNav, requireLogin, showMessage, $ } from "./app.js";
+import { ajudaVisivel } from "./tutorial.js";
 
 renderNav();
 
@@ -34,6 +35,14 @@ function renderIntro() {
       ? el("p", {}, `Tempo limite: ${fmtTime(quiz.time_limit)}. Ao acabar o tempo, o quiz é enviado automaticamente.`)
       : null,
     el("p", { class: "muted" }, "Acertando 70% ou mais, você recebe o certificado de conclusão."),
+    el("div", { class: "dica" },
+      el("h2", { class: "dica-titulo" }, "Como responder"),
+      el("ul", {},
+        el("li", {}, "Leia a pergunta e toque (ou clique) na alternativa que você acha certa. Toque de novo em outra para mudar."),
+        el("li", {}, "Use “Anterior” e “Próxima” para navegar. Você pode voltar e trocar respostas antes de finalizar."),
+        el("li", {}, "Teclado e controle remoto: as teclas A a F (ou 1 a 6) escolhem a alternativa; Tab e Enter navegam e confirmam."),
+        el("li", {}, "Ao tocar em “Finalizar”, o quiz é corrigido na hora e você vê o resultado."),
+        el("li", {}, "Quiz com tempo: quando o relógio zera, as respostas são enviadas sozinhas."))),
     el("button", { class: "btn", type: "button", onclick: start }, "Iniciar quiz")));
 }
 
@@ -48,6 +57,7 @@ function tick() {
 }
 
 function start() {
+  ajudaVisivel(false); // sem distrações enquanto o tempo corre
   startedAt = Date.now();
   if (quiz.time_limit) timerId = setInterval(tick, 500);
   renderQuestion();
@@ -80,6 +90,21 @@ function renderQuestion() {
           ? el("button", { class: "btn", type: "button", onclick: () => finish(false) }, "Finalizar")
           : el("button", { class: "btn", type: "button", onclick: () => { current++; renderQuestion(); } }, "Próxima"))));
 }
+
+// Atalhos de teclado (e de controle remoto com teclas numéricas): A–F ou 1–6 escolhem a alternativa da pergunta atual.
+document.addEventListener("keydown", (evento) => {
+  if (evento.ctrlKey || evento.metaKey || evento.altKey || submitting || !quiz || !startedAt) return;
+  if (/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement?.tagName)) return;
+  const indice = "abcdef".indexOf(evento.key.toLowerCase());
+  const numero = /^[1-6]$/.test(evento.key) ? Number(evento.key) - 1 : -1;
+  const posicao = evento.key.length === 1 ? (indice >= 0 ? indice : numero) : -1;
+  const pergunta = quiz.questions[current];
+  if (posicao < 0 || !pergunta || !pergunta.alternatives[posicao]) return;
+  evento.preventDefault();
+  chosen.set(pergunta.id, pergunta.alternatives[posicao].id);
+  renderQuestion();
+  $(".option[aria-pressed=\"true\"]")?.focus();
+});
 
 async function finish(timeUp) {
   if (submitting) return;

@@ -28,6 +28,12 @@ function render(r) {
         el("a", { class: "btn secondary", href: `quiz.html?id=${r.quiz_id}` }, "Refazer quiz"),
         el("a", { class: "btn secondary", href: "quizzes.html" }, "Outros quizzes"),
         el("a", { class: "btn secondary", href: "ranking.html" }, "Ver ranking"))),
+    el("aside", { class: "dica", "aria-label": "Como ler o resultado" },
+      el("h2", { class: "dica-titulo" }, "Como ler o resultado"),
+      el("ul", {},
+        el("li", {}, el("strong", {}, "Percentual: "), "acertos divididos pelo total de perguntas. Com 70% ou mais você é aprovado e recebe o certificado."),
+        el("li", {}, el("strong", {}, "Pontos: "), "cada pergunta vale pontos conforme o nível. Só a sua melhor nota em cada quiz conta no ranking."),
+        el("li", {}, el("strong", {}, "Não passou? "), "Tudo bem: revise abaixo, estude e tente de novo depois de alguns minutos."))),
     el("h2", { style: "margin-top:28px" }, "Revisão das respostas"),
     el("div", { class: "review" }, r.review.map((item, index) =>
       el("div", { class: `card review-item${item.is_correct ? " right" : ""}` },

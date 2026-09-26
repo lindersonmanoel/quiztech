@@ -5,6 +5,9 @@ A versão em execução aparece no rodapé do site e em `/api/version`.
 
 ## [Não lançado] - hospedagem sem depender de computador
 
+- **Tutorial e ajuda**: boas-vindas em 6 telas no primeiro acesso, tour guiado por página (destaca cada elemento), botão "?" em todas as telas, Central de Ajuda (`ajuda.html`) e caixas explicativas em quizzes, quiz, resultado, ranking, perfil e certificado. O progresso do tutorial fica no aparelho.
+- **Todos os aparelhos**: layout para celular (menu rolável, deitado), tablet (vertical/horizontal), monitores grandes e TV (letras grandes, foco visível, setas do controle remoto, botão Voltar; `?tv=1` força o modo). Atalhos A–F / 1–6 no quiz. Manifesto sem travar a orientação.
+
 - Publicação da API pelo GitHub Actions (`publicar-api.yml`: migrações no Neon + deploy no Vercel) usando só Secrets do GitHub; hook `pre-commit` e novos padrões em `verificar-segredos.sh` (Neon, Tailscale, tokens do Cloudflare).
 
 ### Alterado
