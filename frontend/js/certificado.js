@@ -26,7 +26,7 @@ async function load() {
     document.title = `Certificado de ${c.user_name} | QUIZ TECH`;
     const qr = await qrDoCertificado(c.code);
     $("#cert").replaceChildren(el("article", { class: "certificate", "aria-label": "Certificado de conclusão" },
-      el("img", { class: "logo", src: "assets/logo/logo.png", alt: "QUIZ TECH" }),
+      el("img", { class: "logo", src: "assets/logo/logo-circular.png", alt: "QUIZ TECH" }),
       el("h1", {}, "CERTIFICADO"),
       el("p", {}, "de conclusão"),
       el("p", { class: "text" }, "Certificamos que"),

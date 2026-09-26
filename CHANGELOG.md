@@ -3,6 +3,11 @@
 Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e [versionamento semântico](https://semver.org/lang/pt-BR/).
 A versão do site aparece no rodapé; a do servidor, em `/api/version`.
 
+## [2.4.4] - 2026-09-26
+
+### Corrigido
+- Logo redonda das telas de entrada e do certificado: nova arte `logo-circular.png` (Q ampliado e nome reposicionado) que preenche melhor o círculo.
+
 ## [2.4.3] - 2026-09-26
 
 ### Corrigido

@@ -4,9 +4,14 @@
 // suba a versão aqui, acrescente a entrada NO TOPO do histórico, e faça o mesmo em CHANGELOG.md e em backend-node/package.json.
 // Os testes (backend-node/tests/infra.test.js) reprovam se essas coisas ficarem diferentes entre si.
 
-export const APP_VERSION = "2.4.3";
+export const APP_VERSION = "2.4.4";
 
 export const CHANGELOG = [
+  {
+    versao: "2.4.4",
+    data: "2026-09-26",
+    mudancas: ["Logo redonda reenquadrada: o Q e o nome ocupam melhor o círculo nas telas de entrada e no certificado"],
+  },
   {
     versao: "2.4.3",
     data: "2026-09-26",
