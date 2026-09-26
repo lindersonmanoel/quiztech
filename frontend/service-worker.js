@@ -4,7 +4,7 @@
 // Regras de seguranca: NUNCA intercepta a API (login, respostas, certificados) nem qualquer outra origem;
 // so' arquivos estaticos do proprio site sao guardados.
 
-const CACHE = "quiztech-shell-v4";
+const CACHE = "quiztech-shell-v5";
 const ARQUIVOS = [
   "./", "index.html", "login.html", "cadastro.html", "quizzes.html", "quiz.html", "resultado.html", "ranking.html",
   "perfil.html", "certificado.html", "privacidade.html", "offline.html", "esqueci-senha.html", "redefinir-senha.html", "admin.html",
