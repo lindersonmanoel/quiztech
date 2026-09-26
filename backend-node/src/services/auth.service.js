@@ -8,6 +8,7 @@ const pool = require("../database/pool");
 const usuarioModel = require("../models/usuario.model");
 const senhaResetModel = require("../models/senhaReset.model");
 const emailService = require("./email.service");
+const { emSegundoPlano } = require("../utils/segundoPlano");
 const { AppError } = require("../utils/errors");
 
 // Em teste o custo minimo do bcrypt (4) deixa a suite bem mais rapida; producao segue com 12.
@@ -126,9 +127,7 @@ async function redefinirSenha({ token, senha }) {
     client.release();
   }
   if (usuario) {
-    emailService.enviarSenhaAlterada({ para: usuario.email, nome: usuario.nome })
-      // eslint-disable-next-line no-console
-      .catch((e) => console.error("[email] não foi possível avisar a troca de senha:", e.message));
+    emSegundoPlano(emailService.enviarSenhaAlterada({ para: usuario.email, nome: usuario.nome }), "aviso de senha alterada");
   }
 }
 

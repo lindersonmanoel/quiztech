@@ -5,9 +5,9 @@
 Plataforma web de quizzes de tecnologia com **certificado de conclusão**, instalável como aplicativo (PWA).
 
 - **Site:** HTML5, CSS3 e JavaScript (sem framework e sem build), na pasta `frontend/`, publicado no **Vercel**.
-- **API:** Node.js + Express (`backend-node/`), no mesmo molde do backend do Meu Bolso Digital.
-- **Banco:** PostgreSQL. Em produção, o **mesmo servidor** do Meu Bolso Digital, em um banco e usuário próprios.
-- **Publicação:** API em contêiner na VM (Docker) com endereço fixo gratuito pelo **Tailscale Funnel** (ou Cloudflare Tunnel, se houver domínio), backup diário e CI no GitHub (veja [DEPLOY.md](DEPLOY.md)).
+- **API:** Node.js + Express (`backend-node/`), no mesmo molde do backend do Meu Bolso Digital; em produção roda como função do Vercel.
+- **Banco:** PostgreSQL. Em produção, gerenciado no **Supabase** (São Paulo); em Docker, o mesmo servidor do Meu Bolso Digital.
+- **Publicação:** o site e a API rodam no **Vercel** e o banco no **Supabase**: nada depende do computador do dono (veja [DEPLOY.md](DEPLOY.md), seção 5d). Continua possível rodar em Docker numa VM própria (seções anteriores). CI no GitHub.
 
 ## O que já funciona
 - Cadastro, login (JWT) e edição do nome exibido no certificado.

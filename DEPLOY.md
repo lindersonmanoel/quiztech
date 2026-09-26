@@ -99,6 +99,40 @@ Observações:
 4. Suba o túnel: `docker compose --env-file .env.production -f docker-compose.prod.yml --profile tunnel up -d`.
 5. Coloque `SERVE_FRONTEND=0` no `.env.production` e `docker compose ... up -d` de novo.
 
+## 5d. API no Vercel + banco no Supabase (sem depender do seu computador) — configuração atual
+O site (projeto `quiztech` no Vercel) chama a API em `https://quiztech-api.vercel.app/api`, que roda como função do Vercel
+(projeto `quiztech-api`, região gru1) e usa um PostgreSQL gerenciado no Supabase (projeto `quiztech`, sa-east-1). Nada disso
+precisa do seu PC ligado.
+
+**Banco (Supabase).** Usuário próprio sem superpoderes (`quiztech_app`) e o *pooler* do Supabase (compatível com IPv4):
+porta 5432 (modo sessão) para migrações, porta 6543 (modo transação) para a API. Certificado validado com o CA do Supabase
+(`DATABASE_SSL=true` + `DATABASE_SSL_CA`). As credenciais ficam em `.env.supabase` (ignorado pelo Git) e nas variáveis do Vercel.
+```bash
+# migrações e carga inicial (idempotentes), a partir da sua máquina, usando a URL do modo sessão
+cd backend-node
+DATABASE_URL="<DATABASE_URL_SESSION>" DATABASE_SSL=true DATABASE_SSL_CA="<CA>" npm run migrate
+DATABASE_URL="<DATABASE_URL_SESSION>" DATABASE_SSL=true DATABASE_SSL_CA="<CA>" npm run seed
+```
+
+**API (Vercel).** Variáveis do projeto `quiztech-api`: `NODE_ENV=production`, `DATABASE_URL` (pooler, porta 6543), `DATABASE_SSL=true`,
+`DATABASE_SSL_CA`, `JWT_SECRET`, `FRONTEND_URL` (os endereços do site, separados por vírgula), `APP_URL`, `ADMIN_EMAIL`,
+`RATE_LIMIT_STORE=postgres`, `INTEGRITY_TOKEN` e, para o e-mail, `SMTP_HOST`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM`
+(a mudança de variáveis só vale em um novo deploy: no Vercel, "Redeploy").
+
+**Publicar uma versão nova da API:**
+1. `node scripts/empacotar-api-vercel.js` gera `dist-api/` (um único `api/index.js` minificado + `package.json` + `vercel.json`).
+2. Dentro de `dist-api/`: `npx vercel deploy --prod` (exige `vercel login`), ou peça ao Claude Code para publicar pela conexão do Vercel.
+3. Confira: `curl -H "x-integrity-token: <INTEGRITY_TOKEN>" https://quiztech-api.vercel.app/api/integridade` devolve o SHA-1 de cada
+   arquivo publicado; compare com os locais. Sem o cabeçalho a rota responde 404.
+4. Migrações novas (`database/migrations/*.sql`) são aplicadas antes, com o comando `npm run migrate` acima.
+
+**Limites do plano gratuito.** Supabase gratuito **pausa o projeto após ~7 dias sem uso** (a API responderia erro até você
+reativar em supabase.com/dashboard) e Vercel Hobby é para uso não comercial. Para produção séria, use planos pagos.
+
+**Os contêineres antigos** (`quiztech-api-prod`, Tailscale Funnel, backup) ficam sem uso e podem ser parados:
+`docker compose --env-file .env.production -f docker-compose.prod.yml --profile funnel down`.
+**Backup:** o Supabase gratuito não inclui backups diários; exporte com `pg_dump` (URL do modo sessão) de tempos em tempos.
+
 ## 6. Site no Vercel
 1. Vercel → **Add New → Project** → repositório `lindersonmanoel/quiztech`. O `vercel.json` já define: sem build, pasta
    `frontend/` como site, cabeçalhos de segurança e a política de conteúdo (CSP).

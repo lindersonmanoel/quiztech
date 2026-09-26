@@ -155,3 +155,13 @@ describe("PWA e site estatico", () => {
     expect(html).toContain('name="referrer" content="no-referrer"');
   });
 });
+
+describe("seguranca do banco hospedado", () => {
+  test("toda tabela do schema public tem RLS ligado (nada acessivel por API de terceiros)", async () => {
+    const { rows } = await pool.query(
+      `SELECT c.relname FROM pg_class c JOIN pg_namespace n ON n.oid = c.relnamespace
+        WHERE n.nspname = 'public' AND c.relkind = 'r' AND NOT c.relrowsecurity ORDER BY 1`
+    );
+    expect(rows.map((r) => r.relname)).toEqual([]);
+  });
+});

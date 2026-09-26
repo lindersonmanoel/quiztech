@@ -18,9 +18,10 @@ const ssl = config.databaseSsl
 const pool = new Pool({
   connectionString: config.databaseUrl,
   ssl,
-  max: Number(process.env.DB_POOL_MAX) || 10,
+  // Em funcoes sem servidor cada instancia abre poucas conexoes (o pooler do banco multiplexa); no servidor fixo, 10.
+  max: Number(process.env.DB_POOL_MAX) || (process.env.VERCEL ? 3 : 10),
   connectionTimeoutMillis: 10000,
-  idleTimeoutMillis: 30000,
+  idleTimeoutMillis: process.env.VERCEL ? 10000 : 30000,
   statement_timeout: 30000, // uma consulta travada nao prende a conexao pra sempre (a migracao desliga isto)
 });
 

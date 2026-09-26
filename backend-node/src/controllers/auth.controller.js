@@ -3,6 +3,7 @@
 const authService = require("../services/auth.service");
 const usuarioModel = require("../models/usuario.model");
 const { AppError } = require("../utils/errors");
+const { emSegundoPlano } = require("../utils/segundoPlano");
 const { validateRegister, validateLogin, validateNomePerfil, validateEsqueciSenha, validateRedefinirSenha } = require("../utils/validators");
 
 function dadosInvalidos(erros) {
@@ -66,8 +67,7 @@ async function forgotPassword(req, res, next) {
     if (!valido) throw dadosInvalidos(erros);
     // Resposta imediata e identica para qualquer e-mail; o envio acontece em segundo plano.
     res.status(202).json({ mensagem: "Se o e-mail estiver cadastrado, enviamos um link para redefinir a senha. Confira também a caixa de spam." });
-    // eslint-disable-next-line no-console
-    authService.solicitarRedefinicao(email).catch((err) => console.error("[recuperação de senha] falha:", err.message));
+    emSegundoPlano(authService.solicitarRedefinicao(email), "recuperação de senha");
     return undefined;
   } catch (err) {
     return next(err);

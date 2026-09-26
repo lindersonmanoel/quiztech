@@ -73,6 +73,9 @@ function buildConfig() {
     // Cabecalho, escrito por um proxy CONFIAVEL, com o IP real do visitante (ex.: cf-connecting-ip no Cloudflare).
     // So' defina se todo o trafego passar por esse proxy; senao o cliente poderia forja-lo.
     clientIpHeader: String(process.env.CLIENT_IP_HEADER || "").trim().toLowerCase(),
+    // Onde ficam os contadores do limite de tentativas: "memory" (uma instancia, padrao) ou "postgres" (varias
+    // instancias, ex.: Vercel). No Vercel (variavel VERCEL) o padrao e' postgres.
+    rateLimitStore: String(process.env.RATE_LIMIT_STORE || (process.env.VERCEL ? "postgres" : "memory")).trim().toLowerCase(),
     // Serve tambem o frontend (pasta ../frontend): util em demonstracao/local. Em producao o site fica no Vercel.
     serveFrontend: boolFromEnv(process.env.SERVE_FRONTEND, false),
   };

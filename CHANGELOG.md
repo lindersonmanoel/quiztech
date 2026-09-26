@@ -3,6 +3,21 @@
 Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e [versionamento semântico](https://semver.org/lang/pt-BR/).
 A versão em execução aparece no rodapé do site e em `/api/version`.
 
+## [Não lançado] - hospedagem sem depender de computador
+
+### Alterado
+- **A API e o banco saíram do computador do dono.** O PostgreSQL agora é um banco gerenciado no **Supabase** (São Paulo) e a API
+  roda como função no **Vercel** (`https://quiztech-api.vercel.app`, região gru1). O site chama esse endereço. Cada chamada à API
+  caiu de ~1,4–2,2 s (Tailscale Funnel + PC de casa) para ~0,12–0,16 s.
+- Contadores do limite de tentativas (login, cadastro, recuperação de senha) passam a ficar no PostgreSQL (tabela `rate_limits`,
+  migração 004): com funções sem servidor, um contador em memória seria por instância e não limitaria nada. Falha aberta se o banco
+  cair. Padrão continua "memória" fora do Vercel (`RATE_LIMIT_STORE`).
+- Envio de e-mail em segundo plano com `waitUntil` (`utils/segundoPlano.js`), para terminar mesmo depois da resposta.
+- Migração 005: segurança por linha (RLS) ligada em todas as tabelas, sem políticas, e privilégios de `anon`/`authenticated`
+  revogados, pois o Supabase expõe o schema `public` por uma API própria que este projeto não usa.
+- `scripts/empacotar-api-vercel.js` gera o pacote da função (`dist-api/`); `/api/integridade` (protegida por senha) confere por SHA-1
+  que o publicado é exatamente o enviado.
+
 ## [2.3.0] - 2026-09-25
 
 ### Adicionado

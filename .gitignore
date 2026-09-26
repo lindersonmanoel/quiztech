@@ -20,3 +20,7 @@ backend-node/.env.test
 # Backups do banco (copie para fora da maquina)
 backups/
 *.dump
+
+# API empacotada para o Vercel (gerada por scripts/empacotar-api-vercel.js)
+dist-api/
+dist-api-arquivos/
