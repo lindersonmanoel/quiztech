@@ -17,13 +17,13 @@ function render(r) {
   const cert = r.certificate;
   $("#result").replaceChildren(
     el("div", { class: `card score${r.passed ? "" : " fail"}` },
-      el("h1", {}, r.passed ? "Parabéns, você foi aprovado!" : "Quase lá! Continue praticando"),
+      el("h1", {}, r.passed ? "Parabéns, você foi aprovado" : "Resultado abaixo da nota mínima"),
       el("p", { class: "muted" }, r.quiz_title),
       el("div", { class: "big" }, `${r.percentage}%`),
       el("p", {}, `${r.score} de ${r.max_score} pontos · ${r.correct_answers} acertos · ${r.wrong_answers} erros · tempo ${fmtTime(r.time_spent)}`),
       cert
         ? el("p", {}, el("a", { class: "btn", href: `certificado.html?code=${encodeURIComponent(cert.code)}` }, "Ver meu certificado"))
-        : el("p", { class: "muted" }, "Você precisa de 70% de acertos ou mais. O gabarito é liberado após a aprovação; estude o conteúdo e tente de novo em alguns minutos."),
+        : el("p", { class: "muted" }, "São necessários 70% de acertos ou mais. O gabarito é liberado após a aprovação; estude o conteúdo e tente novamente após alguns minutos."),
       el("div", { class: "actions" },
         el("a", { class: "btn secondary", href: `quiz.html?id=${r.quiz_id}` }, "Refazer quiz"),
         el("a", { class: "btn secondary", href: "quizzes.html" }, "Outros quizzes"),
@@ -31,9 +31,9 @@ function render(r) {
     el("aside", { class: "dica", "aria-label": "Como ler o resultado" },
       el("h2", { class: "dica-titulo" }, "Como ler o resultado"),
       el("ul", {},
-        el("li", {}, el("strong", {}, "Percentual: "), "acertos divididos pelo total de perguntas. Com 70% ou mais você é aprovado e recebe o certificado."),
-        el("li", {}, el("strong", {}, "Pontos: "), "cada pergunta vale pontos conforme o nível. Só a sua melhor nota em cada quiz conta no ranking."),
-        el("li", {}, el("strong", {}, "Não passou? "), "Tudo bem: revise abaixo, estude e tente de novo depois de alguns minutos."))),
+        el("li", {}, el("strong", {}, "Percentual: "), "acertos divididos pelo total de perguntas. Com 70% ou mais, você é aprovado e recebe o certificado."),
+        el("li", {}, el("strong", {}, "Pontos: "), "cada pergunta vale uma pontuação conforme o nível. Somente a melhor nota em cada quiz é considerada no ranking."),
+        el("li", {}, el("strong", {}, "Não passou? "), "Revise as respostas abaixo, estude o conteúdo e tente novamente após alguns minutos."))),
     el("h2", { style: "margin-top:28px" }, "Revisão das respostas"),
     el("div", { class: "review" }, r.review.map((item, index) =>
       el("div", { class: `card review-item${item.is_correct ? " right" : ""}` },

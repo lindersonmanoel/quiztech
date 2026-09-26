@@ -38,11 +38,11 @@ function renderIntro() {
     el("div", { class: "dica" },
       el("h2", { class: "dica-titulo" }, "Como responder"),
       el("ul", {},
-        el("li", {}, "Leia a pergunta e toque (ou clique) na alternativa que você acha certa. Toque de novo em outra para mudar."),
-        el("li", {}, "Use “Anterior” e “Próxima” para navegar. Você pode voltar e trocar respostas antes de finalizar."),
-        el("li", {}, "Teclado e controle remoto: as teclas A a F (ou 1 a 6) escolhem a alternativa; Tab e Enter navegam e confirmam."),
-        el("li", {}, "Ao tocar em “Finalizar”, o quiz é corrigido na hora e você vê o resultado."),
-        el("li", {}, "Quiz com tempo: quando o relógio zera, as respostas são enviadas sozinhas."))),
+        el("li", {}, "Leia a pergunta e selecione a alternativa que considerar correta. Para alterar a escolha, selecione outra alternativa."),
+        el("li", {}, "Utilize “Anterior” e “Próxima” para navegar. É possível voltar e alterar as respostas antes de finalizar."),
+        el("li", {}, "Teclado e controle remoto: as teclas A a F (ou 1 a 6) selecionam a alternativa; Tab e Enter permitem navegar e confirmar."),
+        el("li", {}, "Ao selecionar “Finalizar”, o quiz é corrigido imediatamente e o resultado é exibido."),
+        el("li", {}, "Quiz com tempo limite: quando o cronômetro chega a zero, as respostas são enviadas automaticamente."))),
     el("button", { class: "btn", type: "button", onclick: start }, "Iniciar quiz")));
 }
 
@@ -91,7 +91,7 @@ function renderQuestion() {
           : el("button", { class: "btn", type: "button", onclick: () => { current++; renderQuestion(); } }, "Próxima"))));
 }
 
-// Atalhos de teclado (e de controle remoto com teclas numéricas): A–F ou 1–6 escolhem a alternativa da pergunta atual.
+// Atalhos de teclado (e de controle remoto com teclas numéricas): A a F ou 1 a 6 selecionam a alternativa da pergunta atual.
 document.addEventListener("keydown", (evento) => {
   if (evento.ctrlKey || evento.metaKey || evento.altKey || submitting || !quiz || !startedAt) return;
   if (/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement?.tagName)) return;
@@ -113,7 +113,7 @@ async function finish(timeUp) {
 
   submitting = true;
   clearInterval(timerId);
-  stage.replaceChildren(el("p", { class: "muted", role: "status" }, "Corrigindo…"));
+  stage.replaceChildren(el("p", { class: "muted", role: "status" }, "Corrigindo o quiz…"));
   try {
     const answers = quiz.questions.map((q) => ({ question_id: q.id, alternative_id: chosen.get(q.id) ?? null }));
     const time_spent = Math.round((Date.now() - startedAt) / 1000);

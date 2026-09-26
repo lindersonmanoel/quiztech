@@ -66,7 +66,7 @@ async function forgotPassword(req, res, next) {
     const { valido, erros, email } = validateEsqueciSenha(req.body || {});
     if (!valido) throw dadosInvalidos(erros);
     // Resposta imediata e identica para qualquer e-mail; o envio acontece em segundo plano.
-    res.status(202).json({ mensagem: "Se o e-mail estiver cadastrado, enviamos um link para redefinir a senha. Confira também a caixa de spam." });
+    res.status(202).json({ mensagem: "Se o e-mail estiver cadastrado, enviaremos um link para a redefinição da senha. Verifique também a caixa de spam." });
     emSegundoPlano(authService.solicitarRedefinicao(email), "recuperação de senha");
     return undefined;
   } catch (err) {

@@ -26,11 +26,11 @@ function normalizeNome(nome) {
 /** Regras da senha nova. Devolve a mensagem de erro ou null. */
 function validarSenhaNova(senha) {
   const texto = String(senha || "");
-  if (texto.length < SENHA_MIN) return "A senha precisa ter pelo menos 8 caracteres.";
+  if (texto.length < SENHA_MIN) return "A senha deve conter no mínimo 8 caracteres.";
   if (Buffer.byteLength(texto, "utf8") > SENHA_MAX_BYTES) {
-    return "A senha pode ter no máximo 72 bytes (cerca de 72 caracteres; acentos e emojis ocupam mais).";
+    return "A senha pode conter, no máximo, 72 bytes (cerca de 72 caracteres; acentos e emojis ocupam mais espaço).";
   }
-  if (SENHAS_COMUNS.has(texto.toLowerCase())) return "Essa senha é muito comum. Escolha outra.";
+  if (SENHAS_COMUNS.has(texto.toLowerCase())) return "Esta senha é muito comum. Escolha outra.";
   return null;
 }
 
@@ -90,7 +90,7 @@ const inteiro = (v) => Number.isInteger(v);
 function validateSubmit({ answers, time_spent: tempo } = {}) {
   const erros = {};
   if (!Array.isArray(answers)) erros.answers = "Envie a lista de respostas.";
-  else if (answers.length > 200) erros.answers = "Respostas demais.";
+  else if (answers.length > 200) erros.answers = "A quantidade de respostas excede o limite permitido.";
   else if (!answers.every((a) => a && inteiro(a.question_id) && (a.alternative_id === null || a.alternative_id === undefined || inteiro(a.alternative_id)))) {
     erros.answers = "Formato de resposta inválido.";
   }
@@ -138,11 +138,11 @@ function validatePergunta(b = {}, { exigeQuiz = true } = {}) {
   const texto = String(b.text || "").trim();
   if (texto.length < 3 || texto.length > 1000) erros.text = "O enunciado deve ter de 3 a 1000 caracteres.";
   const pontos = b.points === undefined ? 10 : b.points;
-  if (!inteiro(pontos) || pontos < 1 || pontos > 100) erros.points = "Pontos devem ir de 1 a 100.";
+  if (!inteiro(pontos) || pontos < 1 || pontos > 100) erros.points = "A pontuação deve ser de 1 a 100.";
   const alts = Array.isArray(b.alternatives) ? b.alternatives : [];
   if (alts.length < 2 || alts.length > 6) erros.alternatives = "Informe de 2 a 6 alternativas.";
   else if (!alts.every((a) => a && typeof a.text === "string" && a.text.trim().length >= 1 && a.text.length <= 500)) {
-    erros.alternatives = "Cada alternativa precisa de texto (até 500 caracteres).";
+    erros.alternatives = "Cada alternativa deve conter texto (até 500 caracteres).";
   } else if (alts.filter((a) => a.is_correct === true).length !== 1) {
     erros.alternatives = "Informe exatamente uma alternativa correta.";
   }

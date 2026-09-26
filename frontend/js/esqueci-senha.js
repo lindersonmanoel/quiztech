@@ -9,7 +9,7 @@ api("/config").then((cfg) => {
   if (cfg.password_reset) return;
   $("#submit").disabled = true;
   $("#email").disabled = true;
-  showMessage($("#msg"), "A recuperação de senha por e-mail ainda não está ativada neste servidor. Fale com o administrador do sistema.");
+  showMessage($("#msg"), "A recuperação de senha por e-mail ainda não está ativada neste servidor. Entre em contato com o administrador do sistema.");
 }).catch(() => { /* sem resposta: deixa o formulario funcionar e o envio mostra o erro */ });
 
 $("#form").addEventListener("submit", async (event) => {

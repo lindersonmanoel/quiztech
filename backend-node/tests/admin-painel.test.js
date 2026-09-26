@@ -94,7 +94,7 @@ describe("estatisticas e atividade", () => {
     await request(app).post(`/api/quizzes/${dificil}/submit`).set(u.headers).send({ answers: await respostasErradas(dificil) });
     const { body } = await request(app).get("/api/admin/activity").set(adm.headers);
     expect(body).toHaveLength(2);
-    expect(body[0]).toMatchObject({ user_name: "Ana Souza Lima", difficulty: "dificil", passed: false, certificate: false, quiz_title: "Quiz de Python — Difícil" });
+    expect(body[0]).toMatchObject({ user_name: "Ana Souza Lima", difficulty: "dificil", passed: false, certificate: false, quiz_title: "Quiz de Python (Difícil)" });
     expect(body[1]).toMatchObject({ difficulty: "facil", passed: true, certificate: true });
     expect(JSON.stringify(body)).not.toContain(u.dados.email);
   });

@@ -92,9 +92,9 @@ async function viewResumo() {
       numero(s.results, "resultados"), numero(s.certificates, "certificados"), numero(`${s.pass_rate}%`, "aprovação")),
     el("h2", { class: "sub" }, "Movimento recente"),
     el("div", { class: "stats" },
-      numero(s.users_7d, "novos usuários (7 dias)"), numero(s.results_7d, "quizzes feitos (7 dias)"),
-      numero(s.certificates_7d, "certificados (7 dias)"), numero(s.active_users_week, "pessoas ativas na semana")),
-    el("h2", { class: "sub" }, "Áreas mais feitas"),
+      numero(s.users_7d, "novos usuários (7 dias)"), numero(s.results_7d, "quizzes realizados (7 dias)"),
+      numero(s.certificates_7d, "certificados (7 dias)"), numero(s.active_users_week, "usuários ativos na semana")),
+    el("h2", { class: "sub" }, "Áreas mais realizadas"),
     el("div", { class: "card" }, s.top_categories.length
       ? el("ol", { class: "top-areas" }, s.top_categories.map((c) => el("li", {},
         el("span", { class: "top-nome" }, c.name),
@@ -107,7 +107,7 @@ async function viewResumo() {
         el("td", {}, dataHora(a.created_at)), el("td", {}, a.user_name), el("td", {}, a.quiz_title),
         el("td", {}, insigniaNivel(a.difficulty)), el("td", {}, `${a.percentage}%`),
         el("td", {}, a.passed ? (a.certificate ? "Aprovado · certificado" : "Aprovado") : "Não aprovado"))),
-      "Nenhum quiz respondido ainda."));
+      "Nenhum quiz foi respondido até o momento."));
 }
 
 // ---------- quizzes ----------
@@ -145,7 +145,7 @@ async function viewQuizzes() {
             el("button", { class: "btn small", type: "button", onclick: () => editarQuiz(quiz.id) }, "Editar"),
             el("button", { class: "btn small secondary", type: "button", onclick: () => alternarQuiz(quiz, atualizar) }, quiz.is_active ? "Desativar" : "Ativar"),
             el("button", { class: "btn small danger-btn", type: "button", onclick: () => excluirQuiz(quiz, atualizar) }, "Excluir")))),
-        "Nenhum quiz com esses filtros."));
+        "Nenhum quiz encontrado com os filtros selecionados."));
     } catch (erro) {
       aviso(erro.message);
     }
@@ -175,12 +175,12 @@ async function alternarQuiz(quiz, aoConcluir) {
 async function excluirQuiz(quiz, aoConcluir) {
   const temHistorico = quiz.result_count > 0;
   const pergunta = temHistorico
-    ? `"${quiz.title}" já tem ${quiz.result_count} resultado(s). Por isso ele será apenas DESATIVADO (some para os jogadores, mas o histórico e os certificados ficam). Continuar?`
+    ? `"${quiz.title}" já possui ${quiz.result_count} resultado(s). Por esse motivo, ele será apenas DESATIVADO (deixará de ser exibido aos usuários, mas o histórico e os certificados serão mantidos). Deseja continuar?`
     : `Excluir definitivamente "${quiz.title}" e as suas perguntas?`;
   if (!confirm(pergunta)) return;
   try {
     await api(`/admin/quizzes/${quiz.id}`, { method: "DELETE" });
-    aviso(temHistorico ? "Quiz desativado (tem histórico, então não foi apagado)." : "Quiz excluído.", "ok");
+    aviso(temHistorico ? "Quiz desativado (possui histórico e, por isso, não foi excluído)." : "Quiz excluído.", "ok");
     await aoConcluir();
   } catch (erro) {
     aviso(erro.message);
@@ -218,7 +218,7 @@ async function editarQuiz(id) {
       if (!Number.isInteger(corpo.time_limit) || corpo.time_limit < 0) return showMessage(status, "O tempo limite deve ser um número inteiro de segundos (0 = sem limite).");
       try {
         const salvo = await api(id ? `/admin/quizzes/${id}` : "/admin/quizzes", { method: id ? "PUT" : "POST", body: corpo });
-        aviso(id ? "Quiz salvo." : "Quiz criado. Agora adicione as perguntas.", "ok");
+        aviso(id ? "Quiz salvo." : "Quiz criado. Adicione as perguntas em seguida.", "ok");
         await editarQuiz(salvo.id);
       } catch (erro) {
         showMessage(status, erro.message);
@@ -231,7 +231,7 @@ async function editarQuiz(id) {
   campo("Descrição", descricao),
   el("div", { class: "form-grid" },
     campo("Área", area), campo("Nível", nivel), campo("Tempo limite (segundos, 0 = sem limite)", tempo)),
-  el("div", { class: "field check" }, el("label", {}, ativo, "Ativo (aparece para os jogadores)")),
+  el("div", { class: "field check" }, el("label", {}, ativo, "Ativo (exibido aos usuários)")),
   el("div", { class: "row-actions" },
     el("button", { class: "btn", type: "submit" }, "Salvar quiz"),
     el("button", { class: "btn secondary", type: "button", onclick: () => irPara("quizzes") }, "Voltar à lista")));
@@ -257,7 +257,7 @@ function desenharPerguntas(bloco, quiz) {
 
   bloco.replaceChildren(
     el("h2", { class: "sub" }, `Perguntas (${quiz.questions.length}) · ${quiz.total_points} pontos`),
-    el("p", { class: "muted" }, "Cada pergunta tem exatamente uma alternativa correta. Mudanças valem para quem responder daqui em diante; resultados e certificados antigos não são alterados."),
+    el("p", { class: "muted" }, "Cada pergunta possui exatamente uma alternativa correta. As alterações valem para quem responder a partir de agora; resultados e certificados anteriores não são modificados."),
     ...quiz.questions.map((p, indice) => el("article", { class: "card pergunta-item" },
       el("div", { class: "pergunta-topo" },
         el("strong", {}, `${indice + 1}. ${p.text}`),
@@ -323,8 +323,8 @@ function formPergunta({ quizId, pergunta, aoSalvar, aoCancelar }) {
       evento.preventDefault();
       const limpas = alternativas.map((a) => ({ text: a.texto.trim(), is_correct: a.correta }));
       const pts = Number(pontos.value);
-      if (texto.value.trim().length < 3) return showMessage(status, "Escreva o enunciado da pergunta.");
-      if (!Number.isInteger(pts) || pts < 1 || pts > 100) return showMessage(status, "Os pontos devem ser um número inteiro de 1 a 100.");
+      if (texto.value.trim().length < 3) return showMessage(status, "Informe o enunciado da pergunta.");
+      if (!Number.isInteger(pts) || pts < 1 || pts > 100) return showMessage(status, "A pontuação deve ser um número inteiro de 1 a 100.");
       if (limpas.some((a) => !a.text)) return showMessage(status, "Preencha todas as alternativas ou remova as vazias.");
       if (limpas.filter((a) => a.is_correct).length !== 1) return showMessage(status, "Marque exatamente uma alternativa como correta.");
       try {
@@ -375,7 +375,7 @@ async function viewAreas() {
           el("button", {
             class: "btn small danger-btn", type: "button",
             onclick: async () => {
-              if (!confirm(`Excluir a área "${c.name}" e os quizzes dela? Só é possível se ninguém tiver respondido.`)) return;
+              if (!confirm(`Excluir a área "${c.name}" e os respectivos quizzes? A exclusão só é possível se nenhum usuário tiver respondido.`)) return;
               try {
                 await api(`/admin/categories/${c.id}`, { method: "DELETE" });
                 aviso("Área excluída.", "ok");
@@ -412,7 +412,7 @@ function editarArea(cat) {
           method: cat ? "PUT" : "POST",
           body: { name: nome.value.trim(), slug: slug.value.trim(), group: grupo.value.trim(), icon: iconeSel.value, description: descricao.value.trim() },
         });
-        aviso(cat ? "Área salva." : "Área criada. Crie agora os quizzes dela na aba Quizzes.", "ok");
+        aviso(cat ? "Área salva." : "Área criada. Crie os quizzes correspondentes na aba Quizzes.", "ok");
         await viewAreas();
       } catch (erro) {
         showMessage(status, erro.message);

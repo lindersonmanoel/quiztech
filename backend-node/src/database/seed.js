@@ -62,16 +62,16 @@ async function semearAreas(client, areas = JSON.parse(fs.readFileSync(AREAS_JSON
     criadas += 1;
   }
 
-  // Bancos criados antes dos niveis tem "Quiz de X"; o catalogo agora se chama "Quiz de X — Médio".
+  // Bancos criados antes dos niveis tem "Quiz de X"; o catalogo agora se chama "Quiz de X (Médio)".
   // So' renomeia quando o titulo ainda e' exatamente o original (nao mexe no que o administrador editou).
   for (const area of areas) {
     const novo = area.quiz.titulo;
-    if (!novo.endsWith(` — ${ROTULO_NIVEL.media}`)) continue;
+    if (!novo.endsWith(` (${ROTULO_NIVEL.media})`)) continue;
     await client.query(
       `UPDATE quizzes q SET titulo = $1
          FROM categorias c
         WHERE c.id = q.categoria_id AND c.slug = $2 AND q.dificuldade = 'media' AND q.titulo = $3`,
-      [novo, area.slug, novo.slice(0, -` — ${ROTULO_NIVEL.media}`.length)]
+      [novo, area.slug, novo.slice(0, -` (${ROTULO_NIVEL.media})`.length)]
     );
   }
   return criadas;
@@ -102,7 +102,7 @@ async function semearNiveis(client, niveis = carregarNiveis()) {
       const quiz = await client.query(
         `INSERT INTO quizzes (titulo, descricao, categoria_id, dificuldade, limite_tempo)
          VALUES ($1, $2, $3, $4, $5) RETURNING id`,
-        [`Quiz de ${cat.nome} — ${ROTULO_NIVEL[nivel]}`, descricao, cat.id, nivel, TEMPO_NIVEL[nivel]]
+        [`Quiz de ${cat.nome} (${ROTULO_NIVEL[nivel]})`, descricao, cat.id, nivel, TEMPO_NIVEL[nivel]]
       );
       await inserirPerguntas(client, quiz.rows[0].id, lista.map(([texto, correta, erradas], i) => ({
         texto, correta, erradas, pontos: PONTOS_NIVEL[nivel][i],

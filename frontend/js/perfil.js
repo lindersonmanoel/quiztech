@@ -14,14 +14,14 @@ function renderProfile(user) {
         try {
           const updated = await api("/users/me", { method: "PUT", body: { name: input.value } });
           setSession(getToken(), updated);
-          showMessage($("#msg"), "Nome atualizado. Certificados novos usarão este nome.", "ok");
+          showMessage($("#msg"), "Nome atualizado. Os novos certificados utilizarão este nome.", "ok");
         } catch (error) {
           showMessage($("#msg"), error.message);
         }
       },
     },
     el("p", { class: "muted" }, user.email),
-    el("div", { class: "field" }, el("label", { for: "name" }, "Nome (aparece no certificado)"), input),
+    el("div", { class: "field" }, el("label", { for: "name" }, "Nome (exibido no certificado)"), input),
     el("button", { class: "btn small", type: "submit" }, "Salvar nome")));
 }
 
@@ -37,7 +37,7 @@ async function load() {
         el("p", {}, el("span", { class: `badge nivel-${c.difficulty}` }, DIFFICULTY[c.difficulty] || "")),
         el("p", { class: "muted" }, `${c.percentage}% · emitido em ${fmtDate(c.issued_at)}`),
         el("a", { class: "btn small", href: `certificado.html?code=${encodeURIComponent(c.code)}` }, "Abrir certificado")))
-      : [el("p", { class: "muted" }, "Você ainda não tem certificados. Acerte 70% ou mais em um quiz para receber o primeiro.")]));
+      : [el("p", { class: "muted" }, "Você ainda não possui certificados. Alcance 70% de acertos ou mais em um quiz para receber o primeiro.")]));
 
     $("#history").replaceChildren(...(results.length
       ? results.map((r) => el("tr", {},
@@ -46,7 +46,7 @@ async function load() {
         el("td", {}, `${r.percentage}%`),
         el("td", {}, r.passed ? "Aprovado" : "Não aprovado"),
         el("td", {}, el("a", { href: `resultado.html?id=${r.id}` }, "Detalhes"))))
-      : [el("tr", {}, el("td", { colspan: "5", class: "muted" }, "Nenhum quiz respondido ainda."))]));
+      : [el("tr", {}, el("td", { colspan: "5", class: "muted" }, "Nenhum quiz foi respondido até o momento."))]));
   } catch (error) {
     showMessage($("#msg"), error.message);
   }
@@ -55,8 +55,8 @@ async function load() {
 $("#delete-form").addEventListener("submit", async (event) => {
   event.preventDefault();
   const password = $("#delete-password").value;
-  if (!password) return showMessage($("#msg"), "Informe sua senha para confirmar.");
-  if (!confirm("Tem certeza? Sua conta, resultados e certificados serão apagados para sempre.")) return;
+  if (!password) return showMessage($("#msg"), "Informe a sua senha para confirmar.");
+  if (!confirm("Deseja realmente excluir a conta? A conta, os resultados e os certificados serão removidos definitivamente.")) return;
   try {
     await api("/users/me/delete", { method: "POST", body: { password } });
     clearSession();

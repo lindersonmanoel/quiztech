@@ -15,7 +15,7 @@ async function validarToken(token) {
   const usuarioId = Number(sub);
   const versaoAtual = Number.isInteger(usuarioId) ? await usuarioModel.tokenVersion(usuarioId) : null;
   if (versaoAtual === null || (tv || 0) !== versaoAtual) {
-    throw new authService.AuthError("Sessão inválida ou expirada. Faça login novamente.", 401);
+    throw new authService.AuthError("Sessão inválida ou expirada. Entre novamente na sua conta.", 401);
   }
   return usuarioId;
 }
@@ -23,7 +23,7 @@ async function validarToken(token) {
 /** Exige Authorization: Bearer <token> valido; preenche req.usuarioId. */
 async function requireAuth(req, _res, next) {
   const token = extrairToken(req);
-  if (!token) return next(new authService.AuthError("Token de acesso ausente. Faça login.", 401));
+  if (!token) return next(new authService.AuthError("Token de acesso ausente. Entre na sua conta.", 401));
   try {
     req.usuarioId = await validarToken(token);
     return next();

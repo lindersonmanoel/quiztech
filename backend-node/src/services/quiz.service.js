@@ -47,7 +47,7 @@ async function exigirIntervalo(usuarioId, quizId) {
   if (restanteMs > 0) {
     const segundos = Math.ceil(restanteMs / 1000);
     throw new AppError(
-      `Aguarde ${Math.ceil(segundos / 60)} min para refazer este quiz. Aproveite para revisar o conteúdo.`,
+      `Aguarde ${Math.ceil(segundos / 60)} min para refazer este quiz. Recomenda-se revisar o conteúdo nesse intervalo.`,
       429, null, { retryAfter: segundos }
     );
   }

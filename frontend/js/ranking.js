@@ -34,9 +34,9 @@ function notaDoPeriodo() {
     segunda.setUTCDate(hoje.getUTCDate() - ((hoje.getUTCDay() + 6) % 7));
     const domingo = new Date(segunda);
     domingo.setUTCDate(segunda.getUTCDate() + 6);
-    return `Semana de ${fmt(segunda, { day: "2-digit", month: "2-digit" })} a ${fmt(domingo, { day: "2-digit", month: "2-digit" })}. O ranking recomeça toda segunda-feira.`;
+    return `Semana de ${fmt(segunda, { day: "2-digit", month: "2-digit" })} a ${fmt(domingo, { day: "2-digit", month: "2-digit" })}. O ranking é reiniciado toda segunda-feira.`;
   }
-  if (period === "month") return `Mês de ${fmt(hoje, { month: "long", year: "numeric" })}. O ranking recomeça no dia 1.`;
+  if (period === "month") return `Mês de ${fmt(hoje, { month: "long", year: "numeric" })}. O ranking é reiniciado no dia 1.`;
   return "Pontuação acumulada desde o início.";
 }
 
@@ -65,7 +65,7 @@ async function loadRanking() {
   try {
     const rows = await api(`/ranking?${q}`);
     showMessage($("#msg"), "");
-    const vazio = period === "all" ? "Ainda não há resultados aqui. Seja o primeiro!" : "Ninguém pontuou neste período ainda. Seja o primeiro!";
+    const vazio = period === "all" ? "Ainda não há resultados registrados." : "Nenhuma pontuação foi registrada neste período.";
     $("#rows").replaceChildren(...(rows.length
       ? rows.map((r) => el("tr", {},
         el("td", {}, posicao(r.position)),

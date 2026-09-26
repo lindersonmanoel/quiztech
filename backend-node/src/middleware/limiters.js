@@ -12,7 +12,7 @@ const JANELA_MS = 15 * 60 * 1000;
  * Em teste o limite sobe muito (a suite faz centenas de chamadas legitimas); o mecanismo em si e' verificado a parte,
  * passando `respeitarLimiteEmTeste: true`. */
 function criarLimiter({
-  limit, mensagem = "Muitas requisições. Aguarde alguns minutos e tente de novo.",
+  limit, mensagem = "Muitas requisições. Aguarde alguns minutos e tente novamente.",
   keyGenerator, skipSuccessfulRequests = false, respeitarLimiteEmTeste = false, armazenamento = config.rateLimitStore,
 }) {
   return rateLimit({

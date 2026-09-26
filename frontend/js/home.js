@@ -11,11 +11,11 @@ renderNav();
       stat(categories.length, "áreas"),
       stat(quizzes.length, "quizzes"),
       stat(questions, "perguntas"),
-      stat("70%", "para certificar"),
+      stat("70%", "para a certificação"),
     );
     $("#areas").replaceChildren(...categories.map((c) =>
       el("a", { class: "chip", href: `quizzes.html?category=${c.id}`, style: "text-decoration:none" }, icone(c.icon, { tamanho: 16 }), ` ${c.name}`)));
   } catch {
-    $("#stats").replaceChildren(el("p", { class: "muted" }, "Não foi possível carregar os dados agora."));
+    $("#stats").replaceChildren(el("p", { class: "muted" }, "Não foi possível carregar os dados no momento."));
   }
 })();

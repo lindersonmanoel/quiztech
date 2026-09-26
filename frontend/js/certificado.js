@@ -11,19 +11,19 @@ async function qrDoCertificado(code) {
       src: `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`, width: 132, height: 132,
       alt: "QR Code que abre a página de verificação deste certificado",
     }),
-    el("figcaption", {}, "Aponte a câmera para conferir a autenticidade"));
+    el("figcaption", {}, "Aponte a câmera para verificar a autenticidade"));
 }
 
 async function load() {
   const code = (params().get("code") || "").trim();
-  if (!code) return showMessage($("#msg"), "Informe o código do certificado na URL (?code=QT-XXXX).");
+  if (!code) return showMessage($("#msg"), "Informe o código do certificado no endereço (?code=QT-XXXX).");
   try {
     const c = await api(`/certificates/${encodeURIComponent(code)}`);
     const verifyUrl = `${location.origin}${location.pathname}?code=${encodeURIComponent(c.code)}`;
     const nivel = DIFFICULTY[c.difficulty];
     // O titulo dos quizzes do catalogo ja termina com o nivel; nos criados pelo painel, o nivel e' acrescentado aqui.
     const nivelNoTitulo = nivel && c.quiz_title.toLowerCase().includes(nivel.toLowerCase());
-    document.title = `Certificado — ${c.user_name} — QUIZ TECH`;
+    document.title = `Certificado de ${c.user_name} | QUIZ TECH`;
     const qr = await qrDoCertificado(c.code);
     $("#cert").replaceChildren(el("article", { class: "certificate", "aria-label": "Certificado de conclusão" },
       el("img", { class: "logo", src: "assets/logo/logo.png", alt: "QUIZ TECH" }),
@@ -40,7 +40,7 @@ async function load() {
     $("#actions").hidden = false;
     $("#print").addEventListener("click", () => window.print());
   } catch (error) {
-    showMessage($("#msg"), error.status === 404 ? "Certificado não encontrado. Confira o código." : error.message);
+    showMessage($("#msg"), error.status === 404 ? "Certificado não encontrado. Verifique o código informado." : error.message);
   }
 }
 

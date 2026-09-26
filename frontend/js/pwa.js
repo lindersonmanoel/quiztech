@@ -37,7 +37,7 @@ window.addEventListener("appinstalled", () => {
   pedidoAdiado = null;
   instalado = true;
   atualizarBotoes();
-  avisar("App instalado! Procure o ícone QUIZ TECH na tela inicial.");
+  avisar("Aplicativo instalado. Localize o ícone do QUIZ TECH na tela inicial.");
 });
 
 /** Detecta o navegador para mostrar o passo a passo certo. */
@@ -62,7 +62,7 @@ const PASSOS = {
   duckduckgo: ["Toque no menu {kebab}.", "Toque em “Adicionar à tela inicial”.", "Confirme em “Adicionar”."],
   vivaldi: ["Toque no menu do Vivaldi (ícone V).", "Toque em “Adicionar à tela inicial”.", "Confirme em “Adicionar”."],
   outro: ["Abra o menu do seu navegador ({kebab} ou {menu}).", "Procure “Instalar app” ou “Adicionar à tela inicial”.", "Confirme."],
-  embutido: ["Você está dentro de outro aplicativo (Instagram, Facebook, WhatsApp...), que não permite instalar.", "Toque no menu {kebab} e escolha “Abrir no navegador” (ou copie o endereço).", "Abra no Chrome (ou no seu navegador) e toque em “Instalar app”."],
+  embutido: ["Você está em um navegador incorporado a outro aplicativo (Instagram, Facebook, WhatsApp etc.), que não permite a instalação.", "Toque no menu {kebab} e escolha “Abrir no navegador” (ou copie o endereço).", "Abra no Chrome (ou em outro navegador) e selecione “Instalar app”."],
 };
 
 const NOMES = {
@@ -102,9 +102,9 @@ function abrirInstrucoes() {
   const passos = PASSOS[navegador] || PASSOS.outro;
   const dialogo = el("dialog", { class: "install-dialog", "aria-labelledby": "install-titulo" },
     el("h2", { id: "install-titulo" }, "Instalar o QUIZ TECH"),
-    el("p", { class: "muted" }, navegador === "embutido" ? "Este navegador não instala aplicativos." : `Instalação pelo ${NOMES[navegador]}:`),
+    el("p", { class: "muted" }, navegador === "embutido" ? "Este navegador não permite a instalação de aplicativos." : `Instalação pelo ${NOMES[navegador]}:`),
     el("ol", {}, ...passos.map((p) => el("li", {}, comIcones(p)))),
-    el("p", { class: "muted" }, "O ícone aparece na tela inicial e o site abre como um aplicativo, em tela cheia."),
+    el("p", { class: "muted" }, "O ícone será exibido na tela inicial e o site será aberto como um aplicativo, em tela cheia."),
     el("button", { class: "btn block", type: "button", onclick: () => dialogo.close() }, "Entendi"));
   dialogo.addEventListener("close", () => dialogo.remove());
   document.body.append(dialogo);

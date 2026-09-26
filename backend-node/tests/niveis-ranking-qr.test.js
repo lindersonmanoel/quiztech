@@ -127,7 +127,7 @@ describe("niveis no banco", () => {
     });
   });
 
-  test("banco antigo: o quiz 'Quiz de X' vira 'Quiz de X — Médio' so' se o titulo ainda for o original", async () => {
+  test("banco antigo: o quiz 'Quiz de X' vira 'Quiz de X (Médio)' so' se o titulo ainda for o original", async () => {
     await emTransacaoDesfeita(async (client) => {
       await client.query(
         `UPDATE quizzes SET titulo = 'Quiz de Python' WHERE dificuldade = 'media' AND categoria_id = (SELECT id FROM categorias WHERE slug = 'python')`
@@ -139,7 +139,7 @@ describe("niveis no banco", () => {
       const titulo = async (slug) => (await client.query(
         "SELECT titulo FROM quizzes q JOIN categorias c ON c.id = q.categoria_id WHERE c.slug = $1 AND q.dificuldade = 'media'", [slug]
       )).rows[0].titulo;
-      expect(await titulo("python")).toBe("Quiz de Python — Médio");
+      expect(await titulo("python")).toBe("Quiz de Python (Médio)");
       expect(await titulo("java")).toBe("Titulo que o admin escolheu");
     });
   });
@@ -150,7 +150,7 @@ describe("niveis no banco", () => {
       const r = await aprovar(u, "redes-de-computadores", nivel);
       expect(r.difficulty).toBe(nivel);
       expect(r.certificate.difficulty).toBe(nivel);
-      expect(r.certificate.quiz_title).toMatch(nivel === "facil" ? /Fácil$/ : nivel === "media" ? /Médio$/ : /Difícil$/);
+      expect(r.certificate.quiz_title).toMatch(nivel === "facil" ? /Fácil\)$/ : nivel === "media" ? /Médio\)$/ : /Difícil\)$/);
       const detalhe = await request(app).get(`/api/results/${r.id}`).set(u.headers);
       expect(detalhe.body.difficulty).toBe(nivel);
     }

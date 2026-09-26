@@ -15,7 +15,7 @@ function levelRow(quiz) {
   return el("li", { class: `level-row${done ? " done" : ""}` },
     el("span", { class: `badge nivel-${quiz.difficulty}` }, DIFFICULTY[quiz.difficulty]),
     el("span", { class: "level-info muted" }, `${quiz.question_count} perguntas · ${quiz.total_points} pontos`),
-    done ? el("span", { class: "level-done", title: "Você já tem o certificado deste nível" }, icone("check-circle", { tamanho: 16 }), el("span", { class: "sr-only" }, "Certificado conquistado")) : null,
+    done ? el("span", { class: "level-done", title: "Você já possui o certificado deste nível" }, icone("check-circle", { tamanho: 16 }), el("span", { class: "sr-only" }, "Certificado obtido")) : null,
     el("a", { class: "btn small", href: `quiz.html?id=${quiz.id}`, "aria-label": `${done ? "Refazer" : "Começar"} o nível ${DIFFICULTY[quiz.difficulty]}` }, done ? "Refazer" : "Começar"));
 }
 
@@ -55,7 +55,7 @@ function render() {
 
   $("#list").replaceChildren(...(sections.length
     ? sections
-    : [el("p", { class: "muted" }, "Nenhum quiz encontrado para esse filtro.")]));
+    : [el("p", { class: "muted" }, "Nenhum quiz encontrado para o filtro selecionado.")]));
 }
 
 function renderFilters() {

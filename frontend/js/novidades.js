@@ -15,6 +15,6 @@ export function renderizarNovidades(lista, rotuloVersao, limite = 4) {
   if (rotuloVersao) rotuloVersao.textContent = `v${APP_VERSION}`;
   lista.replaceChildren(...CHANGELOG.slice(0, limite).map((item) => el("div", { class: "novidade-item" },
     el("strong", {}, `Versão ${item.versao}`),
-    el("span", { class: "muted" }, item.data ? ` — ${dataBR(item.data)}` : ""),
+    el("span", { class: "muted" }, item.data ? ` (${dataBR(item.data)})` : ""),
     el("ul", {}, item.mudancas.map((texto) => el("li", {}, texto))))));
 }

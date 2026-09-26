@@ -176,12 +176,12 @@ async function showUpdateBanner(build) {
     el("div", { class: "update-linha" },
       icone("download", { tamanho: 20 }),
       el("strong", {}, `Nova versão disponível (v${maiorQue(versao, APP_VERSION) ? versao : (build ? build.version : versao)})`),
-      onQuiz ? el("span", { class: "muted" }, "Termine o quiz e depois atualize a página.") : null,
+      onQuiz ? el("span", { class: "muted" }, "Conclua o quiz e, em seguida, atualize a página.") : null,
       onQuiz ? null : el("button", { class: "btn small", type: "button", onclick: () => location.reload() }, "Atualizar agora"),
       el("button", {
         class: "btn small secondary", type: "button", "aria-label": "Fechar o aviso de atualização",
         onclick: () => { dismissedBuild = id; banner.remove(); },
-      }, "Depois")),
+      }, "Mais tarde")),
     mudancas.length ? el("ul", { class: "update-lista" }, mudancas.map((texto) => el("li", {}, texto))) : null);
   document.body.append(banner);
 }
@@ -227,7 +227,7 @@ export function renderNav() {
         el("span", {}, "QUIZ ", el("b", {}, "TECH"))),
       el("nav", { class: "nav-links", "aria-label": "Principal" }, links)));
   document.body.prepend(nav);
-  document.body.append(el("footer", {}, el("img", { src: "assets/logo/marca.svg", alt: "", width: 26, height: 26 }), "QUIZ TECH · Aprenda, teste e certifique seus conhecimentos em tecnologia", el("a", { href: "ajuda.html" }, "Ajuda"), el("a", { href: "privacidade.html" }, "Política de Privacidade"), el("span", { id: "app-version", class: "app-version" })));
+  document.body.append(el("footer", {}, el("img", { src: "assets/logo/marca.svg", alt: "", width: 26, height: 26 }), "QUIZ TECH · Aprenda, teste e certifique os seus conhecimentos em tecnologia", el("a", { href: "ajuda.html" }, "Ajuda"), el("a", { href: "privacidade.html" }, "Política de Privacidade"), el("span", { id: "app-version", class: "app-version" })));
   initVersion();
   montarIcones();
   initPwa();

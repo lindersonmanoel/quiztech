@@ -3,6 +3,13 @@
 Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e [versionamento semântico](https://semver.org/lang/pt-BR/).
 A versão do site aparece no rodapé; a do servidor, em `/api/version`.
 
+## [2.4.1] - 2026-09-26
+
+### Alterado
+- **Revisão de linguagem em todo o site**: textos em tom formal, correção ortográfica conferida com dicionário do português e remoção de todos os
+  travessões (títulos das páginas passam a usar "Página | QUIZ TECH"). Mensagens da API e e-mails também foram revisados.
+- Títulos dos quizzes por nível: "Quiz de Python — Médio" passa a "Quiz de Python (Médio)" (migração `006_titulos_sem_travessao.sql`).
+
 ## [2.4.0] - 2026-09-26
 
 Hospedagem sem depender de computador, tutorial e ajuda, suporte a tablet e TV, e novidades/aviso de atualização com o resumo do que mudou.

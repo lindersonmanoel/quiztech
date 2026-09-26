@@ -22,7 +22,7 @@ function errorHandler(err, _req, res, _next) {
   // Violacao de unicidade (23505): duas requisicoes simultaneas passaram na checagem "ja existe?" e a segunda bateu
   // no indice unico. E' conflito, nao erro do servidor.
   if (err && err.code === "23505") {
-    return res.status(409).json({ erro: "Esse registro já existe." });
+    return res.status(409).json({ erro: "Este registro já existe." });
   }
   // Chave estrangeira (23503): o registro e' usado por outro (ex.: apagar quiz que tem resultados).
   if (err && err.code === "23503") {

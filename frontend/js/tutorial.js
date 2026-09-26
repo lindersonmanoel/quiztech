@@ -13,18 +13,18 @@ const SEM_BOTAO_DE_AJUDA = new Set(["admin.html"]);
 // ---------- Conteúdo ----------
 
 const BOAS_VINDAS = [
-  { icone: "rocket", titulo: "Bem-vindo ao QUIZ TECH!",
-    texto: "Aqui você testa seus conhecimentos em tecnologia e ganha certificados. Este guia rápido (1 minuto) mostra como tudo funciona. Você pode pular e rever quando quiser pelo botão “?” no canto da tela." },
+  { icone: "rocket", titulo: "Bem-vindo ao QUIZ TECH",
+    texto: "Nesta plataforma, você testa os seus conhecimentos em tecnologia e obtém certificados. Este guia rápido, com duração de cerca de um minuto, apresenta o funcionamento do site. É possível ignorá-lo e consultá-lo novamente a qualquer momento, pelo botão “?” exibido no canto da tela." },
   { icone: "list", titulo: "1. Escolha uma área e um nível",
-    texto: "São 32 áreas: programação, dados, IA, redes, segurança, design, gestão e mais. Cada área tem 3 níveis — Fácil, Médio e Difícil — com 6 perguntas cada. Comece pelo Fácil e vá subindo." },
-  { icone: "clock", titulo: "2. Responda no seu ritmo",
-    texto: "As perguntas aparecem uma de cada vez. Há um tempo limite (de 5 a 7 minutos) e você pode voltar e mudar respostas antes de finalizar. Quanto mais difícil o nível, mais pontos cada acerto vale." },
-  { icone: "award", titulo: "3. Acerte 70% e ganhe o certificado",
-    texto: "Com 70% ou mais de acertos você recebe um certificado com o seu nome e um QR Code que prova a autenticidade. Dá para imprimir ou salvar em PDF. Se não passar, estude e tente de novo em alguns minutos." },
-  { icone: "trophy", titulo: "4. Suba no ranking",
-    texto: "Seus pontos entram no ranking geral, do mês e da semana. Refazer um quiz não infla a pontuação: vale a sua melhor nota em cada quiz." },
-  { icone: "phone", titulo: "5. Use em qualquer aparelho",
-    texto: "O QUIZ TECH funciona no celular, tablet, computador e TV. No celular você pode instalar como aplicativo. Nos teclados e controles remotos, use as setas e o Enter. Tudo isso está explicado na página Ajuda." },
+    texto: "São 32 áreas, entre elas programação, dados, inteligência artificial, redes, segurança, design e gestão. Cada área possui 3 níveis (Fácil, Médio e Difícil), com 6 perguntas cada. Recomenda-se iniciar pelo nível Fácil e avançar gradualmente." },
+  { icone: "clock", titulo: "2. Responda dentro do tempo",
+    texto: "As perguntas são exibidas uma de cada vez. Há um tempo limite de 5 a 7 minutos e é possível voltar e alterar as respostas antes de finalizar. Quanto maior o nível de dificuldade, maior a pontuação de cada acerto." },
+  { icone: "award", titulo: "3. Alcance 70% e obtenha o certificado",
+    texto: "Com 70% ou mais de acertos, você recebe um certificado com o seu nome e um QR Code que comprova a autenticidade, podendo imprimi-lo ou salvá-lo em PDF. Em caso de reprovação, estude o conteúdo e tente novamente após alguns minutos." },
+  { icone: "trophy", titulo: "4. Acompanhe o ranking",
+    texto: "A sua pontuação compõe o ranking geral, mensal e semanal. Refazer um quiz não aumenta a pontuação de forma indevida: vale a melhor nota obtida em cada quiz." },
+  { icone: "phone", titulo: "5. Utilize em qualquer aparelho",
+    texto: "O QUIZ TECH funciona em celular, tablet, computador e TV. No celular, é possível instalá-lo como aplicativo. Em teclados e controles remotos, utilize as setas e a tecla Enter. Todas as orientações estão disponíveis na página Ajuda." },
 ];
 
 // Cada passo aponta para um elemento da página ("alvo" = seletor CSS). Passos sem alvo aparecem centralizados.
@@ -32,64 +32,64 @@ const TOURS = {
   "index.html": {
     pronto: ".hero",
     passos: [
-      { alvo: ".hero", titulo: "Página inicial", texto: "Este é o começo do QUIZ TECH. Daqui você vai para os quizzes, o ranking ou a Ajuda." },
-      { alvo: ".actions .btn", titulo: "Comece por aqui", texto: "“Ver quizzes” abre a lista de áreas. Cada área tem três níveis de dificuldade." },
-      { alvo: "#como-funciona", titulo: "Como funciona", texto: "Um resumo em quatro passos: escolher, responder, certificar e subir no ranking." },
-      { alvo: "#areas", titulo: "Atalhos por área", texto: "Toque em uma área para ver só os quizzes dela." },
-      { alvo: ".nav-links", titulo: "Menu", texto: "No menu ficam os quizzes, o ranking, o seu perfil com os certificados e esta Ajuda." },
+      { alvo: ".hero", titulo: "Página inicial", texto: "Esta é a página inicial do QUIZ TECH. A partir dela, você acessa os quizzes, o ranking e a Ajuda." },
+      { alvo: ".actions .btn", titulo: "Ponto de partida", texto: "A opção “Ver quizzes” abre a lista de áreas. Cada área possui três níveis de dificuldade." },
+      { alvo: "#como-funciona", titulo: "Como funciona", texto: "Resumo em quatro etapas: escolher, responder, certificar-se e acompanhar o ranking." },
+      { alvo: "#areas", titulo: "Atalhos por área", texto: "Selecione uma área para visualizar apenas os quizzes correspondentes." },
+      { alvo: ".nav-links", titulo: "Menu", texto: "No menu, estão os quizzes, o ranking, o seu perfil com os certificados e a Ajuda." },
     ],
   },
   "quizzes.html": {
     pronto: ".quiz-card, #list .msg",
     passos: [
-      { alvo: "#search", titulo: "Buscar", texto: "Digite um tema (por exemplo Python, Redes ou LGPD) para achar uma área rapidamente." },
-      { alvo: "#filters", titulo: "Grupos", texto: "Filtre por grupo de áreas: Programação, Dados, Infraestrutura e outros." },
-      { alvo: "#levels", titulo: "Níveis", texto: "Mostre só os quizzes Fáceis, Médios ou Difíceis. Fácil vale 10 pontos por pergunta; Difícil vale até 40." },
-      { alvo: ".quiz-card", titulo: "Cartão da área", texto: "Cada área tem um cartão com os seus três níveis." },
-      { alvo: ".level-row", titulo: "Escolha o nível", texto: "Toque em “Começar” para iniciar. O ícone verde indica que você já tem o certificado daquele nível." },
-      { alvo: ".nav-links a[href=\"ranking.html\"]", titulo: "Ranking", texto: "Veja quem mais pontuou no geral, no mês e na semana." },
-      { alvo: ".nav-links a[href=\"perfil.html\"]", titulo: "Meu perfil", texto: "Seus certificados e o histórico de resultados ficam aqui." },
+      { alvo: "#search", titulo: "Busca", texto: "Digite um tema, como Python, Redes ou LGPD, para localizar rapidamente uma área." },
+      { alvo: "#filters", titulo: "Grupos", texto: "Filtre por grupo de áreas, como Programação, Dados e Infraestrutura." },
+      { alvo: "#levels", titulo: "Níveis", texto: "Exiba apenas os quizzes Fáceis, Médios ou Difíceis. O nível Fácil vale 10 pontos por pergunta e o Difícil, até 40." },
+      { alvo: ".quiz-card", titulo: "Cartão da área", texto: "Cada área possui um cartão com os seus três níveis." },
+      { alvo: ".level-row", titulo: "Escolha do nível", texto: "Selecione “Começar” para iniciar. O ícone verde indica que você já possui o certificado daquele nível." },
+      { alvo: ".nav-links a[href=\"ranking.html\"]", titulo: "Ranking", texto: "Consulte quem obteve as maiores pontuações no geral, no mês e na semana." },
+      { alvo: ".nav-links a[href=\"perfil.html\"]", titulo: "Meu perfil", texto: "Os seus certificados e o histórico de resultados ficam disponíveis nesta página." },
     ],
   },
   "quiz.html": {
     pronto: "#stage .card",
     passos: [
-      { alvo: "#stage .card", titulo: "Antes de começar", texto: "Aqui estão o nível, o número de perguntas, os pontos e o tempo limite. O tempo só começa a contar quando você inicia." },
-      { alvo: "#stage .btn", titulo: "Iniciar", texto: "Ao iniciar, responda uma pergunta por vez. Use “Anterior” e “Próxima” para navegar e “Finalizar” no fim. Se o tempo acabar, o quiz é enviado sozinho." },
+      { alvo: "#stage .card", titulo: "Antes de começar", texto: "Nesta tela constam o nível, o número de perguntas, a pontuação e o tempo limite. O cronômetro só é iniciado após a seleção de “Iniciar quiz”." },
+      { alvo: "#stage .btn", titulo: "Iniciar", texto: "Após o início, responda uma pergunta por vez. Utilize “Anterior” e “Próxima” para navegar e “Finalizar” ao término. Se o tempo se esgotar, o quiz é enviado automaticamente." },
     ],
   },
   "resultado.html": {
     pronto: ".score .big",
     passos: [
-      { alvo: ".score .big", titulo: "Seu resultado", texto: "Este é o seu percentual de acertos. Com 70% ou mais você é aprovado." },
-      { alvo: ".score .actions", titulo: "E agora?", texto: "Refaça o quiz, escolha outro ou veja o ranking. Se foi aprovado, o botão do certificado aparece acima." },
-      { alvo: ".review", titulo: "Revisão", texto: "Confira cada pergunta, o que você respondeu e a resposta certa (o gabarito completo é liberado depois da aprovação)." },
+      { alvo: ".score .big", titulo: "Seu resultado", texto: "Este é o seu percentual de acertos. Com 70% ou mais, você é aprovado." },
+      { alvo: ".score .actions", titulo: "Próximos passos", texto: "É possível refazer o quiz, escolher outro ou consultar o ranking. Se houver aprovação, o botão do certificado é exibido acima." },
+      { alvo: ".review", titulo: "Revisão", texto: "Confira cada pergunta, a resposta assinalada e a resposta correta. O gabarito completo é liberado após a aprovação." },
     ],
   },
   "ranking.html": {
     pronto: "#rows tr",
     passos: [
-      { alvo: "#periods", titulo: "Período", texto: "Alterne entre o ranking geral, do mês e da semana. A semana recomeça toda segunda-feira e o mês no dia 1." },
-      { alvo: ".toolbar", titulo: "Filtros", texto: "Filtre por área e por nível para comparar sua pontuação em um assunto específico." },
-      { alvo: ".table-wrap", titulo: "A tabela", texto: "Mostra posição, nome, pontos e quantos quizzes cada pessoa fez. Por privacidade, aparece só o primeiro nome e a inicial do sobrenome." },
+      { alvo: "#periods", titulo: "Período", texto: "Alterne entre o ranking geral, o mensal e o semanal. O semanal reinicia a cada segunda-feira e o mensal, no dia 1." },
+      { alvo: ".toolbar", titulo: "Filtros", texto: "Filtre por área e por nível para comparar a pontuação em um assunto específico." },
+      { alvo: ".table-wrap", titulo: "Tabela", texto: "Exibe a posição, o nome, a pontuação e a quantidade de quizzes de cada pessoa. Por privacidade, são mostrados apenas o primeiro nome e a inicial do sobrenome." },
     ],
   },
   "perfil.html": {
     pronto: "#profile form, #profile .msg",
     passos: [
-      { alvo: "#profile", titulo: "Seus dados", texto: "Confira seu e-mail e ajuste o nome. É o nome que sai no certificado; certificados novos usam o nome atualizado." },
-      { alvo: "#certs", titulo: "Certificados", texto: "Todos os certificados que você conquistou. Abra um para imprimir, salvar em PDF ou compartilhar." },
-      { alvo: "#history", titulo: "Histórico", texto: "Todas as suas tentativas, com pontos, acertos e se você foi aprovado." },
-      { alvo: "#novidades", titulo: "Novidades", texto: "Aqui você vê a versão do QUIZ TECH que está usando e o que mudou nas últimas atualizações. Quando sair uma versão nova, um aviso aparece na tela com um botão para atualizar." },
-      { alvo: "#delete-form", titulo: "Excluir a conta", texto: "Se quiser sair de vez, aqui você apaga a conta e todos os dados (direito previsto na LGPD). Não dá para desfazer." },
+      { alvo: "#profile", titulo: "Seus dados", texto: "Confira o seu e-mail e, se necessário, altere o nome. Ele é o nome impresso no certificado; os certificados novos utilizam o nome atualizado." },
+      { alvo: "#certs", titulo: "Certificados", texto: "Relação de todos os certificados obtidos. Abra um deles para imprimir, salvar em PDF ou compartilhar." },
+      { alvo: "#history", titulo: "Histórico", texto: "Todas as tentativas realizadas, com pontuação, acertos e situação de aprovação." },
+      { alvo: "#novidades", titulo: "Novidades", texto: "Exibe a versão do QUIZ TECH em uso e as alterações das últimas atualizações. Quando houver uma nova versão, um aviso será exibido na tela, com um botão para atualizar." },
+      { alvo: "#delete-form", titulo: "Exclusão da conta", texto: "Nesta seção, é possível excluir a conta e todos os dados associados (direito previsto na LGPD). A ação não pode ser desfeita." },
     ],
   },
   "certificado.html": {
     pronto: ".certificate",
     passos: [
-      { alvo: ".certificate", titulo: "Seu certificado", texto: "Ele traz seu nome, a área, o nível, a nota e a data." },
-      { alvo: ".cert-qr", titulo: "QR Code", texto: "Quem ler o QR Code abre a página de verificação e confirma que o certificado é verdadeiro." },
-      { alvo: "#print", titulo: "Imprimir ou salvar em PDF", texto: "Toque aqui e escolha “Salvar como PDF” no lugar da impressora para guardar o arquivo." },
+      { alvo: ".certificate", titulo: "Seu certificado", texto: "O documento apresenta o nome, a área, o nível, a nota e a data de emissão." },
+      { alvo: ".cert-qr", titulo: "QR Code", texto: "Ao ler o QR Code, qualquer pessoa acessa a página de verificação e confirma a autenticidade do certificado." },
+      { alvo: "#print", titulo: "Imprimir ou salvar em PDF", texto: "Selecione esta opção e escolha “Salvar como PDF” no lugar da impressora para armazenar o arquivo." },
     ],
   },
 };
@@ -169,7 +169,7 @@ export function mostrarBoasVindas({ aoTerminar } = {}) {
   function desenhar() {
     const passo = BOAS_VINDAS[indice];
     const ultimo = indice === BOAS_VINDAS.length - 1;
-    const titulo = indice === 0 && nome ? `Bem-vindo(a), ${nome}!` : passo.titulo;
+    const titulo = indice === 0 && nome ? `Seja bem-vindo(a), ${nome}` : passo.titulo;
     raiz.replaceChildren(el("div", { class: "tour-card tour-card-grande" },
       el("div", { class: "tour-icone", "aria-hidden": "true" }, icone(passo.icone, { tamanho: 44 })),
       el("p", { class: "tour-passo" }, `Tutorial · ${indice + 1} de ${BOAS_VINDAS.length}`),
@@ -177,10 +177,10 @@ export function mostrarBoasVindas({ aoTerminar } = {}) {
       el("p", { id: "tour-texto" }, passo.texto),
       pontinhos(BOAS_VINDAS.length, indice),
       el("div", { class: "tour-acoes" },
-        el("button", { type: "button", class: "btn secondary small", onclick: () => fechar("pular") }, "Pular tutorial"),
+        el("button", { type: "button", class: "btn secondary small", onclick: () => fechar("pular") }, "Ignorar tutorial"),
         indice > 0 ? el("button", { type: "button", class: "btn secondary", onclick: () => { indice--; desenhar(); } }, "Voltar") : null,
         ultimo
-          ? [el("button", { type: "button", class: "btn secondary", onclick: () => fechar("concluir") }, "Começar a jogar"),
+          ? [el("button", { type: "button", class: "btn secondary", onclick: () => fechar("concluir") }, "Começar a usar o site"),
              TOURS[nomeDaPagina()] ? el("button", { type: "button", class: "btn", "data-foco": "", onclick: () => fechar("tour") }, "Ver o tour desta página") : null]
           : el("button", { type: "button", class: "btn", "data-foco": "", onclick: () => { indice++; desenhar(); } }, "Próximo"))));
     (raiz.querySelector("[data-foco]") || raiz.querySelector("button")).focus();
@@ -270,7 +270,7 @@ export async function iniciarTour(pagina = nomeDaPagina(), { automatico = false 
       el("p", { id: "tour-texto" }, passo.texto),
       pontinhos(passos.length, indice),
       el("div", { class: "tour-acoes" },
-        ultimo ? null : el("button", { type: "button", class: "btn secondary small", onclick: fechar }, "Pular"),
+        ultimo ? null : el("button", { type: "button", class: "btn secondary small", onclick: fechar }, "Ignorar"),
         indice > 0 ? el("button", { type: "button", class: "btn secondary small", onclick: () => { indice--; mostrarPasso(); } }, "Anterior") : null,
         el("button", { type: "button", class: "btn small", "data-foco": "", onclick: () => { if (ultimo) fechar(); else { indice++; mostrarPasso(); } } }, ultimo ? "Concluir" : "Próximo")));
     const alvo = passo.alvo ? document.querySelector(passo.alvo) : null;

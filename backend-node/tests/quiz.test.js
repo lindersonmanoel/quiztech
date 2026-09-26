@@ -31,9 +31,9 @@ describe("catalogo", () => {
     expect(porCat.map((q) => q.difficulty).sort()).toEqual(["dificil", "facil", "media"]);
     expect(python.icon).toBe("python");
     const porNivel = Object.fromEntries(porCat.map((q) => [q.difficulty, q]));
-    expect(porNivel.media).toMatchObject({ title: "Quiz de Python — Médio", question_count: 6, total_points: 120, time_limit: 300 });
-    expect(porNivel.facil).toMatchObject({ title: "Quiz de Python — Fácil", question_count: 6, total_points: 60, time_limit: 300 });
-    expect(porNivel.dificil).toMatchObject({ title: "Quiz de Python — Difícil", question_count: 6, total_points: 180, time_limit: 420 });
+    expect(porNivel.media).toMatchObject({ title: "Quiz de Python (Médio)", question_count: 6, total_points: 120, time_limit: 300 });
+    expect(porNivel.facil).toMatchObject({ title: "Quiz de Python (Fácil)", question_count: 6, total_points: 60, time_limit: 300 });
+    expect(porNivel.dificil).toMatchObject({ title: "Quiz de Python (Difícil)", question_count: 6, total_points: 180, time_limit: 420 });
     expect((await request(app).get("/api/quizzes").query({ q: "redes" })).body).toHaveLength(3);
     const injecao = await request(app).get("/api/quizzes").query({ q: "'; DROP TABLE usuarios; --" });
     expect(injecao.status).toBe(200);

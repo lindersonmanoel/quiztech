@@ -13,15 +13,15 @@ function pedirNovoLink(texto) {
 
 if (!token) {
   $("#campos").hidden = true;
-  showMessage($("#msg"), "Este link está incompleto. Abra o link do e-mail de novo ou peça um novo.");
-  $("#rodape").replaceChildren(pedirNovoLink("Pedir um novo link"), " · ", el("a", { href: "login.html" }, "Voltar para o login"));
+  showMessage($("#msg"), "Este link está incompleto. Abra novamente o link recebido por e-mail ou solicite um novo.");
+  $("#rodape").replaceChildren(pedirNovoLink("Solicitar um novo link"), " · ", el("a", { href: "login.html" }, "Voltar à página de entrada"));
 }
 
 $("#form").addEventListener("submit", async (event) => {
   event.preventDefault();
   if (!token) return;
   const password = $("#password").value;
-  if (password.length < 8) return showMessage($("#msg"), "A senha precisa ter pelo menos 8 caracteres.");
+  if (password.length < 8) return showMessage($("#msg"), "A senha deve conter no mínimo 8 caracteres.");
   if (password !== $("#confirm").value) return showMessage($("#msg"), "As senhas não são iguais.");
 
   const button = $("#submit");
@@ -39,7 +39,7 @@ $("#form").addEventListener("submit", async (event) => {
     // Link vencido, ja usado (400) ou cortado (422 "Link invalido"): nao adianta tentar de novo com o mesmo token.
     if (error.status === 400 || /link/i.test(error.message)) {
       $("#campos").hidden = true;
-      $("#rodape").replaceChildren(pedirNovoLink("Pedir um novo link"), " · ", el("a", { href: "login.html" }, "Voltar para o login"));
+      $("#rodape").replaceChildren(pedirNovoLink("Solicitar um novo link"), " · ", el("a", { href: "login.html" }, "Voltar à página de entrada"));
     }
   }
 });

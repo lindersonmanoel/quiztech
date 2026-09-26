@@ -44,7 +44,7 @@ function decodificarToken(token) {
   try {
     return jwt.verify(token, config.jwtSecret, { algorithms: [JWT_ALGORITMO] });
   } catch (err) {
-    throw new AuthError("Sessão inválida ou expirada. Faça login novamente.", 401);
+    throw new AuthError("Sessão inválida ou expirada. Entre novamente na sua conta.", 401);
   }
 }
 
@@ -115,7 +115,7 @@ async function redefinirSenha({ token, senha }) {
     await client.query("BEGIN");
     const pedido = await senhaResetModel.buscarValidoParaUso(client, token);
     if (!pedido) {
-      throw new AuthError("Este link é inválido ou já venceu. Peça um novo em \"Esqueci minha senha\".", 400, "token");
+      throw new AuthError("Este link é inválido ou já venceu. Solicite um novo em “Esqueci minha senha”.", 400, "token");
     }
     usuario = await usuarioModel.atualizarSenha(client, pedido.usuario_id, senhaHash);
     await client.query("UPDATE senha_resets SET usado_em = now() WHERE usuario_id = $1 AND usado_em IS NULL", [pedido.usuario_id]);

@@ -60,15 +60,15 @@ async function enviarRedefinicaoDeSenha({ para, nome, link, minutos }) {
   const validade = minutos >= 60 && minutos % 60 === 0 ? `${minutos / 60} hora${minutos > 60 ? "s" : ""}` : `${minutos} minutos`;
   await enviar({
     para,
-    assunto: "Redefinição de senha — QUIZ TECH",
-    texto: `Olá${primeiro ? `, ${primeiro}` : ""}!\n\nRecebemos um pedido para redefinir a senha da sua conta no QUIZ TECH.\n` +
-      `Abra o link abaixo para escolher uma nova senha (vale por ${validade} e só pode ser usado uma vez):\n\n${link}\n\n` +
-      "Se não foi você, ignore este e-mail: sua senha continua a mesma.\n",
+    assunto: "Redefinição de senha | QUIZ TECH",
+    texto: `Olá${primeiro ? `, ${primeiro}` : ""}!\n\nRecebemos uma solicitação para redefinir a senha da sua conta no QUIZ TECH.\n` +
+      `Acesse o link abaixo para escolher uma nova senha (válido por ${validade} e de uso único):\n\n${link}\n\n` +
+      "Caso não tenha sido você, ignore este e-mail: a sua senha permanece a mesma.\n",
     html: moldura("Redefinição de senha",
-      `<p style="line-height:1.5">Olá${primeiro ? `, ${esc(primeiro)}` : ""}! Recebemos um pedido para redefinir a senha da sua conta.</p>` +
+      `<p style="line-height:1.5">Olá${primeiro ? `, ${esc(primeiro)}` : ""}! Recebemos uma solicitação para redefinir a senha da sua conta.</p>` +
       botao(link, "Escolher nova senha") +
-      `<p style="color:#8fb4dd;font-size:14px;line-height:1.5">O link vale por ${esc(validade)} e só pode ser usado uma vez. Se o botão não abrir, copie este endereço no navegador:<br><span style="word-break:break-all">${esc(link)}</span></p>` +
-      `<p style="color:#8fb4dd;font-size:14px">Se não foi você, ignore este e-mail: sua senha continua a mesma.</p>`),
+      `<p style="color:#8fb4dd;font-size:14px;line-height:1.5">O link é válido por ${esc(validade)} e de uso único. Se o botão não abrir, copie e cole este endereço no navegador:<br><span style="word-break:break-all">${esc(link)}</span></p>` +
+      `<p style="color:#8fb4dd;font-size:14px">Caso não tenha sido você, ignore este e-mail: a sua senha permanece a mesma.</p>`),
   });
 }
 
@@ -76,12 +76,12 @@ async function enviarSenhaAlterada({ para, nome }) {
   const primeiro = String(nome || "").split(/\s+/)[0] || "";
   await enviar({
     para,
-    assunto: "Sua senha foi alterada — QUIZ TECH",
+    assunto: "Sua senha foi alterada | QUIZ TECH",
     texto: `Olá${primeiro ? `, ${primeiro}` : ""}!\n\nA senha da sua conta no QUIZ TECH acabou de ser alterada e as sessões abertas foram encerradas.\n` +
-      "Se foi você, nada a fazer. Se não foi, peça uma nova redefinição de senha agora mesmo.\n",
+      "Se foi você, nenhuma ação é necessária. Caso contrário, solicite imediatamente uma nova redefinição de senha.\n",
     html: moldura("Senha alterada",
       `<p style="line-height:1.5">Olá${primeiro ? `, ${esc(primeiro)}` : ""}! A senha da sua conta acabou de ser alterada e as sessões abertas foram encerradas.</p>` +
-      `<p style="color:#8fb4dd;font-size:14px;line-height:1.5">Se foi você, nada a fazer. Se não foi, peça uma nova redefinição de senha agora mesmo.</p>`),
+      `<p style="color:#8fb4dd;font-size:14px;line-height:1.5">Se foi você, nenhuma ação é necessária. Caso contrário, solicite imediatamente uma nova redefinição de senha.</p>`),
   });
 }
 
