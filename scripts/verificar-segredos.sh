@@ -17,7 +17,7 @@ if git ls-files | grep -E '(^|/)\.env(\..+)?$' | grep -vE '\.example$'; then
 fi
 
 # 2) Padroes de chaves conhecidas.
-PADROES='re_[A-Za-z0-9]{20,}|cfat_[A-Za-z0-9]{20,}|AKIA[0-9A-Z]{16}|ghp_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{30,}|sk-[A-Za-z0-9]{32,}|-----BEGIN ([A-Z]+ )?PRIVATE KEY-----|eyJ[A-Za-z0-9_-]{30,}\.eyJ[A-Za-z0-9_-]{30,}\.[A-Za-z0-9_-]{20,}'
+PADROES='re_[A-Za-z0-9]{20,}|cfat_[A-Za-z0-9]{20,}|napi_[a-z0-9]{30,}|npg_[A-Za-z0-9]{8,}|tskey-(api|auth)-[A-Za-z0-9]{10,}|eyJhIjoi[A-Za-z0-9]{20,}|AKIA[0-9A-Z]{16}|ghp_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{30,}|sk-[A-Za-z0-9]{32,}|-----BEGIN ([A-Z]+ )?PRIVATE KEY-----|eyJ[A-Za-z0-9_-]{30,}\.eyJ[A-Za-z0-9_-]{30,}\.[A-Za-z0-9_-]{20,}'
 if git grep -nIE "$PADROES" -- . ':(exclude)*.example' ':(exclude)*package-lock.json' | grep -vi 'troque'; then
   aviso "possivel chave/token no codigo (linhas acima)."
 fi

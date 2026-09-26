@@ -1,0 +1,105 @@
+name: Publicar API (Vercel + Neon)
+
+# A cada push na main que mexe na API ou nas migracoes: aplica as migracoes no banco (Neon) e publica a API no Vercel.
+# As credenciais NAO estao no codigo: vem dos "Secrets" do repositorio (Settings > Secrets and variables > Actions).
+# Sem os segredos, o job apenas avisa e nao faz nada. O site (pasta frontend/) e' publicado pelo proprio Vercel a cada push.
+# Roda so' em push na main / manualmente: pull requests de terceiros nunca recebem os segredos.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "backend-node/**"
+      - "database/migrations/**"
+      - "scripts/empacotar-api-vercel.js"
+      - "deploy/vercel-api/**"
+      - ".github/workflows/publicar-api.yml"
+  workflow_dispatch:
+    inputs:
+      carga_inicial:
+        description: "Rodar tambem a carga inicial das areas e quizzes (seed, ~3 min; so' quando areas.json ou niveis/*.json mudarem)"
+        type: boolean
+        default: false
+
+concurrency:
+  group: publicar-api
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      NEON_DATABASE_URL: ${{ secrets.NEON_DATABASE_URL }}
+    steps:
+      - name: Conferir segredos configurados
+        id: segredos
+        run: |
+          faltando=""
+          for v in VERCEL_TOKEN VERCEL_ORG_ID VERCEL_PROJECT_ID NEON_DATABASE_URL; do
+            if [ -z "${!v}" ]; then faltando="$faltando $v"; fi
+          done
+          if [ -n "$faltando" ]; then
+            echo "::warning::Publicacao da API ignorada: faltam os segredos:$faltando (veja DEPLOY.md, secao 0)."
+            echo "ok=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.segredos.outputs.ok == 'true'
+      - uses: actions/setup-node@v4
+        if: steps.segredos.outputs.ok == 'true'
+        with:
+          node-version: 22
+
+      - name: Instalar dependencias
+        if: steps.segredos.outputs.ok == 'true'
+        working-directory: backend-node
+        run: npm ci
+
+      - name: Aplicar migracoes no Neon
+        if: steps.segredos.outputs.ok == 'true'
+        working-directory: backend-node
+        env:
+          DATABASE_URL: ${{ secrets.NEON_DATABASE_URL }}
+          DATABASE_SSL: "true"
+          DATABASE_SSL_VERIFY: "true"
+        run: npm run migrate
+
+      - name: Carga inicial (manual)
+        if: steps.segredos.outputs.ok == 'true' && github.event_name == 'workflow_dispatch' && inputs.carga_inicial
+        working-directory: backend-node
+        env:
+          DATABASE_URL: ${{ secrets.NEON_DATABASE_URL }}
+          DATABASE_SSL: "true"
+          DATABASE_SSL_VERIFY: "true"
+        run: npm run seed
+
+      - name: Empacotar a API
+        if: steps.segredos.outputs.ok == 'true'
+        run: node scripts/empacotar-api-vercel.js
+
+      - name: Publicar no Vercel
+        if: steps.segredos.outputs.ok == 'true'
+        working-directory: dist-api
+        run: npx --yes vercel@latest deploy --prod --yes --token "$VERCEL_TOKEN"
+
+      - name: Conferir que a API respondeu
+        if: steps.segredos.outputs.ok == 'true'
+        run: |
+          for i in $(seq 1 20); do
+            if curl -fsS "https://quiztech-api.vercel.app/api/health/ready" | grep -q '"banco":"ok"'; then
+              curl -fsS "https://quiztech-api.vercel.app/api/version"; echo
+              exit 0
+            fi
+            sleep 6
+          done
+          echo "A API nao ficou saudavel a tempo." >&2
+          exit 1

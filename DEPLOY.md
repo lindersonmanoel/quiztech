@@ -17,6 +17,35 @@ usa o **mesmo servidor PostgreSQL** do Meu Bolso Digital, em um banco e com um u
 Os dois projetos **não enxergam os dados um do outro**: o usuário `quiztech` só entra no banco `quiztech`
 (no banco do Meu Bolso ele recebe *permission denied*).
 
+## 0. Publicar atualizações pelo GitHub + Vercel, sem colocar credenciais no Git (configuração atual)
+
+Fluxo do dia a dia: `git push` na `main` e pronto.
+
+| O que mudou | Quem publica | Como |
+|---|---|---|
+| Site (`frontend/`) | Vercel (projeto `quiztech`) | sozinho, a cada push na `main` |
+| API (`backend-node/`) e migrações do banco | GitHub Actions (`.github/workflows/publicar-api.yml`) | roda as migrações no Neon e publica a API em `quiztech-api.vercel.app` |
+
+**Nenhuma credencial vai para o repositório.** Elas ficam só em dois cofres:
+
+1. **GitHub → Settings → Secrets and variables → Actions → New repository secret** (precisa ser admin do repositório):
+   - `VERCEL_TOKEN`: crie em https://vercel.com/account/tokens (escopo: a equipe dona do projeto `quiztech-api`).
+   - `VERCEL_ORG_ID`: id da equipe no Vercel (Settings da equipe → General → Team ID).
+   - `VERCEL_PROJECT_ID`: id do projeto `quiztech-api` (Project → Settings → General → Project ID).
+   - `NEON_DATABASE_URL`: endereço **direto** (sem `-pooler`) do Neon, o mesmo formato `postgresql://usuario:senha@host/neondb?sslmode=require`.
+2. **Vercel → projeto `quiztech-api` → Settings → Environment Variables**: `DATABASE_URL` (endereço com `-pooler`), `JWT_SECRET`,
+   `FRONTEND_URL`, `APP_URL`, `ADMIN_EMAIL` e, quando ativar o e-mail, `SMTP_HOST`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM`.
+   Elas persistem entre publicações (não precisam ir no workflow).
+
+Sem os quatro segredos do GitHub o workflow só avisa "publicação ignorada" e não falha. Ele nunca roda em pull request de terceiros.
+A carga inicial das áreas/quizzes (lenta, ~3 min) é manual: Actions → "Publicar API" → Run workflow → marcar "carga_inicial".
+
+**Travas contra vazamento** (rodam em todo commit e no CI):
+- `bash scripts/instalar-hooks.sh` (uma vez por cópia do repositório) liga o hook `.githooks/pre-commit`, que bloqueia o commit se
+  achar chave/token/senha de banco (Neon, Vercel, Cloudflare, Tailscale, Resend, chaves privadas etc.).
+- `scripts/verificar-segredos.sh` roda de novo no GitHub (`seguranca.yml`); `.env*` reais estão no `.gitignore`.
+- Se alguma credencial já apareceu num chat, print ou commit, considere-a vazada: revogue e gere outra no provedor.
+
 ## 1. Pré-requisitos
 - Docker Desktop (ou Docker Engine) na VM, com o contêiner `meu-bolso-digital-db-prod` de pé.
 - Conta no Vercel e (para endereço fixo) uma conta Cloudflare com um domínio.

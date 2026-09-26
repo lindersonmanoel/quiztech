@@ -5,6 +5,8 @@ A versão em execução aparece no rodapé do site e em `/api/version`.
 
 ## [Não lançado] - hospedagem sem depender de computador
 
+- Publicação da API pelo GitHub Actions (`publicar-api.yml`: migrações no Neon + deploy no Vercel) usando só Secrets do GitHub; hook `pre-commit` e novos padrões em `verificar-segredos.sh` (Neon, Tailscale, tokens do Cloudflare).
+
 ### Alterado
 - **API no Vercel (gru1) + banco no Neon (sa-east-1)**: tudo em São Paulo, ~0,11–0,16 s por chamada, sem depender de computador ligado e sem
   o Supabase. `DATABASE_SSL_VERIFY` valida o certificado de bancos com CA pública. Railway (`x-real-ip`, seção 5e) segue documentado como alternativa;

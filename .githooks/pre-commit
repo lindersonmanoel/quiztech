@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Trava local: impede o commit se houver segredo (chave, token, senha de banco, arquivo .env) nos arquivos versionados.
+# Instalar uma vez por copia do repositorio: bash scripts/instalar-hooks.sh
+cd "$(git rev-parse --show-toplevel)" || exit 1
+if ! bash scripts/verificar-segredos.sh; then
+  echo ""
+  echo "COMMIT BLOQUEADO: remova o segredo acima (use variaveis de ambiente / Secrets do GitHub e do Vercel)."
+  echo "Se a chave ja foi exposta, considere-a vazada e gere outra no provedor."
+  exit 1
+fi
