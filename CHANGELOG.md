@@ -3,6 +3,11 @@
 Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e [versionamento semântico](https://semver.org/lang/pt-BR/).
 A versão do site aparece no rodapé; a do servidor, em `/api/version`.
 
+## [2.4.5] - 2026-09-26
+
+### Corrigido
+- Logo da página inicial sem a moldura preta quadrada: nova arte `logo-transparente.png` (fundo transparente, brilho suave).
+
 ## [2.4.4] - 2026-09-26
 
 ### Corrigido
