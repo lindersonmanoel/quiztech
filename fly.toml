@@ -1,0 +1,44 @@
+# Fly.io — API do QUIZ TECH (contêiner Docker sempre ligado, região de São Paulo).
+# Fly.io NAO tem plano gratuito para contas novas: uma maquina pequena (shared-cpu-1x, 256 MB) custa poucos dolares por mes
+# e o cadastro pede cartao. Passo a passo: DEPLOY.md, secao 5f.
+#
+#   fly launch --no-deploy --copy-config --name quiztech-api     (uma vez)
+#   fly secrets set DATABASE_URL=... DATABASE_SSL_CA=... JWT_SECRET=...
+#   fly deploy
+app = "quiztech-api"
+primary_region = "gru"
+
+[build]
+  dockerfile = "Dockerfile"
+
+# Variaveis NAO secretas. Segredos (DATABASE_URL, JWT_SECRET, DATABASE_SSL_CA, SMTP_PASS) vao por `fly secrets set`.
+[env]
+  NODE_ENV = "production"
+  PORT = "3100"
+  DATABASE_SSL = "true"
+  FRONTEND_URL = "https://quiztech.vercel.app,https://quiztech-lindersonmanoel.vercel.app"
+  APP_URL = "https://quiztech.vercel.app"
+  ADMIN_EMAIL = "lindersonmanoel6@gmail.com"
+  # Uma unica maquina: os contadores do limite de tentativas ficam na memoria. Com 2+ maquinas, use RATE_LIMIT_STORE = "postgres".
+  RATE_LIMIT_STORE = "memory"
+  # Todo o trafego passa pelo proxy do Fly, que escreve o IP real neste cabecalho (o cliente nao consegue forja-lo).
+  CLIENT_IP_HEADER = "fly-client-ip"
+
+[http_service]
+  internal_port = 3100
+  force_https = true
+  # Sempre ligada (sem partida a frio). Para economizar, troque por auto_stop_machines = "stop" e min_machines_running = 0.
+  auto_stop_machines = "off"
+  auto_start_machines = true
+  min_machines_running = 1
+
+  [[http_service.checks]]
+    grace_period = "30s"
+    interval = "30s"
+    timeout = "5s"
+    method = "GET"
+    path = "/api/health/ready"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "256mb"

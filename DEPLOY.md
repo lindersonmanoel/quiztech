@@ -133,6 +133,38 @@ reativar em supabase.com/dashboard) e Vercel Hobby é para uso não comercial. P
 `docker compose --env-file .env.production -f docker-compose.prod.yml --profile funnel down`.
 **Backup:** o Supabase gratuito não inclui backups diários; exporte com `pg_dump` (URL do modo sessão) de tempos em tempos.
 
+## 5e. API no Railway (mesmo esquema do Meu Bolso Digital)
+O Railway roda o mesmo Dockerfile deste repositório (migrações + carga inicial + servidor) e pode hospedar o PostgreSQL no mesmo
+projeto. **Não há plano gratuito permanente**: um crédito de teste e depois o plano Hobby (cerca de US$ 5/mês, com uso incluído).
+```bash
+npx @railway/cli login                       # abre o navegador para autorizar (a partir do seu computador)
+npx @railway/cli init                        # cria o projeto "quiztech"
+npx @railway/cli add --database postgres     # PostgreSQL na rede interna do projeto (opcional, veja abaixo)
+npx @railway/cli variables set NODE_ENV=production DATABASE_SSL=false JWT_SECRET=<48 bytes aleatorios>   FRONTEND_URL=https://quiztech.vercel.app,https://quiztech-lindersonmanoel.vercel.app APP_URL=https://quiztech.vercel.app   ADMIN_EMAIL=<seu e-mail> 'DATABASE_URL=${{Postgres.DATABASE_URL}}'
+npx @railway/cli up --detach                 # constrói pelo Dockerfile e publica
+npx @railway/cli domain                      # gera o endereço público (https://...up.railway.app)
+```
+- **Banco:** com o PostgreSQL do Railway, use `DATABASE_SSL=false` (rede interna). Para continuar no Supabase, use a URL do modo
+  **sessão** (porta 5432, exigida pelas migrações), `DATABASE_SSL=true` e `DATABASE_SSL_CA`.
+- Depois: troque `API_PRODUCAO` em `frontend/js/config.js` e o `connect-src` do `vercel.json` pelo endereço novo, e inclua os endereços
+  do site em `FRONTEND_URL`. O `railway.json` já define o healthcheck em `/api/health/ready`.
+
+## 5f. API no Fly.io
+Contêiner sempre ligado em São Paulo (`gru`), configurado em `fly.toml`. **Sem plano gratuito para contas novas**: uma máquina
+`shared-cpu-1x` de 256 MB custa poucos dólares por mês e o cadastro pede cartão.
+```powershell
+winget install Fly-io.flyctl                 # ou: iwr https://fly.io/install.ps1 -useb | iex
+fly auth login
+fly launch --no-deploy --copy-config --name quiztech-api
+fly secrets set "DATABASE_URL=<URL do banco, modo sessao 5432>" "JWT_SECRET=<48 bytes aleatorios>" "DATABASE_SSL_CA=<CA em uma linha, com 
+>"
+fly deploy
+fly status ; curl https://quiztech-api.fly.dev/api/health/ready
+```
+- O Fly não tem PostgreSQL gratuito: use o Supabase atual (URL do modo sessão) ou o Neon. As variáveis não secretas já estão no `fly.toml`.
+- `CLIENT_IP_HEADER=fly-client-ip` faz o limite de tentativas usar o IP real do visitante.
+- Depois: troque `API_PRODUCAO` em `frontend/js/config.js` e o `connect-src` do `vercel.json` pelo endereço novo (`https://quiztech-api.fly.dev`).
+
 ## 6. Site no Vercel
 1. Vercel → **Add New → Project** → repositório `lindersonmanoel/quiztech`. O `vercel.json` já define: sem build, pasta
    `frontend/` como site, cabeçalhos de segurança e a política de conteúdo (CSP).
