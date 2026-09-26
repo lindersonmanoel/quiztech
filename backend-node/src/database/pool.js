@@ -8,11 +8,11 @@ if (!config.databaseUrl) {
 }
 
 // Sem DATABASE_SSL_CA, hosts gerenciados costumam usar certificado autoassinado e validar a cadeia derrubaria
-// a conexao. Na rede interna do Docker (padrao deste projeto) nao ha SSL: DATABASE_SSL=false.
+// a conexao; se o provedor usa CA publica (ex.: Neon), defina DATABASE_SSL_VERIFY=true para validar mesmo assim. Na rede interna do Docker (padrao deste projeto) nao ha SSL: DATABASE_SSL=false.
 const ssl = config.databaseSsl
   ? config.databaseSslCa
     ? { ca: config.databaseSslCa, rejectUnauthorized: true }
-    : { rejectUnauthorized: false }
+    : { rejectUnauthorized: config.databaseSslVerify }
   : false;
 
 const pool = new Pool({

@@ -43,6 +43,8 @@ function buildConfig() {
     port: Number(process.env.PORT) || 3100, // 3100: nao conflita com o Meu Bolso Digital (3000) na mesma maquina
     databaseUrl: process.env.DATABASE_URL || "",
     databaseSsl: boolFromEnv(process.env.DATABASE_SSL, false),
+    // Bancos com certificado de CA publica (Neon, Railway com dominio proprio etc.): valida a cadeia com as CAs do sistema.
+    databaseSslVerify: boolFromEnv(process.env.DATABASE_SSL_VERIFY, false),
     databaseSslCa: process.env.DATABASE_SSL_CA ? process.env.DATABASE_SSL_CA.replace(/\\n/g, "\n") : "",
     jwtSecret,
     jwtExpiresIn: process.env.JWT_EXPIRES_IN || "12h",

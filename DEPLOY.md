@@ -137,6 +137,20 @@ reativar em supabase.com/dashboard) e Vercel Hobby é para uso não comercial. P
 `docker compose --env-file .env.production -f docker-compose.prod.yml --profile funnel down`.
 **Backup:** o Supabase gratuito não inclui backups diários; exporte com `pg_dump` (URL do modo sessão) de tempos em tempos.
 
+## 5d-bis. Banco gratuito e portátil: Neon (recomendado para trocar de backend à vontade)
+PostgreSQL comum, plano gratuito **sem pausa por inatividade** e sem apagar o projeto (0,5 GB; o computador do banco "dorme" e acorda em ~1 s).
+A conexão é uma URL padrão, então o mesmo banco serve a Railway, Fly.io, Render, Vercel ou uma VM: trocar de backend é só apontar
+`DATABASE_URL` para ele.
+1. neon.com > criar conta > **New Project** (região `aws-sa-east-1`, São Paulo, ou `us-east-1` se o backend estiver nos EUA) > copie a
+   **connection string** *sem* "Pooled connection" (URL direta; as migrações usam trava de sessão).
+2. No backend (Railway: serviço > Variables), defina **sem colar a URL em chats**: `DATABASE_URL=<URL do Neon>`, `DATABASE_SSL=true`,
+   `DATABASE_SSL_VERIFY=true` (o Neon usa CA pública, então o certificado é validado de verdade).
+3. O deploy seguinte roda `migrate` + `seed` sozinho no banco novo (idempotente). Confira `/api/health/ready` e `/api/categories` (32 áreas).
+4. Só depois apague o PostgreSQL antigo do Railway (para não pagar por ele). Se já houver usuários, exporte antes:
+   `pg_dump "<URL antiga>" | psql "<URL do Neon>"`.
+- **Backup:** `pg_dump "<URL do Neon>" > quiztech.sql` de tempos em tempos (o plano gratuito guarda só algumas horas de histórico).
+- Alternativas gratuitas equivalentes: Aiven (1 GB, pode desligar por inatividade) e CockroachDB (não é 100% compatível com PostgreSQL).
+
 ## 5e. API no Railway (mesmo esquema do Meu Bolso Digital)
 O Railway roda o mesmo Dockerfile deste repositório (migrações + carga inicial + servidor) e pode hospedar o PostgreSQL no mesmo
 projeto. **Não há plano gratuito permanente**: um crédito de teste e depois o plano Hobby (cerca de US$ 5/mês, com uso incluído).
