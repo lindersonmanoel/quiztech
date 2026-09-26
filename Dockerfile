@@ -1,7 +1,7 @@
 # Imagem de producao da API do QUIZ TECH (Node.js).
 # Contexto de build: a raiz do repositorio (precisa enxergar backend-node/, database/ e frontend/ juntos:
 # as migracoes e o seed ficam em database/, e o site so' e' servido se SERVE_FRONTEND=1).
-FROM node:20-alpine
+FROM node:26-alpine
 
 WORKDIR /app
 
